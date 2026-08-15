@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://jvmn0wk48cwd"
+path="res://.godot/imported/lasergun.ogg-2b81b55d25a8232f623f95410f15bd1b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/500 Sound Effects by Jalastram/lasergun.ogg"
+dest_files=["res://.godot/imported/lasergun.ogg-2b81b55d25a8232f623f95410f15bd1b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

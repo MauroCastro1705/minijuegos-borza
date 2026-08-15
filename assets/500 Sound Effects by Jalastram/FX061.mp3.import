@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b16lds5c03khy"
+path="res://.godot/imported/FX061.mp3-365bce4bc484b2eab6cb91487da24da0.mp3str"
+
+[deps]
+
+source_file="res://assets/500 Sound Effects by Jalastram/FX061.mp3"
+dest_files=["res://.godot/imported/FX061.mp3-365bce4bc484b2eab6cb91487da24da0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

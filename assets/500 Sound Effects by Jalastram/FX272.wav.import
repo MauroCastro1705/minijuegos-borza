@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://u6g00rrd1smp"
+path="res://.godot/imported/FX272.wav-66111a3db76c9b815214a6a4165beace.sample"
+
+[deps]
+
+source_file="res://assets/500 Sound Effects by Jalastram/FX272.wav"
+dest_files=["res://.godot/imported/FX272.wav-66111a3db76c9b815214a6a4165beace.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
