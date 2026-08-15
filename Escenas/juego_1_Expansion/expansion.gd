@@ -2,14 +2,17 @@ extends Node2D
 
 # En tu script principal (ej: spawner de meteoritos)
 @export var meteorite_scene: PackedScene  # Asignar en el editor
+@export var enemy_scene: PackedScene  # Asignar en el editor
 @onready var meteor_spawn: Timer = $meteor_spawn
 @onready var materia_bar: ProgressBar = $materia_bar
+@onready var enemy_spawn: Timer = $enemy_spawn
 
 
 func _ready() -> void:
 	Global.update.connect(_update)
 	_update()
 	meteor_spawn.start()
+	enemy_spawn.start()
 	spawn_meteorite_from_edge()
 	spawn_meteorite_from_edge()
 	spawn_meteorite_from_edge()
@@ -42,8 +45,29 @@ func spawn_meteorite_from_edge():
 	
 	add_child(meteorite)
 	
+func spawn_enemy_from_edge():
+	var enemy = enemy_scene.instantiate()
+	var viewport_size = get_viewport().size
+	
+	# Elegir borde aleatorio (0=arriba, 1=derecha, 2=abajo, 3=izquierda)
+	var edge = randi_range(0, 3)
+	match edge:
+		0: # Arriba
+			enemy.position = Vector2(randf_range(0, viewport_size.x), -50)
+		1: # Derecha
+			enemy.position = Vector2(viewport_size.x + 50, randf_range(0, viewport_size.y))
+		2: # Abajo
+			enemy.position = Vector2(randf_range(0, viewport_size.x), viewport_size.y + 50)
+		3: # Izquierda
+			enemy.position = Vector2(-50, randf_range(0, viewport_size.y))
+	
+	add_child(enemy)
 	
 
 
 func _on_meteor_spawn_timeout() -> void:
 	spawn_meteorite_from_edge()
+
+
+func _on_enemy_spawn_timeout() -> void:
+	spawn_enemy_from_edge()

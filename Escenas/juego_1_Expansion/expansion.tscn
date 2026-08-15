@@ -5,8 +5,9 @@
 [ext_resource type="Material" uid="uid://364kekwj2p6r" path="res://shaders/transition.tres" id="1_kb38s"]
 [ext_resource type="Script" uid="uid://cpcnbtnpbw4p4" path="res://Escenas/juego_1_Expansion/expansion.gd" id="1_qjeqg"]
 [ext_resource type="PackedScene" uid="uid://covr0r16gisq7" path="res://Escenas/juego_1_Expansion/meteorito/meteorito.tscn" id="5_armdq"]
-[ext_resource type="LabelSettings" uid="uid://cd0oo28yvvyom" path="res://themas/texto_pixelart_muchoborde.tres" id="6_qjeqg"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="7_48hgn"]
 [ext_resource type="Material" uid="uid://dpmryps5t15aj" path="res://shaders/buckshot.tres" id="7_fcja6"]
+[ext_resource type="PackedScene" uid="uid://dlr316kek62yh" path="res://Escenas/juego_1_Expansion/enemigo/enemigo.tscn" id="8_48hgn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_armdq"]
 bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
@@ -14,9 +15,16 @@ bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjeqg"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tuxlk"]
+font = ExtResource("7_48hgn")
+font_size = 23
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [node name="Expansion" type="Node2D" unique_id=991290061]
 script = ExtResource("1_qjeqg")
 meteorite_scene = ExtResource("5_armdq")
+enemy_scene = ExtResource("8_48hgn")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=845499677]
 metadata/_edit_lock_ = true
@@ -67,8 +75,9 @@ offset_left = 25.0
 offset_top = 728.0
 offset_right = 285.0
 offset_bottom = 751.0
+theme_override_font_sizes/font_size = 23
 text = "Materia hasta proxima expansion"
-label_settings = ExtResource("6_qjeqg")
+label_settings = SubResource("LabelSettings_tuxlk")
 
 [node name="Meteorito" parent="." unique_id=204555057 instance=ExtResource("5_armdq")]
 position = Vector2(519, 265)
@@ -83,4 +92,12 @@ material = ExtResource("7_fcja6")
 offset_right = 1008.0
 offset_bottom = 812.0
 
+[node name="Enemigo" parent="." unique_id=605749363 instance=ExtResource("8_48hgn")]
+position = Vector2(278, 249)
+
+[node name="enemy_spawn" type="Timer" parent="." unique_id=383342635]
+wait_time = 2.0
+autostart = true
+
 [connection signal="timeout" from="meteor_spawn" to="." method="_on_meteor_spawn_timeout"]
+[connection signal="timeout" from="enemy_spawn" to="." method="_on_enemy_spawn_timeout"]
