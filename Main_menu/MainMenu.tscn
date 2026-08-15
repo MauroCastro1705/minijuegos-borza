@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://buxo1e66loyly"]
+
+[ext_resource type="Script" uid="uid://dybeejod0kvbl" path="res://Main_menu/main_menu.gd" id="1_aatin"]
+[ext_resource type="Shader" uid="uid://b7fdd3g627rgn" path="res://shaders/transition.gdshader" id="2_4qipx"]
+[ext_resource type="PackedScene" uid="uid://dc57ytm35ij54" path="res://Componentes/botones_main_menu/boton_main_menu.tscn" id="4_lq512"]
+[ext_resource type="Texture2D" uid="uid://dqh61q05muhb1" path="res://assets/locked_level.png" id="5_8cngx"]
+[ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lmyo"]
+shader = ExtResource("2_4qipx")
+shader_parameter/progress = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/pixelation = Vector2(2, 2)
+shader_parameter/zoom = 2.0
+shader_parameter/background_threshold = 9.49999998667295e-08
+shader_parameter/color_threshold = 0.6670000316825
+shader_parameter/color = Color(0.21691772, 0.28846666, 0.33728176, 1)
+shader_parameter/seed = 0.1
+
+[node name="Control" type="Control" unique_id=405304890]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aatin")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=937212800]
+material = SubResource("ShaderMaterial_oii30")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11764706, 0.21176471, 0.23137255, 0.8862745)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1251269853]
+material = SubResource("ShaderMaterial_2lmyo")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14601266, 0.2168428, 0.21923369, 1)
+metadata/_edit_lock_ = true
+
+[node name="StartButton" type="Button" parent="." unique_id=1150670714]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.57900006
+anchor_right = 1.0
+anchor_bottom = 0.81200004
+offset_left = 391.0
+offset_top = 64.32794
+offset_right = -371.26892
+offset_bottom = -30.135925
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(50, 31.429, 19.285, 1)
+theme_override_font_sizes/font_size = 47
+text = "Ver proyectos
+"
+
+[node name="special_floor" parent="StartButton" unique_id=985889854 instance=ExtResource("8_xfihy")]
+position = Vector2(162.63446, 4.472046)
+scale = Vector2(3.1427665, 2.2829287)
+
+[node name="version" type="Label" parent="." unique_id=2103998420]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 772.0
+offset_right = -774.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "v0.0.16"
+
+[node name="Label" type="Label" parent="." unique_id=1169261422]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.35500002
+offset_left = -1.0
+offset_top = 114.0
+offset_right = -3.0
+offset_bottom = -35.000015
+text = "Minijuegos para Borza"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="juegos" type="VBoxContainer" parent="." unique_id=342789019]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 224.0
+offset_top = -1.0
+offset_right = -186.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 66
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="juegos" unique_id=1108001804]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="BotonMainMenu" parent="juegos/HBoxContainer" unique_id=95418454 instance=ExtResource("4_lq512")]
+layout_mode = 2
+scene_path = "res://Escenas/juego_1_Expansion/expansion.tscn"
+game_name = "Tema 1 : Expansion"
+game_img = ExtResource("5_8cngx")
+disable_buton = false
+
+[node name="BotonMainMenu2" parent="juegos/HBoxContainer" unique_id=1411114336 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[node name="BotonMainMenu3" parent="juegos/HBoxContainer" unique_id=97646030 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="juegos" unique_id=1263441442]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="BotonMainMenu" parent="juegos/HBoxContainer2" unique_id=1873821953 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[node name="BotonMainMenu2" parent="juegos/HBoxContainer2" unique_id=445309188 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[node name="BotonMainMenu3" parent="juegos/HBoxContainer2" unique_id=1314581509 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="juegos" unique_id=2109818826]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="BotonMainMenu" parent="juegos/HBoxContainer3" unique_id=1116043422 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[node name="BotonMainMenu2" parent="juegos/HBoxContainer3" unique_id=130147954 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[node name="BotonMainMenu3" parent="juegos/HBoxContainer3" unique_id=1696385270 instance=ExtResource("4_lq512")]
+layout_mode = 2
+game_name = "Tema sorpresa"
+game_img = ExtResource("5_8cngx")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

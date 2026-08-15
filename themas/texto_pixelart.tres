@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bvl2vbgy7pfni"]
+
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="1_bvtxu"]
+
+[resource]
+font = ExtResource("1_bvtxu")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)

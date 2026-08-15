@@ -11,8 +11,34 @@ config_version=5
 [application]
 
 config/name="Minijuegos"
+run/main_scene="uid://buxo1e66loyly"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+TransitionManager="*uid://v10he83yt15m"
+DamageNumbers="*uid://dk4f2vjotc76m"
+Global="*uid://bbkik1lmr30lj"
+
+[display]
+
+window/size/viewport_width=1000
+window/size/viewport_height=800
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Componentes/": "green"
+}
+
+[global_group]
+
+player=""
 
 [physics]
 

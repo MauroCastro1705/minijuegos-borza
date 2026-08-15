@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://covr0r16gisq7"]
+
+[ext_resource type="Script" uid="uid://bdsi5gc2t27pi" path="res://Escenas/juego_1_Expansion/meteorito/meteorito.gd" id="1_7wevm"]
+[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/coin.png" id="1_img1r"]
+[ext_resource type="PackedScene" uid="uid://bcnwb7ldvxvq0" path="res://particulas/trail.tscn" id="3_7mi0d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7wevm"]
+radius = 10.049875
+
+[node name="Meteorito" type="Area2D" unique_id=605749363]
+script = ExtResource("1_7wevm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041051707]
+shape = SubResource("CircleShape2D_7wevm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2049313527]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+position = Vector2(0, 1)
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("1_img1r")
+
+[node name="CPUParticles2D" parent="." unique_id=470647072 instance=ExtResource("3_7mi0d")]
+scale = Vector2(2.7200012, 2.7200012)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

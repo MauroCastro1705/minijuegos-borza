@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cye2po1vg1uqf"]
+
+[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/coin.png" id="1_04tyo"]
+[ext_resource type="Script" uid="uid://dx5u3nvwbounn" path="res://Escenas/juego_1_Expansion/planeta/lpaneta.gd" id="1_d43q0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d43q0"]
+radius = 45.276924
+
+[node name="planeta" type="CharacterBody2D" unique_id=134775067 groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_d43q0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1953397279]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+position = Vector2(1, 1)
+scale = Vector2(1.7499999, 1.7499999)
+texture = ExtResource("1_04tyo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1107114529]
+shape = SubResource("CircleShape2D_d43q0")

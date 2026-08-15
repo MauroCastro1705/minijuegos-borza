@@ -1,6 +1,6 @@
 extends Control
 
-@export var _persistent_foreground_scene : PackedScene = preload("res://escenas/transition_scene/persistent_foreground_scene.tscn")
+@export var _persistent_foreground_scene : PackedScene = preload("res://Escenas/transition_scene/persistent_foreground_scene.tscn")
 
 var fondo: ColorRect
 
