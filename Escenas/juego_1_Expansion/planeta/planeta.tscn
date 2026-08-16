@@ -5,20 +5,58 @@
 [ext_resource type="PackedScene" uid="uid://bcnwb7ldvxvq0" path="res://particulas/trail.tscn" id="3_jbpe3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d43q0"]
-radius = 45.276924
+radius = 32.01562
 
 [node name="planeta" type="CharacterBody2D" unique_id=134775067 groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_d43q0")
+friction = 10.0
+acceleration = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1953397279]
 modulate = Color(18.892157, 18.892157, 18.892157, 1)
 position = Vector2(1, 1)
-scale = Vector2(1.7499999, 1.7499999)
+scale = Vector2(1.15625, 1.1562501)
 texture = ExtResource("1_04tyo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1107114529]
+visible = false
 shape = SubResource("CircleShape2D_d43q0")
 
 [node name="CPUParticles2D" parent="." unique_id=470647072 instance=ExtResource("3_jbpe3")]
-scale = Vector2(11.560002, 11.560002)
+visible = false
+scale = Vector2(8.040002, 8.040002)
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1726337389]
+position = Vector2(4, -16)
+scale = Vector2(0.30909094, 0.3090909)
+polygon = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+uv = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=944432958]
+position = Vector2(5.0000005, 7.999998)
+rotation = -0.36635047
+scale = Vector2(0.30909094, 0.3090909)
+polygon = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+uv = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+
+[node name="Polygon2D3" type="Polygon2D" parent="." unique_id=1509778462]
+position = Vector2(36.48078, 3.0015037)
+rotation = 0.93676215
+scale = Vector2(0.30911773, 0.3097555)
+polygon = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+uv = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+
+[node name="Polygon2D4" type="Polygon2D" parent="." unique_id=322533488]
+position = Vector2(11, 32)
+rotation = 2.161172
+scale = Vector2(0.30909094, 0.3090909)
+polygon = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+uv = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+
+[node name="Polygon2D5" type="Polygon2D" parent="." unique_id=888884386]
+position = Vector2(-12.999997, -3)
+rotation = 2.161172
+scale = Vector2(0.30909094, 0.3090909)
+polygon = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)
+uv = PackedVector2Array(-95, -30, -120, 8, -80, 25, -30, -1)

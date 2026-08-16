@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://7042oltuu2sr"]
+
+[ext_resource type="Script" uid="uid://c6otp7iwr6nc5" path="res://Escenas/juego_1_Expansion/meteorito_orbita/meteorito_orbit.gd" id="1_xwklk"]
+[ext_resource type="PackedScene" uid="uid://bcnwb7ldvxvq0" path="res://particulas/trail.tscn" id="3_ujbg7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7wevm"]
+radius = 10.049875
+
+[node name="Meteorito_orbit" type="Area2D" unique_id=605749363]
+script = ExtResource("1_xwklk")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1156832593]
+position = Vector2(6.9338245, 1.1460091)
+scale = Vector2(0.17588481, 0.1758848)
+polygon = PackedVector2Array(-90, 77, -26, 48, 17, 18, 10, -31, -24, -52, -76, -59, -98, -1)
+uv = PackedVector2Array(-68, 31, -21, 56, 17, 18, 20, -30, -33, -47, -68, -41, -104, -10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041051707]
+shape = SubResource("CircleShape2D_7wevm")
+
+[node name="CPUParticles2D" parent="." unique_id=470647072 instance=ExtResource("3_ujbg7")]
+scale = Vector2(2.7200012, 2.7200012)
+amount = 20
+lifetime = 1.0
+randomness = 0.25
+radial_accel_min = 2.0
+radial_accel_max = 5.0
+scale_amount_min = 1.0
+scale_amount_max = 3.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -22,4 +22,21 @@ texture = ExtResource("1_img1r")
 [node name="CPUParticles2D" parent="." unique_id=470647072 instance=ExtResource("3_7mi0d")]
 scale = Vector2(2.7200012, 2.7200012)
 
+[node name="explosion" type="CPUParticles2D" parent="." unique_id=1024817880]
+position = Vector2(0, 2)
+emitting = false
+amount = 20
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.47
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 50)
+initial_velocity_min = 217.61
+initial_velocity_max = 400.0
+angular_velocity_min = 45.0
+angular_velocity_max = 78.0
+scale_amount_min = 4.0
+scale_amount_max = 6.0
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

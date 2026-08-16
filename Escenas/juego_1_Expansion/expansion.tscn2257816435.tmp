@@ -22,18 +22,6 @@ font_size = 23
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_mp0am"]
-font = ExtResource("7_48hgn")
-font_size = 21
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_kssi1"]
-font = ExtResource("7_48hgn")
-font_size = 24
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
-
 [node name="Expansion" type="Node2D" unique_id=991290061]
 script = ExtResource("1_qjeqg")
 meteorite_scene = ExtResource("5_armdq")
@@ -92,6 +80,9 @@ theme_override_font_sizes/font_size = 23
 text = "Materia hasta proxima expansion"
 label_settings = SubResource("LabelSettings_tuxlk")
 
+[node name="Meteorito" parent="." unique_id=204555057 instance=ExtResource("5_armdq")]
+position = Vector2(519, 265)
+
 [node name="meteor_spawn" type="Timer" parent="." unique_id=993567355]
 wait_time = 0.5
 autostart = true
@@ -101,6 +92,9 @@ visible = false
 material = ExtResource("7_fcja6")
 offset_right = 1008.0
 offset_bottom = 812.0
+
+[node name="Enemigo" parent="." unique_id=605749363 instance=ExtResource("8_48hgn")]
+position = Vector2(278, 249)
 
 [node name="enemy_spawn" type="Timer" parent="." unique_id=383342635]
 wait_time = 2.0
@@ -124,24 +118,6 @@ offset_bottom = 766.0
 toggle_mode = true
 action_mode = 0
 text = "vhs - activo"
-
-[node name="total_materia" type="Label" parent="." unique_id=1588345398]
-offset_left = 498.0
-offset_top = 18.0
-offset_right = 538.0
-offset_bottom = 41.0
-text = "total"
-label_settings = SubResource("LabelSettings_mp0am")
-
-[node name="materia_count" type="Label" parent="." unique_id=1480212055]
-offset_left = 273.0
-offset_top = 752.0
-offset_right = 349.0
-offset_bottom = 775.0
-text = "1/2"
-label_settings = SubResource("LabelSettings_kssi1")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="timeout" from="meteor_spawn" to="." method="_on_meteor_spawn_timeout"]
 [connection signal="timeout" from="enemy_spawn" to="." method="_on_enemy_spawn_timeout"]

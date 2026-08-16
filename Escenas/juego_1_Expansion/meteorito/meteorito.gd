@@ -1,8 +1,10 @@
 extends Area2D
-
+#meteorito
 
 @export var speed: float = 200.0  # Velocidad del meteorito
 var direction: Vector2 = Vector2.ZERO  # Dirección de movimiento
+@onready var explosion: CPUParticles2D = $explosion
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -27,6 +29,11 @@ func _on_body_entered(body: Node2D) -> void:
 		DamageNumbers.display_text("+1", self.position, Color.YELLOW, 25)
 		Global.materia += 1
 		Global.emit_signal("update")
+		explosion.emitting = true
+		sprite_2d.hide()
+		speed = 0
+		await explosion.finished
+		
 		queue_free()
 
 # Función para establecer dirección manualmente (opcional)

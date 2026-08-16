@@ -86,7 +86,7 @@ void fragment()
 shader = SubResource("Shader_h3e0d")
 shader_parameter/progress = 0.5
 shader_parameter/speed = 0.5
-shader_parameter/pixelation = Vector2(2, 2)
+shader_parameter/pixelation = Vector2(10, 10)
 shader_parameter/zoom = 2.0
 shader_parameter/background_threshold = 0.254000107065
 shader_parameter/color_threshold = 0.24
