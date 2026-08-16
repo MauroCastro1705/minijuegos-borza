@@ -11,8 +11,10 @@ extends Node2D
 @onready var planeta: CharacterBody2D = $planeta
 @onready var total_score: Label = $total_materia
 @onready var materia_count: Label = $materia_count
-var score:int = 0
 
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
+var score:int = 0
 var LEVELS: Dictionary = {
 	1: 6,
 	2: 8,
@@ -75,7 +77,7 @@ func level_up():
 	
 	var duration = 0.6
 	var ease_type = Tween.EASE_IN_OUT
-	
+	audio_stream_player.play()
 	tween.tween_property(planeta, "speed", planeta.speed - 75.0, duration)\
 		.set_ease(ease_type).set_trans(Tween.TRANS_QUAD)
 
@@ -95,6 +97,8 @@ func level_up():
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	tween.parallel().tween_property(materia_bar, "scale", Vector2(1.0, 1.0), 0.3).set_delay(0.15)
 	DamageNumbers.display_text("Expansion",planeta.position, Color.WHITE, 35)
+	enemy_spawn.wait_time -= 0.5
+	print("wait time " , enemy_spawn.wait_time)
 
 
 func spawn_meteorite_from_edge():

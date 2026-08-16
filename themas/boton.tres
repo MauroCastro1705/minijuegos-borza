@@ -1,0 +1,31 @@
+[gd_resource type="Theme" format=3 uid="uid://bvdlqc82iykv8"]
+
+[ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="1_ap7ym"]
+[ext_resource type="Texture2D" uid="uid://cpbakvmriixu5" path="res://assets/UI Assets pack_v.1_st/Button_Blue_9Slides_Pressed.png" id="1_yyndb"]
+[ext_resource type="Texture2D" uid="uid://nrehqo0c47or" path="res://assets/UI Assets pack_v.1_st/Button_Blue_9Slides.png" id="2_ap7ym"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qkj7"]
+texture = ExtResource("1_yyndb")
+texture_margin_left = 21.0
+texture_margin_top = 24.0
+texture_margin_right = 22.0
+texture_margin_bottom = 21.0
+region_rect = Rect2(4, 4, 184, 181)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36hkn"]
+texture = ExtResource("2_ap7ym")
+texture_margin_left = 24.0
+texture_margin_top = 19.0
+texture_margin_right = 21.0
+texture_margin_bottom = 23.0
+region_rect = Rect2(8.021133, 0, 176.50085, 185)
+modulate_color = Color(0.88924783, 0.84817773, 0.8642902, 1)
+
+[resource]
+Button/colors/font_color = Color(0.8392157, 0.77254903, 0.7137255, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 5
+Button/font_sizes/font_size = 21
+Button/fonts/font = ExtResource("1_ap7ym")
+Button/styles/hover = SubResource("StyleBoxTexture_7qkj7")
+Button/styles/normal = SubResource("StyleBoxTexture_36hkn")

@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dybeejod0kvbl" path="res://Main_menu/main_menu.gd" id="1_aatin"]
 [ext_resource type="Shader" uid="uid://b7fdd3g627rgn" path="res://shaders/transition.gdshader" id="2_4qipx"]
+[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_5r1yp"]
 [ext_resource type="PackedScene" uid="uid://dc57ytm35ij54" path="res://Componentes/botones_main_menu/boton_main_menu.tscn" id="4_lq512"]
 [ext_resource type="Texture2D" uid="uid://dqh61q05muhb1" path="res://assets/locked_level.png" id="5_8cngx"]
+[ext_resource type="Texture2D" uid="uid://h0klbmjb186j" path="res://assets/Captura de pantalla 2026-08-15 220144.png" id="5_kycn4"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_rmre0"]
+[ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="5_v2is1"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
@@ -18,6 +22,25 @@ shader_parameter/background_threshold = 9.49999998667295e-08
 shader_parameter/color_threshold = 0.6670000316825
 shader_parameter/color = Color(0.21691772, 0.28846666, 0.33728176, 1)
 shader_parameter/seed = 0.1
+
+[sub_resource type="LabelSettings" id="LabelSettings_ckk3t"]
+font = ExtResource("5_rmre0")
+font_size = 19
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rmre0"]
+font = ExtResource("5_v2is1")
+font_size = 43
+font_color = Color(0.5921569, 0.02745098, 0.2784314, 1)
+outline_size = 7
+outline_color = Color(0.99607843, 0.95686275, 0.9098039, 1)
+shadow_size = 27
+shadow_color = Color(0.15686275, 0.24313726, 0.3372549, 1)
+shadow_offset = Vector2(5, 8)
+stacked_outline_count = 1
+stacked_outline_0/size = 6
+stacked_outline_0/color = Color(0.09803922, 0.5372549, 0.6745098, 1)
 
 [node name="Control" type="Control" unique_id=405304890]
 layout_mode = 3
@@ -59,20 +82,21 @@ anchors_preset = -1
 anchor_top = 0.57900006
 anchor_right = 1.0
 anchor_bottom = 0.81200004
-offset_left = 391.0
-offset_top = 64.32794
-offset_right = -371.26892
-offset_bottom = -30.135925
+offset_left = 272.73108
+offset_top = 64.32791
+offset_right = -245.0
+offset_bottom = -11.600037
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_5r1yp")
 theme_override_colors/font_color = Color(50, 31.429, 19.285, 1)
 theme_override_font_sizes/font_size = 47
 text = "Ver proyectos
 "
 
 [node name="special_floor" parent="StartButton" unique_id=985889854 instance=ExtResource("8_xfihy")]
-position = Vector2(162.63446, 4.472046)
-scale = Vector2(3.1427665, 2.2829287)
+position = Vector2(248.26892, 6.472046)
+scale = Vector2(4.5427666, 2.2829287)
 
 [node name="version" type="Label" parent="." unique_id=2103998420]
 layout_mode = 1
@@ -82,12 +106,13 @@ anchor_bottom = 1.0
 offset_left = 7.0
 offset_top = 772.0
 offset_right = -774.0
-offset_bottom = 95.0
+offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "v0.0.16"
+label_settings = SubResource("LabelSettings_ckk3t")
 
-[node name="Label" type="Label" parent="." unique_id=1169261422]
+[node name="titulo" type="Label" parent="." unique_id=1169261422]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -96,7 +121,8 @@ offset_left = -1.0
 offset_top = 114.0
 offset_right = -3.0
 offset_bottom = -35.000015
-text = "Minijuegos para Borza"
+text = "Seminario II"
+label_settings = SubResource("LabelSettings_rmre0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -111,7 +137,7 @@ offset_right = -186.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 66
+theme_override_constants/separation = 45
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="juegos" unique_id=1108001804]
@@ -123,7 +149,7 @@ alignment = 1
 layout_mode = 2
 scene_path = "res://Escenas/juego_1_Expansion/expansion.tscn"
 game_name = "Tema 1 : Expansion"
-game_img = ExtResource("5_8cngx")
+game_img = ExtResource("5_kycn4")
 disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer" unique_id=1411114336 instance=ExtResource("4_lq512")]

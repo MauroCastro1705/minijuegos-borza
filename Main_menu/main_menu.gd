@@ -3,7 +3,7 @@ extends Control
 @export var fade_duration: float = 0.5
 @onready var juegos: VBoxContainer = $juegos
 @onready var start_button: Button = $StartButton
-@onready var titulo: Label = $Label
+@onready var titulo: Label = $titulo
 
 func _ready() -> void:
 	juegos.hide()

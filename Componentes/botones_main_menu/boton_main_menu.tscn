@@ -2,7 +2,17 @@
 
 [ext_resource type="Script" uid="uid://r7b5ql5a7778" path="res://Componentes/botones_main_menu/boton_main_menu.gd" id="1_5qjbw"]
 [ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/coin.png" id="2_4cg82"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_f5phf"]
+[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_fulqr"]
 [ext_resource type="Texture2D" uid="uid://bbs3el8hyyu7y" path="res://assets/chains.png" id="3_pe5rp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0blt2"]
+font = ExtResource("3_f5phf")
+font_size = 26
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0.93333334, 0.4745098, 0, 1)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4cg82"]
 
@@ -33,27 +43,31 @@ layout_mode = 2
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
 text = "Tema"
+label_settings = SubResource("LabelSettings_0blt2")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=2128749130]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 texture = SubResource("PlaceholderTexture2D_4cg82")
-expand_mode = 5
+expand_mode = 3
 stretch_mode = 5
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2029637644]
+custom_minimum_size = Vector2(80, 40)
 layout_mode = 2
+theme = ExtResource("3_fulqr")
 text = "Jugar"
+autowrap_trim_flags = 0
 
 [node name="chains" type="TextureRect" parent="." unique_id=184149300]
 layout_mode = 0
-offset_left = -3.0000014
-offset_top = 79.0
-offset_right = 159.78
-offset_bottom = 160.0
+offset_left = 11.212515
+offset_top = 72.096535
+offset_right = 191.08626
+offset_bottom = 161.12137
 rotation = 0.31337047
 texture = ExtResource("3_pe5rp")
 expand_mode = 5

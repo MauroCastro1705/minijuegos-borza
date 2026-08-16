@@ -15,7 +15,8 @@ spread = 85.235
 gravity = Vector3(0, -30, 0)
 linear_accel_min = -0.5000022
 linear_accel_max = 0.49999776
-scale_max = 3.0
+scale_min = 3.0
+scale_max = 6.0
 scale_over_velocity_min = 395.6
 scale_over_velocity_max = 395.6
 color = Color(1.1535786, 0.7078548, 1.0892952e-06, 0.82)
@@ -24,5 +25,5 @@ hue_variation_min = -0.020000022
 hue_variation_max = 0.049999975
 
 [node name="special_floor" type="GPUParticles2D" unique_id=985889854]
-amount = 16
+amount = 20
 process_material = SubResource("ParticleProcessMaterial_xaocv")

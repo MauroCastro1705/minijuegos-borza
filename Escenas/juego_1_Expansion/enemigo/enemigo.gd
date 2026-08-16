@@ -1,5 +1,10 @@
 extends Area2D
 
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var sprite_2d: Polygon2D = $Polygon2D
+@onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+
 
 @export var speed: float = 200.0  # Velocidad del meteorito
 var direction: Vector2 = Vector2.ZERO  # Dirección de movimiento
@@ -24,10 +29,19 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		call_deferred("disable_coll")
 		DamageNumbers.display_text("-1", self.position, Color.RED, 35)
 		Global.materia -= 1
 		Global.emit_signal("update")
+		audio_stream_player.play()
+		speed = 0
+		sprite_2d.hide()
+		cpu_particles_2d.hide()
+		await audio_stream_player.finished
 		queue_free()
+
+func disable_coll():
+	collision_shape_2d.disabled = true
 
 # Función para establecer dirección manualmente (opcional)
 func set_direction(new_direction: Vector2) -> void:

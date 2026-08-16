@@ -9,6 +9,8 @@
 [ext_resource type="Material" uid="uid://dpmryps5t15aj" path="res://shaders/buckshot.tres" id="7_fcja6"]
 [ext_resource type="PackedScene" uid="uid://dlr316kek62yh" path="res://Escenas/juego_1_Expansion/enemigo/enemigo.tscn" id="8_48hgn"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="9_tuxlk"]
+[ext_resource type="AudioStream" uid="uid://jvmn0wk48cwd" path="res://assets/500 Sound Effects by Jalastram/lasergun.ogg" id="10_mp0am"]
+[ext_resource type="AudioStream" uid="uid://ct7g4n6bnvj03" path="res://assets/musica/asteroids.wav" id="11_kssi1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_armdq"]
 bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
@@ -142,6 +144,17 @@ text = "1/2"
 label_settings = SubResource("LabelSettings_kssi1")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=474819984]
+stream = ExtResource("10_mp0am")
+volume_db = 5.0
+pitch_scale = 0.5
+
+[node name="musica" type="AudioStreamPlayer" parent="." unique_id=1591383106]
+stream = ExtResource("11_kssi1")
+volume_db = -8.0
+pitch_scale = 0.95
+autoplay = true
 
 [connection signal="timeout" from="meteor_spawn" to="." method="_on_meteor_spawn_timeout"]
 [connection signal="timeout" from="enemy_spawn" to="." method="_on_enemy_spawn_timeout"]
