@@ -5,9 +5,9 @@
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_5r1yp"]
 [ext_resource type="PackedScene" uid="uid://dc57ytm35ij54" path="res://Componentes/botones_main_menu/boton_main_menu.tscn" id="4_lq512"]
 [ext_resource type="Texture2D" uid="uid://dqh61q05muhb1" path="res://assets/locked_level.png" id="5_8cngx"]
-[ext_resource type="Texture2D" uid="uid://h0klbmjb186j" path="res://assets/Captura de pantalla 2026-08-15 220144.png" id="5_kycn4"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_rmre0"]
 [ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="5_v2is1"]
+[ext_resource type="Texture2D" uid="uid://boninauffkts6" path="res://assets/Screenshots/PLANET EXPANSION.png" id="8_rmre0"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
@@ -149,7 +149,7 @@ alignment = 1
 layout_mode = 2
 scene_path = "res://Escenas/juego_1_Expansion/expansion.tscn"
 game_name = "Tema 1 : Expansion"
-game_img = ExtResource("5_kycn4")
+game_img = ExtResource("8_rmre0")
 disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer" unique_id=1411114336 instance=ExtResource("4_lq512")]

@@ -25,6 +25,7 @@ Global="*uid://bbkik1lmr30lj"
 
 window/size/viewport_width=1000
 window/size/viewport_height=800
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

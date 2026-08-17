@@ -33,6 +33,7 @@ func _on_body_entered(body: Node2D) -> void:
 		DamageNumbers.display_text("+1", self.position, Color.YELLOW, 25)
 		Global.materia += 1
 		Global.emit_signal("update")
+		Global.emit_signal("hit")
 		explosion.emitting = true
 		audio_stream_player.play()
 		sprite_2d.hide()
