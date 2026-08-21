@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://b4m2rdscejd3e"]
+
+[ext_resource type="Script" uid="uid://36a5wmov2glr" path="res://Escenas/splash/splash.gd" id="1_hyhgb"]
+[ext_resource type="Texture2D" uid="uid://bwkyi2nacefgr" path="res://assets/your-logo-here-dark.png" id="1_m874p"]
+[ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="3_qj824"]
+[ext_resource type="Shader" uid="uid://dab1uksiy332v" path="res://shaders/vhs_wiggle.gdshader" id="4_d63xo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d63xo"]
+font = ExtResource("3_qj824")
+font_size = 35
+shadow_size = 11
+shadow_color = Color(0.21230495, 0.2123048, 0.21230477, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jdavq"]
+shader = ExtResource("4_d63xo")
+shader_parameter/wiggle = 0.0499999988824
+shader_parameter/wiggle_speed = 35.0
+shader_parameter/smear = 0.4550000216125
+shader_parameter/blur_samples = 6
+
+[node name="splash" type="Node2D" unique_id=208541036]
+script = ExtResource("1_hyhgb")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=334177549]
+offset_right = 1010.0
+offset_bottom = 795.0
+color = Color(0.14117648, 0.14117648, 0.14117648, 1)
+metadata/_edit_lock_ = true
+
+[node name="YourLogoHereDark" type="Sprite2D" parent="." unique_id=1018883238]
+position = Vector2(484.00006, 408)
+scale = Vector2(0.28240737, 0.2824074)
+texture = ExtResource("1_m874p")
+metadata/_edit_lock_ = true
+
+[node name="Timer" type="Timer" parent="." unique_id=1128892383]
+wait_time = 3.0
+autostart = true
+
+[node name="Label" type="Label" parent="." unique_id=1095515092]
+offset_left = 516.0
+offset_top = 338.0
+offset_right = 782.0
+offset_bottom = 471.0
+text = "Mauro Castro
+UNSO"
+label_settings = SubResource("LabelSettings_d63xo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1400802482]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=917427866]
+material = SubResource("ShaderMaterial_jdavq")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
