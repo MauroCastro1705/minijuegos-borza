@@ -109,7 +109,21 @@ offset_right = -774.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "v0.0.16"
+text = "v 0.0.16"
+label_settings = SubResource("LabelSettings_ckk3t")
+
+[node name="version2" type="Label" parent="." unique_id=1413113268]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 845.0
+offset_top = 772.0
+offset_right = 1.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "seminario 2 - 2026"
 label_settings = SubResource("LabelSettings_ckk3t")
 
 [node name="titulo" type="Label" parent="." unique_id=1169261422]

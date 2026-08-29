@@ -2,7 +2,6 @@
 
 [ext_resource type="Material" uid="uid://c587cyuh4g2xn" path="res://shaders/stars.tres" id="1_0rxij"]
 [ext_resource type="PackedScene" uid="uid://cye2po1vg1uqf" path="res://Escenas/juego_1_Expansion/planeta/planeta.tscn" id="1_4yvj0"]
-[ext_resource type="Material" uid="uid://364kekwj2p6r" path="res://shaders/transition.tres" id="1_kb38s"]
 [ext_resource type="Script" uid="uid://cpcnbtnpbw4p4" path="res://Escenas/juego_1_Expansion/expansion.gd" id="1_qjeqg"]
 [ext_resource type="PackedScene" uid="uid://covr0r16gisq7" path="res://Escenas/juego_1_Expansion/meteorito/meteorito.tscn" id="5_armdq"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="7_48hgn"]
@@ -12,6 +11,99 @@
 [ext_resource type="AudioStream" uid="uid://jvmn0wk48cwd" path="res://assets/500 Sound Effects by Jalastram/lasergun.ogg" id="10_mp0am"]
 [ext_resource type="AudioStream" uid="uid://ct7g4n6bnvj03" path="res://assets/musica/asteroids.wav" id="11_kssi1"]
 [ext_resource type="Script" uid="uid://dmjh6hfr3j8ak" path="res://Escenas/juego_1_Expansion/camera_2d.gd" id="12_16iub"]
+
+[sub_resource type="Shader" id="Shader_h3e0d"]
+code = "shader_type canvas_item;
+
+uniform float progress = 0.0;
+uniform float speed = 0.1; 
+
+uniform vec2 pixelation = vec2(2.0, 2.0);
+uniform float zoom = 2.0;
+
+uniform float background_threshold : hint_range(-2.0, 1.0) = 0.0;
+uniform float color_threshold : hint_range(0.0, 1.0)  = 0.24;
+
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0); 
+
+uniform float seed = 0.0;
+
+#define iTime (TIME * speed - seed)
+
+const mat2 mtx = mat2( vec2(0.80, -0.60), vec2(0.60, 0.80) );
+
+float rand(vec2 n) { 
+    return fract(sin(dot(n, vec2(12.9898 + seed, 4.1414 - seed))) * (43758.5453 + seed * 1000.0));
+}
+
+float noise(vec2 p){
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u * u * (3.0 - 2.0 * u);
+
+    float res = mix(
+        mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
+        mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
+        
+    return res * res;
+}
+
+float fbm( vec2 p )
+{
+    float f = 0.0;
+    
+    f += 0.500000 * noise( p + iTime ); p = mtx * p * 2.02;
+    f += 0.031250 * noise( p ); p = mtx * p * 2.01;
+    f += 0.250000 * noise( p ); p = mtx * p * 2.03;
+    f += 0.125000 * noise( p ); p = mtx * p * 2.01;
+    f += 0.062500 * noise( p ); p = mtx * p * 2.04;
+    f += 0.015625 * noise( p + sin(iTime) );
+
+    return f / 0.96875;
+}
+
+float pattern( in vec2 p )
+{
+	return fbm( p + fbm( p + fbm( p ) ) );
+}
+
+vec4 colormap(float x, vec2 uv) {
+	
+	x *= max(0.0, min(-abs(progress * 4.0 - uv.x - uv.y - 1.0) + 1.0, 1.0) * 2.0);
+    
+    if (x < background_threshold) { 
+        return vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else if (x < color_threshold) { 
+        return mix(
+			vec4(0.0, 0.0, 0.0, 0.0),
+			color,
+			round((x - background_threshold) / (color_threshold - background_threshold))
+		);
+    }
+	else {
+		return color;
+	}
+}
+
+void fragment()
+{
+	vec2 modifier = 1.0/(SCREEN_PIXEL_SIZE * pixelation);
+	vec2 uv = floor(UV * modifier) / modifier;
+	float shade = pattern(uv * zoom);
+	COLOR = colormap(shade, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kssi1"]
+shader = SubResource("Shader_h3e0d")
+shader_parameter/progress = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/pixelation = Vector2(5, 5)
+shader_parameter/zoom = 2.0
+shader_parameter/background_threshold = 0.254000107065
+shader_parameter/color_threshold = 0.24
+shader_parameter/color = Color(1, 0.77254903, 0.60784316, 0.019607844)
+shader_parameter/seed = 0.2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_armdq"]
 bg_color = Color(0.16206557, 0.1620656, 0.16206548, 1)
@@ -66,8 +158,8 @@ offset_right = 1055.0
 offset_bottom = 906.0
 metadata/_edit_lock_ = true
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=956429521]
-material = ExtResource("1_kb38s")
+[node name="shader_loco" type="ColorRect" parent="." unique_id=956429521]
+material = SubResource("ShaderMaterial_kssi1")
 offset_right = 1011.0
 offset_bottom = 805.0
 color = Color(0, 0, 0, 1)
