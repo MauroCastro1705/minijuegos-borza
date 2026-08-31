@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.11824901, 0.41719845, 0.40857124, 1)
+color = Color(0.023040792, 0.15170035, 0.14825523, 1)
 
 [node name="TransitionEffect" type="ColorRect" parent="." unique_id=283080274]
 material = ExtResource("1_ajf1b")

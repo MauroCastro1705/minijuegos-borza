@@ -145,9 +145,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 224.0
+offset_left = -2.0
 offset_top = -1.0
-offset_right = -186.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -168,8 +167,10 @@ disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer" unique_id=1411114336 instance=ExtResource("4_lq512")]
 layout_mode = 2
-game_name = "Tema sorpresa"
+scene_path = "res://Escenas/juegos_2_patagonia/main_rio.tscn"
+game_name = "Tema 2 : Patagonia"
 game_img = ExtResource("5_8cngx")
+disable_buton = false
 
 [node name="BotonMainMenu3" parent="juegos/HBoxContainer" unique_id=97646030 instance=ExtResource("4_lq512")]
 layout_mode = 2

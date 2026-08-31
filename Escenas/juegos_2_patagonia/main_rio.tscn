@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bswcom8fyr00v"]
+
+[ext_resource type="PackedScene" uid="uid://bpyla4epm802l" path="res://Escenas/juegos_2_patagonia/pinguino/pinguino_player.tscn" id="1_1vcym"]
+[ext_resource type="Script" uid="uid://bluyboek43xrx" path="res://Escenas/juegos_2_patagonia/main_rio.gd" id="1_17s4q"]
+[ext_resource type="Script" uid="uid://cg6534vecjx12" path="res://Escenas/juegos_2_patagonia/spawner.gd" id="2_gauyj"]
+[ext_resource type="PackedScene" uid="uid://bbihidqir1b2a" path="res://Escenas/juegos_2_patagonia/obstaculos/obstaculo_1.tscn" id="3_q0o6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
+size = Vector2(406.75, 72)
+
+[node name="MainRio" type="Node2D" unique_id=1970150383]
+script = ExtResource("1_17s4q")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=950249016]
+offset_top = -21.0
+offset_right = 203.0
+offset_bottom = 804.0
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=189284719]
+offset_left = 806.0
+offset_top = -21.0
+offset_right = 1009.0
+offset_bottom = 804.0
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=765377215]
+offset_left = 192.0
+offset_top = -23.0
+offset_right = 809.0
+offset_bottom = 802.0
+color = Color(0.43702462, 0.54110986, 0.5428512, 1)
+
+[node name="Player" parent="." unique_id=301221430 groups=["player"] instance=ExtResource("1_1vcym")]
+position = Vector2(522, 448)
+
+[node name="spawner" type="Area2D" parent="." unique_id=169231247]
+position = Vector2(451, -182)
+script = ExtResource("2_gauyj")
+obstacle_scene = ExtResource("3_q0o6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spawner" unique_id=1917817436]
+position = Vector2(41.625, -115)
+shape = SubResource("RectangleShape2D_yowuo")
+
+[node name="Timer" type="Timer" parent="." unique_id=1399197681]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1635126709]
+
+[node name="hit_counter" type="Label" parent="CanvasLayer" unique_id=829296414]
+offset_left = 109.0
+offset_top = 491.0
+offset_right = 149.0
+offset_bottom = 514.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "hits"

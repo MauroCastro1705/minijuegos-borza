@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bpyla4epm802l"]
+
+[ext_resource type="Script" uid="uid://dbqn8sg8yvw3g" path="res://Escenas/juegos_2_patagonia/pinguino/player.gd" id="1_5abqv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7c4s7"]
+radius = 16.0
+height = 52.0
+
+[node name="Player" type="CharacterBody2D" unique_id=301221430]
+script = ExtResource("1_5abqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=146749081]
+shape = SubResource("CapsuleShape2D_7c4s7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=932000197]
+offset_left = -14.0
+offset_top = -18.0
+offset_right = 14.0
+offset_bottom = 22.0
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=131248931]
+offset_left = -14.0
+offset_top = -22.0
+offset_right = 14.0
+offset_bottom = -5.0
+color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1021208350]
+offset_left = 9.0
+offset_top = -6.0
+offset_right = 19.0
+offset_bottom = 19.0
+color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=1253033191]
+offset_left = -18.0
+offset_top = -6.0
+offset_right = -8.0
+offset_bottom = 19.0
+color = Color(0.06469653, 0.06469653, 0.06469653, 1)
