@@ -3,6 +3,7 @@ extends Node2D
 @onready var hit_counter: Label = $CanvasLayer/hit_counter
 var hits:int = 0
 @onready var spawner: Area2D = $spawner
+@onready var player: CharacterBody2D = $Player
 
 @onready var efecto_agua: CPUParticles2D = $efecto_agua
 var agua_velocity:Vector2
@@ -63,6 +64,7 @@ func _set_up_combo():
 func _on_hit():
 	hits += 1
 	reducir_velocidad()
+	reiniciar_combo()
 	hit_counter.text = "hits: " + str(hits) + " velocity: " + str(agua_velocity.y)
 
 func _on_pickup():
@@ -175,6 +177,7 @@ func reiniciar_combo():
 	combo_timer.stop()
 	actualizar_ui_combo()
 	print("Combo reiniciado")
+	player._combo_breaker()
 
 func obtener_estado_combo() -> Dictionary:
 	return {

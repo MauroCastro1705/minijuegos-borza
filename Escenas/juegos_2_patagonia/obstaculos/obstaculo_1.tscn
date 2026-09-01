@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://budrcuwhe5bqy" path="res://particulas/explosion_scene2.tscn" id="2_c0qfs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
-radius = 24.020824
+radius = 21.023796
 
 [node name="Obstaculo1" type="RigidBody2D" unique_id=1332238690 groups=["obstaculos"]]
 mass = 500.0

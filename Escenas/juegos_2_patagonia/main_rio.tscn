@@ -25,7 +25,7 @@ colors = PackedColorArray(0.7102279, 0.81995916, 0.99705523, 1, 1, 1, 1, 1, 1, 1
 size = Vector2(406.75, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s20xc"]
-size = Vector2(418, 76)
+size = Vector2(378, 76)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cn0c8"]
 font = ExtResource("10_qg6ds")

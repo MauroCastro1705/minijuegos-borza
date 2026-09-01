@@ -1,6 +1,55 @@
 [gd_scene format=3 uid="uid://bpyla4epm802l"]
 
 [ext_resource type="Script" uid="uid://dbqn8sg8yvw3g" path="res://Escenas/juegos_2_patagonia/pinguino/player.gd" id="1_5abqv"]
+[ext_resource type="FontFile" uid="uid://cqgxinsmd5tbo" path="res://assets/fonts/FFF_Ultra_TRIAL.ttf" id="2_t4yx3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yowuo"]
+font = ExtResource("2_t4yx3")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(3, 3)
+stacked_outline_count = 1
+stacked_outline_0/size = 3
+stacked_outline_0/color = Color(0.78211695, 0.17017251, 0.023421, 1)
+
+[sub_resource type="Animation" id="Animation_sypv3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("combo_label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_njnqi"]
+resource_name = "new_animation"
+length = 0.85
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("combo_label:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 0.8333333),
+"transitions": PackedFloat32Array(1, 1.5157167, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_86trc"]
+_data = {
+&"RESET": SubResource("Animation_sypv3"),
+&"combo": SubResource("Animation_njnqi")
+}
 
 [node name="Player" type="CharacterBody2D" unique_id=301221430]
 script = ExtResource("1_5abqv")
@@ -34,3 +83,17 @@ offset_top = -6.0
 offset_right = -8.0
 offset_bottom = 19.0
 color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+
+[node name="combo_label" type="Label" parent="." unique_id=1208937093]
+visible = false
+z_index = 10
+offset_left = -57.0
+offset_top = -51.0
+offset_right = 52.0
+offset_bottom = -28.0
+pivot_offset = Vector2(57, 8)
+text = "¡COMBO BREAKER!"
+label_settings = SubResource("LabelSettings_yowuo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=3580361]
+libraries/ = SubResource("AnimationLibrary_86trc")
