@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://km5pqhgvbsgs"]
+
+[ext_resource type="Shader" uid="uid://bjo0xympfx115" path="res://shaders/water2d.gdshader" id="1_m02ku"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yowuo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7c4s7"]
+
+[resource]
+shader = ExtResource("1_m02ku")
+shader_parameter/distortion_noise = SubResource("NoiseTexture2D_yowuo")
+shader_parameter/direction = Vector2(10, 5)
+shader_parameter/water_color = Color(0.8183292, 0.9338454, 0.9942586, 1)
+shader_parameter/fractal_color = Color(0.24912077, 0.20420921, 0.2974317, 1)
+shader_parameter/fractals = SubResource("NoiseTexture2D_7c4s7")
+shader_parameter/scale = 86.5
+shader_parameter/opacity = 0.90000001341108
+shader_parameter/distortion_strength = 0.20000000298024
+shader_parameter/fractal_strength = 0.5

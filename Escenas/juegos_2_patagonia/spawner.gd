@@ -71,10 +71,6 @@ func _spawn_obstacle():
 			spawn_position.x,
 			spawn_position.y - y_offset
 		)
-		
-		# Velocidad aleatoria
-		if obstacle.has_method("set_speed") or "speed" in obstacle:
-			obstacle.speed = rng.randf_range(250, 350)
 
 func _get_random_position_in_area() -> Vector2:
 	if spawn_rect == Rect2():

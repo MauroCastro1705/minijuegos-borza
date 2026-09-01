@@ -4,10 +4,10 @@ extends CharacterBody2D
 
 @export var speed: float = 400.0
 @export var lane_width: float = 100.0
-@export var lanes: int = 3
+@export var lanes: int = 5
 
 var target_x: float = 0.0
-var current_lane: int = 1
+var current_lane: int = 3
 var initial_x: float = 0.0  # Guardamos la posición inicial
 
 func _ready():
