@@ -1,9 +1,9 @@
 extends Area2D
 
-@export var obstacle_scene: PackedScene
+@export var pickup_scene: PackedScene
 @export var spawn_interval: float = 1.5
-@export var min_spawn_interval: float = 0.8
-@export var max_obstacles_per_wave: int = 2
+@export var min_spawn_interval: float = 1.0
+@export var max_obstacles_per_wave: int = 1
 
 var spawn_timer: Timer
 var rng = RandomNumberGenerator.new()
@@ -26,25 +26,21 @@ func _ready():
 func _setup_spawn_rect():
 	# Buscar el CollisionShape2D hijo
 	var collision_shape = get_child(0) if get_child_count() > 0 else null
-	
-	if collision_shape is CollisionShape2D:
-		var shape = collision_shape.shape
-		if shape is RectangleShape2D:
-			var extents = shape.extents
-			var pos = global_position
-			spawn_rect = Rect2(
-				pos.x - extents.x,
-				pos.y - extents.y,
-				extents.x * 2,
-				extents.y * 2
+	var shape = collision_shape.shape
+	if shape is RectangleShape2D:
+		var extents = shape.extents
+		var pos = global_position
+		spawn_rect = Rect2(
+			pos.x - extents.x,
+			pos.y - extents.y,
+			extents.x * 2,
+			extents.y * 2
 			)
-			print("Área de spawn configurada: ", spawn_rect)
-		else:
-			print("ERROR: La forma de colisión debe ser RECTANGULAR (RectangleShape2D)")
-			# Crear un rectángulo por defecto
-			spawn_rect = Rect2(global_position.x - 200, global_position.y - 300, 400, 600)
+		print("Área de spawn configurada: ", spawn_rect)
 	else:
-		print("ERROR: No se encontró CollisionShape2D como hijo del Area2D")
+		print("ERROR: La forma de colisión debe ser RECTANGULAR (RectangleShape2D)")
+			# Crear un rectángulo por defecto
+		spawn_rect = Rect2(global_position.x - 200, global_position.y - 300, 400, 600)
 		# Crear un rectángulo por defecto
 		spawn_rect = Rect2(global_position.x - 200, global_position.y - 300, 400, 600)
 
@@ -57,7 +53,7 @@ func _spawn_obstacle():
 	var count = rng.randi_range(1, max_obstacles_per_wave)
 	
 	for i in range(count):
-		var obstacle = obstacle_scene.instantiate()
+		var obstacle = pickup_scene.instantiate()
 		get_parent().add_child(obstacle)  # Añadir al padre (Main) en lugar de al spawner
 		
 		# Posición aleatoria DENTRO del área de spawn

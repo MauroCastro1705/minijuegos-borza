@@ -2,7 +2,7 @@
 
 [sub_resource type="Gradient" id="Gradient_2tuv7"]
 offsets = PackedFloat32Array(0, 0.537037, 1)
-colors = PackedColorArray(0.7102279, 0.81995916, 0.99705523, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.4047382, 0.62655884, 0.99215025, 1, 0.5984843, 0.8828449, 0.83667797, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2tuv7"]
 gradient = SubResource("Gradient_2tuv7")
@@ -21,7 +21,7 @@ angle_min = 50.00001
 angle_max = 180.00002
 radial_velocity_min = 199.99997
 radial_velocity_max = 499.99997
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, -100, 0)
 radial_accel_min = 1000.0
 radial_accel_max = 2000.0
 scale_min = 2.0

@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://cg6534vecjx12" path="res://Escenas/juegos_2_patagonia/spawner.gd" id="2_gauyj"]
 [ext_resource type="PackedScene" uid="uid://bbihidqir1b2a" path="res://Escenas/juegos_2_patagonia/obstaculos/obstaculo_1.tscn" id="3_q0o6t"]
 [ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="7_85fy2"]
+[ext_resource type="Script" uid="uid://c4fhj0rlejx4i" path="res://Escenas/juegos_2_patagonia/fish_spawner.gd" id="7_bsti6"]
+[ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="8_bsti6"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="10_qg6ds"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4s7"]
 size = Vector2(68, 835)
@@ -20,6 +23,21 @@ colors = PackedColorArray(0.7102279, 0.81995916, 0.99705523, 1, 1, 1, 1, 1, 1, 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
 size = Vector2(406.75, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s20xc"]
+size = Vector2(418, 76)
+
+[sub_resource type="LabelSettings" id="LabelSettings_cn0c8"]
+font = ExtResource("10_qg6ds")
+font_size = 19
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kv5fo"]
+font = ExtResource("10_qg6ds")
+font_size = 22
+outline_size = 8
+outline_color = Color(0.9411765, 0, 0, 1)
 
 [node name="MainRio" type="Node2D" unique_id=1970150383]
 script = ExtResource("1_17s4q")
@@ -80,6 +98,16 @@ obstacle_scene = ExtResource("3_q0o6t")
 position = Vector2(41.625, -115)
 shape = SubResource("RectangleShape2D_yowuo")
 
+[node name="fish_spawner" type="Area2D" parent="." unique_id=1997671133]
+position = Vector2(474, -342)
+script = ExtResource("7_bsti6")
+pickup_scene = ExtResource("8_bsti6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fish_spawner" unique_id=1739514974]
+position = Vector2(18, 28)
+shape = SubResource("RectangleShape2D_s20xc")
+debug_color = Color(0.79001063, 0.42869526, 0.06374906, 0.41960785)
+
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1237012275]
 repeat_size = Vector2(0, 600)
 autoscroll = Vector2(0, 350)
@@ -105,9 +133,32 @@ expand_mode = 5
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1635126709]
 
 [node name="hit_counter" type="Label" parent="CanvasLayer" unique_id=829296414]
-offset_left = 109.0
-offset_top = 491.0
-offset_right = 149.0
-offset_bottom = 514.0
+offset_left = 33.0
+offset_top = 307.0
+offset_right = 73.0
+offset_bottom = 330.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "hits"
+
+[node name="combo_Label" type="Label" parent="CanvasLayer" unique_id=391780861]
+offset_left = 26.0
+offset_top = 225.0
+offset_right = 151.0
+offset_bottom = 248.0
+text = "combo"
+label_settings = SubResource("LabelSettings_cn0c8")
+
+[node name="combo_progress" type="ProgressBar" parent="CanvasLayer" unique_id=87345709]
+offset_left = 21.0
+offset_top = 249.0
+offset_right = 168.0
+offset_bottom = 262.0
+show_percentage = false
+
+[node name="score" type="Label" parent="CanvasLayer" unique_id=322574467]
+offset_left = 51.0
+offset_top = 174.0
+offset_right = 104.0
+offset_bottom = 197.0
+text = "scores"
+label_settings = SubResource("LabelSettings_kv5fo")
