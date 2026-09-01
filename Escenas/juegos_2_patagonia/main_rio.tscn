@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://bc8jc35ryhc6v" path="res://assets/water_particle.png" id="2_16da4"]
 [ext_resource type="Script" uid="uid://cg6534vecjx12" path="res://Escenas/juegos_2_patagonia/spawner.gd" id="2_gauyj"]
 [ext_resource type="PackedScene" uid="uid://bbihidqir1b2a" path="res://Escenas/juegos_2_patagonia/obstaculos/obstaculo_1.tscn" id="3_q0o6t"]
-[ext_resource type="Material" uid="uid://km5pqhgvbsgs" path="res://shaders/water2d.tres" id="5_8jamp"]
 [ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="7_85fy2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4s7"]
+size = Vector2(68, 835)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_85fy2"]
 atlas = ExtResource("2_16da4")
@@ -18,9 +20,6 @@ colors = PackedColorArray(0.7102279, 0.81995916, 0.99705523, 1, 1, 1, 1, 1, 1, 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
 size = Vector2(406.75, 72)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4s7"]
-size = Vector2(68, 835)
 
 [node name="MainRio" type="Node2D" unique_id=1970150383]
 script = ExtResource("1_17s4q")
@@ -45,6 +44,19 @@ offset_right = 809.0
 offset_bottom = 802.0
 color = Color(0.43702462, 0.54110986, 0.5428512, 1)
 
+[node name="StaticBody2D" type="StaticBody2D" parent="fondos" unique_id=2059625218]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fondos/StaticBody2D" unique_id=1905398386]
+position = Vector2(203, 396)
+shape = SubResource("RectangleShape2D_7c4s7")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="fondos" unique_id=1323095900]
+position = Vector2(591, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fondos/StaticBody2D2" unique_id=2063251554]
+position = Vector2(203, 396)
+shape = SubResource("RectangleShape2D_7c4s7")
+
 [node name="efecto_agua" type="CPUParticles2D" parent="." unique_id=1976840397]
 position = Vector2(508, -23)
 amount = 20
@@ -68,22 +80,6 @@ obstacle_scene = ExtResource("3_q0o6t")
 position = Vector2(41.625, -115)
 shape = SubResource("RectangleShape2D_yowuo")
 
-[node name="Velocity_Timer" type="Timer" parent="." unique_id=1399197681]
-wait_time = 5.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1635126709]
-
-[node name="hit_counter" type="Label" parent="CanvasLayer" unique_id=829296414]
-offset_left = 109.0
-offset_top = 491.0
-offset_right = 149.0
-offset_bottom = 514.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "hits"
-
-[node name="ColorRect4" type="Sprite2D" parent="." unique_id=1773365928]
-material = ExtResource("5_8jamp")
-
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1237012275]
 repeat_size = Vector2(0, 600)
 autoscroll = Vector2(0, 350)
@@ -106,15 +102,12 @@ rotation = -3.1415927
 texture = ExtResource("7_85fy2")
 expand_mode = 5
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2059625218]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1635126709]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1905398386]
-position = Vector2(203, 396)
-shape = SubResource("RectangleShape2D_7c4s7")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1323095900]
-position = Vector2(591, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=2063251554]
-position = Vector2(203, 396)
-shape = SubResource("RectangleShape2D_7c4s7")
+[node name="hit_counter" type="Label" parent="CanvasLayer" unique_id=829296414]
+offset_left = 109.0
+offset_top = 491.0
+offset_right = 149.0
+offset_bottom = 514.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "hits"

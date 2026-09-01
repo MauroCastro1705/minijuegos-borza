@@ -2,15 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dbqn8sg8yvw3g" path="res://Escenas/juegos_2_patagonia/pinguino/player.gd" id="1_5abqv"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7c4s7"]
-radius = 16.0
-height = 52.0
-
 [node name="Player" type="CharacterBody2D" unique_id=301221430]
 script = ExtResource("1_5abqv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=146749081]
-shape = SubResource("CapsuleShape2D_7c4s7")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=776259963]
+polygon = PackedVector2Array(0, -26, 13, -13, 19, 20, 0, 25, -17, 20, -12, -14)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=932000197]
 offset_left = -14.0

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bbihidqir1b2a"]
 
 [ext_resource type="Script" uid="uid://bxcntsbiudggo" path="res://Escenas/juegos_2_patagonia/obstaculos/obstaculo_1.gd" id="1_cr4ty"]
+[ext_resource type="PackedScene" uid="uid://budrcuwhe5bqy" path="res://particulas/explosion_scene2.tscn" id="2_c0qfs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
 radius = 24.020824
@@ -20,5 +21,7 @@ offset_top = -21.0
 offset_right = 20.0
 offset_bottom = 19.0
 color = Color(0.21116176, 0.2777056, 0.53196084, 1)
+
+[node name="explosion_scene" parent="." unique_id=1830446868 instance=ExtResource("2_c0qfs")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

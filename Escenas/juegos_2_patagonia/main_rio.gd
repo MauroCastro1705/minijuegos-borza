@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var hit_counter: Label = $CanvasLayer/hit_counter
 var hits:int = 0
-@onready var velocity_timer: Timer = $Velocity_Timer
 @onready var spawner: Area2D = $spawner
 
 @onready var efecto_agua: CPUParticles2D = $efecto_agua

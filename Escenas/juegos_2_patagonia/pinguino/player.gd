@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var lanes: int = 5
 
 var target_x: float = 0.0
-var current_lane: int = 3
+var current_lane: int = 2
 var initial_x: float = 0.0  # Guardamos la posición inicial
 
 func _ready():
