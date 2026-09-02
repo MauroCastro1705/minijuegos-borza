@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://di6jmvtbikq7m"]
 
 [ext_resource type="Texture2D" uid="uid://bc8jc35ryhc6v" path="res://assets/water_particle.png" id="1_7f20t"]
+[ext_resource type="Script" uid="uid://decb1gtl8tvwy" path="res://Escenas/juegos_2_patagonia/tutorial/tutorial.gd" id="1_gm8mf"]
 [ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="2_sqyil"]
 [ext_resource type="Texture2D" uid="uid://b6db45d3wknhv" path="res://assets/juego2/juego2_logo (2).png" id="3_sqyil"]
 [ext_resource type="Texture2D" uid="uid://bavcwpaimm15r" path="res://assets/kenney_particlePack/PNG/star_08.png" id="4_05pjn"]
 [ext_resource type="Texture2D" uid="uid://c8l64ahn7vnte" path="res://assets/Keyboard & Mouse/Default/keyboard_arrows_horizontal.png" id="5_qfl2j"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="6_1b6jh"]
+[ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="7_1b6jh"]
+[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="8_e6dx5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_05pjn"]
 atlas = ExtResource("1_7f20t")
@@ -41,6 +44,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0.453125, 0.453125)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Star08:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1.2736489, 1.380357, 0, 0.7058824)]
+}
 
 [sub_resource type="Animation" id="Animation_qfl2j"]
 resource_name = "brillo"
@@ -69,6 +84,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0.453125, 0.453125), Vector2(0.22, 0.22), Vector2(0.453125, 0.453125)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Star08:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.03333336, 0.46666667, 0.96666664),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1.2736489, 1.380357, 0, 0.7058824), Color(1.3015941, 1.38, 0.81456923, 0.706), Color(1.2736489, 1.380357, 0, 0.7058824)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1b6jh"]
 _data = {
@@ -83,6 +110,7 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Tutorial" type="Node2D" unique_id=1400372841]
+script = ExtResource("1_gm8mf")
 
 [node name="fondos" type="Node2D" parent="." unique_id=1070306791]
 metadata/_edit_lock_ = true
@@ -166,22 +194,41 @@ texture = ExtResource("4_05pjn")
 libraries/ = SubResource("AnimationLibrary_1b6jh")
 autoplay = &"brillo"
 
-[node name="KeyboardArrowsHorizontal" type="Sprite2D" parent="." unique_id=1080253734]
+[node name="info" type="Node2D" parent="." unique_id=1475076707]
+position = Vector2(0, -39)
+
+[node name="KeyboardArrowsHorizontal" type="Sprite2D" parent="info" unique_id=1080253734]
 texture_filter = 1
 position = Vector2(496, 434)
 scale = Vector2(1.84375, 1.84375)
 texture = ExtResource("5_qfl2j")
 
-[node name="Label" type="Label" parent="." unique_id=1175467686]
+[node name="Label" type="Label" parent="info" unique_id=1175467686]
 custom_minimum_size = Vector2(100, 80)
 custom_maximum_size = Vector2(500, 300)
 offset_left = 277.0
 offset_top = 431.0
-offset_right = 777.0
-offset_bottom = 593.0
+offset_right = 717.0
+offset_bottom = 626.0
 text = "Usa las flechas 
+para mover a Carlos el pinguino
 
-para mover a Carlos el pinguino y 
-conseguir comida, pero cuidado con los bloques de hielo!"
+Consegui comida! 
+
+Pero cuidado con los bloques de hielo!"
 label_settings = SubResource("LabelSettings_e6dx5")
 autowrap_mode = 3
+
+[node name="Fish3" parent="info" unique_id=182525668 instance=ExtResource("7_1b6jh")]
+position = Vector2(502, 545)
+SPEED = 0.0
+
+[node name="Button" type="Button" parent="." unique_id=1542022230]
+offset_left = 425.0
+offset_top = 655.0
+offset_right = 586.0
+offset_bottom = 725.0
+theme = ExtResource("8_e6dx5")
+text = "Comenzar !"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

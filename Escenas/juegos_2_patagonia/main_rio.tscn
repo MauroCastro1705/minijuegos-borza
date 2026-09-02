@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="7_85fy2"]
 [ext_resource type="Script" uid="uid://c4fhj0rlejx4i" path="res://Escenas/juegos_2_patagonia/fish_spawner.gd" id="7_bsti6"]
 [ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="8_bsti6"]
+[ext_resource type="Texture2D" uid="uid://c4kp23h3l15l5" path="res://assets/juego2/fish.png" id="10_kv5fo"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="10_qg6ds"]
+[ext_resource type="LabelSettings" uid="uid://bvl2vbgy7pfni" path="res://themas/texto_pixelart.tres" id="11_kv5fo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4s7"]
 size = Vector2(68, 835)
@@ -29,15 +31,32 @@ size = Vector2(378, 76)
 
 [sub_resource type="LabelSettings" id="LabelSettings_cn0c8"]
 font = ExtResource("10_qg6ds")
-font_size = 19
+font_size = 30
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kv5fo"]
 font = ExtResource("10_qg6ds")
-font_size = 22
-outline_size = 8
+font_size = 30
+outline_size = 6
 outline_color = Color(0.9411765, 0, 0, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qg6ds"]
+font = ExtResource("10_qg6ds")
+font_size = 35
+font_color = Color(0.9137255, 0.48235294, 0.25490198, 1)
+outline_size = 8
+outline_color = Color(0.57254905, 0.15294118, 0.19215687, 1)
+shadow_size = 5
+shadow_color = Color(0.34509805, 0.15294118, 0.23137255, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61w3v"]
+atlas = ExtResource("10_kv5fo")
+region = Rect2(569, 580, 197, 180)
 
 [node name="MainRio" type="Node2D" unique_id=1970150383]
 script = ExtResource("1_17s4q")
@@ -48,12 +67,14 @@ script = ExtResource("1_17s4q")
 offset_top = -21.0
 offset_right = 203.0
 offset_bottom = 804.0
+metadata/_edit_lock_ = true
 
 [node name="ColorRect2" type="ColorRect" parent="fondos" unique_id=189284719]
 offset_left = 806.0
 offset_top = -21.0
 offset_right = 1009.0
 offset_bottom = 804.0
+metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="fondos" unique_id=765377215]
 offset_left = 192.0
@@ -61,8 +82,10 @@ offset_top = -23.0
 offset_right = 809.0
 offset_bottom = 802.0
 color = Color(0.43702462, 0.54110986, 0.5428512, 1)
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="fondos" unique_id=2059625218]
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fondos/StaticBody2D" unique_id=1905398386]
 position = Vector2(203, 396)
@@ -70,6 +93,7 @@ shape = SubResource("RectangleShape2D_7c4s7")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="fondos" unique_id=1323095900]
 position = Vector2(591, 0)
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fondos/StaticBody2D2" unique_id=2063251554]
 position = Vector2(203, 396)
@@ -85,6 +109,31 @@ emission_rect_extents = Vector2(300, 1)
 scale_amount_max = 2.0
 color = Color(0.40893492, 0.7901508, 0.99386746, 1)
 color_ramp = SubResource("Gradient_m02ku")
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1237012275]
+repeat_size = Vector2(0, 600)
+autoscroll = Vector2(0, 350)
+repeat_times = 5
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Parallax2D" unique_id=2068649711]
+offset_left = 171.0
+offset_top = -10.0
+offset_right = 367.0
+offset_bottom = 806.0
+texture = ExtResource("7_85fy2")
+expand_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="Parallax2D" unique_id=1000482621]
+offset_left = 824.0
+offset_top = 808.0
+offset_right = 1020.0
+offset_bottom = 1624.0
+rotation = -3.1415927
+texture = ExtResource("7_85fy2")
+expand_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." unique_id=301221430 groups=["player"] instance=ExtResource("1_1vcym")]
 position = Vector2(411, 448)
@@ -108,42 +157,12 @@ position = Vector2(18, 28)
 shape = SubResource("RectangleShape2D_s20xc")
 debug_color = Color(0.79001063, 0.42869526, 0.06374906, 0.41960785)
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1237012275]
-repeat_size = Vector2(0, 600)
-autoscroll = Vector2(0, 350)
-repeat_times = 5
-
-[node name="TextureRect" type="TextureRect" parent="Parallax2D" unique_id=2068649711]
-offset_left = 171.0
-offset_top = -10.0
-offset_right = 367.0
-offset_bottom = 806.0
-texture = ExtResource("7_85fy2")
-expand_mode = 5
-
-[node name="TextureRect2" type="TextureRect" parent="Parallax2D" unique_id=1000482621]
-offset_left = 824.0
-offset_top = 808.0
-offset_right = 1020.0
-offset_bottom = 1624.0
-rotation = -3.1415927
-texture = ExtResource("7_85fy2")
-expand_mode = 5
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1635126709]
 
-[node name="hit_counter" type="Label" parent="CanvasLayer" unique_id=829296414]
-offset_left = 33.0
-offset_top = 307.0
-offset_right = 73.0
-offset_bottom = 330.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "hits"
-
 [node name="combo_Label" type="Label" parent="CanvasLayer" unique_id=391780861]
-offset_left = 26.0
-offset_top = 225.0
-offset_right = 151.0
+offset_left = 21.0
+offset_top = 213.0
+offset_right = 201.0
 offset_bottom = 248.0
 text = "combo"
 label_settings = SubResource("LabelSettings_cn0c8")
@@ -151,14 +170,56 @@ label_settings = SubResource("LabelSettings_cn0c8")
 [node name="combo_progress" type="ProgressBar" parent="CanvasLayer" unique_id=87345709]
 offset_left = 21.0
 offset_top = 249.0
-offset_right = 168.0
+offset_right = 160.0
 offset_bottom = 262.0
 show_percentage = false
 
 [node name="score" type="Label" parent="CanvasLayer" unique_id=322574467]
-offset_left = 51.0
-offset_top = 174.0
-offset_right = 104.0
-offset_bottom = 197.0
+offset_left = 34.0
+offset_top = 118.0
+offset_right = 106.0
+offset_bottom = 148.0
 text = "scores"
 label_settings = SubResource("LabelSettings_kv5fo")
+
+[node name="comida" type="Label" parent="CanvasLayer" unique_id=524079388]
+offset_left = 53.0
+offset_top = 283.0
+offset_right = 160.0
+offset_bottom = 329.0
+text = "comida"
+label_settings = SubResource("LabelSettings_qg6ds")
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=985924114]
+texture_filter = 1
+offset_left = -63.000008
+offset_top = 208.99998
+offset_right = 134.0
+offset_bottom = 389.0
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(100, 102)
+texture = SubResource("AtlasTexture_61w3v")
+
+[node name="velocity_bar" type="ProgressBar" parent="CanvasLayer" unique_id=1290313773]
+offset_left = 851.0
+offset_top = 236.0
+offset_right = 955.0
+offset_bottom = 261.0
+show_percentage = false
+
+[node name="velocity_text" type="Label" parent="CanvasLayer" unique_id=1139038409]
+offset_left = 852.0
+offset_top = 266.0
+offset_right = 986.0
+offset_bottom = 289.0
+text = "Velocidad"
+label_settings = ExtResource("11_kv5fo")
+
+[node name="velocity_text2" type="Label" parent="CanvasLayer" unique_id=2054746959]
+offset_left = 852.0
+offset_top = 214.0
+offset_right = 986.0
+offset_bottom = 237.0
+text = "Pingüinometro"
+label_settings = ExtResource("11_kv5fo")

@@ -56,6 +56,7 @@ colors = PackedColorArray(0.99215686, 1, 0, 1, 1, 1, 0.4862745, 1, 1, 1, 1, 1)
 script = ExtResource("1_dg8dx")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=263560820]
+self_modulate = Color(0.73639756, 0.86731124, 0.9334814, 1)
 texture_filter = 1
 offset_left = -102.99999
 offset_top = -97.99999

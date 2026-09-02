@@ -98,6 +98,8 @@ text = "Ver proyectos
 [node name="special_floor" parent="StartButton" unique_id=985889854 instance=ExtResource("8_xfihy")]
 position = Vector2(248.26892, 6.472046)
 scale = Vector2(4.5427666, 2.2829287)
+amount = 23
+lifetime = 2.0
 
 [node name="version" type="Label" parent="." unique_id=2103998420]
 layout_mode = 1
@@ -110,7 +112,7 @@ offset_right = -774.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "v 0.0.16"
+text = "v 0.0.21"
 label_settings = SubResource("LabelSettings_ckk3t")
 
 [node name="version2" type="Label" parent="." unique_id=1413113268]

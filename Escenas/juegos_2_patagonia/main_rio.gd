@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var hit_counter: Label = $CanvasLayer/hit_counter
 var hits:int = 0
 @onready var spawner: Area2D = $spawner
 @onready var player: CharacterBody2D = $Player
@@ -14,6 +13,13 @@ var score:int = 0
 @onready var combo_label: Label = $CanvasLayer/combo_Label
 @onready var combo_progress: ProgressBar = $CanvasLayer/combo_progress
 @onready var score_label: Label = $CanvasLayer/score
+
+#velocidad
+@onready var velocity_bar: ProgressBar = $CanvasLayer/velocity_bar
+@onready var velocity_text: Label = $CanvasLayer/velocity_text
+@onready var comida_label: Label = $CanvasLayer/comida
+
+var COMIDA:int = 0
 
 # Sistema de combo
 var combo_count: int = 0
@@ -39,7 +45,12 @@ const TIEMPO_COMBO_BASE: float = 2.0  # Tiempo base para mantener combo
 const BONUS_POR_COMBO: float = 0.1  # Bonus de multiplicador por cada combo
 const MULTIPLICADOR_MAXIMO: float = 3.0  # Multiplicador máximo
 
+var velocidad_actual: float = 0.0
+var velocidad_maxima: float = 0.0
+var velocidad_minima: float = 0.0
+
 func _ready() -> void:
+	comida_label.text = "Comida: " + str(COMIDA)
 	Global.hit.connect(_on_hit)
 	Global.pick_up.connect(_on_pickup)
 	agua_velocity = Vector2(0, GRAVEDAD_MAXIMA)
@@ -48,7 +59,60 @@ func _ready() -> void:
 	orilla_velocity = Vector2(0, ORILLA_MAXIMA)
 	orilla.autoscroll = orilla_velocity
 	_set_up_combo()
+	
+	# Inicializar velocímetro
+	_inicializar_velocimetro()
 
+func _inicializar_velocimetro():
+	# Calcular velocidad actual basada en el estado inicial
+	velocidad_actual = calcular_velocidad_actual()
+	velocidad_minima = 0.0  # Mínimo 0%
+	velocidad_maxima = 100.0  # Máximo 100%
+	
+	# Configurar barra de velocidad
+	velocity_bar.min_value = velocidad_minima
+	velocity_bar.max_value = velocidad_maxima
+	velocity_bar.value = velocidad_actual
+	
+	# Actualizar texto
+	actualizar_velocimetro()
+
+func calcular_velocidad_actual() -> float:
+	var rango_gravedad = GRAVEDAD_MAXIMA - GRAVEDAD_MINIMA
+	if rango_gravedad <= 0:
+		return 50.0  # Valor por defecto
+	
+	var gravedad_normalizada = (agua_velocity.y - GRAVEDAD_MINIMA) / rango_gravedad
+	var velocidad_porcentaje = gravedad_normalizada * 100.0
+	
+	# También consideramos la velocidad de la orilla para mayor precisión
+	var rango_orilla = ORILLA_MAXIMA - ORILLA_MINIMA
+	if rango_orilla > 0:
+		var orilla_normalizada = (orilla_velocity.y - ORILLA_MINIMA) / rango_orilla
+		# Promedio entre ambas velocidades
+		velocidad_porcentaje = (gravedad_normalizada * 0.6 + orilla_normalizada * 0.4) * 100.0
+	
+	return clamp(velocidad_porcentaje, 0.0, 100.0)
+
+func actualizar_velocimetro():
+	velocity_bar.value = velocidad_actual
+	var nivel_velocidad = ""
+	
+	if velocidad_actual >= 90:
+		nivel_velocidad = "MÁXIMA"
+		velocity_bar.modulate = Color(1, 0.2, 0.2)  # Rojo
+	elif velocidad_actual >= 70:
+		nivel_velocidad = "ALTA"
+		velocity_bar.modulate = Color(1, 0.6, 0)  # Naranja
+	elif velocidad_actual >= 40:
+		nivel_velocidad = "MEDIA"
+		velocity_bar.modulate = Color(0.2, 0.8, 0.2)  # Verde
+	else:
+		nivel_velocidad = "BAJA"
+		velocity_bar.modulate = Color(0.2, 0.6, 1)  # Azul
+	
+	velocity_text.text = "Velociad: " + nivel_velocidad
+	
 func _set_up_combo():
 	# Configurar timer para el combo
 	combo_timer = Timer.new()
@@ -64,19 +128,42 @@ func _set_up_combo():
 func _on_hit():
 	hits += 1
 	reducir_velocidad()
-	reiniciar_combo()
-	hit_counter.text = "hits: " + str(hits) + " velocity: " + str(agua_velocity.y)
+	reiniciar_combo()	
+	# Actualizar velocímetro después de reducir velocidad
+	actualizar_despues_de_cambio_velocidad()
 
 func _on_pickup():
-	# Logica de combo
+	COMIDA += 1
+	comida_label.text = "Comida: " + str(COMIDA)
 	aumentar_combo()
 	calcular_puntaje()
-	
+	# AUMENTAR VELOCIDAD al recoger items
+	aumentar_velocidad()
 	# Reiniciar el timer del combo
 	combo_timer.start()
-	
-	# Actualizar UI
 	actualizar_ui_combo()
+	actualizar_despues_de_cambio_velocidad()
+
+func actualizar_despues_de_cambio_velocidad():
+	# Recalcular velocidad actual
+	velocidad_actual = calcular_velocidad_actual()
+	actualizar_velocimetro()
+	mostrar_efecto_velocidad()
+
+func mostrar_efecto_velocidad():
+	# Efecto visual cuando cambia la velocidad
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_BOUNCE)
+	tween.set_ease(Tween.EASE_OUT)
+	
+	# Efecto en la barra de velocidad
+	var escala_original = velocity_bar.scale
+	tween.tween_property(velocity_bar, "scale", Vector2(1.1, 1.2), 0.1)
+	tween.tween_property(velocity_bar, "scale", escala_original, 0.15)
+	
+	# Efecto en el texto
+	tween.parallel().tween_property(velocity_text, "scale", Vector2(1.2, 1.2), 0.1)
+	tween.parallel().tween_property(velocity_text, "scale", Vector2(1.0, 1.0), 0.15)
 
 func aumentar_combo():
 	# Incrementar combo
@@ -191,6 +278,7 @@ func obtener_estado_combo() -> Dictionary:
 func reducir_velocidad():
 	print("se redujo velocidad")
 	reducir_velocidad_hielo()
+	
 	# Reducir gravedad con límite mínimo
 	var nueva_gravedad_y = max(
 		GRAVEDAD_MINIMA, 
@@ -206,11 +294,16 @@ func reducir_velocidad():
 	)
 	orilla_velocity = Vector2(0, nueva_orilla_y)
 	orilla.autoscroll = orilla_velocity
+	
+	# Actualizar velocidad actual
+	velocidad_actual = calcular_velocidad_actual()
+	
 	print("orilla:", orilla.autoscroll)
 	print("particulas:", efecto_agua.gravity)
 
 func aumentar_velocidad():
 	print("se aumentó velocidad")
+	aumentar_velocidad_hielo()
 	
 	# Aumentar gravedad con límite máximo
 	var nueva_gravedad_y = min(
@@ -228,9 +321,12 @@ func aumentar_velocidad():
 	orilla_velocity = Vector2(0, nueva_orilla_y)
 	orilla.autoscroll = orilla_velocity
 	
+	# Actualizar velocidad actual
+	velocidad_actual = calcular_velocidad_actual()
+	
 	print("orilla:", orilla.autoscroll)
 	print("particulas:", efecto_agua.gravity)
-
+	
 func reducir_velocidad_hielo():
 	# Reducir velocidad con límite mínimo de 0.5
 	Global.hielo_speed = max(0.3, Global.hielo_speed - 0.1)
@@ -240,3 +336,22 @@ func aumentar_velocidad_hielo():
 	# Aumentar velocidad con límite máximo de 1.0
 	Global.hielo_speed = min(1.1, Global.hielo_speed + 0.1)
 	print("hielo: ", Global.hielo_speed)
+
+func _process(_delta: float) -> void:
+	var nueva_velocidad = calcular_velocidad_actual()
+	if abs(nueva_velocidad - velocidad_actual) > 0.1:
+		velocidad_actual = nueva_velocidad
+		actualizar_velocimetro()
+	pass
+
+# Función para resetear velocidad (útil para debug)
+func resetear_velocidad():
+	# Resetear a velocidad máxima
+	agua_velocity = Vector2(0, GRAVEDAD_MAXIMA)
+	efecto_agua.gravity = agua_velocity
+	orilla_velocity = Vector2(0, ORILLA_MAXIMA)
+	orilla.autoscroll = orilla_velocity
+	
+	velocidad_actual = calcular_velocidad_actual()
+	actualizar_velocimetro()
+	print("Velocidad reseteada a máxima")
