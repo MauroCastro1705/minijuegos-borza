@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="8_va4gm"]
 [ext_resource type="Texture2D" uid="uid://c4kp23h3l15l5" path="res://assets/juego2/fish.png" id="9_lw2eq"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="9_vep1r"]
+[ext_resource type="Shader" uid="uid://dab1uksiy332v" path="res://shaders/vhs_wiggle.gdshader" id="11_kesuw"]
+[ext_resource type="AudioStream" uid="uid://cw1qbdc2oqnnq" path="res://assets/musica/italian_funk_1.wav" id="12_cb857"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_05pjn"]
 atlas = ExtResource("2_ovpab")
@@ -123,6 +125,13 @@ shadow_offset = Vector2(2, 2)
 [sub_resource type="AtlasTexture" id="AtlasTexture_61w3v"]
 atlas = ExtResource("9_lw2eq")
 region = Rect2(569, 580, 197, 180)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cb857"]
+shader = ExtResource("11_kesuw")
+shader_parameter/wiggle = 0.03999999910592
+shader_parameter/wiggle_speed = 18.0
+shader_parameter/smear = 0.50000002375
+shader_parameter/blur_samples = 3
 
 [node name="game_over" type="Node2D" unique_id=1400372841]
 script = ExtResource("1_htbv4")
@@ -238,14 +247,6 @@ autowrap_mode = 3
 position = Vector2(502, 545)
 SPEED = 0.0
 
-[node name="Button" type="Button" parent="." unique_id=1542022230]
-offset_left = 425.0
-offset_top = 664.0
-offset_right = 586.0
-offset_bottom = 734.0
-theme = ExtResource("9_vep1r")
-text = "volver"
-
 [node name="Label" type="Label" parent="." unique_id=763910964]
 offset_left = 218.0
 offset_top = 415.0
@@ -283,4 +284,28 @@ text = "Score"
 label_settings = SubResource("LabelSettings_p4qwg")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=959757924]
+
+[node name="vhs" type="ColorRect" parent="CanvasLayer" unique_id=1081504364]
+material = SubResource("ShaderMaterial_cb857")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=1542022230]
+offset_left = 425.0
+offset_top = 664.0
+offset_right = 586.0
+offset_bottom = 734.0
+theme = ExtResource("9_vep1r")
+text = "volver"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1096856664]
+position = Vector2(523, 379)
+stream = ExtResource("12_cb857")
+volume_db = 1.0
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

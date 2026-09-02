@@ -1,5 +1,6 @@
 extends CharacterBody2D
 #player pinguino
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -33,6 +34,7 @@ func _input(event):
 		target_x = initial_x + offset
 
 func _combo_breaker():
+	audio_stream_player_2d.play()
 	combo_label.show()
 	animation_player.play("combo")
 	await animation_player.animation_finished

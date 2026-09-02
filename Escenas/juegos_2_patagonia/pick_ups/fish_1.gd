@@ -3,6 +3,7 @@ extends Node2D
 @onready var effect: CPUParticles2D = $effect
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 func _process(delta: float) -> void:
 	position.y += delta * SPEED
@@ -11,6 +12,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		Global.pick_up.emit()
 		texture_rect.hide()
+		audio_stream_player_2d.play()
 		
 		# Deshabilitar el collision shape de forma segura con call_deferred
 		collision_shape_2d.call_deferred("set_disabled", true)

@@ -9,6 +9,8 @@
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="6_1b6jh"]
 [ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="7_1b6jh"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="8_e6dx5"]
+[ext_resource type="Shader" uid="uid://dab1uksiy332v" path="res://shaders/vhs_wiggle.gdshader" id="10_h1ssf"]
+[ext_resource type="AudioStream" uid="uid://cw1qbdc2oqnnq" path="res://assets/musica/italian_funk_1.wav" id="11_u3pmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_05pjn"]
 atlas = ExtResource("1_7f20t")
@@ -108,6 +110,13 @@ font = ExtResource("6_1b6jh")
 font_size = 29
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3pmh"]
+shader = ExtResource("10_h1ssf")
+shader_parameter/wiggle = 0.03999999910592
+shader_parameter/wiggle_speed = 18.0
+shader_parameter/smear = 0.50000002375
+shader_parameter/blur_samples = 3
 
 [node name="Tutorial" type="Node2D" unique_id=1400372841]
 script = ExtResource("1_gm8mf")
@@ -224,7 +233,18 @@ autowrap_mode = 3
 position = Vector2(502, 545)
 SPEED = 0.0
 
-[node name="Button" type="Button" parent="." unique_id=1542022230]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1677915613]
+
+[node name="vhs" type="ColorRect" parent="CanvasLayer" unique_id=1550797845]
+material = SubResource("ShaderMaterial_u3pmh")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer/vhs" unique_id=1542022230]
+layout_mode = 0
 offset_left = 425.0
 offset_top = 638.0
 offset_right = 586.0
@@ -232,4 +252,10 @@ offset_bottom = 708.0
 theme = ExtResource("8_e6dx5")
 text = "Comenzar !"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1089490429]
+position = Vector2(523, 379)
+stream = ExtResource("11_u3pmh")
+volume_db = 1.0
+autoplay = true
+
+[connection signal="pressed" from="CanvasLayer/vhs/Button" to="." method="_on_button_pressed"]
