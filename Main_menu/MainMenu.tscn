@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://boninauffkts6" path="res://assets/Screenshots/PLANET EXPANSION.png" id="8_rmre0"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
 [ext_resource type="Texture2D" uid="uid://dhpwfwj4bgest" path="res://assets/juego2/patagonia_veloz.png" id="9_ckk3t"]
+[ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
 
@@ -252,5 +253,9 @@ game_img = ExtResource("5_8cngx")
 layout_mode = 2
 game_name = "Tema sorpresa"
 game_img = ExtResource("5_8cngx")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1142846350]
+stream = ExtResource("12_nrt5e")
+autoplay = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
