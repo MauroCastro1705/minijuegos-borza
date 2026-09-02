@@ -11,6 +11,7 @@
 [ext_resource type="LabelSettings" uid="uid://yf88s67n2xyi" path="res://themas/texto_naranja.tres" id="10_61w3v"]
 [ext_resource type="Texture2D" uid="uid://c4kp23h3l15l5" path="res://assets/juego2/fish.png" id="10_kv5fo"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="10_qg6ds"]
+[ext_resource type="PackedScene" uid="uid://bgi7tcyi6ddu3" path="res://Componentes/count_down_timer/countdown_timer.tscn" id="12_61w3v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4s7"]
 size = Vector2(68, 835)
@@ -37,7 +38,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kv5fo"]
 font = ExtResource("10_qg6ds")
-font_size = 30
+font_size = 40
 outline_size = 6
 outline_color = Color(0.9411765, 0, 0, 1)
 shadow_size = 6
@@ -218,3 +219,6 @@ offset_right = 993.0
 offset_bottom = 231.0
 text = "Pingüinometro"
 label_settings = ExtResource("10_61w3v")
+
+[node name="CountdownTimer" parent="." unique_id=470709464 instance=ExtResource("12_61w3v")]
+position = Vector2(851, 83)

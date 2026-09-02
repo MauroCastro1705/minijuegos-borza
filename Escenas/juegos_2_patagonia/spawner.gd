@@ -9,6 +9,7 @@ var spawn_timer: Timer
 var rng = RandomNumberGenerator.new()
 var spawn_rect: Rect2
 
+
 func _ready():
 	rng.randomize()
 	
@@ -49,6 +50,7 @@ func _setup_spawn_rect():
 		spawn_rect = Rect2(global_position.x - 200, global_position.y - 300, 400, 600)
 
 func _spawn_obstacle():
+	
 	# Disminuir intervalo con el tiempo (dificultad creciente)
 	spawn_interval = max(min_spawn_interval, spawn_interval - 0.01)
 	spawn_timer.wait_time = spawn_interval

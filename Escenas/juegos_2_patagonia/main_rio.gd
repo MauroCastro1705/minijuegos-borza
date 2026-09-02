@@ -8,7 +8,7 @@ var hits:int = 0
 var agua_velocity:Vector2
 @onready var orilla: Parallax2D = $Parallax2D
 var orilla_velocity:Vector2
-var score:int = 0
+
 #combo
 @onready var combo_label: Label = $CanvasLayer/combo_Label
 @onready var combo_progress: ProgressBar = $CanvasLayer/combo_progress
@@ -18,8 +18,10 @@ var score:int = 0
 @onready var velocity_bar: ProgressBar = $CanvasLayer/velocity_bar
 @onready var velocity_text: Label = $CanvasLayer/velocity_text
 @onready var comida_label: Label = $CanvasLayer/comida
+@onready var countdown_timer: CustomTimer = $CountdownTimer
 
 var COMIDA:int = 0
+var score:int = 0
 
 # Sistema de combo
 var combo_count: int = 0
@@ -50,9 +52,11 @@ var velocidad_maxima: float = 0.0
 var velocidad_minima: float = 0.0
 
 func _ready() -> void:
+	reset_scores()
 	comida_label.text = "Comida: " + str(COMIDA)
 	Global.hit.connect(_on_hit)
 	Global.pick_up.connect(_on_pickup)
+	countdown_timer.timer_completed.connect(_game_over)
 	agua_velocity = Vector2(0, GRAVEDAD_MAXIMA)
 	efecto_agua.gravity = agua_velocity
 	
@@ -135,6 +139,7 @@ func _on_hit():
 func _on_pickup():
 	COMIDA += 1
 	comida_label.text = "Comida: " + str(COMIDA)
+	Global.comida = COMIDA
 	aumentar_combo()
 	calcular_puntaje()
 	# AUMENTAR VELOCIDAD al recoger items
@@ -186,6 +191,7 @@ func calcular_puntaje():
 	var puntos_combo = int(puntos_base * combo_multiplier)
 	score += puntos_combo
 	score_label.text = "Score: " + str(score)
+	Global.score_pinguino = score
 	
 	print("Pickup! Combo: ", combo_count, " | Multiplicador: x", combo_multiplier, " | Puntos: ", puntos_combo)
 
@@ -355,3 +361,19 @@ func resetear_velocidad():
 	velocidad_actual = calcular_velocidad_actual()
 	actualizar_velocimetro()
 	print("Velocidad reseteada a máxima")
+
+func reset_scores():
+	Global.comida = 0
+	Global.score_pinguino = 0
+
+#DEBUGG
+func _input(_event):
+	#if event.is_action_pressed("test"):
+	#	_game_over()
+	pass
+
+func _game_over():
+	await get_tree().create_timer(0.1).timeout
+	TransitionManager.change_scene("res://Escenas/juegos_2_patagonia/game_over/game_over.tscn")
+	#get_tree().paused = true
+	

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dybeejod0kvbl" path="res://Main_menu/main_menu.gd" id="1_aatin"]
 [ext_resource type="Shader" uid="uid://b7fdd3g627rgn" path="res://shaders/transition.gdshader" id="2_4qipx"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_5r1yp"]
+[ext_resource type="Texture2D" uid="uid://b52ytjg48dtik" path="res://assets/kenney_particlePack/PNG/star_07.png" id="3_wngld"]
 [ext_resource type="PackedScene" uid="uid://dc57ytm35ij54" path="res://Componentes/botones_main_menu/boton_main_menu.tscn" id="4_lq512"]
 [ext_resource type="Texture2D" uid="uid://dqh61q05muhb1" path="res://assets/locked_level.png" id="5_8cngx"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_rmre0"]
@@ -24,6 +25,31 @@ shader_parameter/color_threshold = 0.6670000316825
 shader_parameter/color = Color(0.21691772, 0.28846666, 0.33728176, 1)
 shader_parameter/seed = 0.1
 
+[sub_resource type="Gradient" id="Gradient_nrt5e"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.5502392, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.23529412, 0.34509805, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s20xc"]
+gradient = SubResource("Gradient_nrt5e")
+
+[sub_resource type="Curve" id="Curve_kehw0"]
+_data = [Vector2(0, 0.056179762), 0.0, 0.0, 0, 0, Vector2(0.55744684, 0.56179774), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7c4s7"]
+curve = SubResource("Curve_kehw0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yowuo"]
+particle_flag_disable_z = true
+angular_velocity_min = 9.999984
+angular_velocity_max = 99.999985
+radial_velocity_min = 49.999977
+radial_velocity_max = 99.99998
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_7c4s7")
+color_ramp = SubResource("GradientTexture1D_s20xc")
+
 [sub_resource type="LabelSettings" id="LabelSettings_ckk3t"]
 font = ExtResource("5_rmre0")
 font_size = 19
@@ -32,7 +58,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rmre0"]
 font = ExtResource("5_v2is1")
-font_size = 43
+font_size = 56
 font_color = Color(0.5921569, 0.02745098, 0.2784314, 1)
 outline_size = 7
 outline_color = Color(0.99607843, 0.95686275, 0.9098039, 1)
@@ -75,6 +101,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.14601266, 0.2168428, 0.21923369, 1)
 metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=351254279]
+position = Vector2(484, 207)
+amount = 15
+texture = ExtResource("3_wngld")
+lifetime = 6.0
+process_material = SubResource("ParticleProcessMaterial_yowuo")
 
 [node name="StartButton" type="Button" parent="." unique_id=1150670714]
 texture_filter = 1
@@ -150,7 +183,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2.0
 offset_top = -1.0
-offset_bottom = 1.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 45

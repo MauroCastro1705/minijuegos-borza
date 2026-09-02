@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://dc57ytm35ij54"]
 
 [ext_resource type="Script" uid="uid://r7b5ql5a7778" path="res://Componentes/botones_main_menu/boton_main_menu.gd" id="1_5qjbw"]
-[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/coin.png" id="2_4cg82"]
+[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/unidades/coin.png" id="2_4cg82"]
+[ext_resource type="Texture2D" uid="uid://c3yyo4qdy64bg" path="res://assets/panel_grey_bolts_detail_a.png" id="3_0blt2"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_f5phf"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_fulqr"]
-[ext_resource type="Texture2D" uid="uid://bbs3el8hyyu7y" path="res://assets/chains.png" id="3_pe5rp"]
+[ext_resource type="Texture2D" uid="uid://bbs3el8hyyu7y" path="res://assets/unidades/chains.png" id="3_pe5rp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0blt2"]
 font = ExtResource("3_f5phf")
@@ -29,12 +30,23 @@ game_img = ExtResource("2_4cg82")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1429283278]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 180.0
+offset_bottom = 230.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
+
+[node name="panel" type="NinePatchRect" parent="MarginContainer" unique_id=1691857488]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+offset_transform_scale = Vector2(1, 1.1)
+texture = ExtResource("3_0blt2")
+region_rect = Rect2(0, -3, 128, 131)
+patch_margin_left = 40
+patch_margin_top = 40
+patch_margin_right = 40
+patch_margin_bottom = 40
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1363106324]
 layout_mode = 2
@@ -42,7 +54,7 @@ layout_mode = 2
 [node name="name" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1669710284]
 custom_minimum_size = Vector2(80, 30)
 layout_mode = 2
-text = "Tema"
+text = "Temaqwadasdasdasdsadadasdadas"
 label_settings = SubResource("LabelSettings_0blt2")
 horizontal_alignment = 1
 vertical_alignment = 1

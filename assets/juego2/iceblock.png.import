@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4pqpxb040f0q"
-path="res://.godot/imported/Clouds_05.png-d6766c37938fe852bdd8e3dbb32d594f.ctex"
+uid="uid://cey11kxv1s6xx"
+path="res://.godot/imported/iceblock.png-fe19e2c604a40bbef5021ff5d8779fb7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/clouds/Clouds_05.png"
-dest_files=["res://.godot/imported/Clouds_05.png-d6766c37938fe852bdd8e3dbb32d594f.ctex"]
+source_file="res://assets/juego2/iceblock.png"
+dest_files=["res://.godot/imported/iceblock.png-fe19e2c604a40bbef5021ff5d8779fb7.ctex"]
 
 [params]
 

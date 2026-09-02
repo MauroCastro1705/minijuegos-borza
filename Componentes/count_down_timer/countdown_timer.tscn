@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bgi7tcyi6ddu3"]
+
+[ext_resource type="Script" uid="uid://byadtd56kxay7" path="res://Componentes/count_down_timer/countdown_timer.gd" id="1_csfk6"]
+[ext_resource type="LabelSettings" uid="uid://yf88s67n2xyi" path="res://themas/texto_naranja.tres" id="2_wro1v"]
+
+[node name="CountdownTimer" type="Node2D" unique_id=470709464]
+script = ExtResource("1_csfk6")
+auto_start = true
+
+[node name="timer_label" type="Label" parent="." unique_id=1903296918]
+unique_name_in_owner = true
+offset_right = 113.0
+offset_bottom = 49.0
+text = "timer
+"
+label_settings = ExtResource("2_wro1v")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b52ytjg48dtik"
-path="res://.godot/imported/star_07.png-e253fd9c6c9ec21e7d818fe68f58b25c.ctex"
+uid="uid://ccrxp8n7hcqyt"
+path="res://.godot/imported/Clouds_02.png-7293f88fce4e7935a34eaca1dbaf5e0a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/kenney_particlePack/PNG/star_07.png"
-dest_files=["res://.godot/imported/star_07.png-e253fd9c6c9ec21e7d818fe68f58b25c.ctex"]
+source_file="res://assets/nubes/Clouds_02.png"
+dest_files=["res://.godot/imported/Clouds_02.png-7293f88fce4e7935a34eaca1dbaf5e0a.ctex"]
 
 [params]
 
@@ -30,7 +30,7 @@ roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2
-process/channel_remap/alpha=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

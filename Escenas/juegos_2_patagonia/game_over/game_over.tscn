@@ -1,17 +1,18 @@
-[gd_scene format=3 uid="uid://di6jmvtbikq7m"]
+[gd_scene format=3 uid="uid://largufnw06yn"]
 
-[ext_resource type="Texture2D" uid="uid://bc8jc35ryhc6v" path="res://assets/water_particle.png" id="1_7f20t"]
-[ext_resource type="Script" uid="uid://decb1gtl8tvwy" path="res://Escenas/juegos_2_patagonia/tutorial/tutorial.gd" id="1_gm8mf"]
-[ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="2_sqyil"]
-[ext_resource type="Texture2D" uid="uid://b6db45d3wknhv" path="res://assets/juego2/juego2_logo (2).png" id="3_sqyil"]
-[ext_resource type="Texture2D" uid="uid://bavcwpaimm15r" path="res://assets/kenney_particlePack/PNG/star_08.png" id="4_05pjn"]
-[ext_resource type="Texture2D" uid="uid://c8l64ahn7vnte" path="res://assets/Keyboard & Mouse/Default/keyboard_arrows_horizontal.png" id="5_qfl2j"]
-[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="6_1b6jh"]
-[ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="7_1b6jh"]
-[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="8_e6dx5"]
+[ext_resource type="Script" uid="uid://c66rtuw42ijq7" path="res://Escenas/juegos_2_patagonia/game_over/game_over.gd" id="1_htbv4"]
+[ext_resource type="Texture2D" uid="uid://bc8jc35ryhc6v" path="res://assets/water_particle.png" id="2_ovpab"]
+[ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="3_tlgge"]
+[ext_resource type="Texture2D" uid="uid://b6db45d3wknhv" path="res://assets/juego2/juego2_logo (2).png" id="4_cdwhc"]
+[ext_resource type="Texture2D" uid="uid://bavcwpaimm15r" path="res://assets/kenney_particlePack/PNG/star_08.png" id="5_meavg"]
+[ext_resource type="Texture2D" uid="uid://c8l64ahn7vnte" path="res://assets/Keyboard & Mouse/Default/keyboard_arrows_horizontal.png" id="6_d44gv"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="7_j42gy"]
+[ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="8_va4gm"]
+[ext_resource type="Texture2D" uid="uid://c4kp23h3l15l5" path="res://assets/juego2/fish.png" id="9_lw2eq"]
+[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="9_vep1r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_05pjn"]
-atlas = ExtResource("1_7f20t")
+atlas = ExtResource("2_ovpab")
 region = Rect2(5, 13, 3, 21)
 
 [sub_resource type="Gradient" id="Gradient_gtp10"]
@@ -104,13 +105,27 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_e6dx5"]
-font = ExtResource("6_1b6jh")
+font = ExtResource("7_j42gy")
 font_size = 29
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
-[node name="Tutorial" type="Node2D" unique_id=1400372841]
-script = ExtResource("1_gm8mf")
+[sub_resource type="LabelSettings" id="LabelSettings_p4qwg"]
+font = ExtResource("7_j42gy")
+font_size = 35
+font_color = Color(0.9137255, 0.48235294, 0.25490198, 1)
+outline_size = 8
+outline_color = Color(0.57254905, 0.15294118, 0.19215687, 1)
+shadow_size = 5
+shadow_color = Color(0.34509805, 0.15294118, 0.23137255, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61w3v"]
+atlas = ExtResource("9_lw2eq")
+region = Rect2(569, 580, 197, 180)
+
+[node name="game_over" type="Node2D" unique_id=1400372841]
+script = ExtResource("1_htbv4")
 
 [node name="fondos" type="Node2D" parent="." unique_id=1070306791]
 metadata/_edit_lock_ = true
@@ -159,7 +174,7 @@ offset_left = 171.0
 offset_top = -10.0
 offset_right = 367.0
 offset_bottom = 806.0
-texture = ExtResource("2_sqyil")
+texture = ExtResource("3_tlgge")
 expand_mode = 5
 metadata/_edit_lock_ = true
 
@@ -169,67 +184,103 @@ offset_top = 808.0
 offset_right = 1020.0
 offset_bottom = 1624.0
 rotation = -3.1415927
-texture = ExtResource("2_sqyil")
+texture = ExtResource("3_tlgge")
 expand_mode = 5
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1038543685]
 offset_left = 2.0
-offset_top = 38.298096
+offset_top = 61.298096
 offset_right = 1004.0
-offset_bottom = 262.2981
-texture = ExtResource("3_sqyil")
+offset_bottom = 285.2981
+texture = ExtResource("4_cdwhc")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="Star08" type="Sprite2D" parent="." unique_id=501269190]
 self_modulate = Color(1.2736489, 1.380357, 0, 0.7058824)
-position = Vector2(737.00006, 95.29812)
+position = Vector2(737.00006, 118.29811)
 rotation = 1.4282987
 scale = Vector2(0.453125, 0.453125)
-texture = ExtResource("4_05pjn")
+texture = ExtResource("5_meavg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2065395231]
 libraries/ = SubResource("AnimationLibrary_1b6jh")
 autoplay = &"brillo"
 
 [node name="info" type="Node2D" parent="." unique_id=1475076707]
-position = Vector2(0, -110)
+visible = false
+position = Vector2(0, -39)
 
 [node name="KeyboardArrowsHorizontal" type="Sprite2D" parent="info" unique_id=1080253734]
 texture_filter = 1
 position = Vector2(496, 434)
 scale = Vector2(1.84375, 1.84375)
-texture = ExtResource("5_qfl2j")
+texture = ExtResource("6_d44gv")
 
 [node name="Label" type="Label" parent="info" unique_id=1175467686]
 custom_minimum_size = Vector2(100, 80)
 custom_maximum_size = Vector2(500, 300)
 offset_left = 277.0
 offset_top = 431.0
-offset_right = 777.0
-offset_bottom = 725.0
+offset_right = 717.0
+offset_bottom = 626.0
 text = "Usa las flechas 
 para mover a Carlos el pinguino
 
 Consegui comida! 
 
-Pero cuidado con los bloques de hielo!
-
-Tenes un minuto para volver a casa con la comida"
+Pero cuidado con los bloques de hielo!"
 label_settings = SubResource("LabelSettings_e6dx5")
 autowrap_mode = 3
 
-[node name="Fish3" parent="info" unique_id=182525668 instance=ExtResource("7_1b6jh")]
+[node name="Fish3" parent="info" unique_id=182525668 instance=ExtResource("8_va4gm")]
 position = Vector2(502, 545)
 SPEED = 0.0
 
 [node name="Button" type="Button" parent="." unique_id=1542022230]
 offset_left = 425.0
-offset_top = 638.0
+offset_top = 664.0
 offset_right = 586.0
-offset_bottom = 708.0
-theme = ExtResource("8_e6dx5")
-text = "Comenzar !"
+offset_bottom = 734.0
+theme = ExtResource("9_vep1r")
+text = "volver"
+
+[node name="Label" type="Label" parent="." unique_id=763910964]
+offset_left = 218.0
+offset_top = 415.0
+offset_right = 774.0
+offset_bottom = 450.0
+text = "PUNTAJE FINAL"
+label_settings = SubResource("LabelSettings_p4qwg")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=45557938]
+texture_filter = 1
+offset_left = 496.00006
+offset_top = 389.00003
+offset_right = 693.0001
+offset_bottom = 569.0
+scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(100, 102)
+texture = SubResource("AtlasTexture_61w3v")
+
+[node name="comida" type="Label" parent="." unique_id=1871984294]
+offset_left = 319.0
+offset_top = 472.0
+offset_right = 673.0
+offset_bottom = 507.0
+text = "Comida: 50"
+label_settings = SubResource("LabelSettings_p4qwg")
+horizontal_alignment = 1
+
+[node name="puntaje" type="Label" parent="." unique_id=1231245993]
+offset_left = 319.0
+offset_top = 516.0
+offset_right = 673.0
+offset_bottom = 551.0
+text = "Score"
+label_settings = SubResource("LabelSettings_p4qwg")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
