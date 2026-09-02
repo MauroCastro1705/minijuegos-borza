@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbeb6t0exb8f1"
-path="res://.godot/imported/barra_vida.png-4a0eaad14ef5a0dd5598f1002dc69d4e.ctex"
+uid="uid://crg3fjlwtpm0s"
+path="res://.godot/imported/Castle_Blue.png-910b78f4eaae3676696c17dcc049690f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/barra_vida.png"
-dest_files=["res://.godot/imported/barra_vida.png-4a0eaad14ef5a0dd5598f1002dc69d4e.ctex"]
+source_file="res://assets/unidades/Castle_Blue.png"
+dest_files=["res://.godot/imported/Castle_Blue.png-910b78f4eaae3676696c17dcc049690f.ctex"]
 
 [params]
 

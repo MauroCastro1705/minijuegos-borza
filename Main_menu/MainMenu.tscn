@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="5_v2is1"]
 [ext_resource type="Texture2D" uid="uid://boninauffkts6" path="res://assets/Screenshots/PLANET EXPANSION.png" id="8_rmre0"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
+[ext_resource type="Texture2D" uid="uid://dhpwfwj4bgest" path="res://assets/juego2/patagonia_veloz.png" id="9_ckk3t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
 
@@ -167,9 +168,9 @@ disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer" unique_id=1411114336 instance=ExtResource("4_lq512")]
 layout_mode = 2
-scene_path = "res://Escenas/juegos_2_patagonia/main_rio.tscn"
+scene_path = "res://Escenas/juegos_2_patagonia/tutorial/tutorial.tscn"
 game_name = "Tema 2 : Patagonia"
-game_img = ExtResource("5_8cngx")
+game_img = ExtResource("9_ckk3t")
 disable_buton = false
 
 [node name="BotonMainMenu3" parent="juegos/HBoxContainer" unique_id=97646030 instance=ExtResource("4_lq512")]

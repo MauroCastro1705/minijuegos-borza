@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcady3l2w7eb3"
-path="res://.godot/imported/Goblin_House.png-acc4868cc71f2ea42bec3fa96c03394f.ctex"
+uid="uid://bbs3el8hyyu7y"
+path="res://.godot/imported/chains.png-5950dff6ffd81a544332850378beb6eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Goblin_House.png"
-dest_files=["res://.godot/imported/Goblin_House.png-acc4868cc71f2ea42bec3fa96c03394f.ctex"]
+source_file="res://assets/unidades/chains.png"
+dest_files=["res://.godot/imported/chains.png-5950dff6ffd81a544332850378beb6eb.ctex"]
 
 [params]
 

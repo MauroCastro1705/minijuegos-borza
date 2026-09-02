@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bladk2yro74sg"
-path="res://.godot/imported/referencia ui.png-24d54189b2c5d023552e298809f48f9b.ctex"
+uid="uid://dhpwfwj4bgest"
+path="res://.godot/imported/patagonia_veloz.png-c2e9fde8f8b0628fb137a6088ede240e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/referencia ui.png"
-dest_files=["res://.godot/imported/referencia ui.png-24d54189b2c5d023552e298809f48f9b.ctex"]
+source_file="res://assets/juego2/patagonia_veloz.png"
+dest_files=["res://.godot/imported/patagonia_veloz.png-c2e9fde8f8b0628fb137a6088ede240e.ctex"]
 
 [params]
 

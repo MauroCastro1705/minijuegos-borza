@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctviiknew5nao"
-path="res://.godot/imported/atk_icon_2.png-afa3c9b0b3ffef3b498e4fce32b20893.ctex"
+uid="uid://dbeb6t0exb8f1"
+path="res://.godot/imported/barra_vida.png-945aaed0c463658cbcf5e4a3079e7605.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/atk_icon_2.png"
-dest_files=["res://.godot/imported/atk_icon_2.png-afa3c9b0b3ffef3b498e4fce32b20893.ctex"]
+source_file="res://assets/unidades/barra_vida.png"
+dest_files=["res://.godot/imported/barra_vida.png-945aaed0c463658cbcf5e4a3079e7605.ctex"]
 
 [params]
 

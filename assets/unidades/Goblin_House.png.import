@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgq1vfpr0dd0v"
-path="res://.godot/imported/referencia ui 2.png-efb1fb861c75e62c4293ab76b63fa4d6.ctex"
+uid="uid://dcady3l2w7eb3"
+path="res://.godot/imported/Goblin_House.png-bbfc011c180a8a3fe8b4a67aa8539ee4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/referencia ui 2.png"
-dest_files=["res://.godot/imported/referencia ui 2.png-efb1fb861c75e62c4293ab76b63fa4d6.ctex"]
+source_file="res://assets/unidades/Goblin_House.png"
+dest_files=["res://.godot/imported/Goblin_House.png-bbfc011c180a8a3fe8b4a67aa8539ee4.ctex"]
 
 [params]
 

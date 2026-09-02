@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crg3fjlwtpm0s"
-path="res://.godot/imported/Castle_Blue.png-edaa493bb62320fe782b9acca2d397d7.ctex"
+uid="uid://2ldo3poqrrbx"
+path="res://.godot/imported/coin.png-1ccd91e9bb1286c27cfb5c8a19471572.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Castle_Blue.png"
-dest_files=["res://.godot/imported/Castle_Blue.png-edaa493bb62320fe782b9acca2d397d7.ctex"]
+source_file="res://assets/unidades/coin.png"
+dest_files=["res://.godot/imported/coin.png-1ccd91e9bb1286c27cfb5c8a19471572.ctex"]
 
 [params]
 
