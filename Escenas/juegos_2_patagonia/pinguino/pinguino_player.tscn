@@ -15,7 +15,7 @@ stacked_outline_0/size = 3
 stacked_outline_0/color = Color(0.78211695, 0.17017251, 0.023421, 1)
 
 [sub_resource type="Animation" id="Animation_sypv3"]
-length = 0.001
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,6 +27,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("combo_label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-57, -51)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("combo_label:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_njnqi"]
@@ -43,6 +67,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1.5157167, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("combo_label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.85),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-57, -51), Vector2(-57, -90)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("combo_label:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.014613807, 0.76666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_86trc"]
@@ -62,19 +110,46 @@ offset_left = -14.0
 offset_top = -18.0
 offset_right = 14.0
 offset_bottom = 22.0
+mouse_filter = 2
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=131248931]
 offset_left = -14.0
 offset_top = -22.0
 offset_right = 14.0
 offset_bottom = -5.0
+mouse_filter = 2
 color = Color(0.06469653, 0.06469653, 0.06469653, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="." unique_id=1897476343]
+offset_left = -4.0
+offset_top = -25.0
+offset_right = 3.0588226
+offset_bottom = -22.0
+mouse_filter = 2
+color = Color(0.8138423, 0.43535078, 0.06905947, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="." unique_id=50385773]
+offset_left = 4.0
+offset_top = 22.0
+offset_right = 12.0
+offset_bottom = 25.0
+mouse_filter = 2
+color = Color(0.8138423, 0.43535078, 0.06905947, 1)
+
+[node name="ColorRect7" type="ColorRect" parent="." unique_id=797755163]
+offset_left = -11.0
+offset_top = 22.0
+offset_right = -3.0
+offset_bottom = 25.0
+mouse_filter = 2
+color = Color(0.8138423, 0.43535078, 0.06905947, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="." unique_id=1021208350]
 offset_left = 9.0
 offset_top = -6.0
 offset_right = 19.0
 offset_bottom = 19.0
+mouse_filter = 2
 color = Color(0.06469653, 0.06469653, 0.06469653, 1)
 
 [node name="ColorRect4" type="ColorRect" parent="." unique_id=1253033191]
@@ -82,10 +157,10 @@ offset_left = -18.0
 offset_top = -6.0
 offset_right = -8.0
 offset_bottom = 19.0
+mouse_filter = 2
 color = Color(0.06469653, 0.06469653, 0.06469653, 1)
 
 [node name="combo_label" type="Label" parent="." unique_id=1208937093]
-visible = false
 z_index = 10
 offset_left = -57.0
 offset_top = -51.0

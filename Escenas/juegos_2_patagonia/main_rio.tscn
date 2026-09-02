@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="7_85fy2"]
 [ext_resource type="Script" uid="uid://c4fhj0rlejx4i" path="res://Escenas/juegos_2_patagonia/fish_spawner.gd" id="7_bsti6"]
 [ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="8_bsti6"]
+[ext_resource type="LabelSettings" uid="uid://yf88s67n2xyi" path="res://themas/texto_naranja.tres" id="10_61w3v"]
 [ext_resource type="Texture2D" uid="uid://c4kp23h3l15l5" path="res://assets/juego2/fish.png" id="10_kv5fo"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="10_qg6ds"]
-[ext_resource type="LabelSettings" uid="uid://bvl2vbgy7pfni" path="res://themas/texto_pixelart.tres" id="11_kv5fo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4s7"]
 size = Vector2(68, 835)
@@ -44,19 +44,14 @@ shadow_size = 6
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(3, 3)
 
-[sub_resource type="LabelSettings" id="LabelSettings_qg6ds"]
-font = ExtResource("10_qg6ds")
-font_size = 35
-font_color = Color(0.9137255, 0.48235294, 0.25490198, 1)
-outline_size = 8
-outline_color = Color(0.57254905, 0.15294118, 0.19215687, 1)
-shadow_size = 5
-shadow_color = Color(0.34509805, 0.15294118, 0.23137255, 1)
-shadow_offset = Vector2(2, 2)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_61w3v"]
 atlas = ExtResource("10_kv5fo")
 region = Rect2(569, 580, 197, 180)
+
+[sub_resource type="LabelSettings" id="LabelSettings_esxvu"]
+font = ExtResource("10_qg6ds")
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [node name="MainRio" type="Node2D" unique_id=1970150383]
 script = ExtResource("1_17s4q")
@@ -188,15 +183,15 @@ offset_top = 283.0
 offset_right = 160.0
 offset_bottom = 329.0
 text = "comida"
-label_settings = SubResource("LabelSettings_qg6ds")
+label_settings = ExtResource("10_61w3v")
 vertical_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=985924114]
 texture_filter = 1
-offset_left = -63.000008
-offset_top = 208.99998
-offset_right = 134.0
-offset_bottom = 389.0
+offset_left = -68.00001
+offset_top = 206.99998
+offset_right = 129.0
+offset_bottom = 387.0
 scale = Vector2(0.2, 0.2)
 pivot_offset = Vector2(100, 102)
 texture = SubResource("AtlasTexture_61w3v")
@@ -214,12 +209,12 @@ offset_top = 266.0
 offset_right = 986.0
 offset_bottom = 289.0
 text = "Velocidad"
-label_settings = ExtResource("11_kv5fo")
+label_settings = SubResource("LabelSettings_esxvu")
 
 [node name="velocity_text2" type="Label" parent="CanvasLayer" unique_id=2054746959]
-offset_left = 852.0
-offset_top = 214.0
-offset_right = 986.0
-offset_bottom = 237.0
+offset_left = 811.0
+offset_top = 196.0
+offset_right = 993.0
+offset_bottom = 231.0
 text = "Pingüinometro"
-label_settings = ExtResource("11_kv5fo")
+label_settings = ExtResource("10_61w3v")
