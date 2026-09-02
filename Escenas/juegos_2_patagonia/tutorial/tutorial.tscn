@@ -1,0 +1,187 @@
+[gd_scene format=3 uid="uid://di6jmvtbikq7m"]
+
+[ext_resource type="Texture2D" uid="uid://bc8jc35ryhc6v" path="res://assets/water_particle.png" id="1_7f20t"]
+[ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="2_sqyil"]
+[ext_resource type="Texture2D" uid="uid://b6db45d3wknhv" path="res://assets/juego2/juego2_logo (2).png" id="3_sqyil"]
+[ext_resource type="Texture2D" uid="uid://bavcwpaimm15r" path="res://assets/kenney_particlePack/PNG/star_08.png" id="4_05pjn"]
+[ext_resource type="Texture2D" uid="uid://c8l64ahn7vnte" path="res://assets/Keyboard & Mouse/Default/keyboard_arrows_horizontal.png" id="5_qfl2j"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="6_1b6jh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05pjn"]
+atlas = ExtResource("1_7f20t")
+region = Rect2(5, 13, 3, 21)
+
+[sub_resource type="Gradient" id="Gradient_gtp10"]
+offsets = PackedFloat32Array(0, 0.537037, 1)
+colors = PackedColorArray(0.7102279, 0.81995916, 0.99705523, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_gtp10"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Star08:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.4282987]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Star08:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.453125, 0.453125)]
+}
+
+[sub_resource type="Animation" id="Animation_qfl2j"]
+resource_name = "brillo"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Star08:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 1),
+"transitions": PackedFloat32Array(1, 0.450625, 1),
+"update": 0,
+"values": [1.4282987, 2.2689280275926285, 1.4282987]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Star08:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.46666667, 1),
+"transitions": PackedFloat32Array(1, 1.4142137, 1),
+"update": 0,
+"values": [Vector2(0.453125, 0.453125), Vector2(0.22, 0.22), Vector2(0.453125, 0.453125)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1b6jh"]
+_data = {
+&"RESET": SubResource("Animation_gtp10"),
+&"brillo": SubResource("Animation_qfl2j")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_e6dx5"]
+font = ExtResource("6_1b6jh")
+font_size = 29
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Tutorial" type="Node2D" unique_id=1400372841]
+
+[node name="fondos" type="Node2D" parent="." unique_id=1070306791]
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="fondos" unique_id=522254012]
+offset_top = -21.0
+offset_right = 203.0
+offset_bottom = 804.0
+metadata/_edit_lock_ = true
+
+[node name="ColorRect2" type="ColorRect" parent="fondos" unique_id=1928988249]
+offset_left = 806.0
+offset_top = -21.0
+offset_right = 1009.0
+offset_bottom = 804.0
+metadata/_edit_lock_ = true
+
+[node name="ColorRect3" type="ColorRect" parent="fondos" unique_id=1045079790]
+offset_left = 192.0
+offset_top = -23.0
+offset_right = 809.0
+offset_bottom = 802.0
+color = Color(0.43702462, 0.54110986, 0.5428512, 1)
+metadata/_edit_lock_ = true
+
+[node name="efecto_agua" type="CPUParticles2D" parent="." unique_id=231917231]
+position = Vector2(508, -23)
+amount = 20
+texture = SubResource("AtlasTexture_05pjn")
+lifetime = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(300, 1)
+scale_amount_max = 2.0
+color = Color(0.40893492, 0.7901508, 0.99386746, 1)
+color_ramp = SubResource("Gradient_gtp10")
+metadata/_edit_lock_ = true
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1586882137]
+repeat_size = Vector2(0, 600)
+autoscroll = Vector2(0, 350)
+repeat_times = 5
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Parallax2D" unique_id=698469173]
+offset_left = 171.0
+offset_top = -10.0
+offset_right = 367.0
+offset_bottom = 806.0
+texture = ExtResource("2_sqyil")
+expand_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="Parallax2D" unique_id=757323373]
+offset_left = 824.0
+offset_top = 808.0
+offset_right = 1020.0
+offset_bottom = 1624.0
+rotation = -3.1415927
+texture = ExtResource("2_sqyil")
+expand_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1038543685]
+offset_left = 2.0
+offset_top = 118.0
+offset_right = 1004.0
+offset_bottom = 342.0
+texture = ExtResource("3_sqyil")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="Star08" type="Sprite2D" parent="." unique_id=501269190]
+self_modulate = Color(1.2736489, 1.380357, 0, 0.7058824)
+position = Vector2(737.00006, 175.00002)
+rotation = 1.4282987
+scale = Vector2(0.453125, 0.453125)
+texture = ExtResource("4_05pjn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2065395231]
+libraries/ = SubResource("AnimationLibrary_1b6jh")
+autoplay = &"brillo"
+
+[node name="KeyboardArrowsHorizontal" type="Sprite2D" parent="." unique_id=1080253734]
+texture_filter = 1
+position = Vector2(496, 434)
+scale = Vector2(1.84375, 1.84375)
+texture = ExtResource("5_qfl2j")
+
+[node name="Label" type="Label" parent="." unique_id=1175467686]
+custom_minimum_size = Vector2(100, 80)
+custom_maximum_size = Vector2(500, 300)
+offset_left = 277.0
+offset_top = 431.0
+offset_right = 777.0
+offset_bottom = 593.0
+text = "Usa las flechas 
+
+para mover a Carlos el pinguino y 
+conseguir comida, pero cuidado con los bloques de hielo!"
+label_settings = SubResource("LabelSettings_e6dx5")
+autowrap_mode = 3
