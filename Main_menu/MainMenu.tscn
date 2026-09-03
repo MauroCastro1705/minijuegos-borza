@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dqh61q05muhb1" path="res://assets/locked_level.png" id="5_8cngx"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_rmre0"]
 [ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="5_v2is1"]
-[ext_resource type="Texture2D" uid="uid://boninauffkts6" path="res://assets/Screenshots/PLANET EXPANSION.png" id="8_rmre0"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
-[ext_resource type="Texture2D" uid="uid://dhpwfwj4bgest" path="res://assets/juego2/patagonia_veloz.png" id="9_ckk3t"]
+[ext_resource type="Texture2D" uid="uid://ckyru12bu7naa" path="res://assets/portadas/planeta.png" id="9_nrt5e"]
+[ext_resource type="Texture2D" uid="uid://dlo72kqsitvog" path="res://assets/portadas/patagonia.png" id="10_kehw0"]
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
@@ -199,14 +199,14 @@ alignment = 1
 layout_mode = 2
 scene_path = "res://Escenas/juego_1_Expansion/expansion.tscn"
 game_name = "Tema 1 : Expansion"
-game_img = ExtResource("8_rmre0")
+game_img = ExtResource("9_nrt5e")
 disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer" unique_id=1411114336 instance=ExtResource("4_lq512")]
 layout_mode = 2
 scene_path = "res://Escenas/juegos_2_patagonia/tutorial/tutorial.tscn"
 game_name = "Tema 2 : Patagonia"
-game_img = ExtResource("9_ckk3t")
+game_img = ExtResource("10_kehw0")
 disable_buton = false
 
 [node name="BotonMainMenu3" parent="juegos/HBoxContainer" unique_id=97646030 instance=ExtResource("4_lq512")]

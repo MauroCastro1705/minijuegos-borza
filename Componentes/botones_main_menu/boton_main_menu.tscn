@@ -61,7 +61,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=2128749130]
-custom_minimum_size = Vector2(150, 100)
+custom_minimum_size = Vector2(180, 120)
 layout_mode = 2
 texture = SubResource("PlaceholderTexture2D_4cg82")
 expand_mode = 3
