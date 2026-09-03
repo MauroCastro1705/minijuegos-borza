@@ -14,8 +14,6 @@ func _ready() -> void:
 	# Generar dirección aleatoria
 	var angle = randf_range(0, TAU)  # TAU = 2 * PI
 	direction = Vector2(cos(angle), sin(angle))
-	
-	# Opcional: rotar el sprite para que apunte en la dirección de movimiento
 	rotation = angle
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

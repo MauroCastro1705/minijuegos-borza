@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://covr0r16gisq7"]
 
 [ext_resource type="Script" uid="uid://bdsi5gc2t27pi" path="res://Escenas/juego_1_Expansion/meteorito/meteorito.gd" id="1_7wevm"]
-[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/coin.png" id="1_img1r"]
+[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/unidades/coin.png" id="1_img1r"]
 [ext_resource type="PackedScene" uid="uid://bcnwb7ldvxvq0" path="res://particulas/trail.tscn" id="3_7mi0d"]
 [ext_resource type="AudioStream" uid="uid://u6g00rrd1smp" path="res://assets/500 Sound Effects by Jalastram/FX272.wav" id="4_uaxfm"]
 
@@ -43,5 +43,22 @@ scale_amount_max = 6.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2042542490]
 stream = ExtResource("4_uaxfm")
 pitch_scale = 0.82
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1642372035]
+offset_top = -7.0
+offset_right = 11.0
+offset_bottom = 4.0
+scale = Vector2(0.8746117, 1.3684378)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=38156543]
+offset_left = -11.0
+offset_top = -1.0
+offset_bottom = 10.0
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1719028979]
+offset_left = -8.0
+offset_top = -11.0
+offset_right = 3.0
+rotation = 0.03887385
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

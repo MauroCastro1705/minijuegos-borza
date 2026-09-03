@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://ct7g4n6bnvj03" path="res://assets/musica/asteroids.wav" id="11_kssi1"]
 [ext_resource type="Script" uid="uid://dmjh6hfr3j8ak" path="res://Escenas/juego_1_Expansion/camera_2d.gd" id="12_16iub"]
 
-[sub_resource type="Shader" id="Shader_h3e0d"]
+[sub_resource type="Shader" id="Shader_kssi1"]
 code = "shader_type canvas_item;
 
 uniform float progress = 0.0;
@@ -95,7 +95,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kssi1"]
-shader = SubResource("Shader_h3e0d")
+shader = SubResource("Shader_kssi1")
 shader_parameter/progress = 0.5
 shader_parameter/speed = 0.5
 shader_parameter/pixelation = Vector2(5, 5)
@@ -209,6 +209,7 @@ anchors_preset = -1
 anchor_right = 1.018
 anchor_bottom = 1.024
 offset_bottom = -0.2000122
+metadata/_edit_use_anchors_ = true
 
 [node name="vhs" type="Button" parent="CanvasLayer" unique_id=444753845]
 unique_name_in_owner = true

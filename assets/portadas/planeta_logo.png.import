@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iqvvoylkcedu"
-path="res://.godot/imported/spark_05.png-4befbfd9c30731b6315e0eeefd3db4a6.ctex"
+uid="uid://6c7r5lvviqw5"
+path="res://.godot/imported/planeta_logo.png-e9e04cac0996a5baee0f7aa553f93179.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/kenney_particlePack/PNG/spark_05.png"
-dest_files=["res://.godot/imported/spark_05.png-4befbfd9c30731b6315e0eeefd3db4a6.ctex"]
+source_file="res://assets/portadas/planeta_logo.png"
+dest_files=["res://.godot/imported/planeta_logo.png-e9e04cac0996a5baee0f7aa553f93179.ctex"]
 
 [params]
 
@@ -30,7 +30,7 @@ roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2
-process/channel_remap/alpha=0
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

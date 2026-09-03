@@ -1,0 +1,316 @@
+[gd_scene format=3 uid="uid://ci248lvitrexn"]
+
+[ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="1_gx3qe"]
+[ext_resource type="Script" uid="uid://btt5mpmqyip1b" path="res://Escenas/juego_1_Expansion/tutorial/tutorial.gd" id="1_vnvif"]
+[ext_resource type="Texture2D" uid="uid://iqvvoylkcedu" path="res://assets/kenney_particlePack/PNG/spark_05.png" id="2_8k650"]
+[ext_resource type="AudioStream" uid="uid://ct7g4n6bnvj03" path="res://assets/musica/asteroids.wav" id="2_xptuj"]
+[ext_resource type="Material" uid="uid://c587cyuh4g2xn" path="res://shaders/stars.tres" id="3_8v3vi"]
+[ext_resource type="Texture2D" uid="uid://6c7r5lvviqw5" path="res://assets/portadas/planeta_logo.png" id="4_8v3vi"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_dhvfe"]
+[ext_resource type="Texture2D" uid="uid://eid08lcjbr8r" path="res://assets/Keyboard & Mouse/Default/keyboard_arrows.png" id="6_inidm"]
+[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="8_eaouj"]
+
+[sub_resource type="Shader" id="Shader_h3e0d"]
+code = "shader_type canvas_item;
+
+uniform float progress = 0.0;
+uniform float speed = 0.1; 
+
+uniform vec2 pixelation = vec2(2.0, 2.0);
+uniform float zoom = 2.0;
+
+uniform float background_threshold : hint_range(-2.0, 1.0) = 0.0;
+uniform float color_threshold : hint_range(0.0, 1.0)  = 0.24;
+
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0); 
+
+uniform float seed = 0.0;
+
+#define iTime (TIME * speed - seed)
+
+const mat2 mtx = mat2( vec2(0.80, -0.60), vec2(0.60, 0.80) );
+
+float rand(vec2 n) { 
+    return fract(sin(dot(n, vec2(12.9898 + seed, 4.1414 - seed))) * (43758.5453 + seed * 1000.0));
+}
+
+float noise(vec2 p){
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u * u * (3.0 - 2.0 * u);
+
+    float res = mix(
+        mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
+        mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
+        
+    return res * res;
+}
+
+float fbm( vec2 p )
+{
+    float f = 0.0;
+    
+    f += 0.500000 * noise( p + iTime ); p = mtx * p * 2.02;
+    f += 0.031250 * noise( p ); p = mtx * p * 2.01;
+    f += 0.250000 * noise( p ); p = mtx * p * 2.03;
+    f += 0.125000 * noise( p ); p = mtx * p * 2.01;
+    f += 0.062500 * noise( p ); p = mtx * p * 2.04;
+    f += 0.015625 * noise( p + sin(iTime) );
+
+    return f / 0.96875;
+}
+
+float pattern( in vec2 p )
+{
+	return fbm( p + fbm( p + fbm( p ) ) );
+}
+
+vec4 colormap(float x, vec2 uv) {
+	
+	x *= max(0.0, min(-abs(progress * 4.0 - uv.x - uv.y - 1.0) + 1.0, 1.0) * 2.0);
+    
+    if (x < background_threshold) { 
+        return vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else if (x < color_threshold) { 
+        return mix(
+			vec4(0.0, 0.0, 0.0, 0.0),
+			color,
+			round((x - background_threshold) / (color_threshold - background_threshold))
+		);
+    }
+	else {
+		return color;
+	}
+}
+
+void fragment()
+{
+	vec2 modifier = 1.0/(SCREEN_PIXEL_SIZE * pixelation);
+	vec2 uv = floor(UV * modifier) / modifier;
+	float shade = pattern(uv * zoom);
+	COLOR = colormap(shade, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhvfe"]
+shader = SubResource("Shader_h3e0d")
+shader_parameter/progress = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/pixelation = Vector2(5, 5)
+shader_parameter/zoom = 2.0
+shader_parameter/background_threshold = 0.254000107065
+shader_parameter/color_threshold = 0.24
+shader_parameter/color = Color(1, 0.77254903, 0.60784316, 0.11372549)
+shader_parameter/seed = 0.2
+
+[sub_resource type="LabelSettings" id="LabelSettings_inidm"]
+font = ExtResource("5_dhvfe")
+font_size = 28
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vnvif"]
+font = ExtResource("5_dhvfe")
+font_size = 40
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_8k650"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spark05:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2.7845216, 2.5061717)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spark05:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.0645156]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spark05:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(424, 227.00002)]
+}
+
+[sub_resource type="Animation" id="Animation_eaouj"]
+resource_name = "new_animation"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spark05:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.366667, 10),
+"transitions": PackedFloat32Array(1, 1.624505, 1),
+"update": 0,
+"values": [Vector2(2.7845216, 2.5061717), Vector2(2.8, 2.58), Vector2(2.7845216, 2.5061717)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spark05:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5.366667, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-2.0645156, -2.007128639793479, -2.0645156]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spark05:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.366667, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(424, 227.00002), Vector2(440, 227), Vector2(424, 227.00002)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vnvif"]
+_data = {
+&"RESET": SubResource("Animation_8k650"),
+&"new_animation": SubResource("Animation_eaouj")
+}
+
+[node name="Tutorial" type="Node2D" unique_id=983080846]
+script = ExtResource("1_vnvif")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=719410398]
+offset_right = 1011.0
+offset_bottom = 805.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="stars" type="ColorRect" parent="." unique_id=1446459529]
+material = ExtResource("3_8v3vi")
+offset_left = -77.0
+offset_top = -36.0
+offset_right = 1055.0
+offset_bottom = 906.0
+metadata/_edit_lock_ = true
+
+[node name="shader_loco" type="ColorRect" parent="." unique_id=770374028]
+material = SubResource("ShaderMaterial_dhvfe")
+offset_right = 1011.0
+offset_bottom = 805.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Spark05" type="Sprite2D" parent="." unique_id=289041859]
+position = Vector2(424, 227.00002)
+rotation = -2.0645156
+scale = Vector2(2.7845216, 2.5061717)
+texture = ExtResource("2_8k650")
+
+[node name="musica" type="AudioStreamPlayer" parent="." unique_id=707578770]
+stream = ExtResource("2_xptuj")
+volume_db = -8.0
+pitch_scale = 0.95
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=438875272]
+offset_left = 339.0
+offset_top = 64.0
+offset_right = 670.0
+offset_bottom = 287.66568
+texture = ExtResource("4_8v3vi")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="tutorial" type="Node2D" parent="." unique_id=412156868]
+
+[node name="Label" type="Label" parent="tutorial" unique_id=361727919]
+custom_minimum_size = Vector2(180, 50)
+offset_left = 174.0
+offset_top = 310.0
+offset_right = 839.0
+offset_bottom = 435.0
+theme_override_font_sizes/font_size = 23
+text = "En este juego controlas un planeta en expansion, tenes que navegar el espacio para capturar materia y expandir tu masa para alcanzar nuevos niveles!
+"
+label_settings = SubResource("LabelSettings_inidm")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="tutorial" unique_id=991799536]
+custom_minimum_size = Vector2(180, 50)
+offset_left = 95.0
+offset_top = 486.0
+offset_right = 760.0
+offset_bottom = 611.0
+theme_override_font_sizes/font_size = 23
+text = "Usa las flechas para moverte"
+label_settings = SubResource("LabelSettings_inidm")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="KeyboardArrows" type="Sprite2D" parent="tutorial" unique_id=2032821361]
+position = Vector2(631, 497)
+texture = ExtResource("6_inidm")
+
+[node name="game_over" type="Node2D" parent="." unique_id=1674655828]
+
+[node name="Label" type="Label" parent="game_over" unique_id=136050534]
+custom_minimum_size = Vector2(180, 50)
+offset_left = 174.0
+offset_top = 355.0
+offset_right = 839.0
+offset_bottom = 480.0
+theme_override_font_sizes/font_size = 23
+text = "¡Gracias por jugar Planet Expansion!"
+label_settings = SubResource("LabelSettings_vnvif")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1288710819]
+
+[node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=894502248]
+material = ExtResource("1_gx3qe")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="CanvasLayer" unique_id=55220060]
+offset_left = 419.0
+offset_top = 582.0
+offset_right = 567.0
+offset_bottom = 644.0
+theme = ExtResource("8_eaouj")
+text = "Comenzar"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1801799518]
+libraries/ = SubResource("AnimationLibrary_vnvif")
+autoplay = &"new_animation"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

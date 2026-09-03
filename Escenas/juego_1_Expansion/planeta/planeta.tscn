@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cye2po1vg1uqf"]
 
-[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/coin.png" id="1_04tyo"]
+[ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/unidades/coin.png" id="1_04tyo"]
 [ext_resource type="Script" uid="uid://dx5u3nvwbounn" path="res://Escenas/juego_1_Expansion/planeta/lpaneta.gd" id="1_d43q0"]
 [ext_resource type="PackedScene" uid="uid://bcnwb7ldvxvq0" path="res://particulas/trail.tscn" id="3_jbpe3"]
 
@@ -20,11 +20,9 @@ scale = Vector2(1.15625, 1.1562501)
 texture = ExtResource("1_04tyo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1107114529]
-visible = false
 shape = SubResource("CircleShape2D_d43q0")
 
 [node name="CPUParticles2D" parent="." unique_id=470647072 instance=ExtResource("3_jbpe3")]
-visible = false
 scale = Vector2(8.040002, 8.040002)
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1726337389]

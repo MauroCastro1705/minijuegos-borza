@@ -32,9 +32,7 @@ func _ready() -> void:
 	vhs_effect.show()
 	Global.update.connect(_update)
 	Global.hit.connect(_camera_hit)
-	
-	
-	# Inicializar barra
+	Global.enemy_hit.connect(_enemy_hit)
 	upgrade_barra()
 	_update()
 	
@@ -49,21 +47,98 @@ func _update():
 	total_score.text = "Score " + str(score)
 	
 	current_materia = Global.materia
+	
+	# Verificar que la materia no sea negativa
+	if current_materia < 0:
+		current_materia = 0
+		Global.materia = 0
+	
 	materia_bar.value = current_materia
 	materia_needed = LEVELS[current_level]
 	update_counter()
 	
-	if current_materia == materia_needed:
+	# Verificar si estamos en el último nivel
+	var max_level = LEVELS.size()
+	
+	# Si estamos en el último nivel y la materia está completa
+	if current_level == max_level and current_materia >= materia_needed:
+		win_game()
+		return  # Salir para no ejecutar más lógica
+	
+	# Verificar si se ha alcanzado la materia necesaria para subir de nivel
+	if current_materia >= materia_needed and current_level < max_level:
 		current_level += 1
 		materia_needed = LEVELS[current_level]
-		Global.materia = 0
+		Global.materia = 0  # Reiniciamos la materia al subir de nivel
 		print("subimos a nivel: ", current_level)
-		print("materia para proximo nivel: " , materia_needed)
+		print("materia para proximo nivel: ", materia_needed)
 		level_up()
 		upgrade_barra()
-	
+
+func _enemy_hit():
+	# Solo procesamos si no estamos en el nivel 1 (no podemos bajar de nivel 1)
+	if current_level > 1:
+		# Obtener la materia necesaria para el nivel actual
+		@warning_ignore("unused_variable")
+		var current_materia_needed = LEVELS[current_level]
+		# Obtener la materia necesaria para el nivel anterior
+		@warning_ignore("unused_variable")
+		var previous_materia_needed = LEVELS[current_level - 1]
+		
+		# Verificar si la materia actual es 0 (o menos) para bajar de nivel
+		if Global.materia <= 0:
+			# Bajar de nivel
+			current_level -= 1
+			materia_needed = LEVELS[current_level]
+			
+			# Establecer la materia al máximo del nivel anterior (para que no empiece en 0)
+			Global.materia = materia_needed
+			current_materia = Global.materia
+			
+			# Actualizar la barra y el contador
+			upgrade_barra()
+			
+			# Efecto visual de downgrade
+			if not tween or not tween.is_valid():
+				tween = create_tween()
+			
+			# Efecto de flash rojo en la barra
+			tween.parallel().tween_property(materia_bar, "modulate", Color.RED, 0.1)
+			tween.parallel().tween_property(materia_bar, "modulate", Color.WHITE, 0.3).set_delay(0.1)
+			
+			# Mostrar texto de downgrade
+			DamageNumbers.display_text("Downgrade!", planeta.position, Color.RED, 35)
+			
+			# Restaurar valores del planeta (inverso al level_up)
+			var new_speed = min(planeta.speed + 75.0, 500.0)  # Valor máximo arbitrario
+			var new_friction = max(planeta.friction - 8, 5.0)
+			var new_acceleration = min(planeta.acceleration + 5, 100.0)  # Valor máximo arbitrario
+			var new_scale = max(planeta.scale - Vector2(0.5, 0.5), Vector2(0.5, 0.5))
+			var new_wait_time = min(enemy_spawn.wait_time + 0.5, 3.0)
+			
+			tween.parallel().tween_property(planeta, "speed", new_speed, 0.6)
+			tween.parallel().tween_property(planeta, "friction", new_friction, 0.6)
+			tween.parallel().tween_property(planeta, "acceleration", new_acceleration, 0.6)
+			tween.parallel().tween_property(planeta, "scale", new_scale, 0.6)
+			
+			enemy_spawn.wait_time = new_wait_time
+			print("bajamos a nivel: ", current_level)
+			print("materia para proximo nivel: ", materia_needed)
+			
+			# Asegurar que la materia no sea negativa (por si acaso)
+			if Global.materia < 0:
+				Global.materia = 0
+				current_materia = 0
+				materia_bar.value = 0
+				update_counter()
+
 func upgrade_barra():
 	current_materia = Global.materia
+	# Asegurar que no sea negativa
+	if current_materia < 0:
+		current_materia = 0
+		Global.materia = 0
+	
 	materia_bar.max_value = materia_needed
 	materia_bar.value = current_materia
 	update_counter()
@@ -100,7 +175,6 @@ func level_up():
 	tween.parallel().tween_property(planeta, "scale", new_scale, duration)\
 		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
 	
-	# Animaciones de la barra de materia
 	tween.parallel().tween_property(materia_bar, "modulate", Color.YELLOW, 0.1)
 	tween.parallel().tween_property(materia_bar, "modulate", Color.WHITE, 0.3).set_delay(0.1)
 	
@@ -164,3 +238,6 @@ func _on_vhs_toggled(toggled_on: bool) -> void:
 		
 func _camera_hit():
 	camera_2d.shake()
+	
+func win_game():
+	TransitionManager.change_scene("res://Escenas/juego_1_Expansion/tutorial/tutorial.tscn")

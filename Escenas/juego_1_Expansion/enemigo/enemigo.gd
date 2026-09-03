@@ -32,7 +32,7 @@ func _on_body_entered(body: Node2D) -> void:
 		call_deferred("disable_coll")
 		DamageNumbers.display_text("-1", self.position, Color.RED, 35)
 		Global.materia -= 1
-		Global.emit_signal("update")
+		Global.emit_signal("enemy_hit")
 		Global.emit_signal("hit")
 		audio_stream_player.play()
 		speed = 0
