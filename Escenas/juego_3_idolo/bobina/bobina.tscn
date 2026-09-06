@@ -2,12 +2,55 @@
 
 [ext_resource type="Script" uid="uid://btys4s388ie80" path="res://Escenas/juego_3_idolo/bobina/bobina.gd" id="1_g725v"]
 [ext_resource type="Texture2D" uid="uid://b7s3rf4grhbdn" path="res://assets/juego3/bobina_tela.png" id="1_t7hl1"]
+[ext_resource type="Shader" uid="uid://pvl2lc25agni" path="res://shaders/electric.gdshader" id="2_837oo"]
+[ext_resource type="Material" uid="uid://di15pjvcrgye0" path="res://shaders/electric.tres" id="3_s3bjs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox7s1"]
 size = Vector2(74, 96)
 
+[sub_resource type="Gradient" id="Gradient_vopdu"]
+offsets = PackedFloat32Array(0, 0.5205128, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 1, 1, 1, 0, 0.32156864, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x75fr"]
+gradient = SubResource("Gradient_vopdu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yowff"]
+noise_type = 3
+seed = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ox7s1"]
+noise = SubResource("FastNoiseLite_yowff")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ikdcd"]
+shader = ExtResource("2_837oo")
+shader_parameter/line_gradient = SubResource("GradientTexture1D_x75fr")
+shader_parameter/width = 0.050000002375
+shader_parameter/fix_start = true
+shader_parameter/fix_end = true
+shader_parameter/inverted = false
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ox7s1")
+shader_parameter/speed = 0.10000000475
+shader_parameter/variation = 0.050000002375
+shader_parameter/scale = 1.0000000475
+shader_parameter/repeats = 0.800000038
+
+[sub_resource type="Gradient" id="Gradient_7avyu"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ywfr"]
+gradient = SubResource("Gradient_7avyu")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
 size = Vector2(398, 94)
+
+[sub_resource type="Curve" id="Curve_5rcss"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1.4419891), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_837oo"]
+offsets = PackedFloat32Array(0, 0.65789473, 1)
+colors = PackedColorArray(0.66656864, 0.6665687, 0.66656864, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="Bobina" type="StaticBody2D" unique_id=321406779 groups=["bobina"]]
 script = ExtResource("1_g725v")
@@ -16,6 +59,30 @@ script = ExtResource("1_g725v")
 position = Vector2(27, 38)
 shape = SubResource("RectangleShape2D_ox7s1")
 debug_color = Color(1, 0.0018888913, 0.0965096, 0.41960785)
+
+[node name="rayos" type="Node2D" parent="." unique_id=904053554]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="rayos" unique_id=429461406]
+material = SubResource("ShaderMaterial_ikdcd")
+position = Vector2(1.9999999, -118.33971)
+rotation = -1.5707964
+scale = Vector2(0.44351324, 181.21184)
+texture = SubResource("GradientTexture1D_3ywfr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="rayos" unique_id=258723360]
+material = ExtResource("3_s3bjs")
+position = Vector2(-16.418663, -98.994675)
+rotation = -1.7658211
+scale = Vector2(0.37976313, 181.21184)
+texture = SubResource("GradientTexture1D_3ywfr")
+
+[node name="Sprite2D3" type="Sprite2D" parent="rayos" unique_id=397014352]
+material = ExtResource("3_s3bjs")
+position = Vector2(18.629826, -89.77102)
+rotation = -1.3382292
+scale = Vector2(0.32927376, 181.21182)
+texture = SubResource("GradientTexture1D_3ywfr")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=834936085]
 texture_filter = 1
@@ -39,5 +106,31 @@ position = Vector2(1, -70)
 [node name="attack_timer" type="Timer" parent="." unique_id=298520451]
 wait_time = 0.85
 
+[node name="efecto_timer" type="Timer" parent="." unique_id=738831849]
+wait_time = 0.4
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1504061861]
+position = Vector2(2, -54)
+amount = 10
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(10, 40)
+spread = 92.95
+gravity = Vector2(0, 0)
+angular_velocity_min = 10.0
+angular_velocity_max = 50.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.5
+radial_accel_min = 100.0
+radial_accel_max = 200.0
+angle_min = 1.0
+angle_max = 180.0
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_5rcss")
+color = Color(0, 0.79607844, 0.69803923, 1)
+color_ramp = SubResource("Gradient_837oo")
+
 [connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="efecto_timer" to="." method="_on_efecto_timer_timeout"]

@@ -1,14 +1,25 @@
 [gd_scene format=3 uid="uid://dcb5iey60yej1"]
 
+[ext_resource type="Shader" uid="uid://cjphkkcxlo4x8" path="res://shaders/electric_background.gdshader" id="2_032l0"]
 [ext_resource type="Material" uid="uid://b4n7vxdois4bp" path="res://shaders/electric_fence.tres" id="2_w45du"]
-[ext_resource type="Material" uid="uid://cffg65i0v6gdo" path="res://shaders/electric_background.tres" id="3_sl2pt"]
 [ext_resource type="PackedScene" uid="uid://cqdm6dfmxdbkd" path="res://Escenas/juego_3_idolo/bobina/bobina.tscn" id="4_n41v8"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="4_sl2pt"]
 [ext_resource type="Script" uid="uid://bkb5aoreigbtj" path="res://Escenas/juego_3_idolo/main_scene/enemy_spawner.gd" id="5_032l0"]
 [ext_resource type="PackedScene" uid="uid://dj7q8mcpdt2mv" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.tscn" id="5_n41v8"]
+[ext_resource type="PackedScene" uid="uid://dshie1sgnnif1" path="res://Escenas/juego_3_idolo/buttons/money_ui.tscn" id="7_ug304"]
+[ext_resource type="PackedScene" uid="uid://cexyndwmlv262" path="res://Escenas/juego_3_idolo/buttons/buy_damage.tscn" id="8_dpyhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n41v8"]
 size = Vector2(1260, 106)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ug304"]
+shader = ExtResource("2_032l0")
+shader_parameter/background_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+shader_parameter/line_color = Color(0, 1, 1, 1)
+shader_parameter/line_freq = 20.0
+shader_parameter/height = 0.6
+shader_parameter/speed = 0.1
+shader_parameter/scale = Vector2(2, 5)
 
 [node name="Main" type="Node2D" unique_id=2087527894]
 
@@ -31,19 +42,19 @@ debug_color = Color(1, 0.019607844, 0.007843138, 0.105882354)
 
 [node name="fence" type="ColorRect" parent="." unique_id=257740169]
 material = ExtResource("2_w45du")
-offset_left = 770.0
-offset_top = 14.0
-offset_right = 967.0
-offset_bottom = 162.0
+offset_left = 774.0
+offset_top = 329.0
+offset_right = 971.0
+offset_bottom = 477.0
 
 [node name="lines" type="ColorRect" parent="." unique_id=1628004188]
-material = ExtResource("3_sl2pt")
-offset_left = 419.0
-offset_top = 24.0
-offset_right = 644.0
-offset_bottom = 187.0
+material = SubResource("ShaderMaterial_ug304")
+offset_left = -2.0
+offset_right = 1006.0
+offset_bottom = 163.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659541860]
+visible = false
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=974062488]
 material = ExtResource("4_sl2pt")
@@ -51,6 +62,7 @@ anchors_preset = -1
 anchor_right = 1.018
 anchor_bottom = 1.024
 offset_bottom = -0.2000122
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Bobina" parent="." unique_id=1153505668 instance=ExtResource("4_n41v8")]
@@ -63,3 +75,15 @@ spawn_point = NodePath("../spawn_point")
 
 [node name="spawn_point" type="Marker2D" parent="." unique_id=1641557494]
 position = Vector2(1129, 574)
+
+[node name="money_ui" parent="." unique_id=60018633 instance=ExtResource("7_ug304")]
+offset_left = 45.0
+offset_top = 50.0
+offset_right = 85.0
+offset_bottom = 90.0
+
+[node name="BuyDamage" parent="." unique_id=638008585 instance=ExtResource("8_dpyhi")]
+offset_left = 247.0
+offset_top = 12.0
+offset_right = 396.0
+offset_bottom = 146.0

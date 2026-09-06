@@ -9,6 +9,8 @@ signal  pick_up
 
 @warning_ignore("unused_signal")
 signal enemy_hit
+@warning_ignore("unused_signal")
+signal enemy_died
 
 #planeta expansion
 var materia:int = 0
@@ -19,3 +21,7 @@ var hielo_speed:float = 1.0 #para gravity scale
 ##score juego 2
 var comida:int = 0
 var score_pinguino:int = 0
+
+##juego 3
+var corriente:int = 0
+var enemy_corriente:int = 5

@@ -1,0 +1,164 @@
+[gd_scene format=3 uid="uid://dshie1sgnnif1"]
+
+[ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_u8nw1"]
+[ext_resource type="Script" uid="uid://b0h6m013f6brs" path="res://Escenas/juego_3_idolo/buttons/money_ui.gd" id="1_y14tc"]
+[ext_resource type="Texture2D" uid="uid://dgig0khfobgrx" path="res://assets/juego3/rayo_icon.png" id="3_xv1v6"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="4_sksv6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_032l0"]
+texture = ExtResource("1_u8nw1")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(48, 48, 48, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ug304"]
+font = ExtResource("4_sksv6")
+font_size = 50
+outline_size = 1
+outline_color = Color(0, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_sksv6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("new_score:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3.6666667, 25.666666)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("new_score:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pdthu"]
+resource_name = "update"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("new_score:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03333333, 0.7),
+"transitions": PackedFloat32Array(1, 1.0352651, 0.6155717),
+"update": 0,
+"values": [Vector2(3.6666667, 25.666666), Vector2(3.6666667, 25.666666), Vector2(3.6666667, -1.333334)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("new_score:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7w6p"]
+_data = {
+&"RESET": SubResource("Animation_sksv6"),
+&"update": SubResource("Animation_pdthu")
+}
+
+[node name="money_ui" type="Control" unique_id=60018633]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 40.0
+offset_right = 75.0
+offset_bottom = 80.0
+script = ExtResource("1_y14tc")
+
+[node name="Panel" type="Panel" parent="." unique_id=262138453]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = -0.975
+anchor_right = 2.7250001
+anchor_bottom = 1.2
+offset_right = -95.33334
+offset_bottom = -61.666664
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_032l0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1020951919]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.79300004
+anchor_top = -0.88600004
+anchor_right = 2.621
+anchor_bottom = 0.855
+offset_left = 11.720001
+offset_top = 9.440002
+offset_right = -6.840004
+offset_bottom = -10.200001
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=829533979]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_ug304")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1660245157]
+self_modulate = Color(0, 1.4797037, 1.6064698, 1)
+custom_minimum_size = Vector2(30, 25)
+layout_mode = 2
+texture = ExtResource("3_xv1v6")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="new_score" type="HBoxContainer" parent="." unique_id=2128393247]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.97200006
+offset_left = 3.6666667
+offset_top = 25.666666
+offset_right = 27.666664
+offset_bottom = 36.786663
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="new_value" type="Label" parent="new_score" unique_id=147343072]
+texture_filter = 1
+layout_mode = 2
+text = "+5"
+label_settings = SubResource("LabelSettings_ug304")
+
+[node name="TextureRect" type="TextureRect" parent="new_score" unique_id=1244025521]
+self_modulate = Color(0, 1.4797037, 1.6064698, 1)
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+texture = ExtResource("3_xv1v6")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1701211557]
+libraries/ = SubResource("AnimationLibrary_y7w6p")

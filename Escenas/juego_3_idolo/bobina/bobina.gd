@@ -7,9 +7,15 @@ var position_final
 @onready var attack_timer: Timer = $attack_timer
 var bobina_dmg:int = 25
 var enemy
+@onready var rayos: Node2D = $rayos
+@onready var efecto_timer: Timer = $efecto_timer
+@onready var particulas: CPUParticles2D = $CPUParticles2D
+@export var bobina_nivel:int = 1
+
 
 func _ready() -> void:
 	position_final = damge_position.global_position
+	particulas.amount = 12 #aumentar segun bobina_nivel
 
 
 
@@ -29,5 +35,15 @@ func _on_hit_area_body_entered(body: Node2D) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
-	if enemy:
+	_apply_dmg()
+		
+
+func _apply_dmg():
+	if enemy: #si hay enemigo hago...
+		efecto_timer.start()
+		rayos.show()
 		enemy.take_damage(bobina_dmg)
+
+
+func _on_efecto_timer_timeout() -> void:
+	rayos.hide()

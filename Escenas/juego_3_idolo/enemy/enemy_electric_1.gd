@@ -12,7 +12,7 @@ signal died
 var max_health:float = 50
 var current_health: float
 var is_dead: bool = false
-var SPEED:float = 50
+var SPEED:float = 80
 
 var can_attack:bool = true
 
@@ -45,6 +45,8 @@ func _on_health_depleted():
 	if is_dead:
 		return
 	is_dead = true
+	Global.corriente += Global.enemy_corriente
+	Global.enemy_died.emit()
 	died.emit()
 	can_attack = false
 	death_sprite.show()

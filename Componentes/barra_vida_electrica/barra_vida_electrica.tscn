@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d030r741fvuhv" path="res://Componentes/barra_vida_electrica/barra_vida.gd" id="1_brdao"]
 [ext_resource type="Texture2D" uid="uid://dbeb6t0exb8f1" path="res://assets/unidades/barra_vida.png" id="2_8cigs"]
-[ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="3_81ida"]
+[ext_resource type="FontFile" uid="uid://dhhrl2oo2mnlu" path="res://assets/fonts/pixel_font.ttf" id="3_brdao"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgsk6"]
 bg_color = Color(0, 0, 0, 1)
@@ -11,8 +11,8 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.28235295, 0.99607843, 0.99215686, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qybwr"]
-font = ExtResource("3_81ida")
-shadow_size = 3
+font = ExtResource("3_brdao")
+shadow_size = 7
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(1, 0.5)
 
@@ -68,10 +68,10 @@ patch_margin_bottom = 8
 metadata/_edit_lock_ = true
 
 [node name="value" type="Label" parent="." unique_id=1744241548]
-offset_left = -36.0
-offset_top = -15.0
-offset_right = 37.0
-offset_bottom = 2.0
+offset_left = -41.0
+offset_top = -22.0
+offset_right = 45.0
+offset_bottom = 1.0
 text = "20/60"
 label_settings = SubResource("LabelSettings_qybwr")
 horizontal_alignment = 1

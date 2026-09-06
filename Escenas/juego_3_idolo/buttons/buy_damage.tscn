@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://cexyndwmlv262"]
+
+[ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_nna48"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="2_0cnn8"]
+[ext_resource type="Texture2D" uid="uid://dgig0khfobgrx" path="res://assets/juego3/rayo_icon.png" id="3_ewdud"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5rcss"]
+texture = ExtResource("1_nna48")
+texture_margin_left = 2.0
+texture_margin_top = 1.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(112, 64, 48, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_06mth"]
+font = ExtResource("2_0cnn8")
+font_size = 50
+outline_size = 1
+outline_color = Color(0, 1, 1, 1)
+
+[node name="BuyDamage" type="Control" unique_id=638008585]
+layout_mode = 3
+anchor_right = 0.15
+anchor_bottom = 0.17
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=1754168886]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 45)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.86700004
+offset_right = -100.0
+offset_bottom = -91.98601
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_5rcss")
+
+[node name="cost2" type="Label" parent="." unique_id=38510428]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99300003
+anchor_bottom = 0.316
+offset_right = 0.049987793
+offset_bottom = 0.071998596
+text = "PODER"
+label_settings = SubResource("LabelSettings_06mth")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1708326900]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.933
+offset_top = 41.0
+offset_bottom = -56.414
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="cost" type="Label" parent="HBoxContainer" unique_id=199755792]
+unique_name_in_owner = true
+layout_mode = 2
+text = "20"
+label_settings = SubResource("LabelSettings_06mth")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=2110485134]
+self_modulate = Color(0, 1.4797037, 1.6064698, 1)
+custom_minimum_size = Vector2(30, 25)
+layout_mode = 2
+texture = ExtResource("3_ewdud")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="." unique_id=1333486923]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.933
+offset_left = 10.0
+offset_top = 95.0
+offset_right = -8.0
+offset_bottom = -21.414001
+text = "MEJORAR"
