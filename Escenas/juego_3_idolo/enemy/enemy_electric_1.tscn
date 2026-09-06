@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_8osbm"]
 [ext_resource type="Texture2D" uid="uid://beq31hfv361xe" path="res://assets/juego3/explosion.png" id="3_mw848"]
 [ext_resource type="PackedScene" uid="uid://3x3ncnpunydp" path="res://Componentes/barra_vida/barra_vida.tscn" id="4_dqpkm"]
+[ext_resource type="PackedScene" uid="uid://daps7g4qm000h" path="res://Escenas/juego_3_idolo/attacks/rayo_1.tscn" id="5_52tbi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
 size = Vector2(32, 53)
@@ -120,7 +121,7 @@ texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5rcss")
 autoplay = "default"
-frame_progress = 0.8470247
+frame_progress = 0.81634593
 
 [node name="death_sprite" type="AnimatedSprite2D" parent="." unique_id=1279786471]
 visible = false
@@ -134,3 +135,13 @@ frame_progress = 0.119471215
 position = Vector2(1, -39)
 
 [node name="attack_timer" type="Timer" parent="." unique_id=1281616161]
+
+[node name="Rayo1" parent="." unique_id=85275332 instance=ExtResource("5_52tbi")]
+visible = false
+position = Vector2(3, 23)
+
+[node name="damage_timer" type="Timer" parent="." unique_id=1007270071]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://daps7g4qm000h"]
+
+[ext_resource type="Material" uid="uid://di15pjvcrgye0" path="res://shaders/electric.tres" id="1_lc8rd"]
+
+[sub_resource type="Gradient" id="Gradient_7avyu"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d5sbd"]
+gradient = SubResource("Gradient_7avyu")
+
+[node name="Rayo1" type="Node2D" unique_id=85275332]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1025250421]
+material = ExtResource("1_lc8rd")
+position = Vector2(-0.9999833, -116.3178)
+rotation = -1.5707964
+scale = Vector2(0.9060115, 210)
+texture = SubResource("GradientTexture1D_d5sbd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=29847]
+material = ExtResource("1_lc8rd")
+position = Vector2(16, -59.000008)
+rotation = -1.2458291
+scale = Vector2(0.4550819, 210)
+texture = SubResource("GradientTexture1D_d5sbd")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=903754646]
+material = ExtResource("1_lc8rd")
+position = Vector2(-28.999998, -52)
+rotation = -2.064878
+scale = Vector2(0.4550819, 210)
+texture = SubResource("GradientTexture1D_d5sbd")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1927348674]
+material = ExtResource("1_lc8rd")
+position = Vector2(-0.9999995, -2.0000002)
+rotation = -6.2747164
+scale = Vector2(0.4550819, 210)
+texture = SubResource("GradientTexture1D_d5sbd")
