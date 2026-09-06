@@ -3,11 +3,19 @@
 [ext_resource type="Script" uid="uid://btys4s388ie80" path="res://Escenas/juego_3_idolo/bobina/bobina.gd" id="1_g725v"]
 [ext_resource type="Texture2D" uid="uid://b7s3rf4grhbdn" path="res://assets/juego3/bobina_tela.png" id="1_t7hl1"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ox7s1"]
+size = Vector2(74, 96)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
 size = Vector2(398, 94)
 
-[node name="Bobina" type="Node2D" unique_id=1153505668]
+[node name="Bobina" type="StaticBody2D" unique_id=321406779 groups=["bobina"]]
 script = ExtResource("1_g725v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=408582496]
+position = Vector2(27, 38)
+shape = SubResource("RectangleShape2D_ox7s1")
+debug_color = Color(1, 0.0018888913, 0.0965096, 0.41960785)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=834936085]
 texture_filter = 1
@@ -22,5 +30,14 @@ stretch_mode = 5
 [node name="hit_area" type="Area2D" parent="." unique_id=1616100331]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hit_area" unique_id=1529933275]
-position = Vector2(0, 37)
+position = Vector2(155, 37)
 shape = SubResource("RectangleShape2D_x75fr")
+
+[node name="damge_position" type="Marker2D" parent="." unique_id=1331683202]
+position = Vector2(1, -70)
+
+[node name="attack_timer" type="Timer" parent="." unique_id=298520451]
+wait_time = 0.85
+
+[connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

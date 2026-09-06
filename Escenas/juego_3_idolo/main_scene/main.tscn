@@ -1,22 +1,33 @@
 [gd_scene format=3 uid="uid://dcb5iey60yej1"]
 
-[ext_resource type="Material" uid="uid://di15pjvcrgye0" path="res://shaders/electric.tres" id="1_3bf81"]
 [ext_resource type="Material" uid="uid://b4n7vxdois4bp" path="res://shaders/electric_fence.tres" id="2_w45du"]
 [ext_resource type="Material" uid="uid://cffg65i0v6gdo" path="res://shaders/electric_background.tres" id="3_sl2pt"]
+[ext_resource type="PackedScene" uid="uid://cqdm6dfmxdbkd" path="res://Escenas/juego_3_idolo/bobina/bobina.tscn" id="4_n41v8"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="4_sl2pt"]
+[ext_resource type="Script" uid="uid://bkb5aoreigbtj" path="res://Escenas/juego_3_idolo/main_scene/enemy_spawner.gd" id="5_032l0"]
+[ext_resource type="PackedScene" uid="uid://dj7q8mcpdt2mv" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.tscn" id="5_n41v8"]
 
-[sub_resource type="Gradient" id="Gradient_3bf81"]
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_sm4bk"]
-gradient = SubResource("Gradient_3bf81")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n41v8"]
+size = Vector2(1260, 106)
 
 [node name="Main" type="Node2D" unique_id=2087527894]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1393620981]
-material = ExtResource("1_3bf81")
-position = Vector2(174.99998, 58.000008)
-scale = Vector2(1.1613412, 210)
-texture = SubResource("GradientTexture1D_sm4bk")
+[node name="terrain" type="Node2D" parent="." unique_id=1153532061]
+
+[node name="ColorRect" type="ColorRect" parent="terrain" unique_id=681302358]
+offset_left = -8.0
+offset_top = 578.0
+offset_right = 1005.0
+offset_bottom = 834.0
+color = Color(0.06053035, 0.06053035, 0.060530342, 1)
+metadata/_edit_lock_ = true
+
+[node name="piso" type="StaticBody2D" parent="terrain" unique_id=2082457461]
+
+[node name="piso" type="CollisionShape2D" parent="terrain/piso" unique_id=2009423086]
+position = Vector2(589, 634)
+shape = SubResource("RectangleShape2D_n41v8")
+debug_color = Color(1, 0.019607844, 0.007843138, 0.105882354)
 
 [node name="fence" type="ColorRect" parent="." unique_id=257740169]
 material = ExtResource("2_w45du")
@@ -33,7 +44,6 @@ offset_right = 644.0
 offset_bottom = 187.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659541860]
-visible = false
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=974062488]
 material = ExtResource("4_sl2pt")
@@ -42,3 +52,14 @@ anchor_right = 1.018
 anchor_bottom = 1.024
 offset_bottom = -0.2000122
 metadata/_edit_use_anchors_ = true
+
+[node name="Bobina" parent="." unique_id=1153505668 instance=ExtResource("4_n41v8")]
+position = Vector2(125, 499)
+
+[node name="enemy_spawner" type="Node2D" parent="." unique_id=1152539968 node_paths=PackedStringArray("spawn_point")]
+script = ExtResource("5_032l0")
+enemy_scene = ExtResource("5_n41v8")
+spawn_point = NodePath("../spawn_point")
+
+[node name="spawn_point" type="Marker2D" parent="." unique_id=1641557494]
+position = Vector2(1129, 574)

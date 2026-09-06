@@ -1,23 +1,23 @@
-[gd_scene format=3 uid="uid://3x3ncnpunydp"]
+[gd_scene format=3 uid="uid://csy841kwakacm"]
 
-[ext_resource type="Script" uid="uid://cdbkarvxbqfcx" path="res://Componentes/barra_vida/barra_vida.gd" id="1_4mu1o"]
-[ext_resource type="Texture2D" uid="uid://dbeb6t0exb8f1" path="res://assets/unidades/barra_vida.png" id="2_wr20k"]
-[ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="3_wukmq"]
+[ext_resource type="Script" uid="uid://d030r741fvuhv" path="res://Componentes/barra_vida_electrica/barra_vida.gd" id="1_brdao"]
+[ext_resource type="Texture2D" uid="uid://dbeb6t0exb8f1" path="res://assets/unidades/barra_vida.png" id="2_8cigs"]
+[ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="3_81ida"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgsk6"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duw5i"]
-bg_color = Color(0.65882355, 0.06666667, 0, 1)
+bg_color = Color(0.28235295, 0.99607843, 0.99215686, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qybwr"]
-font = ExtResource("3_wukmq")
+font = ExtResource("3_81ida")
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(1, 0.5)
 
-[node name="BarraVida" type="Node2D" unique_id=571050010]
-script = ExtResource("1_4mu1o")
+[node name="BarraVida_electrica" type="Node2D" unique_id=571050010]
+script = ExtResource("1_brdao")
 
 [node name="life_bar" type="ProgressBar" parent="." unique_id=81290640]
 custom_minimum_size = Vector2(70, 8)
@@ -44,7 +44,7 @@ offset_top = -7.0
 offset_right = 117.0
 offset_bottom = 21.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_wr20k")
+texture = ExtResource("2_8cigs")
 region_rect = Rect2(2, 1, 95, 20)
 patch_margin_left = 10
 patch_margin_top = 8
@@ -53,12 +53,13 @@ patch_margin_bottom = 8
 metadata/_edit_lock_ = true
 
 [node name="electric_bar" type="NinePatchRect" parent="." unique_id=968282051]
+self_modulate = Color(0, 0.84705883, 1, 1)
 offset_left = -39.0
 offset_top = -7.0
 offset_right = 117.0
 offset_bottom = 21.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_wr20k")
+texture = ExtResource("2_8cigs")
 region_rect = Rect2(2, 1, 95, 20)
 patch_margin_left = 10
 patch_margin_top = 8

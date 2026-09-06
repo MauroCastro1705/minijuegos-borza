@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://b1034bf0pnd0r" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.gd" id="1_3rsaj"]
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_8osbm"]
 [ext_resource type="Texture2D" uid="uid://beq31hfv361xe" path="res://assets/juego3/explosion.png" id="3_mw848"]
-[ext_resource type="PackedScene" uid="uid://3x3ncnpunydp" path="res://Componentes/barra_vida/barra_vida.tscn" id="4_dqpkm"]
 [ext_resource type="PackedScene" uid="uid://daps7g4qm000h" path="res://Escenas/juego_3_idolo/attacks/rayo_1.tscn" id="5_52tbi"]
+[ext_resource type="PackedScene" uid="uid://csy841kwakacm" path="res://Componentes/barra_vida_electrica/barra_vida_electrica.tscn" id="6_2uepw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
 size = Vector2(32, 53)
@@ -104,10 +104,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cjmx5")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"default",
 "speed": 6.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
+size = Vector2(78, 53)
 
 [node name="EnemyElectric1" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
 script = ExtResource("1_3rsaj")
@@ -122,6 +125,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_5rcss")
 autoplay = "default"
 frame_progress = 0.81634593
+flip_h = true
 
 [node name="death_sprite" type="AnimatedSprite2D" parent="." unique_id=1279786471]
 visible = false
@@ -131,17 +135,26 @@ sprite_frames = SubResource("SpriteFrames_x75fr")
 autoplay = "default"
 frame_progress = 0.119471215
 
-[node name="BarraVida" parent="." unique_id=571050010 instance=ExtResource("4_dqpkm")]
-position = Vector2(1, -39)
-
 [node name="attack_timer" type="Timer" parent="." unique_id=1281616161]
+wait_time = 2.0
 
 [node name="Rayo1" parent="." unique_id=85275332 instance=ExtResource("5_52tbi")]
 visible = false
-position = Vector2(3, 23)
+position = Vector2(-4, 23)
 
 [node name="damage_timer" type="Timer" parent="." unique_id=1007270071]
 wait_time = 0.5
-autostart = true
 
+[node name="attack_area" type="Area2D" parent="." unique_id=109419654]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=1816785956]
+position = Vector2(-29, -0.5)
+shape = SubResource("RectangleShape2D_x75fr")
+debug_color = Color(0.78039217, 0.627451, 0.2509804, 0.12156863)
+
+[node name="BarraVida_electrica" parent="." unique_id=978959134 instance=ExtResource("6_2uepw")]
+position = Vector2(0, -39)
+
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

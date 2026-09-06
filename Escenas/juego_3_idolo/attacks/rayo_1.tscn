@@ -18,21 +18,28 @@ texture = SubResource("GradientTexture1D_d5sbd")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=29847]
 material = ExtResource("1_lc8rd")
-position = Vector2(16, -59.000008)
+position = Vector2(10.384739, -42.333122)
 rotation = -1.2458291
-scale = Vector2(0.4550819, 210)
+scale = Vector2(0.31768045, 210)
 texture = SubResource("GradientTexture1D_d5sbd")
 
 [node name="Sprite2D3" type="Sprite2D" parent="." unique_id=903754646]
 material = ExtResource("1_lc8rd")
-position = Vector2(-28.999998, -52)
+position = Vector2(-18.598396, -32.689228)
 rotation = -2.064878
-scale = Vector2(0.4550819, 210)
+scale = Vector2(0.28372273, 210)
 texture = SubResource("GradientTexture1D_d5sbd")
 
-[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1927348674]
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=438633319]
 material = ExtResource("1_lc8rd")
-position = Vector2(-0.9999995, -2.0000002)
-rotation = -6.2747164
-scale = Vector2(0.4550819, 210)
+position = Vector2(-26.999998, -27)
+rotation = -2.3430998
+scale = Vector2(0.28372273, 210)
+texture = SubResource("GradientTexture1D_d5sbd")
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=721890295]
+material = ExtResource("1_lc8rd")
+position = Vector2(24, -24.999998)
+rotation = -0.7369158
+scale = Vector2(0.28372273, 210)
 texture = SubResource("GradientTexture1D_d5sbd")
