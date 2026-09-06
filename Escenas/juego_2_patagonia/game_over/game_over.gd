@@ -8,4 +8,4 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
-	TransitionManager.change_scene("res://Escenas/juegos_2_patagonia/tutorial/tutorial.tscn")
+	TransitionManager.change_scene("res://Escenas/juego_2_patagonia/tutorial/tutorial.tscn")

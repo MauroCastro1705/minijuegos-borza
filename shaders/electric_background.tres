@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cffg65i0v6gdo"]
+
+[ext_resource type="Shader" uid="uid://cjphkkcxlo4x8" path="res://shaders/electric_background.gdshader" id="1_346cm"]
+
+[resource]
+shader = ExtResource("1_346cm")
+shader_parameter/background_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+shader_parameter/line_color = Color(0, 1, 1, 1)
+shader_parameter/line_freq = 9.56
+shader_parameter/height = 0.6
+shader_parameter/speed = 0.8
+shader_parameter/scale = Vector2(2, 16)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bpyla4epm802l"]
 
-[ext_resource type="Script" uid="uid://dbqn8sg8yvw3g" path="res://Escenas/juegos_2_patagonia/pinguino/player.gd" id="1_5abqv"]
+[ext_resource type="Script" uid="uid://dbqn8sg8yvw3g" path="res://Escenas/juego_2_patagonia/pinguino/player.gd" id="1_5abqv"]
 [ext_resource type="FontFile" uid="uid://cqgxinsmd5tbo" path="res://assets/fonts/FFF_Ultra_TRIAL.ttf" id="2_t4yx3"]
 [ext_resource type="AudioStream" uid="uid://jvmn0wk48cwd" path="res://assets/500 Sound Effects by Jalastram/lasergun.ogg" id="3_sypv3"]
 

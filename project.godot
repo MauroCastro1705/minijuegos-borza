@@ -36,13 +36,15 @@ enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 folder_colors={
 "res://Componentes/": "green",
-"res://Escenas/": "orange"
+"res://Escenas/": "orange",
+"res://Main_menu/": "red"
 }
 
 [global_group]
 
 player=""
 obstaculos=""
+enemigo=""
 
 [input]
 

@@ -374,6 +374,6 @@ func _input(_event):
 
 func _game_over():
 	await get_tree().create_timer(0.1).timeout
-	TransitionManager.change_scene("res://Escenas/juegos_2_patagonia/game_over/game_over.tscn")
+	TransitionManager.change_scene("res://Escenas/juego_2_patagonia/game_over/game_over.tscn")
 	#get_tree().paused = true
 	

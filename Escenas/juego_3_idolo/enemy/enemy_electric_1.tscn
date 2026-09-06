@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://dj7q8mcpdt2mv"]
+
+[ext_resource type="Script" uid="uid://b1034bf0pnd0r" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.gd" id="1_3rsaj"]
+[ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_8osbm"]
+[ext_resource type="Texture2D" uid="uid://beq31hfv361xe" path="res://assets/juego3/explosion.png" id="3_mw848"]
+[ext_resource type="PackedScene" uid="uid://3x3ncnpunydp" path="res://Componentes/barra_vida/barra_vida.tscn" id="4_dqpkm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
+size = Vector2(32, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rsaj"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(289, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw848"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(305, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqpkm"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(321, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52tbi"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(337, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uepw"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(353, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ifan"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(369, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25jwy"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(385, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_florv"]
+atlas = ExtResource("1_8osbm")
+region = Rect2(401, 20, 16, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5rcss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rsaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw848")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqpkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52tbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uepw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ifan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25jwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_florv")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h51s"]
+atlas = ExtResource("3_mw848")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr4si"]
+atlas = ExtResource("3_mw848")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4sfw"]
+atlas = ExtResource("3_mw848")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjmx5"]
+atlas = ExtResource("3_mw848")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x75fr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4h51s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kr4si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4sfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjmx5")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="EnemyElectric1" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
+script = ExtResource("1_3rsaj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=47465645]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_5rcss")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=848013205]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5rcss")
+autoplay = "default"
+frame_progress = 0.8470247
+
+[node name="death_sprite" type="AnimatedSprite2D" parent="." unique_id=1279786471]
+visible = false
+position = Vector2(1, -1)
+scale = Vector2(0.68749994, 0.68749994)
+sprite_frames = SubResource("SpriteFrames_x75fr")
+autoplay = "default"
+frame_progress = 0.119471215
+
+[node name="BarraVida" parent="." unique_id=571050010 instance=ExtResource("4_dqpkm")]
+position = Vector2(1, -39)
+
+[node name="attack_timer" type="Timer" parent="." unique_id=1281616161]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b1q5sum4vij4w"]
 
 [ext_resource type="Texture2D" uid="uid://c4kp23h3l15l5" path="res://assets/juego2/fish.png" id="1_6goaj"]
-[ext_resource type="Script" uid="uid://83uwficxe111" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.gd" id="1_dg8dx"]
+[ext_resource type="Script" uid="uid://83uwficxe111" path="res://Escenas/juego_2_patagonia/pick_ups/fish_1.gd" id="1_dg8dx"]
 [ext_resource type="AudioStream" uid="uid://u6g00rrd1smp" path="res://assets/500 Sound Effects by Jalastram/FX272.wav" id="3_lbf0o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]

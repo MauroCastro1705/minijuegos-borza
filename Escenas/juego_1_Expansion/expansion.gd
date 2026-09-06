@@ -106,25 +106,6 @@ func _enemy_hit():
 			tween.parallel().tween_property(materia_bar, "modulate", Color.RED, 0.1)
 			tween.parallel().tween_property(materia_bar, "modulate", Color.WHITE, 0.3).set_delay(0.1)
 			
-			# Mostrar texto de downgrade
-			DamageNumbers.display_text("Downgrade!", planeta.position, Color.RED, 35)
-			
-			# Restaurar valores del planeta (inverso al level_up)
-			var new_speed = min(planeta.speed + 75.0, 500.0)  # Valor máximo arbitrario
-			var new_friction = max(planeta.friction - 8, 5.0)
-			var new_acceleration = min(planeta.acceleration + 5, 100.0)  # Valor máximo arbitrario
-			var new_scale = max(planeta.scale - Vector2(0.5, 0.5), Vector2(0.5, 0.5))
-			var new_wait_time = min(enemy_spawn.wait_time + 0.5, 3.0)
-			
-			tween.parallel().tween_property(planeta, "speed", new_speed, 0.6)
-			tween.parallel().tween_property(planeta, "friction", new_friction, 0.6)
-			tween.parallel().tween_property(planeta, "acceleration", new_acceleration, 0.6)
-			tween.parallel().tween_property(planeta, "scale", new_scale, 0.6)
-			
-			enemy_spawn.wait_time = new_wait_time
-			print("bajamos a nivel: ", current_level)
-			print("materia para proximo nivel: ", materia_needed)
-			
 			# Asegurar que la materia no sea negativa (por si acaso)
 			if Global.materia < 0:
 				Global.materia = 0

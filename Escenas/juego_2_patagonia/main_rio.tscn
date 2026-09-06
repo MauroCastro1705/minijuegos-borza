@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bswcom8fyr00v"]
 
-[ext_resource type="PackedScene" uid="uid://bpyla4epm802l" path="res://Escenas/juegos_2_patagonia/pinguino/pinguino_player.tscn" id="1_1vcym"]
-[ext_resource type="Script" uid="uid://bluyboek43xrx" path="res://Escenas/juegos_2_patagonia/main_rio.gd" id="1_17s4q"]
+[ext_resource type="PackedScene" uid="uid://bpyla4epm802l" path="res://Escenas/juego_2_patagonia/pinguino/pinguino_player.tscn" id="1_1vcym"]
+[ext_resource type="Script" uid="uid://bluyboek43xrx" path="res://Escenas/juego_2_patagonia/main_rio.gd" id="1_17s4q"]
 [ext_resource type="Texture2D" uid="uid://bc8jc35ryhc6v" path="res://assets/water_particle.png" id="2_16da4"]
-[ext_resource type="Script" uid="uid://cg6534vecjx12" path="res://Escenas/juegos_2_patagonia/spawner.gd" id="2_gauyj"]
-[ext_resource type="PackedScene" uid="uid://bbihidqir1b2a" path="res://Escenas/juegos_2_patagonia/obstaculos/obstaculo_1.tscn" id="3_q0o6t"]
+[ext_resource type="Script" uid="uid://cg6534vecjx12" path="res://Escenas/juego_2_patagonia/spawner.gd" id="2_gauyj"]
+[ext_resource type="PackedScene" uid="uid://bbihidqir1b2a" path="res://Escenas/juego_2_patagonia/obstaculos/obstaculo_1.tscn" id="3_q0o6t"]
 [ext_resource type="Texture2D" uid="uid://cekon8pt8p6kl" path="res://assets/juego2/nieve.png" id="7_85fy2"]
-[ext_resource type="Script" uid="uid://c4fhj0rlejx4i" path="res://Escenas/juegos_2_patagonia/fish_spawner.gd" id="7_bsti6"]
-[ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juegos_2_patagonia/pick_ups/fish_1.tscn" id="8_bsti6"]
+[ext_resource type="Script" uid="uid://c4fhj0rlejx4i" path="res://Escenas/juego_2_patagonia/fish_spawner.gd" id="7_bsti6"]
+[ext_resource type="PackedScene" uid="uid://b1q5sum4vij4w" path="res://Escenas/juego_2_patagonia/pick_ups/fish_1.tscn" id="8_bsti6"]
 [ext_resource type="LabelSettings" uid="uid://yf88s67n2xyi" path="res://themas/texto_naranja.tres" id="10_61w3v"]
 [ext_resource type="Texture2D" uid="uid://c4kp23h3l15l5" path="res://assets/juego2/fish.png" id="10_kv5fo"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="10_qg6ds"]
@@ -106,7 +106,7 @@ position = Vector2(203, 396)
 shape = SubResource("RectangleShape2D_7c4s7")
 
 [node name="efecto_agua" type="CPUParticles2D" parent="." unique_id=1976840397]
-position = Vector2(508, -23)
+position = Vector2(518, -42)
 amount = 20
 texture = SubResource("AtlasTexture_85fy2")
 lifetime = 3.0

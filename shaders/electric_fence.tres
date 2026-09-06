@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b4n7vxdois4bp"]
+
+[ext_resource type="Shader" uid="uid://cfujtyjat5qcq" path="res://shaders/electric_fence.gdshader" id="1_dngvn"]
+
+[resource]
+shader = ExtResource("1_dngvn")
+shader_parameter/speed = 0.01
+shader_parameter/scale = Vector2(5, 5)
+shader_parameter/rotate_speed = 1.1
+shader_parameter/line_width = 0.1
+shader_parameter/line_size = 0.1
+shader_parameter/back_color = Color(0, 0, 0, 1)
+shader_parameter/line_color = Color(0, 1, 1, 1)

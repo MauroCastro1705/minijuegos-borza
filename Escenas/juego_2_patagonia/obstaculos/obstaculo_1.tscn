@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbihidqir1b2a"]
 
-[ext_resource type="Script" uid="uid://bxcntsbiudggo" path="res://Escenas/juegos_2_patagonia/obstaculos/obstaculo_1.gd" id="1_cr4ty"]
+[ext_resource type="Script" uid="uid://bxcntsbiudggo" path="res://Escenas/juego_2_patagonia/obstaculos/obstaculo_1.gd" id="1_cr4ty"]
 [ext_resource type="PackedScene" uid="uid://budrcuwhe5bqy" path="res://particulas/explosion_scene2.tscn" id="2_c0qfs"]
 [ext_resource type="Texture2D" uid="uid://cey11kxv1s6xx" path="res://assets/juego2/iceblock.png" id="3_smwxd"]
 

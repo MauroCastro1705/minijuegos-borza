@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://3x3ncnpunydp"]
+
+[ext_resource type="Script" uid="uid://cdbkarvxbqfcx" path="res://Componentes/barra_vida/barra_vida.gd" id="1_4mu1o"]
+[ext_resource type="Texture2D" uid="uid://dbeb6t0exb8f1" path="res://assets/unidades/barra_vida.png" id="2_wr20k"]
+[ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="3_wukmq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgsk6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duw5i"]
+bg_color = Color(0.65882355, 0.06666667, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qybwr"]
+font = ExtResource("3_wukmq")
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1, 0.5)
+
+[node name="BarraVida" type="Node2D" unique_id=571050010]
+script = ExtResource("1_4mu1o")
+
+[node name="life_bar" type="ProgressBar" parent="." unique_id=81290640]
+custom_minimum_size = Vector2(70, 8)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -4.0
+offset_right = 35.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(35, 4)
+theme_override_styles/background = SubResource("StyleBoxFlat_wgsk6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_duw5i")
+value = 20.0
+show_percentage = false
+metadata/_edit_lock_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1919456304]
+offset_left = -39.0
+offset_top = -7.0
+offset_right = 117.0
+offset_bottom = 21.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_wr20k")
+region_rect = Rect2(2, 1, 95, 20)
+patch_margin_left = 10
+patch_margin_top = 8
+patch_margin_right = 10
+patch_margin_bottom = 8
+metadata/_edit_lock_ = true
+
+[node name="value" type="Label" parent="." unique_id=1744241548]
+offset_left = -36.0
+offset_top = -15.0
+offset_right = 37.0
+offset_bottom = 2.0
+text = "20/60"
+label_settings = SubResource("LabelSettings_qybwr")
+horizontal_alignment = 1
+vertical_alignment = 1

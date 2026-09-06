@@ -197,14 +197,14 @@ alignment = 1
 
 [node name="BotonMainMenu" parent="juegos/HBoxContainer" unique_id=95418454 instance=ExtResource("4_lq512")]
 layout_mode = 2
-scene_path = "res://Escenas/juego_1_Expansion/expansion.tscn"
+scene_path = "res://Escenas/juego_1_Expansion/tutorial/tutorial.tscn"
 game_name = "Tema 1 : Expansion"
 game_img = ExtResource("9_nrt5e")
 disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer" unique_id=1411114336 instance=ExtResource("4_lq512")]
 layout_mode = 2
-scene_path = "res://Escenas/juegos_2_patagonia/tutorial/tutorial.tscn"
+scene_path = "res://Escenas/juego_2_patagonia/tutorial/tutorial.tscn"
 game_name = "Tema 2 : Patagonia"
 game_img = ExtResource("10_kehw0")
 disable_buton = false

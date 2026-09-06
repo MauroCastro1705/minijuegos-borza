@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cqdm6dfmxdbkd"]
+
+[ext_resource type="Script" uid="uid://btys4s388ie80" path="res://Escenas/juego_3_idolo/bobina/bobina.gd" id="1_g725v"]
+[ext_resource type="Texture2D" uid="uid://b7s3rf4grhbdn" path="res://assets/juego3/bobina_tela.png" id="1_t7hl1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
+size = Vector2(398, 94)
+
+[node name="Bobina" type="Node2D" unique_id=1153505668]
+script = ExtResource("1_g725v")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=834936085]
+texture_filter = 1
+offset_left = -77.0
+offset_top = -84.0
+offset_right = 80.0
+offset_bottom = 84.05176
+texture = ExtResource("1_t7hl1")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="hit_area" type="Area2D" parent="." unique_id=1616100331]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hit_area" unique_id=1529933275]
+position = Vector2(0, 37)
+shape = SubResource("RectangleShape2D_x75fr")
