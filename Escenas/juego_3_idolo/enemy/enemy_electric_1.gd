@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var rayo_1: Node2D = $Rayo1
 @onready var damage_timer: Timer = $damage_timer
 @onready var barra_vida: HealthBar2 = $BarraVida_electrica
+@onready var click_effect: CPUParticles2D = $click_effect
 
 var bobina
 var enemy_dmg:int = 5
@@ -100,9 +101,10 @@ func _handle_click_damage() -> void:
 		_show_click_effect()
 		# ceil redondea hacia arriba para daño entero
 		take_damage_no_effect(ceil(damage_to_apply))
-		
+
 
 func _show_click_effect() -> void:
+	click_effect.emitting = true
 	modulate = Color(1, 0.8, 0.8)  # Efecto de flash rojo
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.1)
