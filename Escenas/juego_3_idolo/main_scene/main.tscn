@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dj7q8mcpdt2mv" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.tscn" id="5_n41v8"]
 [ext_resource type="PackedScene" uid="uid://dshie1sgnnif1" path="res://Escenas/juego_3_idolo/buttons/money_ui.tscn" id="7_ug304"]
 [ext_resource type="PackedScene" uid="uid://cexyndwmlv262" path="res://Escenas/juego_3_idolo/buttons/buy_damage.tscn" id="8_dpyhi"]
+[ext_resource type="PackedScene" uid="uid://bqv81201ielq" path="res://Escenas/juego_3_idolo/ui/info_box.tscn" id="10_0u5up"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
 atlas = ExtResource("1_3nvmc")
@@ -276,3 +277,9 @@ offset_left = 263.0
 offset_top = 22.0
 offset_right = 414.0
 offset_bottom = 125.0
+
+[node name="InfoBox" parent="." unique_id=2132404917 instance=ExtResource("10_0u5up")]
+offset_left = 23.0
+offset_top = 604.0
+offset_right = 190.0
+offset_bottom = 670.0

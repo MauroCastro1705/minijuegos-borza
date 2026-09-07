@@ -14,6 +14,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_buy_button_pressed() -> void:
+	Global.buy_upgrade.emit()
 	Global.corriente -= inicial_value
 	Global.bobina_dmg += 5
 	inicial_value += int(inicial_value * 1.7)
