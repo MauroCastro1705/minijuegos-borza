@@ -11,9 +11,9 @@ gradient = SubResource("Gradient_7avyu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1025250421]
 material = ExtResource("1_lc8rd")
-position = Vector2(-0.9999833, -116.3178)
+position = Vector2(-0.99998707, -202.26048)
 rotation = -1.5707964
-scale = Vector2(0.9060115, 210)
+scale = Vector2(1.5774387, 210)
 texture = SubResource("GradientTexture1D_d5sbd")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=29847]

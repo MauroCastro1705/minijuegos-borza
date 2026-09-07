@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://btys4s388ie80" path="res://Escenas/juego_3_idolo/bobina/bobina.gd" id="1_g725v"]
 [ext_resource type="Texture2D" uid="uid://b7s3rf4grhbdn" path="res://assets/juego3/bobina_tela.png" id="1_t7hl1"]
 [ext_resource type="Shader" uid="uid://pvl2lc25agni" path="res://shaders/electric.gdshader" id="2_837oo"]
-[ext_resource type="Material" uid="uid://di15pjvcrgye0" path="res://shaders/electric.tres" id="3_s3bjs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox7s1"]
 size = Vector2(74, 96)
@@ -64,24 +63,11 @@ debug_color = Color(1, 0.0018888913, 0.0965096, 0.41960785)
 visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="rayos" unique_id=429461406]
+z_index = -1
 material = SubResource("ShaderMaterial_ikdcd")
-position = Vector2(1.9999999, -118.33971)
+position = Vector2(1.9999952, -227.29074)
 rotation = -1.5707964
-scale = Vector2(0.44351324, 181.21184)
-texture = SubResource("GradientTexture1D_3ywfr")
-
-[node name="Sprite2D2" type="Sprite2D" parent="rayos" unique_id=258723360]
-material = ExtResource("3_s3bjs")
-position = Vector2(-16.418663, -98.994675)
-rotation = -1.7658211
-scale = Vector2(0.37976313, 181.21184)
-texture = SubResource("GradientTexture1D_3ywfr")
-
-[node name="Sprite2D3" type="Sprite2D" parent="rayos" unique_id=397014352]
-material = ExtResource("3_s3bjs")
-position = Vector2(18.629826, -89.77102)
-rotation = -1.3382292
-scale = Vector2(0.32927376, 181.21182)
+scale = Vector2(1.2946931, 181.21184)
 texture = SubResource("GradientTexture1D_3ywfr")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=834936085]

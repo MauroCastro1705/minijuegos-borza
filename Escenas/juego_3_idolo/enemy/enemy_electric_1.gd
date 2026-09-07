@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var attack_timer: Timer = $attack_timer
 @onready var rayo_1: Node2D = $Rayo1
 @onready var damage_timer: Timer = $damage_timer
-@onready var barra_vida: HealthBar = $BarraVida_electrica
+@onready var barra_vida: HealthBar2 = $BarraVida_electrica
 
 var bobina
 var enemy_dmg:int = 5

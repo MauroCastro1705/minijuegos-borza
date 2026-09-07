@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dcb5iey60yej1"]
 
+[ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_3nvmc"]
 [ext_resource type="Shader" uid="uid://cjphkkcxlo4x8" path="res://shaders/electric_background.gdshader" id="2_032l0"]
 [ext_resource type="Material" uid="uid://b4n7vxdois4bp" path="res://shaders/electric_fence.tres" id="2_w45du"]
 [ext_resource type="PackedScene" uid="uid://cqdm6dfmxdbkd" path="res://Escenas/juego_3_idolo/bobina/bobina.tscn" id="4_n41v8"]
@@ -9,8 +10,27 @@
 [ext_resource type="PackedScene" uid="uid://dshie1sgnnif1" path="res://Escenas/juego_3_idolo/buttons/money_ui.tscn" id="7_ug304"]
 [ext_resource type="PackedScene" uid="uid://cexyndwmlv262" path="res://Escenas/juego_3_idolo/buttons/buy_damage.tscn" id="8_dpyhi"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n41v8"]
-size = Vector2(1260, 106)
+[sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
+atlas = ExtResource("1_3nvmc")
+region = Rect2(48, 16, 49, 48)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3nvmc"]
+load_path = "res://.godot/imported/robottesla.png-725956282a757c27f22a58024a7ee4aa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0u5up"]
+atlas = SubResource("CompressedTexture2D_3nvmc")
+region = Rect2(96, 63, 16, 49)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0u5up"]
+load_path = "res://.godot/imported/robottesla.png-725956282a757c27f22a58024a7ee4aa.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0eqn"]
+atlas = SubResource("CompressedTexture2D_0u5up")
+region = Rect2(1, 160, 31, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng7li"]
+atlas = SubResource("CompressedTexture2D_0u5up")
+region = Rect2(32, 158, 17, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ug304"]
 shader = ExtResource("2_032l0")
@@ -20,6 +40,13 @@ shader_parameter/line_freq = 20.0
 shader_parameter/height = 0.6
 shader_parameter/speed = 0.1
 shader_parameter/scale = Vector2(2, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nvmc"]
+atlas = SubResource("CompressedTexture2D_0u5up")
+region = Rect2(112, 48, 48, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n41v8"]
+size = Vector2(1260, 106)
 
 [node name="Main" type="Node2D" unique_id=2087527894]
 
@@ -31,6 +58,171 @@ offset_top = 578.0
 offset_right = 1005.0
 offset_bottom = 834.0
 color = Color(0.06053035, 0.06053035, 0.060530342, 1)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="terrain" unique_id=497061260]
+self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+z_index = 1
+texture_filter = 1
+offset_left = -1.0
+offset_top = 163.0
+offset_right = 436.0
+offset_bottom = 587.0
+texture = SubResource("AtlasTexture_yowuo")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="terrain" unique_id=345986930]
+self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+z_index = 1
+texture_filter = 1
+offset_left = 436.0
+offset_top = 164.0
+offset_right = 648.0
+offset_bottom = 588.0
+texture = SubResource("AtlasTexture_0u5up")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="terrain" unique_id=2052106481]
+self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+z_index = 1
+texture_filter = 1
+offset_left = 1077.0
+offset_top = 581.0
+offset_right = 1464.0
+offset_bottom = 1005.0
+rotation = -3.1415927
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_yowuo")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect4" type="TextureRect" parent="terrain" unique_id=1376167372]
+self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+z_index = 1
+texture_filter = 1
+offset_left = 834.0
+offset_top = 159.0
+offset_right = 991.4673
+offset_bottom = 257.12506
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_g0eqn")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect5" type="TextureRect" parent="terrain" unique_id=126663253]
+self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+z_index = 1
+texture_filter = 1
+offset_left = 266.0
+offset_top = 145.0
+offset_right = 375.86456
+offset_bottom = 213.46545
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_ng7li")
+metadata/_edit_lock_ = true
+
+[node name="TextureRect6" type="TextureRect" parent="terrain" unique_id=1189800162]
+self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+z_index = 1
+texture_filter = 1
+offset_left = 707.0
+offset_top = 145.0
+offset_right = 816.86456
+offset_bottom = 213.46545
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_ng7li")
+metadata/_edit_lock_ = true
+
+[node name="lines" type="ColorRect" parent="terrain" unique_id=1628004188]
+z_index = 2
+material = SubResource("ShaderMaterial_ug304")
+offset_left = -2.0
+offset_right = 1006.0
+offset_bottom = 163.0
+metadata/_edit_lock_ = true
+
+[node name="iu_arco" type="TextureRect" parent="terrain" unique_id=1691181956]
+z_index = 2
+texture_filter = 1
+offset_top = 144.0
+offset_right = 133.44228
+offset_bottom = 168.01305
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_3nvmc")
+metadata/_edit_lock_ = true
+
+[node name="iu_arco2" type="TextureRect" parent="terrain" unique_id=1973051342]
+z_index = 2
+texture_filter = 1
+offset_left = 146.99998
+offset_top = 144.0
+offset_right = 280.44226
+offset_bottom = 168.01305
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_3nvmc")
+metadata/_edit_lock_ = true
+
+[node name="iu_arco3" type="TextureRect" parent="terrain" unique_id=2089208737]
+z_index = 2
+texture_filter = 1
+offset_left = 292.99997
+offset_top = 144.0
+offset_right = 426.44226
+offset_bottom = 168.01305
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_3nvmc")
+metadata/_edit_lock_ = true
+
+[node name="iu_arco4" type="TextureRect" parent="terrain" unique_id=67939234]
+z_index = 2
+texture_filter = 1
+offset_left = 439.99994
+offset_top = 144.0
+offset_right = 573.4422
+offset_bottom = 168.01305
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_3nvmc")
+metadata/_edit_lock_ = true
+
+[node name="iu_arco5" type="TextureRect" parent="terrain" unique_id=660611488]
+z_index = 2
+texture_filter = 1
+offset_left = 588.00006
+offset_top = 144.00002
+offset_right = 721.4423
+offset_bottom = 168.01306
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_3nvmc")
+metadata/_edit_lock_ = true
+
+[node name="iu_arco6" type="TextureRect" parent="terrain" unique_id=1705070317]
+z_index = 2
+texture_filter = 1
+offset_left = 735.99994
+offset_top = 144.0
+offset_right = 869.4422
+offset_bottom = 168.01305
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_3nvmc")
+metadata/_edit_lock_ = true
+
+[node name="iu_arco7" type="TextureRect" parent="terrain" unique_id=145438293]
+z_index = 2
+texture_filter = 1
+offset_left = 882.0
+offset_top = 144.0
+offset_right = 1015.44226
+offset_bottom = 168.01305
+rotation = -6.2831855
+scale = Vector2(1.1091797, 0.9932392)
+texture = SubResource("AtlasTexture_3nvmc")
 metadata/_edit_lock_ = true
 
 [node name="piso" type="StaticBody2D" parent="terrain" unique_id=2082457461]
@@ -47,12 +239,6 @@ offset_top = 329.0
 offset_right = 971.0
 offset_bottom = 477.0
 
-[node name="lines" type="ColorRect" parent="." unique_id=1628004188]
-material = SubResource("ShaderMaterial_ug304")
-offset_left = -2.0
-offset_right = 1006.0
-offset_bottom = 163.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659541860]
 visible = false
 
@@ -66,6 +252,7 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Bobina" parent="." unique_id=1153505668 instance=ExtResource("4_n41v8")]
+z_index = 2
 position = Vector2(125, 499)
 
 [node name="enemy_spawner" type="Node2D" parent="." unique_id=1152539968 node_paths=PackedStringArray("spawn_point")]
@@ -77,13 +264,15 @@ spawn_point = NodePath("../spawn_point")
 position = Vector2(1129, 574)
 
 [node name="money_ui" parent="." unique_id=60018633 instance=ExtResource("7_ug304")]
+z_index = 3
 offset_left = 45.0
 offset_top = 50.0
 offset_right = 85.0
 offset_bottom = 90.0
 
 [node name="BuyDamage" parent="." unique_id=638008585 instance=ExtResource("8_dpyhi")]
+z_index = 3
 offset_left = 247.0
 offset_top = 12.0
-offset_right = 396.0
-offset_bottom = 146.0
+offset_right = 398.0
+offset_bottom = 115.0
