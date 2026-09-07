@@ -114,6 +114,7 @@ size = Vector2(78, 53)
 
 [node name="EnemyElectric1" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
 z_index = 4
+input_pickable = true
 script = ExtResource("1_3rsaj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=47465645]
