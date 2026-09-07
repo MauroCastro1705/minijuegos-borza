@@ -18,8 +18,6 @@ var SPEED:float = 80
 var can_attack:bool = true
 
 # Variables para el click damage
-var click_damage: float = 10.0  # Daño por click (ajustable)
-var click_cooldown: float = 0.2  # Cooldown entre clicks en segundos
 var last_click_time: float = 0.0  # Último momento en que se hizo click
 
 func _ready() -> void:
@@ -93,11 +91,11 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void
 func _handle_click_damage() -> void:
 	# Verificar cooldown
 	var current_time = Time.get_ticks_msec() / 1000.0  # Tiempo en segundos
-	if current_time - last_click_time >= click_cooldown:
+	if current_time - last_click_time >= Global.click_cooldown:
 		last_click_time = current_time
 		
 		# Aplicar daño por click
-		var damage_to_apply = click_damage
+		var damage_to_apply = Global.click_damage
 		_show_click_effect()
 		# ceil redondea hacia arriba para daño entero
 		take_damage_no_effect(ceil(damage_to_apply))
@@ -111,16 +109,16 @@ func _show_click_effect() -> void:
 
 # Funciones públicas para modificar el daño y cooldown desde otros scripts
 func set_click_damage(new_damage: float) -> void:
-	click_damage = new_damage
+	Global.click_damage = new_damage
 
 func set_click_cooldown(new_cooldown: float) -> void:
-	click_cooldown = new_cooldown
+	Global.click_cooldown = new_cooldown
 
 # Función para mejorar el daño por click (para upgrades)
 func upgrade_click_damage(percentage: float) -> void:
-	click_damage *= (1.0 + percentage / 100.0)
+	Global.click_damage *= (1.0 + percentage / 100.0)
 
 # Función para reducir el cooldown (para upgrades)
 func upgrade_click_cooldown(percentage: float) -> void:
-	click_cooldown *= (1.0 - percentage / 100.0)
-	click_cooldown = max(click_cooldown, 0.05)  # Mínimo 0.05 segundos
+	Global.click_cooldown *= (1.0 - percentage / 100.0)
+	Global.click_cooldown = max(Global.click_cooldown, 0.05)  # Mínimo 0.05 segundos
