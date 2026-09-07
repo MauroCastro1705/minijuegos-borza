@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d38ntl3bp8r8s" path="res://Escenas/juego_3_idolo/ui/info_box.gd" id="1_4macm"]
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_tm2xs"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_7h7y4"]
+[ext_resource type="Texture2D" uid="uid://dgig0khfobgrx" path="res://assets/juego3/rayo_icon.png" id="3_bvjfy"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4macm"]
 texture = ExtResource("1_tm2xs")
@@ -10,6 +12,12 @@ texture_margin_top = 5.0
 texture_margin_right = 5.0
 texture_margin_bottom = 5.0
 region_rect = Rect2(112, 64, 48, 16)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h6ruw"]
+font = ExtResource("3_7h7y4")
+font_size = 19
+outline_size = 5
+outline_color = Color(0, 0.52156866, 1, 1)
 
 [node name="InfoBox" type="Control" unique_id=2132404917]
 layout_mode = 3
@@ -37,17 +45,41 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.79
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 7.0
-offset_right = -33.042007
-offset_bottom = -12.0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = -7.230011
+offset_bottom = -3.0
 
-[node name="coil_dmg" type="Label" parent="VBoxContainer" unique_id=1563813513]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=285790535]
+layout_mode = 2
+
+[node name="coil_dmg" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1563813513]
 unique_name_in_owner = true
 layout_mode = 2
 text = "tesla coil damage"
+label_settings = SubResource("LabelSettings_h6ruw")
 
-[node name="click_dmg" type="Label" parent="VBoxContainer" unique_id=1578175088]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=174809807]
+self_modulate = Color(0, 1.4797037, 1.6064698, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("3_bvjfy")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1895599174]
+layout_mode = 2
+
+[node name="click_dmg" type="Label" parent="VBoxContainer/HBoxContainer2" unique_id=1578175088]
 unique_name_in_owner = true
 layout_mode = 2
 text = "tesla click damage"
+label_settings = SubResource("LabelSettings_h6ruw")
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer2" unique_id=1556651920]
+self_modulate = Color(0, 1.4797037, 1.6064698, 1)
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("3_bvjfy")
+expand_mode = 5
+stretch_mode = 5

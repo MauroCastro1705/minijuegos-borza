@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var bobina_health:int = 150
+var bobina_health
+var bobina_Max_health:int = 150
 var is_dead: bool = false
 @onready var damage_position: Marker2D = $damge_position
 var position_final: Vector2
@@ -9,12 +10,17 @@ var position_final: Vector2
 @onready var efecto_timer: Timer = $efecto_timer
 @onready var particulas: CPUParticles2D = $CPUParticles2D
 @export var bobina_nivel:int = 1
+@onready var barra_vida: HealthBar2 = $BarraVida_electrica
 
 
 # Lista de enemigos en rango (orden de entrada)
 var enemies_in_range: Array = []
 
 func _ready() -> void:
+	bobina_health = bobina_Max_health
+	barra_vida.health_depleted.connect(_on_health_depleted)
+	barra_vida.max_health = bobina_Max_health
+	barra_vida.current_health = bobina_health
 	position_final = damage_position.global_position
 	particulas.amount = 12 #aumentar segun bobina_nivel
 	rayos.hide()
@@ -25,11 +31,8 @@ func take_damage(damage: int) -> void:
 	print("bobina recibió daño: ", damage)
 	bobina_health -= damage
 	DamageNumbers.display_numbers_tesla(damage, position_final)
-	
-	# Si la salud llega a 0, destruir la torreta
-	if bobina_health <= 0:
-		is_dead = true
-		queue_free()
+	show_damage()
+
 
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemigo") and not body in enemies_in_range:
@@ -46,6 +49,18 @@ func _on_hit_area_body_exited(body: Node2D) -> void:
 		if enemies_in_range.is_empty():
 			attack_timer.stop()
 			rayos.hide()
+
+func show_damage():
+	modulate = Color(1, 0.8, 0.8)  # Efecto de flash rojo
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.1)
+
+
+func _on_health_depleted():
+	# Si la salud llega a 0, destruir la torreta
+	if bobina_health <= 0:
+		is_dead = true
+		queue_free()
 
 func _on_attack_timer_timeout() -> void:
 	# Limpiar enemigos muertos o inválidos

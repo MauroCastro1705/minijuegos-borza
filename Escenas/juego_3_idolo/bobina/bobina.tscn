@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://btys4s388ie80" path="res://Escenas/juego_3_idolo/bobina/bobina.gd" id="1_g725v"]
 [ext_resource type="Texture2D" uid="uid://b7s3rf4grhbdn" path="res://assets/juego3/bobina_tela.png" id="1_t7hl1"]
 [ext_resource type="Shader" uid="uid://pvl2lc25agni" path="res://shaders/electric.gdshader" id="2_837oo"]
+[ext_resource type="PackedScene" uid="uid://csy841kwakacm" path="res://Componentes/barra_vida_electrica/barra_vida_electrica.tscn" id="4_837oo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox7s1"]
 size = Vector2(74, 96)
@@ -116,6 +117,10 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_5rcss")
 color = Color(0, 0.79607844, 0.69803923, 1)
 color_ramp = SubResource("Gradient_837oo")
+
+[node name="BarraVida_electrica" parent="." unique_id=571050010 instance=ExtResource("4_837oo")]
+position = Vector2(5, 107)
+scale = Vector2(1.0368001, 0.96)
 
 [connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
