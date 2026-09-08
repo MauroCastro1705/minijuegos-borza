@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://cexyndwmlv262" path="res://Escenas/juego_3_idolo/buttons/buy_damage.tscn" id="8_dpyhi"]
 [ext_resource type="PackedScene" uid="uid://bqv81201ielq" path="res://Escenas/juego_3_idolo/ui/info_box.tscn" id="10_0u5up"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="11_g0eqn"]
+[ext_resource type="PackedScene" uid="uid://ttgq5nwo1sn5" path="res://Escenas/juego_3_idolo/buttons/buy_health.tscn" id="12_ng7li"]
+[ext_resource type="PackedScene" uid="uid://b4y7ubkm2cnyj" path="res://Escenas/juego_3_idolo/buttons/buy_click.tscn" id="13_4fpjr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
 atlas = ExtResource("1_3nvmc")
@@ -256,18 +258,6 @@ position = Vector2(589, 634)
 shape = SubResource("RectangleShape2D_n41v8")
 debug_color = Color(1, 0.019607844, 0.007843138, 0.105882354)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659541860]
-visible = false
-
-[node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=974062488]
-material = ExtResource("4_sl2pt")
-anchors_preset = -1
-anchor_right = 1.018
-anchor_bottom = 1.024
-offset_bottom = -0.2000122
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
 [node name="Bobina" parent="." unique_id=1153505668 instance=ExtResource("4_n41v8")]
 z_index = 2
 position = Vector2(125, 499)
@@ -298,17 +288,17 @@ offset_bottom = 113.0
 
 [node name="BuyDamage" parent="." unique_id=638008585 instance=ExtResource("8_dpyhi")]
 z_index = 3
-offset_left = 263.0
-offset_top = 22.0
-offset_right = 414.0
-offset_bottom = 125.0
+offset_left = 404.0
+offset_top = 18.0
+offset_right = 552.0
+offset_bottom = 121.0
 
 [node name="InfoBox" parent="." unique_id=2132404917 instance=ExtResource("10_0u5up")]
 z_index = 3
-offset_left = 27.0
-offset_top = 684.0
-offset_right = 223.0
-offset_bottom = 757.0
+offset_left = 770.0
+offset_top = 32.0
+offset_right = 966.0
+offset_bottom = 105.0
 
 [node name="Button" type="Button" parent="." unique_id=1878038334]
 z_index = 3
@@ -318,5 +308,34 @@ offset_right = 987.0
 offset_bottom = 650.0
 theme = ExtResource("11_g0eqn")
 text = "Next wave"
+
+[node name="BuyHealth" parent="." unique_id=1514600921 node_paths=PackedStringArray("bobina") instance=ExtResource("12_ng7li")]
+z_index = 3
+custom_minimum_size = Vector2(50, 50)
+offset_left = 245.0
+offset_top = 18.0
+offset_right = 394.0
+offset_bottom = 135.0
+bobina = NodePath("../Bobina")
+
+[node name="BuyClick" parent="." unique_id=78129773 instance=ExtResource("13_4fpjr")]
+z_index = 3
+custom_minimum_size = Vector2(50, 50)
+offset_left = 557.0
+offset_top = 18.0
+offset_right = 709.0
+offset_bottom = 129.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659541860]
+visible = false
+
+[node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=974062488]
+material = ExtResource("4_sl2pt")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Button" to="enemy_spawner" method="_on_button_pressed"]

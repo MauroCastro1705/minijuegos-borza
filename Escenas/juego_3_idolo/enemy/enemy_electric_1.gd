@@ -6,7 +6,8 @@ extends CharacterBody2D
 @onready var damage_timer: Timer = $damage_timer
 @onready var barra_vida: HealthBar2 = $BarraVida_electrica
 @onready var click_effect: CPUParticles2D = $click_effect
-
+@onready var number_position: Marker2D = $Marker2D
+var number_real_position
 var bobina
 var enemy_dmg:int = 5
 signal died
@@ -21,6 +22,7 @@ var can_attack:bool = true
 var last_click_time: float = 0.0  # Último momento en que se hizo click
 
 func _ready() -> void:
+	number_real_position = number_position.position
 	current_health = max_health
 	barra_vida.health_depleted.connect(_on_health_depleted)
 	barra_vida.max_health = max_health
@@ -38,7 +40,8 @@ func take_damage(damage: int) -> void:
 	current_health -= damage
 	rayo_1.show()
 	damage_timer.start()
-	DamageNumbers.display_numbers_tesla(damage, global_position)
+	number_real_position = number_position.global_position
+	DamageNumbers.display_numbers_tesla(damage, number_real_position)
 	
 	if barra_vida:
 		barra_vida.take_damage(damage)

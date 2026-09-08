@@ -184,6 +184,9 @@ scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_yowuo")
 color = Color(0, 1, 1, 1)
 
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1921398640]
+position = Vector2(-2, -72)
+
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

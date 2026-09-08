@@ -26,9 +26,9 @@ var comida:int = 0
 var score_pinguino:int = 0
 
 ##juego 3
-var corriente:int = 0
+var corriente:int = 120
 var enemy_corriente:int = 5
 var bobina_dmg:int = 5
 var bobina_speed:float = 1.0
-var click_damage: float = 10.0  # Daño por click (ajustable)
+var click_damage: float = 3  # Daño por click (ajustable)
 var click_cooldown: float = 1.0  # Cooldown entre clicks en segundos

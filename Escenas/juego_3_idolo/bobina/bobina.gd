@@ -11,6 +11,7 @@ var position_final: Vector2
 @onready var particulas: CPUParticles2D = $CPUParticles2D
 @export var bobina_nivel:int = 1
 @onready var barra_vida: HealthBar2 = $BarraVida_electrica
+@onready var heal_effect: CPUParticles2D = $heal_effect
 
 
 # Lista de enemigos en rango (orden de entrada)
@@ -36,6 +37,11 @@ func take_damage(damage: int) -> void:
 	DamageNumbers.display_numbers_tesla(damage, position_final)
 	show_damage()
 
+func repair_coil(amount:float):
+	heal_effect.emitting = true
+	bobina_health += amount
+	if barra_vida:
+		barra_vida.heal(amount)
 
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemigo") and not body in enemies_in_range:

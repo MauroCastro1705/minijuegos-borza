@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://cexyndwmlv262"]
+[gd_scene format=3 uid="uid://ttgq5nwo1sn5"]
 
-[ext_resource type="Script" uid="uid://dgea44xn8kvbx" path="res://Escenas/juego_3_idolo/buttons/buy_damage.gd" id="1_0cnn8"]
-[ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_nna48"]
-[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="2_0cnn8"]
-[ext_resource type="Texture2D" uid="uid://dgig0khfobgrx" path="res://assets/juego3/rayo_icon.png" id="3_ewdud"]
+[ext_resource type="Script" uid="uid://dsxdxpkyqjqul" path="res://Escenas/juego_3_idolo/buttons/buy_health.gd" id="1_sg206"]
+[ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="2_pmp6i"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_ftap1"]
+[ext_resource type="Texture2D" uid="uid://dgig0khfobgrx" path="res://assets/juego3/rayo_icon.png" id="4_bu1by"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5rcss"]
-texture = ExtResource("1_nna48")
+texture = ExtResource("2_pmp6i")
 texture_margin_left = 2.0
 texture_margin_top = 1.0
 texture_margin_right = 2.0
@@ -14,18 +14,18 @@ texture_margin_bottom = 2.0
 region_rect = Rect2(112, 64, 48, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_06mth"]
-font = ExtResource("2_0cnn8")
+font = ExtResource("3_ftap1")
 font_size = 35
 outline_size = 1
 outline_color = Color(0, 1, 1, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nna48"]
-font = ExtResource("2_0cnn8")
+font = ExtResource("3_ftap1")
 font_size = 33
 outline_size = 1
 outline_color = Color(0, 1, 1, 1)
 
-[node name="BuyDamage" type="Control" unique_id=638008585]
+[node name="BuyHealth" type="Control" unique_id=638008585]
 layout_mode = 3
 anchor_right = 0.15
 anchor_bottom = 0.17
@@ -33,7 +33,7 @@ offset_right = -1.0
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0cnn8")
+script = ExtResource("1_sg206")
 
 [node name="Panel" type="Panel" parent="." unique_id=1754168886]
 texture_filter = 1
@@ -47,14 +47,14 @@ offset_bottom = -69.992004
 scale = Vector2(3, 3)
 theme_override_styles/panel = SubResource("StyleBoxTexture_5rcss")
 
-[node name="name" type="Label" parent="." unique_id=38510428]
+[node name="cost2" type="Label" parent="." unique_id=38510428]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.859
 anchor_bottom = 0.316
 offset_right = 0.008995056
 offset_bottom = 0.063999176
-text = "Coil DMG"
+text = "COIL"
 label_settings = SubResource("LabelSettings_06mth")
 horizontal_alignment = 1
 
@@ -79,7 +79,7 @@ label_settings = SubResource("LabelSettings_nna48")
 self_modulate = Color(0, 1.4797037, 1.6064698, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("3_ewdud")
+texture = ExtResource("4_bu1by")
 expand_mode = 5
 stretch_mode = 5
 
@@ -92,6 +92,6 @@ offset_left = 6.0
 offset_top = 67.0
 offset_right = -8.949997
 offset_bottom = -0.43200684
-text = "UPGRADE"
+text = "REPAIR"
 
 [connection signal="pressed" from="buy_button" to="." method="_on_buy_button_pressed"]

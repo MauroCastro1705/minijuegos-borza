@@ -11,6 +11,7 @@ extends Control
 
 func _ready() -> void:
 	Global.enemy_died.connect(_animation)
+	Global.buy_upgrade.connect(_update_label)
 	_update_label()
 	
 	
