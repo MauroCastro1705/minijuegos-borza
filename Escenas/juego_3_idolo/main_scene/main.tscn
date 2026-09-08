@@ -277,7 +277,7 @@ text = "asdasd"
 label_settings = ExtResource("7_0u5up")
 
 [node name="spawn_point" type="Marker2D" parent="." unique_id=1641557494]
-position = Vector2(1129, 574)
+position = Vector2(1032, 574)
 
 [node name="money_ui" parent="." unique_id=60018633 instance=ExtResource("7_ug304")]
 z_index = 3

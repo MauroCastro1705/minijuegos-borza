@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://beq31hfv361xe" path="res://assets/juego3/explosion.png" id="3_mw848"]
 [ext_resource type="PackedScene" uid="uid://daps7g4qm000h" path="res://Escenas/juego_3_idolo/attacks/rayo_1.tscn" id="5_52tbi"]
 [ext_resource type="PackedScene" uid="uid://csy841kwakacm" path="res://Componentes/barra_vida_electrica/barra_vida_electrica.tscn" id="6_2uepw"]
+[ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="6_7ifan"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
 size = Vector2(32, 53)
@@ -112,9 +113,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
 size = Vector2(78, 53)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fpjr"]
+atlas = ExtResource("6_7ifan")
+region = Rect2(8, 6, 7, 7)
+
 [sub_resource type="Curve" id="Curve_yowuo"]
 _limits = [0.0, 4.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1.4831462), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.504717, 1.5730338), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="EnemyElectric1" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
@@ -165,7 +170,8 @@ position = Vector2(0, -39)
 [node name="click_effect" type="CPUParticles2D" parent="." unique_id=1630830558]
 position = Vector2(-14, 15)
 emitting = false
-amount = 25
+amount = 20
+texture = SubResource("AtlasTexture_4fpjr")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
@@ -179,8 +185,7 @@ angular_velocity_min = 202.92
 angular_velocity_max = 202.92
 angle_min = 50.0
 angle_max = 180.0
-scale_amount_min = 2.0
-scale_amount_max = 5.0
+scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_yowuo")
 color = Color(0, 1, 1, 1)
 
