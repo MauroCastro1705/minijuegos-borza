@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://csy841kwakacm"]
+[gd_scene format=3 uid="uid://cc020q3bhj1ia"]
 
-[ext_resource type="Script" uid="uid://d030r741fvuhv" path="res://Componentes/barra_vida_electrica/barra_vida.gd" id="1_brdao"]
-[ext_resource type="Texture2D" uid="uid://dbeb6t0exb8f1" path="res://assets/unidades/barra_vida.png" id="2_8cigs"]
-[ext_resource type="FontFile" uid="uid://dhhrl2oo2mnlu" path="res://assets/fonts/pixel_font.ttf" id="3_brdao"]
+[ext_resource type="Script" uid="uid://d030r741fvuhv" path="res://Componentes/barra_vida_electrica/barra_vida.gd" id="1_3la6e"]
+[ext_resource type="Texture2D" uid="uid://dbeb6t0exb8f1" path="res://assets/unidades/barra_vida.png" id="2_6pild"]
+[ext_resource type="FontFile" uid="uid://dhhrl2oo2mnlu" path="res://assets/fonts/pixel_font.ttf" id="3_86gib"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgsk6"]
 bg_color = Color(0, 0, 0, 1)
@@ -11,23 +11,23 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.28235295, 0.99607843, 0.99215686, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_qybwr"]
-font = ExtResource("3_brdao")
+font = ExtResource("3_86gib")
 shadow_size = 7
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(1, 0.5)
 
 [node name="BarraVida_electrica" type="Node2D" unique_id=571050010]
-script = ExtResource("1_brdao")
+script = ExtResource("1_3la6e")
 
 [node name="life_bar" type="ProgressBar" parent="." unique_id=81290640]
 custom_minimum_size = Vector2(70, 8)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -35.0
-offset_top = -4.0
-offset_right = 35.0
-offset_bottom = 4.0
+offset_left = 3.0
+offset_top = 6.0
+offset_right = 138.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(35, 4)
@@ -35,45 +35,38 @@ theme_override_styles/background = SubResource("StyleBoxFlat_wgsk6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_duw5i")
 value = 20.0
 show_percentage = false
-metadata/_edit_lock_ = true
-
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1919456304]
-visible = false
-offset_left = -39.0
-offset_top = -7.0
-offset_right = 117.0
-offset_bottom = 21.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_8cigs")
-region_rect = Rect2(2, 1, 95, 20)
-patch_margin_left = 10
-patch_margin_top = 8
-patch_margin_right = 10
-patch_margin_bottom = 8
-metadata/_edit_lock_ = true
 
 [node name="electric_bar" type="NinePatchRect" parent="." unique_id=968282051]
 self_modulate = Color(0, 0.84705883, 1, 1)
-offset_left = -39.0
-offset_top = -7.0
-offset_right = 117.0
-offset_bottom = 21.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = 285.0
+offset_bottom = 51.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_8cigs")
+texture = ExtResource("2_6pild")
 region_rect = Rect2(2, 1, 95, 20)
 patch_margin_left = 10
 patch_margin_top = 8
 patch_margin_right = 10
 patch_margin_bottom = 8
-metadata/_edit_lock_ = true
 
 [node name="value" type="Label" parent="." unique_id=1744241548]
 unique_name_in_owner = true
-offset_left = -41.0
-offset_top = -22.0
-offset_right = 45.0
-offset_bottom = 1.0
+offset_left = 142.0
+offset_top = 3.0
+offset_right = 228.0
+offset_bottom = 26.0
 text = "20/60"
+label_settings = SubResource("LabelSettings_qybwr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="texto" type="Label" parent="." unique_id=90980519]
+offset_left = 21.0
+offset_top = 27.0
+offset_right = 107.0
+offset_bottom = 50.0
+text = "Coil Health"
 label_settings = SubResource("LabelSettings_qybwr")
 horizontal_alignment = 1
 vertical_alignment = 1

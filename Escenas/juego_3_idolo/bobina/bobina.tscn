@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://btys4s388ie80" path="res://Escenas/juego_3_idolo/bobina/bobina.gd" id="1_g725v"]
 [ext_resource type="Texture2D" uid="uid://b7s3rf4grhbdn" path="res://assets/juego3/bobina_tela.png" id="1_t7hl1"]
 [ext_resource type="Shader" uid="uid://pvl2lc25agni" path="res://shaders/electric.gdshader" id="2_837oo"]
-[ext_resource type="PackedScene" uid="uid://csy841kwakacm" path="res://Componentes/barra_vida_electrica/barra_vida_electrica.tscn" id="4_837oo"]
+[ext_resource type="PackedScene" uid="uid://cc020q3bhj1ia" path="res://Componentes/barra_vida_distinta/barra_vida_electrica2.tscn" id="5_ikdcd"]
+[ext_resource type="Texture2D" uid="uid://rj50ljvgmy32" path="res://assets/kenney_particlePack/PNG/circle_01.png" id="5_s3bjs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox7s1"]
-size = Vector2(74, 96)
+size = Vector2(89, 96)
 
 [sub_resource type="Gradient" id="Gradient_vopdu"]
 offsets = PackedFloat32Array(0, 0.5205128, 1)
@@ -41,7 +42,7 @@ shader_parameter/repeats = 0.800000038
 gradient = SubResource("Gradient_7avyu")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
-size = Vector2(398, 94)
+size = Vector2(333, 94)
 
 [sub_resource type="Curve" id="Curve_5rcss"]
 _limits = [0.0, 2.0, 0.0, 1.0]
@@ -52,11 +53,73 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.65789473, 1)
 colors = PackedColorArray(0.66656864, 0.6665687, 0.66656864, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
+[sub_resource type="Animation" id="Animation_s3bjs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle01:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Circle01:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.1972656, 1.1972656)]
+}
+
+[sub_resource type="Animation" id="Animation_ikdcd"]
+resource_name = "tesla"
+length = 3.0000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle01:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 1, 1), Color(0, 0.62352943, 1, 1), Color(0, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Circle01:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.1972656, 1.1972656), Vector2(1.21, 1.21), Vector2(1.1972656, 1.1972656)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ywfr"]
+_data = {
+&"RESET": SubResource("Animation_s3bjs"),
+&"tesla": SubResource("Animation_ikdcd")
+}
+
 [node name="Bobina" type="StaticBody2D" unique_id=321406779 groups=["bobina"]]
 script = ExtResource("1_g725v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=408582496]
-position = Vector2(27, 38)
+position = Vector2(34.5, 38)
 shape = SubResource("RectangleShape2D_ox7s1")
 debug_color = Color(1, 0.0018888913, 0.0965096, 0.41960785)
 
@@ -84,7 +147,7 @@ stretch_mode = 5
 [node name="hit_area" type="Area2D" parent="." unique_id=1616100331]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hit_area" unique_id=1529933275]
-position = Vector2(155, 37)
+position = Vector2(122.5, 37)
 shape = SubResource("RectangleShape2D_x75fr")
 
 [node name="damge_position" type="Marker2D" parent="." unique_id=1331683202]
@@ -118,9 +181,19 @@ scale_amount_curve = SubResource("Curve_5rcss")
 color = Color(0, 0.79607844, 0.69803923, 1)
 color_ramp = SubResource("Gradient_837oo")
 
-[node name="BarraVida_electrica" parent="." unique_id=571050010 instance=ExtResource("4_837oo")]
-position = Vector2(5, 107)
-scale = Vector2(1.0368001, 0.96)
+[node name="Circle01" type="Sprite2D" parent="." unique_id=2070067841]
+self_modulate = Color(0, 1, 1, 1)
+position = Vector2(5, 41)
+scale = Vector2(1.1972656, 1.1972656)
+texture = ExtResource("5_s3bjs")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=797366908]
+libraries/ = SubResource("AnimationLibrary_3ywfr")
+autoplay = &"tesla"
+
+[node name="BarraVida_electrica" parent="." unique_id=571050010 instance=ExtResource("5_ikdcd")]
+z_index = 7
+position = Vector2(-58, 100)
 
 [connection signal="body_entered" from="hit_area" to="." method="_on_hit_area_body_entered"]
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]

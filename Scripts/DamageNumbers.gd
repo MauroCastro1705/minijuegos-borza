@@ -109,8 +109,8 @@ func display_numbers_random(value: float, position: Vector2):
 	
 	await tween.finished
 	number.queue_free()
-	
-	
+
+
 func display_text(text: String, position: Vector2, color: Color = Color.WHITE, font_size: int = 18):
 	var label = Label.new()
 	label.global_position = position
@@ -150,7 +150,6 @@ func display_text(text: String, position: Vector2, color: Color = Color.WHITE, f
 	label.queue_free()
 
 
-
 func flash_sprite(sprite: CanvasItem) -> void:
 	if not sprite: return
 	
@@ -159,7 +158,7 @@ func flash_sprite(sprite: CanvasItem) -> void:
 	tween.set_parallel(false)  # Que sea secuencial
 	tween.tween_property(sprite, "modulate:a", 0.0, 0.1)
 	tween.tween_property(sprite, "modulate:a", 1.0, 0.1)
-	
+
 func display_numbers_heal(value:float, position:Vector2):
 	var number = Label.new()
 	number.global_position = position
@@ -206,12 +205,12 @@ func display_numbers_tesla(value:float, position:Vector2):
 	elif value < 25:
 		label_settings.font_color = Color("white")
 	elif value < 50:
-		label_settings.font_color = Color("yellow")
+		label_settings.font_color = Color("00eeffff")
 	else:
-		label_settings.font_color = Color("red")
+		label_settings.font_color = Color("0055caff")
 
 	# Ajuste del tamaño de fuente según el daño
-	var base_size = 28
+	var base_size = 40
 	var size_multiplier = clamp(value / 50.0, 0.8, 2.0)
 	label_settings.font_size = base_size * size_multiplier
 	number.label_settings = label_settings
@@ -229,7 +228,7 @@ func display_numbers_tesla(value:float, position:Vector2):
 		number, "position:y", number.position.y, 0.5 
 	).set_ease(Tween.EASE_IN).set_delay(0.25)
 	tween.tween_property(
-		number, "scale", Vector2.ZERO, 0.25
+		number, "scale", Vector2.ZERO, 0.30
 	).set_ease(Tween.EASE_IN).set_delay(0.5)
 	
 	await tween.finished

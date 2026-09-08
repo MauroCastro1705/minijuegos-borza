@@ -3,7 +3,7 @@ class_name HealthBar2
 #barravida2
 
 @onready var progress_bar: ProgressBar = $life_bar
-@onready var value_label: Label = $value
+@onready var value_label: Label = %value
 
 ## Señal que se emite cuando la vida llega a 0
 signal health_depleted

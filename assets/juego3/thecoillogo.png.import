@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rj50ljvgmy32"
-path="res://.godot/imported/circle_01.png-c88fec589cbc929f4c4002a95345d65f.ctex"
+uid="uid://5smi1072bvuh"
+path="res://.godot/imported/thecoillogo.png-8d0a8ff5b4c76130c68e9723ae07dcd7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/kenney_particlePack/PNG/circle_01.png"
-dest_files=["res://.godot/imported/circle_01.png-c88fec589cbc929f4c4002a95345d65f.ctex"]
+source_file="res://assets/juego3/thecoillogo.png"
+dest_files=["res://.godot/imported/thecoillogo.png-8d0a8ff5b4c76130c68e9723ae07dcd7.ctex"]
 
 [params]
 
@@ -22,17 +22,17 @@ compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
-compress/channel_pack=1
+compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1
-roughness/mode=1
+roughness/mode=0
 roughness/src_normal=""
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2
-process/channel_remap/alpha=0
-process/fix_alpha_border=false
-process/premult_alpha=true
+process/channel_remap/alpha=3
+process/fix_alpha_border=true
+process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false

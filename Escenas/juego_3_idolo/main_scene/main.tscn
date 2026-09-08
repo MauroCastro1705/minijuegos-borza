@@ -6,9 +6,11 @@
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="4_sl2pt"]
 [ext_resource type="Script" uid="uid://bkb5aoreigbtj" path="res://Escenas/juego_3_idolo/main_scene/enemy_spawner.gd" id="5_032l0"]
 [ext_resource type="PackedScene" uid="uid://dj7q8mcpdt2mv" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.tscn" id="5_n41v8"]
+[ext_resource type="LabelSettings" uid="uid://dr00aduu10518" path="res://themas/damage_tesla.tres" id="7_0u5up"]
 [ext_resource type="PackedScene" uid="uid://dshie1sgnnif1" path="res://Escenas/juego_3_idolo/buttons/money_ui.tscn" id="7_ug304"]
 [ext_resource type="PackedScene" uid="uid://cexyndwmlv262" path="res://Escenas/juego_3_idolo/buttons/buy_damage.tscn" id="8_dpyhi"]
 [ext_resource type="PackedScene" uid="uid://bqv81201ielq" path="res://Escenas/juego_3_idolo/ui/info_box.tscn" id="10_0u5up"]
+[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="11_g0eqn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
 atlas = ExtResource("1_3nvmc")
@@ -53,6 +55,7 @@ size = Vector2(1260, 106)
 [node name="terrain" type="Node2D" parent="." unique_id=1153532061]
 
 [node name="ColorRect" type="ColorRect" parent="terrain" unique_id=681302358]
+z_index = 3
 offset_left = -8.0
 offset_top = 577.0
 offset_right = 1005.0
@@ -61,7 +64,7 @@ color = Color(0.06053035, 0.06053035, 0.060530342, 1)
 metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="terrain" unique_id=497061260]
-self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+self_modulate = Color(0.4429111, 0.44291064, 0.44291085, 1)
 z_index = 1
 texture_filter = 1
 offset_left = -1.0
@@ -72,7 +75,7 @@ texture = SubResource("AtlasTexture_yowuo")
 metadata/_edit_lock_ = true
 
 [node name="TextureRect3" type="TextureRect" parent="terrain" unique_id=345986930]
-self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+self_modulate = Color(0.4429111, 0.44291064, 0.44291085, 1)
 z_index = 1
 texture_filter = 1
 offset_left = 436.0
@@ -83,7 +86,7 @@ texture = SubResource("AtlasTexture_0u5up")
 metadata/_edit_lock_ = true
 
 [node name="TextureRect2" type="TextureRect" parent="terrain" unique_id=2052106481]
-self_modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+self_modulate = Color(0.4429111, 0.44291064, 0.44291085, 1)
 z_index = 1
 texture_filter = 1
 offset_left = 1077.0
@@ -274,6 +277,15 @@ script = ExtResource("5_032l0")
 enemy_scene = ExtResource("5_n41v8")
 spawn_point = NodePath("../spawn_point")
 
+[node name="wave_info" type="Label" parent="enemy_spawner" unique_id=1229674735]
+z_index = 8
+offset_left = 435.0
+offset_top = 595.0
+offset_right = 543.0
+offset_bottom = 625.0
+text = "asdasd"
+label_settings = ExtResource("7_0u5up")
+
 [node name="spawn_point" type="Marker2D" parent="." unique_id=1641557494]
 position = Vector2(1129, 574)
 
@@ -292,7 +304,19 @@ offset_right = 414.0
 offset_bottom = 125.0
 
 [node name="InfoBox" parent="." unique_id=2132404917 instance=ExtResource("10_0u5up")]
-offset_left = 205.0
-offset_top = 604.0
-offset_right = 401.0
-offset_bottom = 677.0
+z_index = 3
+offset_left = 27.0
+offset_top = 684.0
+offset_right = 223.0
+offset_bottom = 757.0
+
+[node name="Button" type="Button" parent="." unique_id=1878038334]
+z_index = 3
+offset_left = 833.0
+offset_top = 588.0
+offset_right = 987.0
+offset_bottom = 650.0
+theme = ExtResource("11_g0eqn")
+text = "Next wave"
+
+[connection signal="pressed" from="Button" to="enemy_spawner" method="_on_button_pressed"]

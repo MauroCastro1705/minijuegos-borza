@@ -17,10 +17,11 @@ var position_final: Vector2
 var enemies_in_range: Array = []
 
 func _ready() -> void:
-	bobina_health = bobina_Max_health
-	barra_vida.health_depleted.connect(_on_health_depleted)
-	barra_vida.max_health = bobina_Max_health
-	barra_vida.current_health = bobina_health
+	if barra_vida:
+		bobina_health = bobina_Max_health
+		barra_vida.health_depleted.connect(_on_health_depleted)
+		barra_vida.max_health = bobina_Max_health
+		barra_vida.current_health = bobina_health
 	position_final = damage_position.global_position
 	particulas.amount = 12 #aumentar segun bobina_nivel
 	rayos.hide()
@@ -30,6 +31,8 @@ func take_damage(damage: int) -> void:
 		return
 	print("bobina recibió daño: ", damage)
 	bobina_health -= damage
+	if barra_vida:
+		barra_vida.take_damage(damage)
 	DamageNumbers.display_numbers_tesla(damage, position_final)
 	show_damage()
 
