@@ -54,6 +54,9 @@ size = Vector2(1260, 106)
 
 [node name="Main" type="Node2D" unique_id=2087527894]
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=261326581]
+position = Vector2(545, 411)
+
 [node name="terrain" type="Node2D" parent="." unique_id=1153532061]
 
 [node name="ColorRect" type="ColorRect" parent="terrain" unique_id=681302358]
@@ -447,5 +450,7 @@ anchor_bottom = 1.024
 offset_bottom = -0.2000122
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="game_over_screen" type="Node2D" parent="." unique_id=1144414960]
 
 [connection signal="pressed" from="Button" to="enemy_spawner" method="_on_button_pressed"]

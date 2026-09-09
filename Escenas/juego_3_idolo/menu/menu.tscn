@@ -35,6 +35,74 @@ font_size = 18
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_mhgqj"]
+font = ExtResource("5_0asdo")
+font_size = 25
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_wp2hx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("logo:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("logo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mhgqj"]
+resource_name = "new_animation"
+length = 3.0000000000000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("logo:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.1, 2.9666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.017453292519943295, -0.017453292519943295, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("logo:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5666667, 2.9666667),
+"transitions": PackedFloat32Array(1, 1.3660405, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.01, 1.01), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ld0w1"]
+_data = {
+&"RESET": SubResource("Animation_wp2hx"),
+&"new_animation": SubResource("Animation_mhgqj")
+}
+
 [node name="Menu" type="Node2D" unique_id=832759672]
 script = ExtResource("1_wp2hx")
 
@@ -47,8 +115,25 @@ offset_bottom = 810.0
 color = Color(0.50928617, 0.50928617, 0.50928617, 1)
 metadata/_edit_lock_ = true
 
+[node name="logo" type="Node2D" parent="." unique_id=1193784310]
+
+[node name="Polygon2D" type="Polygon2D" parent="logo" unique_id=1303790371]
+color = Color(0.15127608, 0.15127608, 0.15127608, 1)
+polygon = PackedVector2Array(226, 46, 365, 120, 479, 52, 666, 148, 759, 93, 858, 278, 714, 315, 590, 256, 553, 307, 269, 271, 295, 158)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D2" type="Polygon2D" parent="logo" unique_id=323797547]
+position = Vector2(7, -13)
+polygon = PackedVector2Array(226, 46, 365, 120, 479, 52, 666, 148, 759, 93, 858, 278, 714, 315, 590, 256, 553, 307, 269, 271, 295, 158)
+metadata/_edit_lock_ = true
+
+[node name="Thecoillogo" type="Sprite2D" parent="logo" unique_id=132101808]
+position = Vector2(497, 170.00002)
+scale = Vector2(0.27164996, 0.27164996)
+texture = ExtResource("3_sh1cm")
+metadata/_edit_lock_ = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=403649426]
-visible = false
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=1976062102]
 material = ExtResource("3_tl0n5")
@@ -59,18 +144,14 @@ offset_bottom = -0.2000122
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Thecoillogo" type="Sprite2D" parent="." unique_id=132101808]
-position = Vector2(495.00006, 193.00002)
-scale = Vector2(0.27164996, 0.27164996)
-texture = ExtResource("3_sh1cm")
-
 [node name="historia" type="Control" parent="." unique_id=70087344]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 4.0
-offset_top = -49.0
-offset_right = 44.0
-offset_bottom = -9.0
+offset_left = -54.0
+offset_top = -158.0
+offset_right = -14.0
+offset_bottom = -118.0
+scale = Vector2(1.2, 1.2)
 
 [node name="Panel" type="Panel" parent="historia" unique_id=387810333]
 texture_filter = 1
@@ -133,12 +214,94 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="tuto" type="Control" parent="." unique_id=456607591]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 503.0
+offset_top = -158.0
+offset_right = 543.0
+offset_bottom = -118.0
+scale = Vector2(1.2, 1.2)
+
+[node name="Panel" type="Panel" parent="tuto" unique_id=1313301597]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = -0.975
+anchor_right = 2.7250001
+anchor_bottom = 1.2
+offset_left = 98.0
+offset_top = 469.8217
+offset_right = 62.66665
+offset_bottom = 452.5478
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_0asdo")
+
+[node name="Panel2" type="Panel" parent="tuto" unique_id=297627703]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 5)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = -0.975
+anchor_right = 2.7250001
+anchor_bottom = 1.2
+offset_left = 218.0
+offset_top = 469.82172
+offset_right = 114.99999
+offset_bottom = 389.59793
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_6afil")
+
+[node name="Label" type="Label" parent="tuto" unique_id=246905988]
+layout_mode = 0
+offset_left = 77.0
+offset_top = 412.8217
+offset_right = 174.0
+offset_bottom = 432.8217
+text = "TUTORIAL"
+label_settings = SubResource("LabelSettings_0asdo")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="tuto" unique_id=1743057525]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 68.0
+offset_top = 441.0
+offset_right = 386.0
+offset_bottom = 636.0
+text = "Ayuda a Tesla a combatir el ataque de robots de Edison, usa el mouse para atacar y comprar mejoras para la bobina, sobrevivi a las oleadas para ganar"
+label_settings = SubResource("LabelSettings_mhgqj")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="Button" type="Button" parent="." unique_id=613682077]
-offset_left = 453.0
-offset_top = 658.0
-offset_right = 625.0
-offset_bottom = 742.0
+offset_left = 421.0
+offset_top = 655.0
+offset_right = 595.0
+offset_bottom = 739.0
 theme = ExtResource("6_6afil")
 text = "JUGAR"
 
+[node name="return" type="Button" parent="." unique_id=1800429133]
+offset_left = 853.0
+offset_top = 723.0
+offset_right = 981.4286
+offset_bottom = 785.0
+theme = ExtResource("6_6afil")
+text = "volver"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1629029117]
+libraries/ = SubResource("AnimationLibrary_ld0w1")
+autoplay = &"new_animation"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="return" to="." method="_on_return_pressed"]
