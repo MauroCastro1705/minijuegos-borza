@@ -60,9 +60,9 @@ func _on_hit_area_body_exited(body: Node2D) -> void:
 			rayos.hide()
 
 func show_damage():
-	modulate = Color(1, 0.8, 0.8)  # Efecto de flash rojo
+	modulate = Color(0.913, 0.102, 0.0, 1.0)  # Efecto de flash rojo
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
 
 
 func _on_health_depleted():

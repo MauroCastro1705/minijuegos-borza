@@ -198,7 +198,7 @@ autoplay = &"tesla"
 
 [node name="BarraVida_electrica" parent="." unique_id=571050010 instance=ExtResource("5_ikdcd")]
 z_index = 7
-position = Vector2(-58, 100)
+position = Vector2(-58, 133)
 
 [node name="heal_effect" type="CPUParticles2D" parent="." unique_id=103140157]
 position = Vector2(1, 53)

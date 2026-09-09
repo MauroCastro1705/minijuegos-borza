@@ -42,7 +42,7 @@ func take_damage(damage: int) -> void:
 	damage_timer.start()
 	number_real_position = number_position.global_position
 	DamageNumbers.display_numbers_tesla(damage, number_real_position)
-	
+	_show_click_effect()
 	if barra_vida:
 		barra_vida.take_damage(damage)
 
@@ -52,6 +52,7 @@ func take_damage_no_effect(damage: int) -> void:
 	print("robot recibió daño de click: ", damage)
 	current_health -= damage
 	DamageNumbers.display_numbers_tesla(damage, global_position)
+	_show_click_effect()
 	if barra_vida:
 		barra_vida.take_damage(damage)
 
@@ -99,16 +100,15 @@ func _handle_click_damage() -> void:
 		
 		# Aplicar daño por click
 		var damage_to_apply = Global.click_damage
-		_show_click_effect()
 		# ceil redondea hacia arriba para daño entero
 		take_damage_no_effect(ceil(damage_to_apply))
 
 
 func _show_click_effect() -> void:
 	click_effect.emitting = true
-	modulate = Color(1, 0.8, 0.8)  # Efecto de flash rojo
+	modulate = Color(1.0, 0.0, 0.0, 1.0)  # Efecto de flash rojo
 	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.1)
+	tween.tween_property(self, "modulate", Color(1, 1, 1), 0.2)
 
 # Funciones públicas para modificar el daño y cooldown desde otros scripts
 func set_click_damage(new_damage: float) -> void:
