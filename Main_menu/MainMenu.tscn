@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
 [ext_resource type="Texture2D" uid="uid://ckyru12bu7naa" path="res://assets/portadas/planeta.png" id="9_nrt5e"]
 [ext_resource type="Texture2D" uid="uid://dlo72kqsitvog" path="res://assets/portadas/patagonia.png" id="10_kehw0"]
+[ext_resource type="Texture2D" uid="uid://wxefl0ouq20b" path="res://assets/portadas/testla.jpg" id="11_kehw0"]
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
+[ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="14_x1cxr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
 
@@ -146,7 +148,7 @@ offset_right = -774.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "v 0.0.21"
+text = "v 0.0.32"
 label_settings = SubResource("LabelSettings_ckk3t")
 
 [node name="version2" type="Label" parent="." unique_id=1413113268]
@@ -211,8 +213,10 @@ disable_buton = false
 
 [node name="BotonMainMenu3" parent="juegos/HBoxContainer" unique_id=97646030 instance=ExtResource("4_lq512")]
 layout_mode = 2
-game_name = "Tema sorpresa"
-game_img = ExtResource("5_8cngx")
+scene_path = "res://Escenas/juego_3_idolo/menu/menu.tscn"
+game_name = "Tema 3 : Idolos"
+game_img = ExtResource("11_kehw0")
+disable_buton = false
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="juegos" unique_id=1263441442]
 layout_mode = 2
@@ -257,5 +261,16 @@ game_img = ExtResource("5_8cngx")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1142846350]
 stream = ExtResource("12_nrt5e")
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=322618874]
+
+[node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=220204203]
+material = ExtResource("14_x1cxr")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

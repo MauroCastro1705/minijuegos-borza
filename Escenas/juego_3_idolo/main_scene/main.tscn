@@ -440,7 +440,6 @@ offset_right = 709.0
 offset_bottom = 129.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659541860]
-visible = false
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=974062488]
 material = ExtResource("4_sl2pt")
