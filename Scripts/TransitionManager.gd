@@ -2,6 +2,8 @@ extends Control
 
 @export var _persistent_foreground_scene : PackedScene = preload("res://Escenas/transition_scene/persistent_foreground_scene.tscn")
 
+const MAIN_MENU:String = ("res://Main_menu/MainMenu.tscn")
+
 var fondo: ColorRect
 
 var _foreground_canvas : CanvasLayer
@@ -53,6 +55,8 @@ var _transition_effect_parameter_call = func(value : float):
 	_transition_effect.material.set_shader_parameter("progress", value)
 	_transition_effect.material.set_shader_parameter("background_threshold", abs(1.0 - value*2.0) - 0.5)
 	_transition_effect.material.set_shader_parameter("color_threshold", min(1.0, abs(-4.0 + value*8.0)) * 0.48)
+
+
 
 func change_scene(scene_path : String):
 	if _is_transitioning:
@@ -131,3 +135,7 @@ func wait_for_transition():
 	"""Espera a que la transición actual termine"""
 	while _is_transitioning:
 		await get_tree().process_frame
+
+#para hacer mas rapido desde otras escenas
+func change_to_menu():
+	change_scene(MAIN_MENU)

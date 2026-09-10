@@ -6,4 +6,4 @@ func _on_button_pressed() -> void:
 
 
 func _on_return_pressed() -> void:
-	TransitionManager.change_scene("res://Main_menu/MainMenu.tscn")
+	TransitionManager.change_to_menu()

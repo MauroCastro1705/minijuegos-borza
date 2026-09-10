@@ -1,7 +1,7 @@
 extends Node2D
 
 var bobina_health
-var bobina_Max_health:int = 150
+var bobina_Max_health:int = 85
 var is_dead: bool = false
 @onready var damage_position: Marker2D = $damge_position
 var position_final: Vector2

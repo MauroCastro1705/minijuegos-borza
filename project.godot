@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 TransitionManager="*uid://v10he83yt15m"
 DamageNumbers="*uid://dk4f2vjotc76m"
 Global="*uid://bbkik1lmr30lj"
+FeedbackInputMode="*uid://bt4bdvwsya5a3"
 
 [display]
 
@@ -30,7 +31,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/BarsGalore/plugin.cfg", "res://addons/StyleboxFancy/plugin.cfg", "res://addons/interaction_feedback/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [file_customization]
 

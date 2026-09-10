@@ -6,6 +6,11 @@
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_f5phf"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_fulqr"]
 [ext_resource type="Texture2D" uid="uid://bbs3el8hyyu7y" path="res://assets/unidades/chains.png" id="3_pe5rp"]
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="6_bnlv0"]
+[ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="7_gpy56"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="8_20xll"]
+[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="9_25iah"]
+[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="10_e2lpj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0blt2"]
 font = ExtResource("3_f5phf")
@@ -73,6 +78,27 @@ layout_mode = 2
 theme = ExtResource("3_fulqr")
 text = "Jugar"
 autowrap_trim_flags = 0
+
+[node name="InteractionFeedback" type="Node" parent="MarginContainer/VBoxContainer/Button" unique_id=1389823525]
+script = ExtResource("6_bnlv0")
+
+[node name="FeedbackStickyEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=1739265493]
+script = ExtResource("7_gpy56")
+
+[node name="FeedbackScaleEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=1830331883]
+script = ExtResource("8_20xll")
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=857931630]
+script = ExtResource("9_25iah")
+degrees = 3.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=1552776119]
+script = ExtResource("10_e2lpj")
+mode = 1
+trigger = 1
 
 [node name="chains" type="TextureRect" parent="." unique_id=184149300]
 layout_mode = 0

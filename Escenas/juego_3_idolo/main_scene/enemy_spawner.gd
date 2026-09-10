@@ -2,8 +2,11 @@ extends Node2D
 
 @export var enemy_scene: PackedScene  # Arrastra la escena del enemigo aquí
 @export var spawn_interval: float = 2.0  # Tiempo entre spawns
-@export var auto_spawn: bool = true  # Si empieza a spawnear automáticamente
+@export var auto_spawn: bool = false  # Ahora por defecto NO auto-spawn, empieza con el botón
 @onready var button: Button = $"../Button"
+@onready var game_over_screen: Node2D = $"../game_over_screen"
+@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
+
 
 # Configuración de oleadas
 @export var wave1_enemies: int = 3
@@ -14,22 +17,31 @@ extends Node2D
 @onready var wave_info: Label = $wave_info
 
 var enemies_spawned: int = 0
+var active_enemies: int = 0
 var spawn_timer: Timer
 var current_wave: int = 1
 var total_waves: int = 3
 var wave_started: bool = false
 var waiting_for_wave: bool = false
+var game_started: bool = false   # Controla si ya se pulsó Begin
 
 func _ready() -> void:
+	game_over_screen.hide()
 	# Crear y configurar el timer
 	spawn_timer = Timer.new()
 	spawn_timer.wait_time = spawn_interval
 	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 	add_child(spawn_timer)
 	
+	# Estado inicial: botón habilitado con texto "Begin"
+	button.disabled = false
+	button.text = "Begin"
+	
 	update_wave_info()
 	
+	# Si quieres que opcionalmente se autoinicie (no recomendado con el flujo del botón)
 	if auto_spawn:
+		game_started = true
 		start_next_wave()
 
 func _on_spawn_timer_timeout() -> void:
@@ -37,16 +49,8 @@ func _on_spawn_timer_timeout() -> void:
 		spawn_enemy()
 		enemies_spawned += 1
 		
-		# Si ya spawnearon todos los enemigos de la oleada
 		if enemies_spawned >= get_current_wave_enemy_count():
 			spawn_timer.stop()
-			waiting_for_wave = true
-			update_wave_info()
-			
-			# Verificar si es la última oleada
-			if current_wave >= total_waves:
-				print("¡Todas las oleadas completadas!")
-				wave_info.text = "¡Todas las oleadas completadas!"
 
 func spawn_enemy() -> void:
 	if not enemy_scene or not spawn_point:
@@ -54,7 +58,38 @@ func spawn_enemy() -> void:
 	
 	var enemy = enemy_scene.instantiate()
 	enemy.global_position = spawn_point.global_position
+	if enemy.has_signal("died"):
+		enemy.died.connect(_on_enemy_died)
+	else:
+		push_warning("La escena del enemigo no tiene la señal 'died'")
+	
 	get_parent().add_child(enemy)
+	active_enemies += 1
+
+func _on_enemy_died() -> void:
+	active_enemies -= 1
+	if active_enemies < 0:
+		active_enemies = 0
+	_check_wave_cleared()
+
+func _check_wave_cleared() -> void:
+	if enemies_spawned >= get_current_wave_enemy_count() and active_enemies <= 0:
+		waiting_for_wave = true
+		update_wave_info()
+		
+		if current_wave >= total_waves:
+			# Última oleada completada
+			button.disabled = true
+			print("¡Todas las oleadas completadas!")
+			wave_info.text = "¡Todas las oleadas completadas!"
+			on_all_waves_completed()
+		else:
+			# Habilitar botón para la siguiente oleada
+			button.disabled = false
+			button.text = "Next Wave"
+			print("Oleada " + str(current_wave) + " completada. Pulsa el botón para continuar.")
+
+
 
 # Función para comenzar la próxima oleada
 func start_next_wave() -> void:
@@ -66,11 +101,12 @@ func start_next_wave() -> void:
 		wave_started = true
 		waiting_for_wave = false
 		enemies_spawned = 0
+		active_enemies = 0
+		button.disabled = true   # Deshabilitar mientras dura la oleada
 		update_wave_info()
 		spawn_timer.start()
 		print("Oleada " + str(current_wave) + " comenzada")
 
-# Función para obtener la cantidad de enemigos de la oleada actual
 func get_current_wave_enemy_count() -> int:
 	match current_wave:
 		1:
@@ -82,7 +118,6 @@ func get_current_wave_enemy_count() -> int:
 		_:
 			return 0
 
-# Función para obtener la cantidad de enemigos de la próxima oleada
 func get_next_wave_enemy_count() -> int:
 	match current_wave + 1:
 		1:
@@ -94,13 +129,11 @@ func get_next_wave_enemy_count() -> int:
 		_:
 			return 0
 
-# Función para avanzar a la siguiente oleada
 func advance_to_next_wave() -> void:
 	if current_wave < total_waves:
 		current_wave += 1
 		start_next_wave()
 
-# Actualizar información de oleadas en el label
 func update_wave_info() -> void:
 	var current_wave_enemies = get_current_wave_enemy_count()
 	var next_wave_enemies = get_next_wave_enemy_count()
@@ -113,8 +146,14 @@ func update_wave_info() -> void:
 	else:
 		info_text += "Last wave"
 	
-	if waiting_for_wave and current_wave <= total_waves:
-		info_text += "\n[Press button for next wave]"
+	if not game_started:
+		info_text += "\n[Press Begin]"
+	elif waiting_for_wave and current_wave < total_waves:
+		info_text += "\n[Press Next Wave]"
+	elif waiting_for_wave and current_wave >= total_waves:
+		info_text += "\n[All waves cleared]"
+	else:
+		info_text += "\nEnemies alive: " + str(active_enemies)
 	
 	wave_info.text = info_text
 	print(info_text)
@@ -124,6 +163,7 @@ func start_spawning() -> void:
 	if not spawn_timer.is_stopped():
 		return
 	enemies_spawned = 0
+	active_enemies = 0
 	spawn_timer.start()
 
 func stop_spawning() -> void:
@@ -132,18 +172,31 @@ func stop_spawning() -> void:
 func reset_spawner() -> void:
 	current_wave = 1
 	enemies_spawned = 0
+	active_enemies = 0
 	waiting_for_wave = false
 	wave_started = false
+	game_started = false
 	spawn_timer.stop()
+	button.disabled = false
+	button.text = "Begin"
 	update_wave_info()
-	if auto_spawn:
-		start_next_wave()
-
-
 
 func _on_button_pressed() -> void:
+	# Primer pulsación: comenzar la wave 1
+	if not game_started:
+		game_started = true
+		button.text = "Next Wave"
+		start_next_wave()
+		return
+	
+	# Pulsaciones siguientes: avanzar a la siguiente wave cuando la actual haya terminado
 	if waiting_for_wave and current_wave < total_waves:
 		advance_to_next_wave()
 	elif waiting_for_wave and current_wave >= total_waves:
 		button.disabled = true
 		print("¡Ya completaste todas las oleadas!")
+		
+
+func on_all_waves_completed() -> void:
+	game_over_screen.show()
+	animation_player.play("game_over")

@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://coget1nkxsssi"]
+
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="1_cf64p"]
+[ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="2_5pod0"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="3_lh32x"]
+[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="4_20rts"]
+[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="5_r54kb"]
+
+[sub_resource type="RectangleShape2D" id="Rect_card"]
+size = Vector2(260, 64)
+
+[sub_resource type="StyleBoxFlat" id="SB_card"]
+bg_color = Color(0.408, 0.635, 0.933, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+shadow_color = Color(0.2, 0.35, 0.55, 0.12)
+shadow_size = 10
+shadow_offset = Vector2(0, 4)
+
+[node name="AllTogether" type="Area2D" unique_id=1228681570]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1888484022]
+position = Vector2(131, 33)
+shape = SubResource("Rect_card")
+
+[node name="Panel" type="Panel" parent="." unique_id=1482652668]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 261.0
+offset_bottom = 65.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("SB_card")
+
+[node name="Label" type="Label" parent="." unique_id=1762474906]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 261.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Floating & punchy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractionFeedback" type="Node" parent="." unique_id=578993708]
+script = ExtResource("1_cf64p")
+
+[node name="FeedbackStickyEffect" type="Node" parent="InteractionFeedback" unique_id=1505795526]
+script = ExtResource("2_5pod0")
+
+[node name="FeedbackScaleEffect" type="Node" parent="InteractionFeedback" unique_id=259070798]
+script = ExtResource("3_lh32x")
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="InteractionFeedback" unique_id=307383585]
+script = ExtResource("4_20rts")
+degrees = 3.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="InteractionFeedback" unique_id=1808969570]
+script = ExtResource("5_r54kb")
+mode = 1
+trigger = 1

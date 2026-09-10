@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://dcb5iey60yej1"]
 
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_3nvmc"]
+[ext_resource type="Script" uid="uid://bqvqhmst0gy2j" path="res://Escenas/juego_3_idolo/main_scene/main.gd" id="1_uhx6r"]
 [ext_resource type="Shader" uid="uid://cjphkkcxlo4x8" path="res://shaders/electric_background.gdshader" id="2_032l0"]
 [ext_resource type="PackedScene" uid="uid://cqdm6dfmxdbkd" path="res://Escenas/juego_3_idolo/bobina/bobina.tscn" id="4_n41v8"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="4_sl2pt"]
 [ext_resource type="Script" uid="uid://bkb5aoreigbtj" path="res://Escenas/juego_3_idolo/main_scene/enemy_spawner.gd" id="5_032l0"]
 [ext_resource type="PackedScene" uid="uid://dj7q8mcpdt2mv" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.tscn" id="5_n41v8"]
-[ext_resource type="LabelSettings" uid="uid://dr00aduu10518" path="res://themas/damage_tesla.tres" id="7_0u5up"]
 [ext_resource type="PackedScene" uid="uid://dshie1sgnnif1" path="res://Escenas/juego_3_idolo/buttons/money_ui.tscn" id="7_ug304"]
 [ext_resource type="PackedScene" uid="uid://cexyndwmlv262" path="res://Escenas/juego_3_idolo/buttons/buy_damage.tscn" id="8_dpyhi"]
 [ext_resource type="PackedScene" uid="uid://bqv81201ielq" path="res://Escenas/juego_3_idolo/ui/info_box.tscn" id="10_0u5up"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="11_g0eqn"]
 [ext_resource type="PackedScene" uid="uid://ttgq5nwo1sn5" path="res://Escenas/juego_3_idolo/buttons/buy_health.tscn" id="12_ng7li"]
 [ext_resource type="PackedScene" uid="uid://b4y7ubkm2cnyj" path="res://Escenas/juego_3_idolo/buttons/buy_click.tscn" id="13_4fpjr"]
+[ext_resource type="Material" uid="uid://b4n7vxdois4bp" path="res://shaders/electric_fence.tres" id="14_lc5g7"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="15_foo7b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
 atlas = ExtResource("1_3nvmc")
@@ -52,7 +54,77 @@ region = Rect2(112, 48, 48, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n41v8"]
 size = Vector2(1260, 106)
 
+[sub_resource type="LabelSettings" id="LabelSettings_foo7b"]
+font = ExtResource("15_foo7b")
+font_size = 31
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uhx6r"]
+texture = ExtResource("1_3nvmc")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(48, 48, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wp2hx"]
+atlas = ExtResource("1_3nvmc")
+region = Rect2(112, 48, 48, 8)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6xwcb"]
+texture = SubResource("AtlasTexture_wp2hx")
+
+[sub_resource type="LabelSettings" id="LabelSettings_pr8nk"]
+font = ExtResource("15_foo7b")
+font_size = 20
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1xe1t"]
+font = ExtResource("15_foo7b")
+font_size = 34
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_uhx6r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("game_over_screen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6xwcb"]
+resource_name = "game_over"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("game_over_screen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.96666664),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pr8nk"]
+_data = {
+&"RESET": SubResource("Animation_uhx6r"),
+&"game_over": SubResource("Animation_6xwcb")
+}
+
 [node name="Main" type="Node2D" unique_id=2087527894]
+script = ExtResource("1_uhx6r")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=261326581]
 position = Vector2(545, 411)
@@ -378,6 +450,8 @@ position = Vector2(125, 499)
 [node name="enemy_spawner" type="Node2D" parent="." unique_id=1152539968 node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("5_032l0")
 enemy_scene = ExtResource("5_n41v8")
+wave2_enemies = 7
+wave3_enemies = 10
 spawn_point = NodePath("../spawn_point")
 
 [node name="wave_info" type="Label" parent="enemy_spawner" unique_id=1229674735]
@@ -387,7 +461,7 @@ offset_top = 638.0
 offset_right = 557.0
 offset_bottom = 668.0
 text = "asdasd"
-label_settings = ExtResource("7_0u5up")
+label_settings = SubResource("LabelSettings_foo7b")
 
 [node name="spawn_point" type="Marker2D" parent="." unique_id=1641557494]
 position = Vector2(1031, 559)
@@ -413,15 +487,6 @@ offset_top = 32.0
 offset_right = 966.0
 offset_bottom = 105.0
 
-[node name="Button" type="Button" parent="." unique_id=1878038334]
-z_index = 7
-offset_left = 834.0
-offset_top = 646.0
-offset_right = 988.0
-offset_bottom = 708.0
-theme = ExtResource("11_g0eqn")
-text = "Next wave"
-
 [node name="BuyHealth" parent="." unique_id=1514600921 node_paths=PackedStringArray("bobina") instance=ExtResource("12_ng7li")]
 z_index = 3
 custom_minimum_size = Vector2(50, 50)
@@ -439,6 +504,15 @@ offset_top = 18.0
 offset_right = 709.0
 offset_bottom = 129.0
 
+[node name="Button" type="Button" parent="." unique_id=1878038334]
+z_index = 7
+offset_left = 834.0
+offset_top = 646.0
+offset_right = 988.0
+offset_bottom = 708.0
+theme = ExtResource("11_g0eqn")
+text = "Next wave"
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=659541860]
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=974062488]
@@ -451,5 +525,189 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="game_over_screen" type="Node2D" parent="." unique_id=1144414960]
+visible = false
+
+[node name="fence" type="ColorRect" parent="game_over_screen" unique_id=1353418380]
+z_index = 12
+material = ExtResource("14_lc5g7")
+offset_left = -2.0
+offset_top = 3.0
+offset_right = 1017.0
+offset_bottom = 810.0
+color = Color(0.50928617, 0.50928617, 0.50928617, 1)
+metadata/_edit_lock_ = true
+
+[node name="final" type="Control" parent="game_over_screen" unique_id=667168864]
+z_index = 12
+layout_mode = 3
+anchors_preset = 0
+offset_left = 252.0
+offset_top = -240.0
+offset_right = 292.0
+offset_bottom = -200.0
+scale = Vector2(1.2, 1.2)
+
+[node name="Panel" type="Panel" parent="game_over_screen/final" unique_id=215348850]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = -0.975
+anchor_right = 2.7250001
+anchor_bottom = 1.2
+offset_left = 98.0
+offset_top = 469.8217
+offset_right = 62.66665
+offset_bottom = 452.5478
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_uhx6r")
+
+[node name="Panel2" type="Panel" parent="game_over_screen/final" unique_id=1114273898]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 5)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = -0.975
+anchor_right = 2.7250001
+anchor_bottom = 1.2
+offset_left = 319.0
+offset_top = 469.82172
+offset_right = 216.0
+offset_bottom = 389.59793
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_6xwcb")
+
+[node name="Label" type="Label" parent="game_over_screen/final" unique_id=1994859535]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 412.8217
+offset_right = 275.0
+offset_bottom = 432.8217
+text = "VICTORIA!"
+label_settings = SubResource("LabelSettings_pr8nk")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="game_over_screen/final" unique_id=1121835585]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 68.0
+offset_top = 441.0
+offset_right = 386.0
+offset_bottom = 636.0
+text = "Lograste vencer las oleadas de enemigos!
+Gracias por jugar Protect the Coil !"
+label_settings = SubResource("LabelSettings_1xe1t")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button" type="Button" parent="game_over_screen" unique_id=904080251]
+z_index = 12
+offset_left = 421.0
+offset_top = 655.0
+offset_right = 595.0
+offset_bottom = 739.0
+theme = ExtResource("11_g0eqn")
+text = "Volver al menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1454262824]
+libraries/ = SubResource("AnimationLibrary_pr8nk")
+
+[node name="tuto" type="Control" parent="." unique_id=617742634]
+z_index = 12
+layout_mode = 3
+anchors_preset = 0
+offset_left = 415.00003
+offset_top = -283.0
+offset_right = 455.00003
+offset_bottom = -243.0
+scale = Vector2(1.2, 1.2)
+
+[node name="ColorRect" type="ColorRect" parent="tuto" unique_id=1656843936]
+layout_mode = 0
+offset_left = -357.5
+offset_top = 234.16667
+offset_right = 509.1667
+offset_bottom = 918.3333
+color = Color(0.15294118, 0.15294118, 0.15294118, 0.80784315)
+
+[node name="Panel" type="Panel" parent="tuto" unique_id=1856249789]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = -0.975
+anchor_right = 2.7250001
+anchor_bottom = 1.2
+offset_left = 98.0
+offset_top = 469.8217
+offset_right = 62.66665
+offset_bottom = 452.5478
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_uhx6r")
+
+[node name="Panel2" type="Panel" parent="tuto" unique_id=663520686]
+texture_filter = 1
+custom_minimum_size = Vector2(40, 5)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = -0.975
+anchor_right = 2.7250001
+anchor_bottom = 1.2
+offset_left = 319.0
+offset_top = 469.82172
+offset_right = 216.0
+offset_bottom = 389.59793
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+scale = Vector2(3, 3)
+theme_override_styles/panel = SubResource("StyleBoxTexture_6xwcb")
+
+[node name="Label" type="Label" parent="tuto" unique_id=1158637674]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 412.8217
+offset_right = 275.0
+offset_bottom = 432.8217
+text = "Tutorial"
+label_settings = SubResource("LabelSettings_pr8nk")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="tuto" unique_id=306295100]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_left = 68.0
+offset_top = 441.0
+offset_right = 386.0
+offset_bottom = 636.0
+text = "Vencer enemigos te otorga \"Electricidad\" para comprar mejoras, usa el boton para comenzar la oleada"
+label_settings = SubResource("LabelSettings_1xe1t")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="tutorial_button" type="Button" parent="tuto" unique_id=1016586777]
+z_index = 15
+layout_mode = 0
+offset_left = 357.5
+offset_top = 612.5
+offset_right = 434.1667
+offset_bottom = 674.5
+theme = ExtResource("11_g0eqn")
+text = "OK"
 
 [connection signal="pressed" from="Button" to="enemy_spawner" method="_on_button_pressed"]
+[connection signal="pressed" from="game_over_screen/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="tuto/tutorial_button" to="." method="_on_tutorial_button_pressed"]

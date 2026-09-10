@@ -8,8 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://dqh61q05muhb1" path="res://assets/locked_level.png" id="5_8cngx"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_rmre0"]
 [ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="5_v2is1"]
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="6_rvhpw"]
+[ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="7_stx74"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="8_d8bvs"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
+[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="9_mhndg"]
 [ext_resource type="Texture2D" uid="uid://ckyru12bu7naa" path="res://assets/portadas/planeta.png" id="9_nrt5e"]
+[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="10_cpe8a"]
 [ext_resource type="Texture2D" uid="uid://dlo72kqsitvog" path="res://assets/portadas/patagonia.png" id="10_kehw0"]
 [ext_resource type="Texture2D" uid="uid://wxefl0ouq20b" path="res://assets/portadas/testla.jpg" id="11_kehw0"]
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
@@ -137,6 +142,27 @@ scale = Vector2(4.5427666, 2.2829287)
 amount = 23
 lifetime = 2.0
 
+[node name="InteractionFeedback" type="Node" parent="StartButton" unique_id=363295236]
+script = ExtResource("6_rvhpw")
+
+[node name="FeedbackStickyEffect" type="Node" parent="StartButton/InteractionFeedback" unique_id=503351007]
+script = ExtResource("7_stx74")
+
+[node name="FeedbackScaleEffect" type="Node" parent="StartButton/InteractionFeedback" unique_id=482616971]
+script = ExtResource("8_d8bvs")
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="StartButton/InteractionFeedback" unique_id=1130132365]
+script = ExtResource("9_mhndg")
+degrees = 5.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="StartButton/InteractionFeedback" unique_id=603422010]
+script = ExtResource("10_cpe8a")
+mode = 1
+trigger = 1
+
 [node name="version" type="Label" parent="." unique_id=2103998420]
 layout_mode = 1
 anchors_preset = 15
@@ -180,12 +206,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="juegos" type="VBoxContainer" parent="." unique_id=342789019]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -27.0
-offset_right = 2.0
+offset_right = -87.0
 offset_bottom = -28.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -263,6 +290,7 @@ stream = ExtResource("12_nrt5e")
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=322618874]
+visible = false
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=220204203]
 material = ExtResource("14_x1cxr")
