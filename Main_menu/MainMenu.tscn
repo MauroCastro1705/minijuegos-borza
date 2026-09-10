@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="10_cpe8a"]
 [ext_resource type="Texture2D" uid="uid://dlo72kqsitvog" path="res://assets/portadas/patagonia.png" id="10_kehw0"]
 [ext_resource type="Texture2D" uid="uid://wxefl0ouq20b" path="res://assets/portadas/testla.jpg" id="11_kehw0"]
+[ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="11_stx74"]
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="14_x1cxr"]
 
@@ -139,8 +140,8 @@ text = "Ver proyectos
 [node name="special_floor" parent="StartButton" unique_id=985889854 instance=ExtResource("8_xfihy")]
 position = Vector2(248.26892, 6.472046)
 scale = Vector2(4.5427666, 2.2829287)
-amount = 23
-lifetime = 2.0
+amount = 31
+lifetime = 2.1999999999999997
 
 [node name="InteractionFeedback" type="Node" parent="StartButton" unique_id=363295236]
 script = ExtResource("6_rvhpw")
@@ -162,6 +163,12 @@ transition = 1
 script = ExtResource("10_cpe8a")
 mode = 1
 trigger = 1
+
+[node name="FeedbackModulateOnceEffect" type="Node" parent="StartButton/InteractionFeedback" unique_id=1744748839]
+script = ExtResource("11_stx74")
+color = Color(0.05490196, 1, 1, 1)
+transition = 1
+metadata/_custom_type_script = "uid://cw31nl0ldqdv0"
 
 [node name="version" type="Label" parent="." unique_id=2103998420]
 layout_mode = 1
