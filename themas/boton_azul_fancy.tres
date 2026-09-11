@@ -1,0 +1,61 @@
+[gd_resource type="StyleBox" script_class="StyleBoxFancy" format=3 uid="uid://81dpfysude1q"]
+
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_w4q7b"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_nv16k"]
+
+[sub_resource type="Gradient" id="Gradient_20xll"]
+colors = PackedColorArray(0.13652235, 0.23444888, 0.38196114, 1, 0, 0.50003004, 0.50002974, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_25iah"]
+gradient = SubResource("Gradient_20xll")
+
+[sub_resource type="Resource" id="Resource_h02jc"]
+script = ExtResource("1_w4q7b")
+texture = SubResource("GradientTexture1D_25iah")
+width_left = 3
+width_top = 3
+width_right = 3
+width_bottom = 3
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_lhptf"]
+script = ExtResource("1_w4q7b")
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_25iah"]
+offsets = PackedFloat32Array(0.14403293, 1)
+colors = PackedColorArray(0.2352289, 0.31780517, 0.3868604, 1, 0.47058824, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e2lpj"]
+gradient = SubResource("Gradient_25iah")
+fill_from = Vector2(0.51282054, 1)
+fill_to = Vector2(0.48290598, 0.0042735045)
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("2_nv16k")
+borders = Array[ExtResource("1_w4q7b")]([SubResource("Resource_h02jc"), SubResource("Resource_lhptf")])
+texture = SubResource("GradientTexture2D_e2lpj")
+corner_detail = 5
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_curvature_top_left = 2.0
+corner_curvature_top_right = 2.0
+corner_curvature_bottom_right = 2.0
+corner_curvature_bottom_left = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.7764706)
+shadow_blur = 2
+shadow_offset = Vector2(1, 1)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"

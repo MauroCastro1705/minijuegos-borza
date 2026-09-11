@@ -3,7 +3,8 @@ extends Node2D
 @export var enemy_scene: PackedScene  # Arrastra la escena del enemigo aquí
 @export var spawn_interval: float = 2.0  # Tiempo entre spawns
 @export var auto_spawn: bool = false  # Ahora por defecto NO auto-spawn, empieza con el botón
-@onready var button: Button = $"../Button"
+@onready var wave_button: Button = $"../wave_button"
+
 @onready var game_over_screen: Node2D = $"../game_over_screen"
 @onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
 
@@ -34,8 +35,8 @@ func _ready() -> void:
 	add_child(spawn_timer)
 	
 	# Estado inicial: botón habilitado con texto "Begin"
-	button.disabled = false
-	button.text = "Begin"
+	wave_button.disabled = false
+	wave_button.text = "Begin"
 	
 	update_wave_info()
 	
@@ -79,14 +80,14 @@ func _check_wave_cleared() -> void:
 		
 		if current_wave >= total_waves:
 			# Última oleada completada
-			button.disabled = true
+			wave_button.disabled = true
 			print("¡Todas las oleadas completadas!")
 			wave_info.text = "¡Todas las oleadas completadas!"
 			on_all_waves_completed()
 		else:
 			# Habilitar botón para la siguiente oleada
-			button.disabled = false
-			button.text = "Next Wave"
+			wave_button.disabled = false
+			wave_button.text = "Next Wave"
 			print("Oleada " + str(current_wave) + " completada. Pulsa el botón para continuar.")
 
 
@@ -102,7 +103,7 @@ func start_next_wave() -> void:
 		waiting_for_wave = false
 		enemies_spawned = 0
 		active_enemies = 0
-		button.disabled = true   # Deshabilitar mientras dura la oleada
+		wave_button.disabled = true   # Deshabilitar mientras dura la oleada
 		update_wave_info()
 		spawn_timer.start()
 		print("Oleada " + str(current_wave) + " comenzada")
@@ -177,15 +178,21 @@ func reset_spawner() -> void:
 	wave_started = false
 	game_started = false
 	spawn_timer.stop()
-	button.disabled = false
-	button.text = "Begin"
+	wave_button.disabled = false
+	wave_button.text = "Begin"
 	update_wave_info()
 
-func _on_button_pressed() -> void:
-	# Primer pulsación: comenzar la wave 1
+
+func on_all_waves_completed() -> void:
+	game_over_screen.show()
+	animation_player.play("game_over")
+
+
+func _on_wave_button_pressed() -> void:
+# Primer pulsación: comenzar la wave 1
 	if not game_started:
 		game_started = true
-		button.text = "Next Wave"
+		wave_button.text = "Next Wave"
 		start_next_wave()
 		return
 	
@@ -193,10 +200,5 @@ func _on_button_pressed() -> void:
 	if waiting_for_wave and current_wave < total_waves:
 		advance_to_next_wave()
 	elif waiting_for_wave and current_wave >= total_waves:
-		button.disabled = true
+		wave_button.disabled = true
 		print("¡Ya completaste todas las oleadas!")
-		
-
-func on_all_waves_completed() -> void:
-	game_over_screen.show()
-	animation_player.play("game_over")

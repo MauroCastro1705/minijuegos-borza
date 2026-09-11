@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="2_pmp6i"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_ftap1"]
 [ext_resource type="Texture2D" uid="uid://dgig0khfobgrx" path="res://assets/juego3/rayo_icon.png" id="4_bu1by"]
+[ext_resource type="PackedScene" uid="uid://drgi355byf4bo" path="res://Componentes/skew_button/skew_button.tscn" id="5_pmp6i"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5rcss"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ftap1"]
 texture = ExtResource("2_pmp6i")
 texture_margin_left = 2.0
 texture_margin_top = 1.0
@@ -13,13 +14,13 @@ texture_margin_right = 2.0
 texture_margin_bottom = 2.0
 region_rect = Rect2(112, 64, 48, 16)
 
-[sub_resource type="LabelSettings" id="LabelSettings_06mth"]
+[sub_resource type="LabelSettings" id="LabelSettings_bu1by"]
 font = ExtResource("3_ftap1")
 font_size = 35
 outline_size = 1
 outline_color = Color(0, 1, 1, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_nna48"]
+[sub_resource type="LabelSettings" id="LabelSettings_ywy8y"]
 font = ExtResource("3_ftap1")
 font_size = 33
 outline_size = 1
@@ -27,55 +28,56 @@ outline_color = Color(0, 1, 1, 1)
 
 [node name="BuyHealth" type="Control" unique_id=638008585]
 layout_mode = 3
-anchor_right = 0.15
-anchor_bottom = 0.17
-offset_right = -1.0
-offset_bottom = -8.0
+anchor_right = 0.13000001
+anchor_bottom = 0.16000001
+offset_right = -1.0000153
+offset_bottom = 0.99998474
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sg206")
 
-[node name="Panel" type="Panel" parent="." unique_id=1754168886]
+[node name="Panel2" type="Panel" parent="." unique_id=1075476567]
 texture_filter = 1
 custom_minimum_size = Vector2(30, 35)
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.873
-anchor_bottom = 0.772
-offset_right = -87.283325
-offset_bottom = -69.992004
-scale = Vector2(3, 3)
-theme_override_styles/panel = SubResource("StyleBoxTexture_5rcss")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ftap1")
 
-[node name="cost2" type="Label" parent="." unique_id=38510428]
+[node name="name" type="Label" parent="." unique_id=1394440072]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.859
+anchor_right = 0.99300003
 anchor_bottom = 0.316
-offset_right = 0.008995056
-offset_bottom = 0.063999176
-text = "COIL"
-label_settings = SubResource("LabelSettings_06mth")
+offset_left = 1.0
+offset_right = 1.0429993
+offset_bottom = 0.06399155
+text = "Coil "
+label_settings = SubResource("LabelSettings_bu1by")
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1708326900]
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1377205158]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.89800006
+anchor_right = 1.0
 anchor_bottom = 0.51500005
-offset_top = 30.0
-offset_right = -4.700012
-offset_bottom = -0.040008545
+offset_left = 1.0
+offset_top = 36.0
+offset_right = 2.0
+offset_bottom = 12.564995
 theme_override_constants/separation = -1
 alignment = 1
 
-[node name="cost" type="Label" parent="HBoxContainer" unique_id=199755792]
+[node name="cost" type="Label" parent="HBoxContainer2" unique_id=1647750669]
 unique_name_in_owner = true
 layout_mode = 2
 text = "20"
-label_settings = SubResource("LabelSettings_nna48")
+label_settings = SubResource("LabelSettings_ywy8y")
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=2110485134]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer2" unique_id=118989519]
 self_modulate = Color(0, 1.4797037, 1.6064698, 1)
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
@@ -83,15 +85,17 @@ texture = ExtResource("4_bu1by")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="buy_button" type="Button" parent="." unique_id=1333486923]
+[node name="buy_button2" parent="." unique_id=545554746 instance=ExtResource("5_pmp6i")]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.873
-anchor_bottom = 0.76900005
-offset_left = 6.0
-offset_top = 67.0
-offset_right = -8.949997
-offset_bottom = -0.43200684
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.872986
+offset_top = 77.0
+offset_right = -7.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "REPAIR"
 
-[connection signal="pressed" from="buy_button" to="." method="_on_buy_button_pressed"]
+[connection signal="pressed" from="buy_button2" to="." method="_on_buy_button_2_pressed"]

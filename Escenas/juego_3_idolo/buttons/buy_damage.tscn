@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="1_nna48"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="2_0cnn8"]
 [ext_resource type="Texture2D" uid="uid://dgig0khfobgrx" path="res://assets/juego3/rayo_icon.png" id="3_ewdud"]
+[ext_resource type="PackedScene" uid="uid://drgi355byf4bo" path="res://Componentes/skew_button/skew_button.tscn" id="5_ewdud"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5rcss"]
 texture = ExtResource("1_nna48")
@@ -27,10 +28,10 @@ outline_color = Color(0, 1, 1, 1)
 
 [node name="BuyDamage" type="Control" unique_id=638008585]
 layout_mode = 3
-anchor_right = 0.15
-anchor_bottom = 0.17
-offset_right = -1.0
-offset_bottom = -8.0
+anchor_right = 0.12900001
+anchor_bottom = 0.16000001
+offset_right = -1.5258789e-05
+offset_bottom = 0.99998474
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0cnn8")
@@ -39,20 +40,19 @@ script = ExtResource("1_0cnn8")
 texture_filter = 1
 custom_minimum_size = Vector2(30, 35)
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.873
-anchor_bottom = 0.772
-offset_right = -87.283325
-offset_bottom = -69.992004
-scale = Vector2(3, 3)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5rcss")
 
 [node name="name" type="Label" parent="." unique_id=38510428]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.859
+anchor_right = 0.99300003
 anchor_bottom = 0.316
-offset_right = 0.008995056
+offset_right = 0.042999268
 offset_bottom = 0.063999176
 text = "Coil DMG"
 label_settings = SubResource("LabelSettings_06mth")
@@ -61,11 +61,11 @@ horizontal_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1708326900]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.89800006
+anchor_right = 1.0
 anchor_bottom = 0.51500005
-offset_top = 30.0
-offset_right = -4.700012
-offset_bottom = -0.040008545
+offset_top = 39.0
+offset_right = 1.0
+offset_bottom = 8.959991
 theme_override_constants/separation = -1
 alignment = 1
 
@@ -83,15 +83,16 @@ texture = ExtResource("3_ewdud")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="buy_button" type="Button" parent="." unique_id=1333486923]
+[node name="buy_button" parent="." unique_id=545554746 instance=ExtResource("5_ewdud")]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.873
-anchor_bottom = 0.76900005
-offset_left = 6.0
-offset_top = 67.0
-offset_right = -8.949997
-offset_bottom = -0.43200684
-text = "UPGRADE"
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.872986
+offset_top = 79.0
+offset_right = -8.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="buy_button" to="." method="_on_buy_button_pressed"]

@@ -1,8 +1,10 @@
 extends Control
-@onready var theme_name: Label = $MarginContainer/VBoxContainer/name
-@onready var texture_rect: TextureRect = $MarginContainer/VBoxContainer/TextureRect
-@onready var button: Button = $MarginContainer/VBoxContainer/Button
+
+@onready var game_texture: TextureRect = %TextureRect
+
 @onready var chains: TextureRect = $chains
+@onready var theme_name: Label = %name
+@onready var button: Button = %Button
 
 @export var scene_path:String = "" ##sin comillas el path
 @export var game_name:String = ""
@@ -11,7 +13,7 @@ extends Control
 
 func _ready() -> void:
 	theme_name.text = game_name
-	texture_rect.texture = game_img
+	game_texture.texture = game_img
 	if disable_buton:
 		button.disabled = true
 		chains.show()

@@ -7,6 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="4_sh1cm"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_0asdo"]
 [ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="6_6afil"]
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="8_lvm44"]
+[ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="9_gpvhy"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="10_ksjri"]
+[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="11_2ym7u"]
+[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="12_5ualk"]
+[ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="13_4p6uq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0asdo"]
 texture = ExtResource("4_sh1cm")
@@ -291,6 +297,33 @@ offset_bottom = 739.0
 theme = ExtResource("6_6afil")
 text = "JUGAR"
 
+[node name="InteractionFeedback" type="Node" parent="Button" unique_id=370118518]
+script = ExtResource("8_lvm44")
+
+[node name="FeedbackStickyEffect" type="Node" parent="Button/InteractionFeedback" unique_id=614389940]
+script = ExtResource("9_gpvhy")
+
+[node name="FeedbackScaleEffect" type="Node" parent="Button/InteractionFeedback" unique_id=2100110179]
+script = ExtResource("10_ksjri")
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="Button/InteractionFeedback" unique_id=1722369669]
+script = ExtResource("11_2ym7u")
+degrees = 5.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="Button/InteractionFeedback" unique_id=1818723403]
+script = ExtResource("12_5ualk")
+mode = 1
+trigger = 1
+
+[node name="FeedbackModulateOnceEffect" type="Node" parent="Button/InteractionFeedback" unique_id=1769472327]
+script = ExtResource("13_4p6uq")
+color = Color(0.05490196, 1, 1, 1)
+transition = 1
+metadata/_custom_type_script = "uid://cw31nl0ldqdv0"
+
 [node name="return" type="Button" parent="." unique_id=1800429133]
 offset_left = 853.0
 offset_top = 723.0
@@ -298,6 +331,33 @@ offset_right = 981.4286
 offset_bottom = 785.0
 theme = ExtResource("6_6afil")
 text = "volver"
+
+[node name="InteractionFeedback" type="Node" parent="return" unique_id=1332417190]
+script = ExtResource("8_lvm44")
+
+[node name="FeedbackStickyEffect" type="Node" parent="return/InteractionFeedback" unique_id=312577309]
+script = ExtResource("9_gpvhy")
+
+[node name="FeedbackScaleEffect" type="Node" parent="return/InteractionFeedback" unique_id=669897392]
+script = ExtResource("10_ksjri")
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="return/InteractionFeedback" unique_id=649569735]
+script = ExtResource("11_2ym7u")
+degrees = 5.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="return/InteractionFeedback" unique_id=1169581161]
+script = ExtResource("12_5ualk")
+mode = 1
+trigger = 1
+
+[node name="FeedbackModulateOnceEffect" type="Node" parent="return/InteractionFeedback" unique_id=963632218]
+script = ExtResource("13_4p6uq")
+color = Color(0.05490196, 1, 1, 1)
+transition = 1
+metadata/_custom_type_script = "uid://cw31nl0ldqdv0"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1629029117]
 libraries/ = SubResource("AnimationLibrary_ld0w1")

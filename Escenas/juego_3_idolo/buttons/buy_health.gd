@@ -2,11 +2,11 @@ extends Control
 #buy health
 #repair_coil
 
-@onready var cost: Label = %cost
-@onready var buy_button: Button = $buy_button
+@onready var buy_button: Button = $buy_button2
 var inicial_value:int = 10 #costo del upgrade
 @export var bobina:StaticBody2D
 @export var heal_value:float = 25
+@onready var cost: Label = %cost
 
 func _ready() -> void:
 	cost.text = str(inicial_value)
@@ -18,7 +18,7 @@ func _process(_delta: float) -> void:
 		buy_button.disabled = false
 
 
-func _on_buy_button_pressed() -> void:
+func _on_buy_button_2_pressed() -> void:
 	Global.corriente -= inicial_value
 	bobina.repair_coil(heal_value)
 	#Global.bobina_dmg += 5

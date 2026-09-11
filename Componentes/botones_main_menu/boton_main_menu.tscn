@@ -2,15 +2,58 @@
 
 [ext_resource type="Script" uid="uid://r7b5ql5a7778" path="res://Componentes/botones_main_menu/boton_main_menu.gd" id="1_5qjbw"]
 [ext_resource type="Texture2D" uid="uid://2ldo3poqrrbx" path="res://assets/unidades/coin.png" id="2_4cg82"]
-[ext_resource type="Texture2D" uid="uid://c3yyo4qdy64bg" path="res://assets/panel_grey_bolts_detail_a.png" id="3_0blt2"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_f5phf"]
-[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_fulqr"]
 [ext_resource type="Texture2D" uid="uid://bbs3el8hyyu7y" path="res://assets/unidades/chains.png" id="3_pe5rp"]
-[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="6_bnlv0"]
-[ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="7_gpy56"]
-[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="8_20xll"]
-[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="9_25iah"]
-[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="10_e2lpj"]
+[ext_resource type="PackedScene" uid="uid://cc80d7jrn58h4" path="res://Componentes/boton_generico_lindo/button_nice.tscn" id="6_7qkj7"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="12_20xll"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="13_25iah"]
+
+[sub_resource type="Gradient" id="Gradient_20xll"]
+colors = PackedColorArray(0.13652235, 0.23444888, 0.38196114, 1, 0, 0.50003004, 0.50002974, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_25iah"]
+gradient = SubResource("Gradient_20xll")
+
+[sub_resource type="Resource" id="Resource_h02jc"]
+script = ExtResource("12_20xll")
+texture = SubResource("GradientTexture1D_25iah")
+width_left = 3
+width_top = 3
+width_right = 3
+width_bottom = 3
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_25iah"]
+offsets = PackedFloat32Array(0.14403293, 1)
+colors = PackedColorArray(0.2352289, 0.31780517, 0.3868604, 1, 0.47058824, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e2lpj"]
+gradient = SubResource("Gradient_25iah")
+fill_from = Vector2(0.51282054, 1)
+fill_to = Vector2(0.48290598, 0.0042735045)
+
+[sub_resource type="StyleBox" id="StyleBox_7c4s7"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("13_25iah")
+borders = Array[ExtResource("12_20xll")]([SubResource("Resource_h02jc")])
+texture = SubResource("GradientTexture2D_e2lpj")
+corner_detail = 14
+corner_radius_top_left = 50
+corner_radius_bottom_right = 50
+corner_curvature_top_left = 3.25
+corner_curvature_top_right = 3.25
+corner_curvature_bottom_right = 3.25
+corner_curvature_bottom_left = 3.25
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.7764706)
+shadow_blur = 2
+shadow_offset = Vector2(5, 5)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="LabelSettings" id="LabelSettings_0blt2"]
 font = ExtResource("3_f5phf")
@@ -25,89 +68,82 @@ shadow_color = Color(0.93333334, 0.4745098, 0, 1)
 [node name="BotonMainMenu" type="Control" unique_id=95418454]
 custom_minimum_size = Vector2(130, 200)
 layout_mode = 3
-anchor_right = 0.14500001
-anchor_bottom = 0.268
-offset_right = -145.00002
-offset_bottom = -214.40001
+anchor_right = 0.18900001
+anchor_bottom = 0.30100003
+offset_right = -1.5258789e-05
+offset_bottom = 0.19998169
 script = ExtResource("1_5qjbw")
 game_name = "caca"
 game_img = ExtResource("2_4cg82")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1429283278]
-layout_mode = 0
-offset_right = 180.0
-offset_bottom = 230.0
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
+[node name="Panel" type="Panel" parent="." unique_id=1834145559]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_7c4s7")
 
-[node name="panel" type="NinePatchRect" parent="MarginContainer" unique_id=1691857488]
-custom_minimum_size = Vector2(200, 150)
-layout_mode = 2
-offset_transform_scale = Vector2(1, 1.1)
-texture = ExtResource("3_0blt2")
-region_rect = Rect2(0, -3, 128, 131)
-patch_margin_left = 40
-patch_margin_top = 40
-patch_margin_right = 40
-patch_margin_bottom = 40
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1429283278]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.1
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = -0.1000061
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1363106324]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1363106324]
 layout_mode = 2
+theme_override_constants/separation = 2
 
-[node name="name" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1669710284]
-custom_minimum_size = Vector2(80, 30)
+[node name="name" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1669710284]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
-text = "Temaqwadasdasdasdsadadasdadas"
+text = "tema1"
 label_settings = SubResource("LabelSettings_0blt2")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=2128749130]
-custom_minimum_size = Vector2(180, 120)
+[node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer" unique_id=2128749130]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 texture = SubResource("PlaceholderTexture2D_4cg82")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2029637644]
-custom_minimum_size = Vector2(80, 40)
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1367009495]
 layout_mode = 2
-theme = ExtResource("3_fulqr")
-text = "Jugar"
-autowrap_trim_flags = 0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="InteractionFeedback" type="Node" parent="MarginContainer/VBoxContainer/Button" unique_id=1389823525]
-script = ExtResource("6_bnlv0")
-
-[node name="FeedbackStickyEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=1739265493]
-script = ExtResource("7_gpy56")
-
-[node name="FeedbackScaleEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=1830331883]
-script = ExtResource("8_20xll")
-transition = 10
-
-[node name="FeedbackRotationOnceEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=857931630]
-script = ExtResource("9_25iah")
-degrees = 3.0
-on_press = true
-transition = 1
-
-[node name="FeedbackRotationOscillatedEffect" type="Node" parent="MarginContainer/VBoxContainer/Button/InteractionFeedback" unique_id=1552776119]
-script = ExtResource("10_e2lpj")
-mode = 1
-trigger = 1
+[node name="Button" parent="Panel/MarginContainer/VBoxContainer/MarginContainer" unique_id=1473501286 instance=ExtResource("6_7qkj7")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="chains" type="TextureRect" parent="." unique_id=184149300]
-layout_mode = 0
-offset_left = 11.212515
-offset_top = 72.096535
-offset_right = 191.08626
-offset_bottom = 161.12137
-rotation = 0.31337047
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = 64.0
+offset_right = 10.0
+offset_bottom = -0.4131317
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_pe5rp")
 expand_mode = 5
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/MarginContainer/Button" to="." method="_on_button_pressed"]

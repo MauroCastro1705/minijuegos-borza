@@ -1,10 +1,9 @@
 extends Control
 #buy click
 
-
 @onready var cost: Label = %cost
-@onready var buy_button: Button = $buy_button
 var inicial_value:int = 15 #costo del upgrade
+@onready var buy_button: Button = $buy_button2
 
 
 
@@ -18,7 +17,8 @@ func _process(_delta: float) -> void:
 		buy_button.disabled = false
 
 
-func _on_buy_button_pressed() -> void:
+
+func _on_buy_button_2_pressed() -> void:
 	Global.corriente -= inicial_value
 	Global.click_damage += 2
 	inicial_value = int(inicial_value * 1.3)

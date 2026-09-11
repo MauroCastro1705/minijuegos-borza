@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://drgi355byf4bo"]
+
+[ext_resource type="FontFile" uid="uid://dhhrl2oo2mnlu" path="res://assets/fonts/pixel_font.ttf" id="1_73416"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="2_1il4j"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="3_mfwt8"]
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="4_rrsic"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="5_ve7cr"]
+[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="6_x12sq"]
+[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="7_ks3d4"]
+
+[sub_resource type="Gradient" id="Gradient_785yw"]
+offsets = PackedFloat32Array(0, 0.9874477)
+colors = PackedColorArray(4.5724212e-07, 0.39554712, 0.40596524, 1, 0, 0.16384381, 0.36864603, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ligct"]
+gradient = SubResource("Gradient_785yw")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_b5ikn"]
+script = ExtResource("2_1il4j")
+texture = SubResource("GradientTexture2D_ligct")
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_6sr1v"]
+script = ExtResource("2_1il4j")
+color = Color(0, 1, 1, 1)
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_jmyng"]
+colors = PackedColorArray(0, 0.5411765, 1, 1, 0, 0.019607844, 0.48235294, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pr8nk"]
+gradient = SubResource("Gradient_jmyng")
+fill_from = Vector2(0.23504274, 0.17521368)
+fill_to = Vector2(0.99572647, 1)
+
+[sub_resource type="StyleBox" id="StyleBox_6xwcb"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_mfwt8")
+skew = Vector2(0.2, 0)
+borders = Array[ExtResource("2_1il4j")]([SubResource("Resource_b5ikn"), SubResource("Resource_6sr1v")])
+texture = SubResource("GradientTexture2D_pr8nk")
+shadow_offset = Vector2(3, 3)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Gradient" id="Gradient_06mth"]
+offsets = PackedFloat32Array(0, 0.9874477)
+colors = PackedColorArray(4.5724212e-07, 0.39554712, 0.40596524, 1, 0, 0.16384381, 0.36864603, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jmyng"]
+gradient = SubResource("Gradient_06mth")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Resource" id="Resource_ligct"]
+script = ExtResource("2_1il4j")
+texture = SubResource("GradientTexture2D_jmyng")
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_kep60"]
+script = ExtResource("2_1il4j")
+color = Color(0, 1, 1, 1)
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_rg6p7"]
+colors = PackedColorArray(0, 0.5411765, 1, 1, 0, 0.019607844, 0.48235294, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ldmt5"]
+gradient = SubResource("Gradient_rg6p7")
+fill_from = Vector2(0.23504274, 0.17521368)
+fill_to = Vector2(0.99572647, 1)
+
+[sub_resource type="StyleBox" id="StyleBox_1dkdf"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_mfwt8")
+color = Color(0.5529556, 0.55295557, 0.55295557, 1)
+skew = Vector2(0.2, 0)
+borders = Array[ExtResource("2_1il4j")]([SubResource("Resource_ligct"), SubResource("Resource_kep60")])
+texture = SubResource("GradientTexture2D_ldmt5")
+shadow_offset = Vector2(3, 3)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="StyleBox" id="StyleBox_785yw"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_mfwt8")
+skew = Vector2(0.2, 0)
+borders = Array[ExtResource("2_1il4j")]([SubResource("Resource_b5ikn"), SubResource("Resource_6sr1v")])
+texture = SubResource("GradientTexture2D_pr8nk")
+shadow_enabled = true
+shadow_offset = Vector2(1.5, 1.5)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[node name="buy_button" type="Button" unique_id=545554746]
+anchors_preset = -1
+anchor_right = 0.873
+anchor_bottom = 0.76900005
+offset_left = 10.127014
+offset_top = 67.0
+offset_right = -13.077011
+offset_bottom = -0.43200684
+theme_override_fonts/font = ExtResource("1_73416")
+theme_override_styles/normal = SubResource("StyleBox_6xwcb")
+theme_override_styles/pressed = SubResource("StyleBox_1dkdf")
+theme_override_styles/hover = SubResource("StyleBox_785yw")
+text = "UPGRADE"
+
+[node name="InteractionFeedback" type="Node" parent="." unique_id=1699260538]
+script = ExtResource("4_rrsic")
+
+[node name="FeedbackScaleEffect" type="Node" parent="InteractionFeedback" unique_id=873661863]
+script = ExtResource("5_ve7cr")
+hovered_scale = 1.04
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="InteractionFeedback" unique_id=2062211878]
+script = ExtResource("6_x12sq")
+degrees = 3.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="InteractionFeedback" unique_id=280947692]
+script = ExtResource("7_ks3d4")
+mode = 1
+trigger = 1
