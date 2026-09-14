@@ -1,13 +1,12 @@
 extends Node2D
 
-@export var enemy_scene: PackedScene  # Arrastra la escena del enemigo aquí
+@export var enemy_scene: PackedScene  
 @export var spawn_interval: float = 2.0  # Tiempo entre spawns
-@export var auto_spawn: bool = false  # Ahora por defecto NO auto-spawn, empieza con el botón
+@export var auto_spawn: bool = false 
 
 @onready var battle_button: Button = $"../battle_button"
 
-@onready var game_over_screen: Node2D = $"../game_over_screen"
-@onready var animation_player: AnimationPlayer = $"../AnimationPlayer"
+
 
 
 # Configuración de oleadas
@@ -15,14 +14,12 @@ extends Node2D
 @export var wave2_enemies: int = 5
 @export var wave3_enemies: int = 8
 
-# --- NUEVO: múltiples puntos de spawn ---
+
 @export var spawn_points: Array[Marker2D] = []
 # "random" elige un punto aleatorio cada vez
 # "round_robin" recorre los puntos en orden
 enum SpawnMode { RANDOM, ROUND_ROBIN }
 @export var spawn_mode: SpawnMode = SpawnMode.RANDOM
-
-@onready var wave_info: Label = $wave_info
 
 var enemies_spawned: int = 0
 var active_enemies: int = 0
@@ -38,7 +35,6 @@ var _spawn_index: int = 0
 
 
 func _ready() -> void:
-	game_over_screen.hide()
 	# Crear y configurar el timer
 	spawn_timer = Timer.new()
 	spawn_timer.wait_time = spawn_interval
@@ -122,7 +118,6 @@ func _check_wave_cleared() -> void:
 		if current_wave >= total_waves:
 			battle_button.disabled = true
 			print("¡Todas las oleadas completadas!")
-			wave_info.text = "¡Todas las oleadas completadas!"
 			on_all_waves_completed()
 		else:
 			battle_button.disabled = false
@@ -199,7 +194,6 @@ func update_wave_info() -> void:
 	else:
 		info_text += "\nEnemies alive: " + str(active_enemies)
 	
-	wave_info.text = info_text
 	print(info_text)
 
 
@@ -230,17 +224,8 @@ func reset_spawner() -> void:
 
 
 func on_all_waves_completed() -> void:
-	game_over_screen.show()
-	animation_player.play("game_over")
+	pass
 
-
-func _on_wave_button_pressed() -> void:
-	# Primer pulsación: comenzar la wave 1
-	if not game_started:
-		game_started = true
-		battle_button.text = "Next Wave"
-		start_next_wave()
-		return
 	
 	# Pulsaciones siguientes: avanzar a la siguiente wave cuando la actual haya terminado
 	if waiting_for_wave and current_wave < total_waves:
@@ -248,3 +233,12 @@ func _on_wave_button_pressed() -> void:
 	elif waiting_for_wave and current_wave >= total_waves:
 		battle_button.disabled = true
 		print("¡Ya completaste todas las oleadas!")
+
+
+func _on_battle_button_pressed() -> void:
+	# Primer pulsación: comenzar la wave 1
+	if not game_started:
+		game_started = true
+		battle_button.text = "Next Wave"
+		start_next_wave()
+		return

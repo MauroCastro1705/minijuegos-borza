@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://b6d3ogi1qh3y4" path="res://Escenas/juego_4_mutante/mutant_inventory/inventory.tscn" id="1_yu33v"]
 [ext_resource type="Script" uid="uid://2vyrhmq2gu6f" path="res://Escenas/juego_4_mutante/enemy_spawner_mutante.gd" id="2_kjeb4"]
 [ext_resource type="PackedScene" uid="uid://d0dqmng8ibmgr" path="res://Componentes/item/item_tooltip.tscn" id="2_px0uf"]
+[ext_resource type="PackedScene" uid="uid://deegte0xglo30" path="res://Escenas/juego_4_mutante/enemy/enemy_mutant.tscn" id="3_kjeb4"]
 [ext_resource type="PackedScene" uid="uid://bgi7tcyi6ddu3" path="res://Componentes/count_down_timer/countdown_timer.tscn" id="3_uxdvc"]
 [ext_resource type="PackedScene" uid="uid://dk4ronipsfh" path="res://Escenas/juego_4_mutante/mutante/mutante.tscn" id="4_4gp5x"]
-[ext_resource type="PackedScene" uid="uid://dj7q8mcpdt2mv" path="res://Escenas/juego_3_idolo/enemy/enemy_electric_1.tscn" id="6_5ifaq"]
 
 [node name="Main4" type="Node2D" unique_id=2094789572]
 script = ExtResource("1_m3y83")
@@ -29,9 +29,10 @@ mouse_filter = 2
 color = Color(0.48570347, 0.48570353, 0.4857034, 1)
 metadata/_edit_lock_ = true
 
-[node name="enemy_spawner" type="Node2D" parent="." unique_id=155420095]
+[node name="enemy_spawner" type="Node2D" parent="." unique_id=155420095 node_paths=PackedStringArray("spawn_points")]
 script = ExtResource("2_kjeb4")
-enemy_scene = ExtResource("6_5ifaq")
+enemy_scene = ExtResource("3_kjeb4")
+spawn_points = [NodePath("../Marker2D"), NodePath("../Marker2D2"), NodePath("../Marker2D3")]
 
 [node name="Inventory" parent="." unique_id=1484637582 instance=ExtResource("1_yu33v")]
 position = Vector2(18, 440)
@@ -52,3 +53,14 @@ offset_top = 504.0
 offset_right = 843.0
 offset_bottom = 554.0
 text = "empezar"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=515821696]
+position = Vector2(43, 275)
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=893247038]
+position = Vector2(403, 62)
+
+[node name="Marker2D3" type="Marker2D" parent="." unique_id=1909045701]
+position = Vector2(834, 273)
+
+[connection signal="pressed" from="battle_button" to="enemy_spawner" method="_on_battle_button_pressed"]
