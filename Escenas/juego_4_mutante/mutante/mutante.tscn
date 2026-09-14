@@ -30,8 +30,8 @@ corner_radius_bottom_left = 15
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yowuo"]
-radius = 13.0
-height = 40.0
+radius = 23.0
+height = 78.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
 size = Vector2(222, 20)
@@ -40,14 +40,15 @@ size = Vector2(222, 20)
 script = ExtResource("1_efigm")
 
 [node name="Panel" type="Panel" parent="." unique_id=280769983]
-offset_left = -13.0
-offset_top = -20.0
-offset_right = 13.0
-offset_bottom = 20.0
+offset_left = -23.0
+offset_top = -27.0
+offset_right = 24.0
+offset_bottom = 45.307693
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_yowuo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2061624710]
+position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_yowuo")
 
 [node name="detection_area" type="Area2D" parent="." unique_id=1118261544]

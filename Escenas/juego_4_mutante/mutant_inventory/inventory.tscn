@@ -5,7 +5,7 @@
 [node name="Inventory" type="Node2D" unique_id=1484637582]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1798281746]
-offset_right = 319.0
+offset_right = 305.0
 offset_bottom = 216.0
 color = Color(0.22310299, 0.22310287, 0.22310293, 1)
 
@@ -13,43 +13,43 @@ color = Color(0.22310299, 0.22310287, 0.22310293, 1)
 position = Vector2(64, 53)
 
 [node name="DropSocket2" parent="." unique_id=961202526 instance=ExtResource("1_aujlm")]
-position = Vector2(63, 145)
+position = Vector2(64, 142)
 
 [node name="DropSocket3" parent="." unique_id=1515949630 instance=ExtResource("1_aujlm")]
-position = Vector2(169, 53)
+position = Vector2(155, 54)
 
 [node name="DropSocket4" parent="." unique_id=830297442 instance=ExtResource("1_aujlm")]
-position = Vector2(168, 145)
+position = Vector2(154, 141)
 
 [node name="DropSocket5" parent="." unique_id=1432554531 instance=ExtResource("1_aujlm")]
-position = Vector2(260, 53)
+position = Vector2(246, 56)
 
 [node name="DropSocket6" parent="." unique_id=1426873902 instance=ExtResource("1_aujlm")]
-position = Vector2(259, 145)
+position = Vector2(247, 141)
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=898308698]
-offset_left = 376.0
-offset_right = 663.0
+offset_left = 339.0
+offset_right = 615.0
 offset_bottom = 307.0
 color = Color(0.22310299, 0.22310287, 0.22310293, 1)
 
 [node name="DropSocket7" parent="." unique_id=646548644 instance=ExtResource("1_aujlm")]
-position = Vector2(431, 108)
+position = Vector2(392, 108)
 
 [node name="DropSocket8" parent="." unique_id=1275648530 instance=ExtResource("1_aujlm")]
-position = Vector2(484, 234)
+position = Vector2(436, 234)
 
 [node name="DropSocket9" parent="." unique_id=940861529 instance=ExtResource("1_aujlm")]
-position = Vector2(524, 53)
+position = Vector2(476, 53)
 
 [node name="DropSocket10" parent="." unique_id=1321624882 instance=ExtResource("1_aujlm")]
-position = Vector2(523, 145)
+position = Vector2(475, 145)
 
 [node name="DropSocket11" parent="." unique_id=370492993 instance=ExtResource("1_aujlm")]
-position = Vector2(609, 108)
+position = Vector2(557, 108)
 
 [node name="DropSocket12" parent="." unique_id=692136944 instance=ExtResource("1_aujlm")]
-position = Vector2(564, 233)
+position = Vector2(516, 233)
 
 [node name="Label" type="Label" parent="." unique_id=1070304263]
 offset_left = 4.0
@@ -60,9 +60,9 @@ text = "Inventario"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="." unique_id=1377109598]
-offset_left = 363.0
-offset_top = 280.0
-offset_right = 677.0
-offset_bottom = 329.0
+offset_left = 315.0
+offset_top = 279.0
+offset_right = 629.0
+offset_bottom = 328.0
 text = "Mutante"
 horizontal_alignment = 1

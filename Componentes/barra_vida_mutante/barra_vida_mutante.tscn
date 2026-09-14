@@ -17,13 +17,19 @@ metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 [sub_resource type="StyleBox" id="StyleBox_xe5er"]
 resource_local_to_scene = false
 resource_name = ""
-content_margin_left = -1.0
-content_margin_top = -1.0
-content_margin_right = -1.0
-content_margin_bottom = -1.0
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
 script = ExtResource("3_l1mwk")
 color = Color(0, 0, 0, 1)
+skew = Vector2(0.5, 0)
 borders = Array[ExtResource("2_wrvmi")]([SubResource("Resource_wrvmi")])
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+corner_curvature_top_right = -2.0
+corner_curvature_bottom_right = -2.0
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
@@ -33,14 +39,43 @@ shadow_color = Color(0, 0, 0, 0.84705883)
 shadow_offset = Vector2(2, 2)
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
-[sub_resource type="StyleBox" id="StyleBox_08q35"]
+[sub_resource type="Resource" id="Resource_h3e0d"]
+script = ExtResource("2_wrvmi")
+width_top = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_wrvmi"]
+offsets = PackedFloat32Array(0, 0.63586956)
+colors = PackedColorArray(0, 0.32097834, 1.92523e-07, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f0q3u"]
+gradient = SubResource("Gradient_wrvmi")
+fill_from = Vector2(0.525641, 1)
+fill_to = Vector2(0.50427353, 0)
+
+[sub_resource type="StyleBox" id="StyleBox_l1mwk"]
 resource_local_to_scene = false
 resource_name = ""
-content_margin_left = -1.0
-content_margin_top = -1.0
-content_margin_right = -1.0
-content_margin_bottom = -1.0
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 script = ExtResource("3_l1mwk")
+color = Color(0.36269194, 0.78534806, 0, 1)
+skew = Vector2(0.5, 0)
+borders = Array[ExtResource("2_wrvmi")]([SubResource("Resource_h3e0d")])
+texture = SubResource("GradientTexture2D_f0q3u")
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+corner_curvature_top_right = -2.0
+corner_curvature_bottom_right = -2.0
+expand_margin_left = -1.0
+expand_margin_top = -1.0
+expand_margin_right = -1.0
+expand_margin_bottom = -1.0
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="LabelSettings" id="LabelSettings_qybwr"]
@@ -61,13 +96,13 @@ anchor_bottom = 1.0
 offset_left = -54.0
 offset_top = -3.0
 offset_right = 51.0
-offset_bottom = 9.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(35, 4)
 theme_override_styles/background = SubResource("StyleBox_xe5er")
-theme_override_styles/fill = SubResource("StyleBox_08q35")
-value = 20.0
+theme_override_styles/fill = SubResource("StyleBox_l1mwk")
+value = 55.0
 show_percentage = false
 
 [node name="value" type="Label" parent="." unique_id=1744241548]

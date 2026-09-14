@@ -1,17 +1,19 @@
 extends CharacterBody2D
 # Mutante Auto Battler
+@onready var barra_vida: HealthBar2 = $BarraVida_mutante
 
 @onready var detection_area: Area2D = $detection_area
 @onready var sprite: Sprite2D = $Sprite2D  # opcional, para voltear el sprite
-
+signal died
+var is_dead:bool = false
+var max_health:float = 50
+var current_health: float
 # --- Stats base ---
 var fuerza: int = 15          # daño base del ataque
 var atk_speed: float = 1     #
 var velocidad: float = 150.0  # velocidad de movimiento
 
 # --- Stats derivados / runtime ---
-var vida_max: int = 100
-var vida_actual: int = 100
 var rango_ataque: float = 40.0   # distancia a la que puede golpear
 var objetivo_actual: Node2D = null
 var puede_atacar: bool = true
@@ -31,7 +33,10 @@ func _ready() -> void:
 	# Conectar señales del Area2D para detectar enemigos
 	detection_area.body_entered.connect(_on_detection_body_entered)
 	detection_area.body_exited.connect(_on_detection_body_exited)
-	vida_actual = vida_max + bonus_vida
+	current_health = max_health
+	barra_vida.health_depleted.connect(_on_health_depleted)
+	barra_vida.max_health = max_health
+	barra_vida.current_health = current_health
 
 
 func _physics_process(delta: float) -> void:
@@ -79,17 +84,17 @@ func _intentar_atacar() -> void:
 
 
 func _atacar(objetivo: Node2D) -> void:
-	var danio_final: int = int(fuerza * multi_danio)
-	# Si el enemigo tiene método recibir_danio, lo llamamos
-	if objetivo.has_method("recibir_danio"):
-		objetivo.recibir_danio(danio_final)
-	else:
-		# Fallback: intentar bajar una variable "vida_actual"
-		if "vida_actual" in objetivo:
-			objetivo.vida_actual -= danio_final
-	# Aquí puedes emitir una señal para reproducir animación de ataque
-	# emit_signal("ataco", objetivo)
+	var damage: int = int(fuerza * multi_danio)
+	if objetivo.has_method("take_damage"):
+		objetivo.take_damage(damage)
 
+func take_damage(damage: int) -> void:
+	if is_dead:
+		return
+	print("mutante recibió daño: ", damage)
+	current_health -= damage
+	if barra_vida:
+		barra_vida.take_damage(damage)
 
 # ------------------ DETECCIÓN ------------------
 func _buscar_enemigo_mas_cercano() -> Node2D:
@@ -116,33 +121,15 @@ func _on_detection_body_exited(body: Node2D) -> void:
 	if body == objetivo_actual:
 		objetivo_actual = null
 
-
-# ------------------ VIDA ------------------
-func recibir_danio(cantidad: int) -> void:
-	vida_actual -= cantidad
-	if vida_actual <= 0:
-		morir()
-
-
-func morir() -> void:
-	# Aquí puedes emitir señal, animación, etc.
+func _on_health_depleted():
+	if is_dead:
+		return
+	is_dead = true
+	died.emit()
+	barra_vida.hide()
+	print("mutante murio")
 	queue_free()
 
-
-# ------------------ MEJORAS ------------------
-func mejorar_fuerza(cantidad: float) -> void:
-	multi_danio += cantidad
-
-func mejorar_velocidad(cantidad: float) -> void:
-	multi_velocidad += cantidad
-
-func mejorar_atk_speed(cantidad: float) -> void:
-	multi_atk_speed += cantidad
-
-func mejorar_vida(cantidad: int) -> void:
-	bonus_vida += cantidad
-	vida_max += cantidad
-	vida_actual += cantidad
 
 
 # ------------------ CONTROL DE BATALLA ------------------
@@ -160,3 +147,14 @@ func detener_batalla() -> void:
 func _voltear_sprite(dir_x: float) -> void:
 	if sprite and dir_x != 0:
 		sprite.flip_h = dir_x < 0
+		
+
+# ------------------ MEJORAS ------------------
+func mejorar_fuerza(cantidad: float) -> void:
+	multi_danio += cantidad
+
+func mejorar_velocidad(cantidad: float) -> void:
+	multi_velocidad += cantidad
+
+func mejorar_atk_speed(cantidad: float) -> void:
+	multi_atk_speed += cantidad
