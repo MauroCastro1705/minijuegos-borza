@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cth2a0f4wlanx"]
+
+[ext_resource type="Shader" uid="uid://blnk6unlnq2x7" path="res://shaders/green_crt_monitor.gdshader" id="1_uy30j"]
+[ext_resource type="Texture2D" uid="uid://dx0oo4ktc6lc3" path="res://assets/crt_pattern.png" id="2_oiqmp"]
+
+[resource]
+shader = ExtResource("1_uy30j")
+shader_parameter/tiledtexture = ExtResource("2_oiqmp")
+shader_parameter/opacity = 1.0
+shader_parameter/pixel_size = 0.01
+shader_parameter/greyscale = false
+shader_parameter/contrast = 0.0
+shader_parameter/pixel_colors = Color(0, 1, 0, 1)
+shader_parameter/background_color = Color(0, 0, 0, 1)

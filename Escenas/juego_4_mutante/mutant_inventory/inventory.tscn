@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://b6d3ogi1qh3y4"]
+
+[ext_resource type="PackedScene" uid="uid://v38vekhgkavn" path="res://Componentes/drop_socket/drop_socket.tscn" id="1_aujlm"]
+
+[node name="Inventory" type="Node2D" unique_id=1484637582]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1798281746]
+offset_right = 319.0
+offset_bottom = 216.0
+color = Color(0.22310299, 0.22310287, 0.22310293, 1)
+
+[node name="DropSocket" parent="." unique_id=2030778956 instance=ExtResource("1_aujlm")]
+position = Vector2(64, 53)
+
+[node name="DropSocket2" parent="." unique_id=961202526 instance=ExtResource("1_aujlm")]
+position = Vector2(63, 145)
+
+[node name="DropSocket3" parent="." unique_id=1515949630 instance=ExtResource("1_aujlm")]
+position = Vector2(169, 53)
+
+[node name="DropSocket4" parent="." unique_id=830297442 instance=ExtResource("1_aujlm")]
+position = Vector2(168, 145)
+
+[node name="DropSocket5" parent="." unique_id=1432554531 instance=ExtResource("1_aujlm")]
+position = Vector2(260, 53)
+
+[node name="DropSocket6" parent="." unique_id=1426873902 instance=ExtResource("1_aujlm")]
+position = Vector2(259, 145)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=898308698]
+offset_left = 376.0
+offset_right = 663.0
+offset_bottom = 307.0
+color = Color(0.22310299, 0.22310287, 0.22310293, 1)
+
+[node name="DropSocket7" parent="." unique_id=646548644 instance=ExtResource("1_aujlm")]
+position = Vector2(431, 108)
+
+[node name="DropSocket8" parent="." unique_id=1275648530 instance=ExtResource("1_aujlm")]
+position = Vector2(484, 234)
+
+[node name="DropSocket9" parent="." unique_id=940861529 instance=ExtResource("1_aujlm")]
+position = Vector2(524, 53)
+
+[node name="DropSocket10" parent="." unique_id=1321624882 instance=ExtResource("1_aujlm")]
+position = Vector2(523, 145)
+
+[node name="DropSocket11" parent="." unique_id=370492993 instance=ExtResource("1_aujlm")]
+position = Vector2(609, 108)
+
+[node name="DropSocket12" parent="." unique_id=692136944 instance=ExtResource("1_aujlm")]
+position = Vector2(564, 233)
+
+[node name="Label" type="Label" parent="." unique_id=1070304263]
+offset_left = 4.0
+offset_top = 190.0
+offset_right = 318.0
+offset_bottom = 239.0
+text = "Inventario"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="." unique_id=1377109598]
+offset_left = 363.0
+offset_top = 280.0
+offset_right = 677.0
+offset_bottom = 329.0
+text = "Mutante"
+horizontal_alignment = 1

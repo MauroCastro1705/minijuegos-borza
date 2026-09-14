@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://24axemrsl1cw"]
+
+[ext_resource type="Script" uid="uid://d10ans3eanfy8" path="res://Componentes/barra_vida_mutante/barra_vida.gd" id="1_3pp08"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="2_wrvmi"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_hwuti"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="3_l1mwk"]
+
+[sub_resource type="Resource" id="Resource_wrvmi"]
+script = ExtResource("2_wrvmi")
+color = Color(0, 1, 0, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_xe5er"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_l1mwk")
+color = Color(0, 0, 0, 1)
+borders = Array[ExtResource("2_wrvmi")]([SubResource("Resource_wrvmi")])
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="StyleBox" id="StyleBox_08q35"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_l1mwk")
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="LabelSettings" id="LabelSettings_qybwr"]
+font = ExtResource("3_hwuti")
+font_size = 22
+shadow_size = 7
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(1, 0.5)
+
+[node name="BarraVida_mutante" type="Node2D" unique_id=571050010]
+script = ExtResource("1_3pp08")
+
+[node name="life_bar" type="ProgressBar" parent="." unique_id=81290640]
+custom_minimum_size = Vector2(70, 8)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -3.0
+offset_right = 51.0
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(35, 4)
+theme_override_styles/background = SubResource("StyleBox_xe5er")
+theme_override_styles/fill = SubResource("StyleBox_08q35")
+value = 20.0
+show_percentage = false
+
+[node name="value" type="Label" parent="." unique_id=1744241548]
+unique_name_in_owner = true
+offset_left = -42.0
+offset_top = -29.0
+offset_right = 44.0
+offset_bottom = -6.0
+text = "20/60"
+label_settings = SubResource("LabelSettings_qybwr")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -32,3 +32,7 @@ var bobina_dmg:int = 5
 var bobina_speed:float = 1.0
 var click_damage: float = 3  # Daño por click (ajustable)
 var click_cooldown: float = 1.0  # Cooldown entre clicks en segundos
+
+##juego 4
+var is_dragging: bool = false
+var drag_limits: Rect2 = Rect2()

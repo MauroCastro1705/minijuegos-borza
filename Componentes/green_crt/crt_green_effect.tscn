@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://si5q4n55o5u4"]
+
+[ext_resource type="Material" uid="uid://cth2a0f4wlanx" path="res://shaders/green_crt_monitor.tres" id="1_ugmrw"]
+
+[node name="crt_green_effect" type="ColorRect" unique_id=1181810832]
+material = ExtResource("1_ugmrw")
+offset_left = -8.0
+offset_top = 2.0
+offset_right = 328.0
+offset_bottom = 320.0

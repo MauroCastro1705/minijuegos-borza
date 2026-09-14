@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://deegte0xglo30"]
+
+[ext_resource type="Script" uid="uid://cow8mtrrrrnu8" path="res://Escenas/juego_4_mutante/enemy/enemy_mutant.gd" id="1_56uo5"]
+[ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="2_tra7p"]
+[ext_resource type="Texture2D" uid="uid://beq31hfv361xe" path="res://assets/juego3/explosion.png" id="3_k8xj5"]
+[ext_resource type="PackedScene" uid="uid://daps7g4qm000h" path="res://Escenas/juego_3_idolo/attacks/rayo_1.tscn" id="4_ii6ca"]
+[ext_resource type="PackedScene" uid="uid://csy841kwakacm" path="res://Componentes/barra_vida_electrica/barra_vida_electrica.tscn" id="5_165ne"]
+[ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="6_5gh2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
+size = Vector2(32, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rsaj"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(289, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw848"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(305, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqpkm"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(321, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52tbi"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(337, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uepw"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(353, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ifan"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(369, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25jwy"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(385, 20, 16, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_florv"]
+atlas = ExtResource("2_tra7p")
+region = Rect2(401, 20, 16, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5rcss"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rsaj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw848")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqpkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52tbi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uepw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ifan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25jwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_florv")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h51s"]
+atlas = ExtResource("3_k8xj5")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr4si"]
+atlas = ExtResource("3_k8xj5")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4sfw"]
+atlas = ExtResource("3_k8xj5")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjmx5"]
+atlas = ExtResource("3_k8xj5")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x75fr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4h51s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kr4si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4sfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjmx5")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
+size = Vector2(78, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fpjr"]
+atlas = ExtResource("6_5gh2d")
+region = Rect2(8, 6, 7, 7)
+
+[sub_resource type="Curve" id="Curve_yowuo"]
+_limits = [0.0, 4.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.504717, 1.5730338), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Enemy_mutant" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
+z_index = 4
+input_pickable = true
+script = ExtResource("1_56uo5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=47465645]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_5rcss")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=848013205]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5rcss")
+autoplay = "default"
+frame_progress = 0.81634593
+flip_h = true
+
+[node name="death_sprite" type="AnimatedSprite2D" parent="." unique_id=1279786471]
+visible = false
+position = Vector2(1, -1)
+scale = Vector2(0.68749994, 0.68749994)
+sprite_frames = SubResource("SpriteFrames_x75fr")
+autoplay = "default"
+frame_progress = 0.119471215
+
+[node name="attack_timer" type="Timer" parent="." unique_id=1281616161]
+wait_time = 2.0
+
+[node name="Rayo1" parent="." unique_id=85275332 instance=ExtResource("4_ii6ca")]
+visible = false
+position = Vector2(-4, 23)
+
+[node name="damage_timer" type="Timer" parent="." unique_id=1007270071]
+wait_time = 0.5
+
+[node name="attack_area" type="Area2D" parent="." unique_id=109419654]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=1816785956]
+position = Vector2(-29, -0.5)
+shape = SubResource("RectangleShape2D_x75fr")
+debug_color = Color(0.78039217, 0.627451, 0.2509804, 0.12156863)
+
+[node name="BarraVida_electrica" parent="." unique_id=978959134 instance=ExtResource("5_165ne")]
+position = Vector2(0, -39)
+
+[node name="click_effect" type="CPUParticles2D" parent="." unique_id=1630830558]
+position = Vector2(-14, 15)
+emitting = false
+amount = 20
+texture = SubResource("AtlasTexture_4fpjr")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, -50)
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.0
+initial_velocity_max = 150.0
+angular_velocity_min = 202.92
+angular_velocity_max = 202.92
+angle_min = 50.0
+angle_max = 180.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_yowuo")
+color = Color(0, 1, 1, 1)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1921398640]
+position = Vector2(-2, -72)
+
+[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
