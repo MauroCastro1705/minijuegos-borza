@@ -1,5 +1,5 @@
 extends Node2D
-class_name HealthBar2
+class_name HealthBar3
 #barravida2
 
 @onready var progress_bar: ProgressBar = $life_bar

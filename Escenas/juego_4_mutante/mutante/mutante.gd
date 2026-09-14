@@ -1,6 +1,6 @@
 extends CharacterBody2D
 # Mutante Auto Battler
-@onready var barra_vida: HealthBar2 = $BarraVida_mutante
+@onready var barra_vida: HealthBar3 = $BarraVida_mutante
 
 @onready var detection_area: Area2D = $detection_area
 @onready var sprite: Sprite2D = $Sprite2D  # opcional, para voltear el sprite

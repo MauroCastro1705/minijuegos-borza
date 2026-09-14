@@ -1,37 +1,109 @@
 [gd_scene format=3 uid="uid://b6d3ogi1qh3y4"]
 
 [ext_resource type="PackedScene" uid="uid://v38vekhgkavn" path="res://Componentes/drop_socket/drop_socket.tscn" id="1_aujlm"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_umoio"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_efo6j"]
+
+[sub_resource type="Resource" id="Resource_l7s1y"]
+script = ExtResource("1_umoio")
+color = Color(0, 1, 0, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_6vckb"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("2_efo6j")
+color = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("1_umoio")]([SubResource("Resource_l7s1y")])
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+corner_curvature_top_right = -2.0
+corner_curvature_bottom_right = -2.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Gradient" id="Gradient_nicnm"]
+offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
+colors = PackedColorArray(0.0018410678, 0.0018410682, 0.0018410678, 1, 0, 0.2175481, 1.2032687e-07, 1, 0, 0.37354112, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_umoio"]
+gradient = SubResource("Gradient_nicnm")
+fill_from = Vector2(0.55128205, 1)
+fill_to = Vector2(0.7606838, 0.0042735045)
+
+[sub_resource type="StyleBox" id="StyleBox_wf8mm"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("2_efo6j")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("1_umoio")]([SubResource("Resource_l7s1y")])
+texture = SubResource("GradientTexture2D_umoio")
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+corner_curvature_top_right = -2.0
+corner_curvature_bottom_right = -2.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [node name="Inventory" type="Node2D" unique_id=1484637582]
+metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1798281746]
-offset_right = 305.0
-offset_bottom = 216.0
-color = Color(0.22310299, 0.22310287, 0.22310293, 1)
+[node name="fondo" type="Panel" parent="." unique_id=1435648948]
+offset_left = 7.0
+offset_right = 298.0
+offset_bottom = 198.0
+theme_override_styles/panel = SubResource("StyleBox_6vckb")
+
+[node name="fondo2" type="Panel" parent="." unique_id=217802088]
+offset_left = 341.0
+offset_right = 603.0
+offset_bottom = 316.0
+theme_override_styles/panel = SubResource("StyleBox_wf8mm")
 
 [node name="DropSocket" parent="." unique_id=2030778956 instance=ExtResource("1_aujlm")]
-position = Vector2(64, 53)
+position = Vector2(72, 45)
 
 [node name="DropSocket2" parent="." unique_id=961202526 instance=ExtResource("1_aujlm")]
-position = Vector2(64, 142)
+position = Vector2(50, 125)
 
 [node name="DropSocket3" parent="." unique_id=1515949630 instance=ExtResource("1_aujlm")]
-position = Vector2(155, 54)
+position = Vector2(163, 46)
 
 [node name="DropSocket4" parent="." unique_id=830297442 instance=ExtResource("1_aujlm")]
-position = Vector2(154, 141)
+position = Vector2(140, 124)
 
 [node name="DropSocket5" parent="." unique_id=1432554531 instance=ExtResource("1_aujlm")]
-position = Vector2(246, 56)
+position = Vector2(254, 48)
 
 [node name="DropSocket6" parent="." unique_id=1426873902 instance=ExtResource("1_aujlm")]
-position = Vector2(247, 141)
-
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=898308698]
-offset_left = 339.0
-offset_right = 615.0
-offset_bottom = 307.0
-color = Color(0.22310299, 0.22310287, 0.22310293, 1)
+position = Vector2(233, 124)
 
 [node name="DropSocket7" parent="." unique_id=646548644 instance=ExtResource("1_aujlm")]
 position = Vector2(392, 108)
@@ -52,10 +124,10 @@ position = Vector2(557, 108)
 position = Vector2(516, 233)
 
 [node name="Label" type="Label" parent="." unique_id=1070304263]
-offset_left = 4.0
-offset_top = 190.0
-offset_right = 318.0
-offset_bottom = 239.0
+offset_left = -12.0
+offset_top = 166.0
+offset_right = 302.0
+offset_bottom = 215.0
 text = "Inventario"
 horizontal_alignment = 1
 
