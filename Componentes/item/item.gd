@@ -49,6 +49,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	Global.emit_signal("pick_up")
 	if not is_being_dragged: return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:

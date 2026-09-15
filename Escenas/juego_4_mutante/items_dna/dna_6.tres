@@ -8,4 +8,5 @@ script = ExtResource("1_ihjxg")
 sprite = ExtResource("2_ihjxg")
 item_name = "Mutageno SP"
 item_description = "Mejora la capacidad especial del ADN"
+type = 5
 metadata/_custom_type_script = "uid://cr677umm4ntgt"

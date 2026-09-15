@@ -5,7 +5,7 @@ signal update
 @warning_ignore("unused_signal")
 signal hit
 @warning_ignore("unused_signal")
-signal  pick_up
+signal pick_up
 
 @warning_ignore("unused_signal")
 signal enemy_hit

@@ -5,12 +5,12 @@ extends CharacterBody2D
 @onready var detection_area: Area2D = $detection_area
 @onready var sprite: Sprite2D = $Sprite2D  # opcional, para voltear el sprite
 signal died
-var is_dead:bool = false
-var max_health:float = 50
+var is_dead: bool = false
+var max_health: float = 50
 var current_health: float
 # --- Stats base ---
 var fuerza: int = 15          # daño base del ataque
-var atk_speed: float = 1     #
+var atk_speed: float = 1      #
 var velocidad: float = 150.0  # velocidad de movimiento
 
 # --- Stats derivados / runtime ---
@@ -24,6 +24,18 @@ var multi_danio: float = 1.0
 var multi_velocidad: float = 1.0
 var multi_atk_speed: float = 1.0
 var bonus_vida: int = 0
+
+# --- Stats defensivos / rango ---
+var defensa: float = 0.0                    # 0.0 = sin reducción, 0.5 = 50% menos daño
+const DEFENSA_MAX: float = 0.9              # tope para no volverse inmune
+var multi_rango: float = 1.0                # multiplicador del rango de ataque
+
+
+const STR_POR_ITEM: float = 0.10            # +10% daño
+const AGI_POR_ITEM: float = 0.10            # +10% velocidad de movimiento
+const INT_POR_ITEM: float = 0.10            # +10% rango de ataque
+const DEF_POR_ITEM: float = 0.05            # +5% reducción de daño (acumulativo)
+const HP_POR_ITEM: int    = 10              # +10 vida máxima
 
 # Temporizador interno para el cooldown de ataque
 var _cooldown_ataque: float = 0.0
@@ -59,8 +71,9 @@ func _physics_process(delta: float) -> void:
 
 	# Lógica de combate
 	var distancia := global_position.distance_to(objetivo_actual.global_position)
+	var rango_efectivo := rango_ataque * multi_rango
 
-	if distancia <= rango_ataque:
+	if distancia <= rango_efectivo:
 		# Estamos en rango: detenerse y atacar
 		velocity = Vector2.ZERO
 		move_and_slide()
@@ -82,7 +95,6 @@ func _intentar_atacar() -> void:
 	_cooldown_ataque = 1.0 / max(atk_speed * multi_atk_speed, 0.01)
 	_atacar(objetivo_actual)
 
-
 func _atacar(objetivo: Node2D) -> void:
 	var damage: int = int(fuerza * multi_danio)
 	if objetivo.has_method("take_damage"):
@@ -91,10 +103,12 @@ func _atacar(objetivo: Node2D) -> void:
 func take_damage(damage: int) -> void:
 	if is_dead:
 		return
-	print("mutante recibió daño: ", damage)
-	current_health -= damage
+	var danio_final: int = int(round(damage * (1.0 - defensa)))
+	danio_final = max(danio_final, 1)   # siempre al menos 1 de daño
+	print("mutante recibió daño: ", danio_final, " (original: ", damage, ")")
+	current_health -= danio_final
 	if barra_vida:
-		barra_vida.take_damage(damage)
+		barra_vida.take_damage(danio_final)
 
 # ------------------ DETECCIÓN ------------------
 func _buscar_enemigo_mas_cercano() -> Node2D:
@@ -147,7 +161,7 @@ func detener_batalla() -> void:
 func _voltear_sprite(dir_x: float) -> void:
 	if sprite and dir_x != 0:
 		sprite.flip_h = dir_x < 0
-		
+
 
 # ------------------ MEJORAS ------------------
 func mejorar_fuerza(cantidad: float) -> void:
@@ -158,3 +172,40 @@ func mejorar_velocidad(cantidad: float) -> void:
 
 func mejorar_atk_speed(cantidad: float) -> void:
 	multi_atk_speed += cantidad
+
+func mejorar_rango(cantidad: float) -> void:
+	multi_rango += cantidad
+
+func mejorar_defensa(cantidad: float) -> void:
+	defensa = min(defensa + cantidad, DEFENSA_MAX)
+
+func mejorar_vida(cantidad: int) -> void:
+	max_health += cantidad
+	current_health += cantidad   # cura la misma cantidad al subir el máximo
+	if barra_vida:
+		barra_vida.max_health = max_health
+		barra_vida.current_health = current_health
+
+
+# ------------------ APLICAR ITEM ------------------
+# Punto único de entrada: le pasas un ItemData y aplica lo que corresponda
+func aplicar_item(item: ItemData) -> void:
+	if item == null:
+		push_warning("aplicar_item: item nulo")
+		return
+
+	match item.type:
+		ItemData.ItemType.STR:
+			mejorar_fuerza(STR_POR_ITEM)
+		ItemData.ItemType.AGI:
+			mejorar_velocidad(AGI_POR_ITEM)
+		ItemData.ItemType.INT:
+			mejorar_rango(INT_POR_ITEM)
+		ItemData.ItemType.DEF:
+			mejorar_defensa(DEF_POR_ITEM)
+		ItemData.ItemType.HP:
+			mejorar_vida(HP_POR_ITEM)
+		ItemData.ItemType.SP:
+			pass   # reservado para más adelante
+		_:
+			push_warning("Tipo de item no manejado: %s" % item.type)

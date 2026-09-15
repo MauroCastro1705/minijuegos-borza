@@ -26,9 +26,11 @@ func get_item_data() -> ItemData:
 func clear_item() -> void:
 	occupied_item = null
 	
-func _on_something() -> void:
+func _on_something(mutante) -> void:
 	#var item_name: String
 	#var item_description: String
 	if has_item():
 		var item_data := get_item_data()
+		mutante.aplicar_item(item_data)
+
 		print("El socket contiene: ", item_data.item_name)

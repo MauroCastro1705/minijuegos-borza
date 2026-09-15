@@ -99,6 +99,97 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.84615386, 0.16239317)
 
+[sub_resource type="LabelSettings" id="LabelSettings_wf8mm"]
+font = ExtResource("4_6vckb")
+font_size = 28
+
+[sub_resource type="Resource" id="Resource_wf8mm"]
+script = ExtResource("1_umoio")
+color = Color(0, 1, 0, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_nupf2"]
+offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
+colors = PackedColorArray(0.0018410678, 0.0018410682, 0.0018410678, 1, 0, 0.2175481, 1.2032687e-07, 1, 0, 0.37354112, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8qer"]
+gradient = SubResource("Gradient_nupf2")
+fill_from = Vector2(0.55128205, 1)
+fill_to = Vector2(0.7606838, 0.0042735045)
+
+[sub_resource type="StyleBox" id="StyleBox_xjwfm"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("2_efo6j")
+color = Color(0.50140655, 0.5014065, 0.5014065, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("1_umoio")]([SubResource("Resource_wf8mm")])
+texture = SubResource("GradientTexture2D_a8qer")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Resource" id="Resource_a8qer"]
+script = ExtResource("1_umoio")
+color = Color(0, 1, 0, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_xjwfm"]
+offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
+colors = PackedColorArray(0.0018410678, 0.0018410682, 0.0018410678, 1, 0, 0.2175481, 1.2032687e-07, 1, 0, 0.37354112, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wn21o"]
+gradient = SubResource("Gradient_xjwfm")
+fill_from = Vector2(0.55128205, 1)
+fill_to = Vector2(0.7606838, 0.0042735045)
+
+[sub_resource type="StyleBox" id="StyleBox_ouor8"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("2_efo6j")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("1_umoio")]([SubResource("Resource_a8qer")])
+texture = SubResource("GradientTexture2D_wn21o")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
 [node name="Inventory" type="Node2D" unique_id=1484637582]
 script = ExtResource("1_l7s1y")
 metadata/_edit_lock_ = true
@@ -117,21 +208,20 @@ offset_bottom = 316.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_wf8mm")
 
+[node name="Label2" type="Label" parent="." unique_id=765225837]
+offset_left = 265.0
+offset_top = 282.0
+offset_right = 468.0
+offset_bottom = 314.0
+text = "Mutante"
+label_settings = SubResource("LabelSettings_l7s1y")
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="." unique_id=1070304263]
 offset_top = 166.0
 offset_right = 203.0
 offset_bottom = 198.0
 text = "Inventario"
-label_settings = SubResource("LabelSettings_l7s1y")
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="Label" unique_id=765225837]
-layout_mode = 0
-offset_left = 265.0
-offset_top = 116.0
-offset_right = 468.0
-offset_bottom = 148.0
-text = "Mutante"
 label_settings = SubResource("LabelSettings_l7s1y")
 horizontal_alignment = 1
 
@@ -176,7 +266,8 @@ position = Vector2(163, 46)
 position = Vector2(140, 124)
 
 [node name="tank" type="Node2D" parent="." unique_id=503277126]
-position = Vector2(-32, -22)
+position = Vector2(35, -14)
+scale = Vector2(0.8411057, 0.8411057)
 
 [node name="fondo" type="TextureRect" parent="tank" unique_id=1176445145]
 offset_left = 624.0
@@ -219,3 +310,27 @@ mouse_filter = 2
 texture = ExtResource("8_a8qer")
 expand_mode = 5
 stretch_mode = 5
+
+[node name="mutant_info" type="Label" parent="." unique_id=137594564]
+unique_name_in_owner = true
+offset_left = 700.0
+offset_top = 21.0
+offset_right = 934.0
+offset_bottom = 295.0
+text = "adwasdsadfqw
+qweqweasfasfd
+asdasd
+asdasd"
+label_settings = SubResource("LabelSettings_wf8mm")
+
+[node name="apply_mutagen" type="Button" parent="." unique_id=1335745374]
+offset_left = 555.0
+offset_top = 271.0
+offset_right = 670.0
+offset_bottom = 321.0
+theme_override_styles/normal = SubResource("StyleBox_xjwfm")
+theme_override_styles/hover = SubResource("StyleBox_ouor8")
+text = "Aplicar
+Mutagenos"
+
+[connection signal="pressed" from="apply_mutagen" to="." method="_on_apply_mutagen_pressed"]

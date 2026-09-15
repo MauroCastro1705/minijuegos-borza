@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://24axemrsl1cw" path="res://Componentes/barra_vida_mutante/barra_vida_mutante.tscn" id="4_ypk5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
-size = Vector2(32, 53)
+size = Vector2(42, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
 size = Vector2(126, 122)
@@ -16,7 +16,6 @@ input_pickable = true
 script = ExtResource("1_56uo5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=47465645]
-position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_5rcss")
 
 [node name="attack_timer" type="Timer" parent="." unique_id=1281616161]
@@ -41,12 +40,14 @@ position = Vector2(67, -63)
 
 [node name="BarraVida_mutante" parent="." unique_id=571050010 instance=ExtResource("4_ypk5e")]
 position = Vector2(0, -62)
+scale = Vector2(0.75999963, 0.75999963)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=870777890]
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
+color = Color(0.6392157, 0.11372549, 0, 1)
 
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]

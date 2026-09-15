@@ -8,4 +8,5 @@ script = ExtResource("1_lok4x")
 sprite = ExtResource("2_lok4x")
 item_name = "Mutageno HP"
 item_description = "Mejora la resistencia del ADN"
+type = 4
 metadata/_custom_type_script = "uid://cr677umm4ntgt"

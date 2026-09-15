@@ -44,8 +44,9 @@ script = ExtResource("2_kjeb4")
 enemy_scene = ExtResource("3_kjeb4")
 spawn_points = [NodePath("../Marker2D"), NodePath("../Marker2D2"), NodePath("../Marker2D3")]
 
-[node name="Inventory" parent="." unique_id=1484637582 instance=ExtResource("1_yu33v")]
-position = Vector2(18, 440)
+[node name="Inventory" parent="." unique_id=1484637582 node_paths=PackedStringArray("mutante") instance=ExtResource("1_yu33v")]
+position = Vector2(18, 426)
+mutante = NodePath("../Mutante")
 
 [node name="CountdownTimer" parent="." unique_id=470709464 instance=ExtResource("3_uxdvc")]
 position = Vector2(444, 66)
@@ -55,11 +56,12 @@ auto_start = false
 position = Vector2(502, 336)
 
 [node name="battle_button" type="Button" parent="." unique_id=2035194236]
-offset_left = 735.0
-offset_top = 504.0
-offset_right = 843.0
-offset_bottom = 554.0
-text = "empezar"
+offset_left = 886.0
+offset_top = 342.0
+offset_right = 994.0
+offset_bottom = 396.0
+text = "Comenzar
+Prueba"
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=515821696]
 position = Vector2(43, 275)
@@ -77,6 +79,7 @@ data = ExtResource("9_ldo6a")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=777729258]
 
 [node name="ItemTooltip" parent="CanvasLayer" unique_id=951043355 instance=ExtResource("2_px0uf")]
+visible = false
 offset_left = -12.0
 offset_top = 3.0
 offset_right = 137.0

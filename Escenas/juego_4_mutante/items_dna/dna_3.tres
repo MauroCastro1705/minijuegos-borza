@@ -8,4 +8,5 @@ script = ExtResource("1_bo0yt")
 sprite = ExtResource("2_bo0yt")
 item_name = "Mutageno AGI"
 item_description = "Mejora la agilidad del ADN"
+type = 1
 metadata/_custom_type_script = "uid://cr677umm4ntgt"

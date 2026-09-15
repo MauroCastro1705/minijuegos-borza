@@ -1,60 +1,17 @@
 [gd_scene format=3 uid="uid://v38vekhgkavn"]
 
 [ext_resource type="Script" uid="uid://bjgrmglpahilc" path="res://Componentes/drop_socket/drop_socket.gd" id="1_fxx0q"]
-[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="2_hi7hl"]
-[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="3_nskq8"]
-
-[sub_resource type="Resource" id="Resource_l7s1y"]
-script = ExtResource("2_hi7hl")
-color = Color(0, 1, 0, 1)
-width_left = 2
-width_top = 2
-width_right = 2
-width_bottom = 2
-metadata/_custom_type_script = "uid://cjmmhbp1b5312"
-
-[sub_resource type="Gradient" id="Gradient_nupf2"]
-offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
-colors = PackedColorArray(0.0018410678, 0.0018410682, 0.0018410678, 1, 0, 0.2175481, 1.2032687e-07, 1, 0, 0.37354112, 1.92523e-07, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_yowuo"]
-gradient = SubResource("Gradient_nupf2")
-fill_from = Vector2(0.55128205, 1)
-fill_to = Vector2(0.7606838, 0.0042735045)
-
-[sub_resource type="StyleBox" id="StyleBox_lk8rj"]
-resource_local_to_scene = false
-resource_name = ""
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-script = ExtResource("3_nskq8")
-borders = Array[ExtResource("2_hi7hl")]([SubResource("Resource_l7s1y")])
-texture = SubResource("GradientTexture2D_yowuo")
-corner_detail = 9
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.84705883)
-shadow_offset = Vector2(2, 2)
-metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+[ext_resource type="StyleBox" uid="uid://bw1uctay7mu2l" path="res://themas/boton_mutante.tres" id="2_h7hnk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n0die"]
 size = Vector2(64, 64)
 
-[sub_resource type="Gradient" id="Gradient_n3niw"]
+[sub_resource type="Gradient" id="Gradient_hi7hl"]
 offsets = PackedFloat32Array(0.4682081, 0.9364162)
 colors = PackedColorArray(0, 1, 0, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_n3niw"]
-gradient = SubResource("Gradient_n3niw")
+gradient = SubResource("Gradient_hi7hl")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.84615386, 0.16239317)
@@ -70,7 +27,7 @@ offset_top = -32.809143
 offset_right = 32.0
 offset_bottom = 32.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBox_lk8rj")
+theme_override_styles/panel = ExtResource("2_h7hnk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=916726455]
 shape = SubResource("RectangleShape2D_n0die")
