@@ -5,7 +5,6 @@ extends Node2D
 @onready var inventory: Node2D = $Inventory
 @onready var enemy_mutant: CharacterBody2D = $Enemy_mutant
 @onready var mutante: CharacterBody2D = $Mutante
-@onready var countdown_timer: CustomTimer = $CountdownTimer
 @onready var item_tooltip: Panel = $CanvasLayer/ItemTooltip
 @onready var item: Item = $Item
 @onready var timer_for_attaks: Timer = $Timer_for_attaks

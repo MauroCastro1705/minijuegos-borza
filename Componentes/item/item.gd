@@ -65,7 +65,8 @@ func _input(event: InputEvent) -> void:
 
 			occupied_socket = drop_socket_ref
 			occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", true)
-			occupied_socket.occupied_item = self
+			if occupied_socket.special_socket:
+				occupied_socket.occupied_item = self
 
 			is_hovering_socket = false
 			drop_socket_ref = null
@@ -155,23 +156,35 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group('sockets'):
-		# Ignorar el socket del que acabamos de recoger el item hasta que salgamos de él
-		if body == socket_to_ignore:
-			return
+	if not body.is_in_group('sockets'):
+		return
 
-		is_hovering_socket = true
-		body.modulate = Color(Color.GHOST_WHITE, 1.0)
-		drop_socket_ref = body
+	if body == socket_to_ignore:
+		return
+
+	is_hovering_socket = true
+	drop_socket_ref = body
+	if body.has_method("set_hover"):
+		body.set_hover(true)
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	
-	if body.is_in_group('sockets'):
-		# Si salimos del socket que estábamos ignorando, dejamos de ignorarlo
-		if body == socket_to_ignore:
-			socket_to_ignore = null
-		#REVISAR!
+	if not body.is_in_group('sockets'):
+		return
+
+	# Socket al que acabamos de soltar/recoger → ignorar hasta que salgamos
+	if body == socket_to_ignore:
+		socket_to_ignore = null
+		if body.has_method("set_hover"):
+			body.set_hover(false)
+		return
+
+	# Solo resetear el estado de hover si el socket que sale
+	# es el que teníamos como referencia actual
+	if body == drop_socket_ref:
 		is_hovering_socket = false
-		body.modulate = Color(Color.GREEN_YELLOW, 0.5)
 		drop_socket_ref = null
+
+	# Apagar el highlight del socket que efectivamente salimos
+	if body.has_method("set_hover"):
+		body.set_hover(false)
