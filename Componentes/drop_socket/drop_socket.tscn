@@ -33,7 +33,7 @@ theme_override_styles/panel = ExtResource("2_h7hnk")
 shape = SubResource("RectangleShape2D_n0die")
 
 [node name="DropHighlight" type="CPUParticles2D" parent="." unique_id=1609543808]
-amount = 28
+amount = 10
 texture = SubResource("GradientTexture2D_n3niw")
 lifetime = 0.5
 emission_shape = 6

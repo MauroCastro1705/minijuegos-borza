@@ -156,6 +156,7 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	Global.pick_up.emit()
 	if not body.is_in_group('sockets'):
 		return
 
@@ -169,6 +170,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
+	Global.pick_up.emit()
 	if not body.is_in_group('sockets'):
 		return
 

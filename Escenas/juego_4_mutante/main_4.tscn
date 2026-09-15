@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d0dqmng8ibmgr" path="res://Componentes/item/item_tooltip.tscn" id="2_px0uf"]
 [ext_resource type="PackedScene" uid="uid://deegte0xglo30" path="res://Escenas/juego_4_mutante/enemy/enemy_mutant.tscn" id="3_kjeb4"]
 [ext_resource type="PackedScene" uid="uid://dk4ronipsfh" path="res://Escenas/juego_4_mutante/mutante/mutante.tscn" id="4_4gp5x"]
+[ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="7_ldo6a"]
 [ext_resource type="PackedScene" uid="uid://mmi2bm0him43" path="res://Componentes/item/item.tscn" id="8_6h3ti"]
 [ext_resource type="Resource" uid="uid://cgbfvlvfohxr7" path="res://Escenas/juego_4_mutante/items_dna/dna_1.tres" id="9_ldo6a"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="10_1ypsl"]
@@ -151,11 +152,21 @@ offset_top = 3.0
 offset_right = 137.0
 offset_bottom = 42.0
 
+[node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=916593841]
+visible = false
+material = ExtResource("7_ldo6a")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="start_button" type="Button" parent="." unique_id=1551800230]
-offset_left = 877.0
-offset_top = 330.0
-offset_right = 992.0
-offset_bottom = 380.0
+offset_left = 826.0
+offset_top = 307.0
+offset_right = 959.0
+offset_bottom = 378.0
 theme_override_styles/normal = SubResource("StyleBox_wyrh1")
 theme_override_styles/hover = SubResource("StyleBox_63ja4")
 text = "Comenzar

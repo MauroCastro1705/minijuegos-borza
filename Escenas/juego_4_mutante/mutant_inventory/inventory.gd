@@ -40,5 +40,5 @@ func _update_label() -> void:
 
 
 func _on_apply_mutagen_pressed() -> void:
-	_update_label()
 	usar_mutagenos()
+	_update_label()
