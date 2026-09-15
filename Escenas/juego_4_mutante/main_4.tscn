@@ -13,11 +13,19 @@
 [node name="Main4" type="Node2D" unique_id=2094789572]
 script = ExtResource("1_m3y83")
 
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=707824182]
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 1001.0
+offset_bottom = 792.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1562009424]
 offset_left = -12.0
 offset_top = 403.0
 offset_right = 1016.0
-offset_bottom = 797.0
+offset_bottom = 810.0
 mouse_filter = 2
 color = Color(0.2520276, 0.25202766, 0.25202763, 1)
 metadata/_edit_lock_ = true
@@ -38,9 +46,6 @@ spawn_points = [NodePath("../Marker2D"), NodePath("../Marker2D2"), NodePath("../
 
 [node name="Inventory" parent="." unique_id=1484637582 instance=ExtResource("1_yu33v")]
 position = Vector2(18, 440)
-
-[node name="ItemTooltip" parent="." unique_id=951043355 instance=ExtResource("2_px0uf")]
-visible = false
 
 [node name="CountdownTimer" parent="." unique_id=470709464 instance=ExtResource("3_uxdvc")]
 position = Vector2(444, 66)
@@ -66,7 +71,16 @@ position = Vector2(403, 62)
 position = Vector2(834, 273)
 
 [node name="Item" parent="." unique_id=1982616256 instance=ExtResource("8_6h3ti")]
-position = Vector2(744, 422)
+position = Vector2(753, 301)
 data = ExtResource("9_ldo6a")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=777729258]
+
+[node name="ItemTooltip" parent="CanvasLayer" unique_id=951043355 instance=ExtResource("2_px0uf")]
+offset_left = -12.0
+offset_top = 3.0
+offset_right = 137.0
+offset_bottom = 42.0
+
 [connection signal="pressed" from="battle_button" to="enemy_spawner" method="_on_battle_button_pressed"]
+[connection signal="pressed" from="battle_button" to="Inventory" method="_on_battle_button_pressed"]

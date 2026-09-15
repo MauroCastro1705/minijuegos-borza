@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bdfta00qn381m"]
+
+[ext_resource type="Script" uid="uid://cr677umm4ntgt" path="res://Componentes/item/item_data.gd" id="1_8oydh"]
+[ext_resource type="Texture2D" uid="uid://b2mlowqxkcf1d" path="res://assets/juego4/dna-no-fondo-int.png" id="2_8oydh"]
+
+[resource]
+script = ExtResource("1_8oydh")
+sprite = ExtResource("2_8oydh")
+item_name = "Mutageno INT"
+item_description = "Mejora la area de ataque del ADN"
+metadata/_custom_type_script = "uid://cr677umm4ntgt"

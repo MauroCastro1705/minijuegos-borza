@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://b6d3ogi1qh3y4"]
 
 [ext_resource type="PackedScene" uid="uid://v38vekhgkavn" path="res://Componentes/drop_socket/drop_socket.tscn" id="1_aujlm"]
+[ext_resource type="Script" uid="uid://bs82x23go3ifu" path="res://Escenas/juego_4_mutante/mutant_inventory/inventory.gd" id="1_l7s1y"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_umoio"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_efo6j"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="4_6vckb"]
+[ext_resource type="Script" uid="uid://dn6iyxbrmcrct" path="res://Componentes/drop_socket/drop_socket_especial.gd" id="4_efo6j"]
+[ext_resource type="Texture2D" uid="uid://bhbw8u5faoibi" path="res://assets/juego4/tank1.png" id="7_wf8mm"]
+[ext_resource type="Texture2D" uid="uid://1f0mmoh0fc38" path="res://assets/juego4/tank2.png" id="8_a8qer"]
 
 [sub_resource type="Resource" id="Resource_l7s1y"]
 script = ExtResource("1_umoio")
@@ -72,69 +77,145 @@ shadow_color = Color(0, 0, 0, 0.84705883)
 shadow_offset = Vector2(2, 2)
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
+[sub_resource type="LabelSettings" id="LabelSettings_l7s1y"]
+font = ExtResource("4_6vckb")
+font_size = 28
+
+[sub_resource type="Gradient" id="Gradient_wf8mm"]
+colors = PackedColorArray(0, 0.1254902, 0, 1, 0, 0.47194552, 2.8878452e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yowuo"]
+gradient = SubResource("Gradient_wf8mm")
+fill_from = Vector2(0.50427353, 1)
+fill_to = Vector2(0.508547, 0)
+
+[sub_resource type="Gradient" id="Gradient_n3niw"]
+offsets = PackedFloat32Array(0.4682081, 0.9364162)
+colors = PackedColorArray(0, 1, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wf8mm"]
+gradient = SubResource("Gradient_n3niw")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.84615386, 0.16239317)
+
 [node name="Inventory" type="Node2D" unique_id=1484637582]
+script = ExtResource("1_l7s1y")
 metadata/_edit_lock_ = true
 
 [node name="fondo" type="Panel" parent="." unique_id=1435648948]
 offset_left = 7.0
-offset_right = 298.0
+offset_right = 213.0
 offset_bottom = 198.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_6vckb")
 
 [node name="fondo2" type="Panel" parent="." unique_id=217802088]
-offset_left = 341.0
-offset_right = 603.0
+offset_left = 240.0
+offset_right = 502.0
 offset_bottom = 316.0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_wf8mm")
 
-[node name="DropSocket" parent="." unique_id=2030778956 instance=ExtResource("1_aujlm")]
+[node name="Label" type="Label" parent="." unique_id=1070304263]
+offset_top = 166.0
+offset_right = 203.0
+offset_bottom = 198.0
+text = "Inventario"
+label_settings = SubResource("LabelSettings_l7s1y")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Label" unique_id=765225837]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 116.0
+offset_right = 468.0
+offset_bottom = 148.0
+text = "Mutante"
+label_settings = SubResource("LabelSettings_l7s1y")
+horizontal_alignment = 1
+
+[node name="sockets_mutante" type="Node2D" parent="." unique_id=1115641343]
+
+[node name="socket_spe" parent="sockets_mutante" unique_id=646548644 instance=ExtResource("1_aujlm")]
+position = Vector2(291, 108)
+script = ExtResource("4_efo6j")
+
+[node name="socket_spe2" parent="sockets_mutante" unique_id=1275648530 instance=ExtResource("1_aujlm")]
+position = Vector2(335, 234)
+script = ExtResource("4_efo6j")
+
+[node name="socket_spe3" parent="sockets_mutante" unique_id=940861529 instance=ExtResource("1_aujlm")]
+position = Vector2(375, 53)
+script = ExtResource("4_efo6j")
+
+[node name="socket_spe4" parent="sockets_mutante" unique_id=1321624882 instance=ExtResource("1_aujlm")]
+position = Vector2(374, 145)
+script = ExtResource("4_efo6j")
+
+[node name="socket_spe5" parent="sockets_mutante" unique_id=370492993 instance=ExtResource("1_aujlm")]
+position = Vector2(456, 108)
+script = ExtResource("4_efo6j")
+
+[node name="socket_spe6" parent="sockets_mutante" unique_id=692136944 instance=ExtResource("1_aujlm")]
+position = Vector2(415, 233)
+script = ExtResource("4_efo6j")
+
+[node name="sockets_inventario" type="Node2D" parent="." unique_id=873164885]
+
+[node name="DropSocket" parent="sockets_inventario" unique_id=2030778956 instance=ExtResource("1_aujlm")]
 position = Vector2(72, 45)
 
-[node name="DropSocket2" parent="." unique_id=961202526 instance=ExtResource("1_aujlm")]
+[node name="DropSocket2" parent="sockets_inventario" unique_id=721376083 instance=ExtResource("1_aujlm")]
 position = Vector2(50, 125)
 
-[node name="DropSocket3" parent="." unique_id=1515949630 instance=ExtResource("1_aujlm")]
+[node name="DropSocket3" parent="sockets_inventario" unique_id=2067902229 instance=ExtResource("1_aujlm")]
 position = Vector2(163, 46)
 
-[node name="DropSocket4" parent="." unique_id=830297442 instance=ExtResource("1_aujlm")]
+[node name="DropSocket4" parent="sockets_inventario" unique_id=1342252216 instance=ExtResource("1_aujlm")]
 position = Vector2(140, 124)
 
-[node name="DropSocket5" parent="." unique_id=1432554531 instance=ExtResource("1_aujlm")]
-position = Vector2(254, 48)
+[node name="tank" type="Node2D" parent="." unique_id=503277126]
+position = Vector2(-32, -22)
 
-[node name="DropSocket6" parent="." unique_id=1426873902 instance=ExtResource("1_aujlm")]
-position = Vector2(233, 124)
+[node name="fondo" type="TextureRect" parent="tank" unique_id=1176445145]
+offset_left = 624.0
+offset_top = 88.0
+offset_right = 744.0
+offset_bottom = 270.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_yowuo")
 
-[node name="DropSocket7" parent="." unique_id=646548644 instance=ExtResource("1_aujlm")]
-position = Vector2(392, 108)
+[node name="tank_aprt" type="CPUParticles2D" parent="tank" unique_id=1878625254]
+position = Vector2(684, 253)
+amount = 28
+texture = SubResource("GradientTexture2D_wf8mm")
+lifetime = 1.2
+emission_shape = 3
+emission_rect_extents = Vector2(50, 20)
+gravity = Vector2(0, -200)
+scale_amount_min = 0.05
+scale_amount_max = 0.1
+color = Color(1.7060097, 1.5872233, 1.4195247, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
 
-[node name="DropSocket8" parent="." unique_id=1275648530 instance=ExtResource("1_aujlm")]
-position = Vector2(436, 234)
+[node name="TextureRect" type="TextureRect" parent="tank" unique_id=1687733740]
+offset_left = 589.0
+offset_top = -79.0
+offset_right = 776.0
+offset_bottom = 176.0
+mouse_filter = 2
+texture = ExtResource("7_wf8mm")
+expand_mode = 5
+stretch_mode = 5
 
-[node name="DropSocket9" parent="." unique_id=940861529 instance=ExtResource("1_aujlm")]
-position = Vector2(476, 53)
-
-[node name="DropSocket10" parent="." unique_id=1321624882 instance=ExtResource("1_aujlm")]
-position = Vector2(475, 145)
-
-[node name="DropSocket11" parent="." unique_id=370492993 instance=ExtResource("1_aujlm")]
-position = Vector2(557, 108)
-
-[node name="DropSocket12" parent="." unique_id=692136944 instance=ExtResource("1_aujlm")]
-position = Vector2(516, 233)
-
-[node name="Label" type="Label" parent="." unique_id=1070304263]
-offset_left = -12.0
-offset_top = 166.0
-offset_right = 302.0
-offset_bottom = 215.0
-text = "Inventario"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="." unique_id=1377109598]
-offset_left = 315.0
-offset_top = 279.0
-offset_right = 629.0
-offset_bottom = 328.0
-text = "Mutante"
-horizontal_alignment = 1
+[node name="TextureRect2" type="TextureRect" parent="tank" unique_id=777041871]
+offset_left = 589.0
+offset_top = 210.0
+offset_right = 778.0
+offset_bottom = 389.0
+mouse_filter = 2
+texture = ExtResource("8_a8qer")
+expand_mode = 5
+stretch_mode = 5

@@ -1,9 +1,10 @@
-extends PanelContainer
+extends Panel
 
-@onready var name_label: Label = $VBoxContainer/NameLabel
-@onready var desc_label: Label = $VBoxContainer/DescLabel
 
-var offset: Vector2 = Vector2(50, -50) # Offset por default, arriba y a la derecha
+@onready var name_label: Label = %NameLabel
+@onready var desc_label: Label = %DescLabel
+
+var offset: Vector2 = Vector2(40, -40) # Offset por default, arriba y a la derecha
 
 
 func _ready() -> void:

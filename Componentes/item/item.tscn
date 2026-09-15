@@ -4,6 +4,7 @@
 
 [node name="Item" type="Node2D" unique_id=1982616256 groups=["items"]]
 script = ExtResource("1_un4xo")
+asset_scale = Vector2(0.13, 0.13)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1060736633]
 

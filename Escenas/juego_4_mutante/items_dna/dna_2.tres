@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dhsvp22tuv0hs"]
+
+[ext_resource type="Script" uid="uid://cr677umm4ntgt" path="res://Componentes/item/item_data.gd" id="1_7x6fn"]
+[ext_resource type="Texture2D" uid="uid://bepa1ejvfga56" path="res://assets/juego4/dna-no-fondo-fuerza.png" id="2_7x6fn"]
+
+[resource]
+script = ExtResource("1_7x6fn")
+sprite = ExtResource("2_7x6fn")
+item_name = "Mutageno STR"
+item_description = "Mejora la Fuerza del ADN"
+metadata/_custom_type_script = "uid://cr677umm4ntgt"

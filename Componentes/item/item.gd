@@ -4,6 +4,7 @@ signal tooltip_requested(data: ItemData, item_global_pos: Vector2)
 signal tooltip_hidden()
 
 @export var data: ItemData
+@export var asset_scale: Vector2 = Vector2(0.2, 0.2)
 
 var is_being_dragged: bool = false
 
@@ -11,23 +12,28 @@ var is_being_dragged: bool = false
 var is_hovering_socket: bool = false
 var drop_socket_ref: StaticBody2D = null
 
+# Socket que acabamos de dejar y que debemos ignorar hasta salir de su área
+var socket_to_ignore: StaticBody2D = null
+
 # Estado permanente cuando el item está en un socket
 var occupied_socket: StaticBody2D = null
 
+var base_scale: Vector2 = Vector2(1.0, 1.0)
 var offset: Vector2 = Vector2(0.0, 0.0)
 var particles: CPUParticles2D = null
 
+
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var area_2d: Area2D = $Area2D
 @onready var collision_shape: CollisionShape2D = $Area2D/CollisionShape2D
 
 
 func _ready() -> void:
 	if not data:
 		return
-	#data.item_name
-	#data.item_description
-	#data.sfx
-	#data.vfx
+
+	_init_scale()
+
 	if data.sprite:
 		sprite.texture = data.sprite
 		# Crea un rectángulo que cubre por completo la textura
@@ -39,7 +45,7 @@ func _ready() -> void:
 	if data.vfx:
 		particles = data.vfx.instantiate()
 		self.add_child(particles)
-		particles.emitting = false # Iniciar apagadas por defecto
+		particles.emitting = false
 
 
 func _input(event: InputEvent) -> void:
@@ -58,6 +64,12 @@ func _input(event: InputEvent) -> void:
 
 			occupied_socket = drop_socket_ref
 			occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", true)
+			occupied_socket.occupied_item = self
+
+			# Limpiar estado de hover y cualquier socket a ignorar
+			is_hovering_socket = false
+			drop_socket_ref = null
+			socket_to_ignore = null
 		else:
 			tooltip_requested.emit(data, self.global_position)
 
@@ -79,32 +91,40 @@ func _physics_process(_delta: float) -> void:
 		self.global_position = target_pos
 
 
+func _init_scale() -> void:
+	# Store base scale from the sprite (depends on the scale of the assets)
+	base_scale = asset_scale
+	sprite.scale = base_scale
+	area_2d.scale = base_scale
+
+
 func _handle_left_mouse_down() -> void:
 	# Como todo lo que sigue es lógica de arrastrar, si ya lo estoy haciendo no debería seguir
 	if Global.is_dragging:
 		return
 
-	var local_click_pos = sprite.get_local_mouse_position()
+	# Si el item estaba en un socket, lo liberamos y marcamos ese socket para ignorarlo
+	if occupied_socket:
+		occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", false)
+		occupied_socket.occupied_item = null 
+		socket_to_ignore = occupied_socket
+		occupied_socket = null
+		is_hovering_socket = false
+		drop_socket_ref = null
 
-	# Chequeo si estoy clickeando sobre la parte no transparente de la textura
-	if sprite.is_pixel_opaque(local_click_pos):
-		if occupied_socket:
-			occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", false)
-			occupied_socket = null
+	Global.is_dragging = true
+	self.is_being_dragged = true
+	self.offset = get_global_mouse_position() - self.global_position
 
-		Global.is_dragging = true
-		self.is_being_dragged = true
-		self.offset = get_global_mouse_position() - self.global_position
+	tooltip_hidden.emit()
+	if particles:
+		particles.emitting = true
 
-		tooltip_hidden.emit()
-		if particles:
-			particles.emitting = true
+	
+	self.z_index = 100# Mandar al frente
 
-		# Mandar al frente
-		self.z_index = 100
-
-		# Consumir click para no propagar a otros items
-		get_viewport().set_input_as_handled()
+	# Consumir click para no propagar a otros items
+	get_viewport().set_input_as_handled()
 
 
 func _on_area_2d_mouse_entered():
@@ -113,7 +133,7 @@ func _on_area_2d_mouse_entered():
 		tween.set_ease(Tween.EASE_OUT)
 		tween.set_trans(Tween.TRANS_BACK)
 		tween.tween_property(self, "scale", Vector2(1.05, 1.05), 0.15)
-		
+
 		tooltip_requested.emit(data, self.global_position)
 
 
@@ -128,20 +148,28 @@ func _on_area_2d_mouse_exited():
 
 func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		# Manejar mouse button down
 		if event.pressed:
 			_handle_left_mouse_down()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group('sockets'):
+		# Ignorar el socket del que acabamos de recoger el item hasta que salgamos de él
+		if body == socket_to_ignore:
+			return
+
 		is_hovering_socket = true
 		body.modulate = Color(Color.GHOST_WHITE, 1.0)
 		drop_socket_ref = body
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
+	
 	if body.is_in_group('sockets'):
+		# Si salimos del socket que estábamos ignorando, dejamos de ignorarlo
+		if body == socket_to_ignore:
+			socket_to_ignore = null
+		#REVISAR!
 		is_hovering_socket = false
-		body.modulate = Color(Color.GHOST_WHITE, 0.7)
+		body.modulate = Color(Color.GREEN_YELLOW, 0.5)
 		drop_socket_ref = null

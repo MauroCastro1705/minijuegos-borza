@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hpldgxtpaew0"
-path="res://.godot/imported/mutant_tank.jpg-b79b3a28d1afd37f974b05707d32b4a0.ctex"
+uid="uid://1f0mmoh0fc38"
+path="res://.godot/imported/tank2.png-7a4694a7c11dc296807946afae20a9d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/juego4/mutant_tank.jpg"
-dest_files=["res://.godot/imported/mutant_tank.jpg-b79b3a28d1afd37f974b05707d32b4a0.ctex"]
+source_file="res://assets/juego4/tank2.png"
+dest_files=["res://.godot/imported/tank2.png-7a4694a7c11dc296807946afae20a9d5.ctex"]
 
 [params]
 

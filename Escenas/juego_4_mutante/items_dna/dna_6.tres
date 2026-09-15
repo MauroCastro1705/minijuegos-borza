@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://rfeldtqj141r"]
+
+[ext_resource type="Script" uid="uid://cr677umm4ntgt" path="res://Componentes/item/item_data.gd" id="1_ihjxg"]
+[ext_resource type="Texture2D" uid="uid://blbci7jk5vclv" path="res://assets/juego4/dna-no-fondo-spl.png" id="2_ihjxg"]
+
+[resource]
+script = ExtResource("1_ihjxg")
+sprite = ExtResource("2_ihjxg")
+item_name = "Mutageno SP"
+item_description = "Mejora la capacidad especial del ADN"
+metadata/_custom_type_script = "uid://cr677umm4ntgt"
