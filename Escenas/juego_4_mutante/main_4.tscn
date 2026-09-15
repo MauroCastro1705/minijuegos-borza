@@ -6,10 +6,104 @@
 [ext_resource type="PackedScene" uid="uid://deegte0xglo30" path="res://Escenas/juego_4_mutante/enemy/enemy_mutant.tscn" id="3_kjeb4"]
 [ext_resource type="PackedScene" uid="uid://dk4ronipsfh" path="res://Escenas/juego_4_mutante/mutante/mutante.tscn" id="4_4gp5x"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="7_ldo6a"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="8_1ypsl"]
 [ext_resource type="PackedScene" uid="uid://mmi2bm0him43" path="res://Componentes/item/item.tscn" id="8_6h3ti"]
 [ext_resource type="Resource" uid="uid://cgbfvlvfohxr7" path="res://Escenas/juego_4_mutante/items_dna/dna_1.tres" id="9_ldo6a"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="10_1ypsl"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="11_4mr71"]
+
+[sub_resource type="Shader" id="Shader_kssi1"]
+code = "shader_type canvas_item;
+
+uniform float progress = 0.0;
+uniform float speed = 0.1; 
+
+uniform vec2 pixelation = vec2(2.0, 2.0);
+uniform float zoom = 2.0;
+
+uniform float background_threshold : hint_range(-2.0, 1.0) = 0.0;
+uniform float color_threshold : hint_range(0.0, 1.0)  = 0.24;
+
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0); 
+
+uniform float seed = 0.0;
+
+#define iTime (TIME * speed - seed)
+
+const mat2 mtx = mat2( vec2(0.80, -0.60), vec2(0.60, 0.80) );
+
+float rand(vec2 n) { 
+    return fract(sin(dot(n, vec2(12.9898 + seed, 4.1414 - seed))) * (43758.5453 + seed * 1000.0));
+}
+
+float noise(vec2 p){
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u * u * (3.0 - 2.0 * u);
+
+    float res = mix(
+        mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
+        mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
+        
+    return res * res;
+}
+
+float fbm( vec2 p )
+{
+    float f = 0.0;
+    
+    f += 0.500000 * noise( p + iTime ); p = mtx * p * 2.02;
+    f += 0.031250 * noise( p ); p = mtx * p * 2.01;
+    f += 0.250000 * noise( p ); p = mtx * p * 2.03;
+    f += 0.125000 * noise( p ); p = mtx * p * 2.01;
+    f += 0.062500 * noise( p ); p = mtx * p * 2.04;
+    f += 0.015625 * noise( p + sin(iTime) );
+
+    return f / 0.96875;
+}
+
+float pattern( in vec2 p )
+{
+	return fbm( p + fbm( p + fbm( p ) ) );
+}
+
+vec4 colormap(float x, vec2 uv) {
+	
+	x *= max(0.0, min(-abs(progress * 4.0 - uv.x - uv.y - 1.0) + 1.0, 1.0) * 2.0);
+    
+    if (x < background_threshold) { 
+        return vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else if (x < color_threshold) { 
+        return mix(
+			vec4(0.0, 0.0, 0.0, 0.0),
+			color,
+			round((x - background_threshold) / (color_threshold - background_threshold))
+		);
+    }
+	else {
+		return color;
+	}
+}
+
+void fragment()
+{
+	vec2 modifier = 1.0/(SCREEN_PIXEL_SIZE * pixelation);
+	vec2 uv = floor(UV * modifier) / modifier;
+	float shade = pattern(uv * zoom);
+	COLOR = colormap(shade, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ypsl"]
+shader = SubResource("Shader_kssi1")
+shader_parameter/progress = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/pixelation = Vector2(5, 5)
+shader_parameter/zoom = 2.0
+shader_parameter/background_threshold = 0.254000107065
+shader_parameter/color_threshold = 0.24
+shader_parameter/color = Color(0.64705884, 0.8666667, 0.9490196, 0.19215687)
+shader_parameter/seed = 0.2
 
 [sub_resource type="Resource" id="Resource_wf8mm"]
 script = ExtResource("10_1ypsl")
@@ -100,6 +194,7 @@ metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [node name="Main4" type="Node2D" unique_id=2094789572]
 script = ExtResource("1_m3y83")
+base_enemy = ExtResource("3_kjeb4")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=707824182]
 offset_left = 8.0
@@ -127,6 +222,16 @@ mouse_filter = 2
 color = Color(0.48570347, 0.48570353, 0.4857034, 1)
 metadata/_edit_lock_ = true
 
+[node name="shader_loco" type="ColorRect" parent="." unique_id=530148945]
+material = SubResource("ShaderMaterial_1ypsl")
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 1014.0
+offset_bottom = 344.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
 [node name="Inventory" parent="." unique_id=1484637582 node_paths=PackedStringArray("mutante") instance=ExtResource("1_yu33v")]
 position = Vector2(47, 380)
 mutante = NodePath("../Mutante")
@@ -141,6 +246,18 @@ data = ExtResource("9_ldo6a")
 
 [node name="Item2" parent="." unique_id=932787270 instance=ExtResource("8_6h3ti")]
 position = Vector2(612, 271)
+data = ExtResource("9_ldo6a")
+
+[node name="Item3" parent="." unique_id=673907411 instance=ExtResource("8_6h3ti")]
+position = Vector2(552, 197)
+data = ExtResource("9_ldo6a")
+
+[node name="Item4" parent="." unique_id=260746570 instance=ExtResource("8_6h3ti")]
+position = Vector2(761, 194)
+data = ExtResource("9_ldo6a")
+
+[node name="Item5" parent="." unique_id=604519992 instance=ExtResource("8_6h3ti")]
+position = Vector2(861, 142)
 data = ExtResource("9_ldo6a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=777729258]
@@ -167,6 +284,8 @@ offset_left = 826.0
 offset_top = 307.0
 offset_right = 959.0
 offset_bottom = 378.0
+theme_override_fonts/font = ExtResource("8_1ypsl")
+theme_override_font_sizes/font_size = 27
 theme_override_styles/normal = SubResource("StyleBox_wyrh1")
 theme_override_styles/hover = SubResource("StyleBox_63ja4")
 text = "Comenzar

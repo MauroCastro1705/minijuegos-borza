@@ -2,18 +2,25 @@ extends CharacterBody2D
 
 
 @onready var barra_vida: HealthBar3 = $BarraVida_mutante
-
 @onready var number_position: Marker2D = $Marker2D
 var number_real_position
 
-var enemy_dmg:int = 15
 signal died
-var max_health:float = 60
-var current_health: float
-var is_dead: bool = false
-var SPEED:float = 10
 
-var can_attack:bool = true
+# --- Stats base (matchean con el GameManager) ---
+var max_health: float = 60
+var current_health: float
+var fuerza: int = 10             # daño base
+var velocidad: float = 100.0     # solo informativo en formato Pokémon
+var defensa: float = 0.0         # 0.0 = sin reducción, 0.5 = 50% menos daño
+const DEFENSA_MAX: float = 0.9
+
+# Alias por compatibilidad con código viejo
+var enemy_dmg: int:
+	get: return fuerza
+	set(value): fuerza = value
+
+var is_dead: bool = false
 
 
 func _ready() -> void:
@@ -23,20 +30,27 @@ func _ready() -> void:
 	barra_vida.max_health = max_health
 	barra_vida.current_health = current_health
 
+
 func _physics_process(_delta: float) -> void:
 	pass
 
 
+# ------------------ RECIBIR DAÑO ------------------
 func take_damage(damage: int) -> void:
 	if is_dead:
 		return
-	print("robot recibió daño: ", damage)
-	current_health -= damage
+
+	var danio_final: int = int(round(damage * (1.0 - defensa)))
+	danio_final = max(danio_final, 1)  # siempre al menos 1
+
+	print("enemigo recibió daño: ", danio_final, " (original: ", damage, ")")
 	number_real_position = number_position.global_position
-	DamageNumbers.display_numbers_tesla(damage, number_real_position)
+	DamageNumbers.display_numbers_tesla(danio_final, number_real_position)
 	DamageNumbers.flash_sprite(self)
+
+	current_health -= danio_final
 	if barra_vida:
-		barra_vida.take_damage(damage)
+		barra_vida.take_damage(danio_final)
 
 
 func _on_health_depleted():
@@ -45,36 +59,34 @@ func _on_health_depleted():
 	is_dead = true
 	Global.enemy_died.emit()
 	died.emit()
-	can_attack = false
 	barra_vida.hide()
-	print("robot murio")
+	print("enemigo murio")
 	queue_free()
-	
+
+
+# ------------------ ATACAR ------------------
 func atacar(objetivo: Node2D) -> void:
+	if is_dead:
+		return
 	if not is_instance_valid(objetivo):
 		return
 
-	var damage: int = int(enemy_dmg)
+	var damage: int = int(fuerza)
 	if objetivo.has_method("take_damage"):
-		# Dirección hacia el objetivo
 		var direccion := (objetivo.global_position - global_position).normalized()
 		var pos_original := global_position
-		var distancia_lunge := 25.0  # cuánto se lanza hacia adelante
+		var distancia_lunge := 25.0
 
-		# --- Animación tipo Pokémon (lunge) ---
 		var tween := create_tween()
 		tween.set_trans(Tween.TRANS_QUAD)
 
-		# 1. Lanzarse hacia adelante rápido
 		tween.tween_property(self, "global_position",
 			pos_original + direccion * distancia_lunge, 0.08).set_ease(Tween.EASE_OUT)
 
-		# 2. Aplicar daño justo en el impacto
 		tween.tween_callback(func():
 			objetivo.take_damage(damage)
-			print("mutante ataco")
+			print("enemigo ataco por ", damage)
 		)
 
-		# 3. Volver a la posición original
 		tween.tween_property(self, "global_position",
 			pos_original, 0.15).set_ease(Tween.EASE_IN)

@@ -6,6 +6,7 @@ signal died
 var is_dead: bool = false
 var max_health: float = 50
 var current_health: float
+@onready var marker_2d: Marker2D = $Marker2D
 
 # --- Stats base ---
 var fuerza: int = 15
@@ -25,7 +26,7 @@ const AGI_POR_ITEM: float = 0.10
 const INT_POR_ITEM: float = 0.10
 const DEF_POR_ITEM: float = 0.05
 const HP_POR_ITEM: int    = 10
-
+var number_real_position
 
 
 
@@ -79,7 +80,8 @@ func take_damage(damage: int) -> void:
 	danio_final = max(danio_final, 1)
 	print("mutante recibió daño: ", danio_final, " (original: ", damage, ")")
 	DamageNumbers.flash_sprite(self)
-	DamageNumbers.display_numbers(danio_final, global_position)
+	number_real_position = marker_2d.global_position
+	DamageNumbers.display_numbers_tesla(danio_final, number_real_position)
 	current_health -= danio_final
 	if barra_vida:
 		barra_vida.take_damage(danio_final)
