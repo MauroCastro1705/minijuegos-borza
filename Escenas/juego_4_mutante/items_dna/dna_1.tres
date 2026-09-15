@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cgbfvlvfohxr7"]
+
+[ext_resource type="Script" uid="uid://cr677umm4ntgt" path="res://Componentes/item/item_data.gd" id="1_r8gn6"]
+[ext_resource type="Texture2D" uid="uid://cqs0h6sf86afo" path="res://assets/juego4/dna-no-fondo--def.png" id="2_6ub63"]
+
+[resource]
+script = ExtResource("1_r8gn6")
+sprite = ExtResource("2_6ub63")
+item_name = "Mutageno DEF"
+item_description = "Mejora la resistencia del ADN"
+metadata/_custom_type_script = "uid://cr677umm4ntgt"
