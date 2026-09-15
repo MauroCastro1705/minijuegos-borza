@@ -1,5 +1,6 @@
 class_name Item extends Node2D
 
+var already_applied: bool = false
 signal tooltip_requested(data: ItemData, item_global_pos: Vector2)
 signal tooltip_hidden()
 

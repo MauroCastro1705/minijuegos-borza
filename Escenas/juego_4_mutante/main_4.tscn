@@ -131,7 +131,8 @@ position = Vector2(47, 380)
 mutante = NodePath("../Mutante")
 
 [node name="Mutante" parent="." unique_id=405837163 instance=ExtResource("4_4gp5x")]
-position = Vector2(259, 259)
+position = Vector2(315, 235)
+scale = Vector2(1.7, 1.7)
 
 [node name="Item" parent="." unique_id=1982616256 instance=ExtResource("8_6h3ti")]
 position = Vector2(753, 301)
@@ -161,6 +162,10 @@ text = "Comenzar
 Prueba"
 
 [node name="Enemy_mutant" parent="." unique_id=816020656 instance=ExtResource("3_kjeb4")]
-position = Vector2(685, 130)
+position = Vector2(664, 173)
+scale = Vector2(2, 2)
+
+[node name="Timer_for_attaks" type="Timer" parent="." unique_id=1742553077]
 
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="Timer_for_attaks" to="." method="_on_timer_for_attaks_timeout"]

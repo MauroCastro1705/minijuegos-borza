@@ -49,3 +49,32 @@ func _on_health_depleted():
 	barra_vida.hide()
 	print("robot murio")
 	queue_free()
+	
+func atacar(objetivo: Node2D) -> void:
+	if not is_instance_valid(objetivo):
+		return
+
+	var damage: int = int(enemy_dmg)
+	if objetivo.has_method("take_damage"):
+		# Dirección hacia el objetivo
+		var direccion := (objetivo.global_position - global_position).normalized()
+		var pos_original := global_position
+		var distancia_lunge := 25.0  # cuánto se lanza hacia adelante
+
+		# --- Animación tipo Pokémon (lunge) ---
+		var tween := create_tween()
+		tween.set_trans(Tween.TRANS_QUAD)
+
+		# 1. Lanzarse hacia adelante rápido
+		tween.tween_property(self, "global_position",
+			pos_original + direccion * distancia_lunge, 0.08).set_ease(Tween.EASE_OUT)
+
+		# 2. Aplicar daño justo en el impacto
+		tween.tween_callback(func():
+			objetivo.take_damage(damage)
+			print("mutante ataco")
+		)
+
+		# 3. Volver a la posición original
+		tween.tween_property(self, "global_position",
+			pos_original, 0.15).set_ease(Tween.EASE_IN)
