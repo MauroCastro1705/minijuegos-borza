@@ -49,7 +49,6 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	Global.emit_signal("pick_up")
 	if not is_being_dragged: return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
@@ -67,14 +66,15 @@ func _input(event: InputEvent) -> void:
 			occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", true)
 			occupied_socket.occupied_item = self
 
-			# Limpiar estado de hover y cualquier socket a ignorar
 			is_hovering_socket = false
 			drop_socket_ref = null
 			socket_to_ignore = null
 		else:
 			tooltip_requested.emit(data, self.global_position)
 
-		# Resettear índice z al soltar y dejar por encima de todo otro item
+		# --- NUEVO: emitir señal al soltar el item ---
+		Global.pick_up.emit()
+
 		self.z_index = 10
 		if get_parent():
 			get_parent().move_child(self, -1)

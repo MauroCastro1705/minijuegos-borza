@@ -13,7 +13,8 @@ signal enemy_hit
 signal enemy_died
 @warning_ignore("unused_signal")
 signal buy_upgrade
-
+@warning_ignore("unused_signal")
+signal player_died
 
 #planeta expansion
 var materia:int = 0

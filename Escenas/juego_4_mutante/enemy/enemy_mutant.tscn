@@ -1,14 +1,10 @@
 [gd_scene format=3 uid="uid://deegte0xglo30"]
 
 [ext_resource type="Script" uid="uid://cow8mtrrrrnu8" path="res://Escenas/juego_4_mutante/enemy/enemy_mutant.gd" id="1_56uo5"]
-[ext_resource type="PackedScene" uid="uid://daps7g4qm000h" path="res://Escenas/juego_3_idolo/attacks/rayo_1.tscn" id="4_ii6ca"]
 [ext_resource type="PackedScene" uid="uid://24axemrsl1cw" path="res://Componentes/barra_vida_mutante/barra_vida_mutante.tscn" id="4_ypk5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
 size = Vector2(42, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x75fr"]
-size = Vector2(126, 122)
 
 [node name="Enemy_mutant" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
 z_index = 4
@@ -17,23 +13,6 @@ script = ExtResource("1_56uo5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=47465645]
 shape = SubResource("RectangleShape2D_5rcss")
-
-[node name="attack_timer" type="Timer" parent="." unique_id=1281616161]
-wait_time = 2.0
-
-[node name="Rayo1" parent="." unique_id=85275332 instance=ExtResource("4_ii6ca")]
-visible = false
-position = Vector2(-4, 23)
-
-[node name="damage_timer" type="Timer" parent="." unique_id=1007270071]
-wait_time = 0.5
-
-[node name="attack_area" type="Area2D" parent="." unique_id=109419654]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=1816785956]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_x75fr")
-debug_color = Color(0.78039217, 0.627451, 0.2509804, 0.12156863)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1921398640]
 position = Vector2(67, -63)
@@ -48,7 +27,3 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 color = Color(0.6392157, 0.11372549, 0, 1)
-
-[connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]
-[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

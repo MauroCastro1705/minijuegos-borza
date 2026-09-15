@@ -7,9 +7,9 @@ extends Node2D
 @onready var socket_spe_6: StaticBody2D = $sockets_mutante/socket_spe6
 
 @export var mutante:CharacterBody2D
-
+var can_apply_mutagens:bool = true
+@onready var apply_mutagen_button: Button = $apply_mutagen
 @onready var mutant_info: Label = %mutant_info
-
 @onready var sockets:Array = [socket_spe, socket_spe_2,socket_spe_3,socket_spe_4, socket_spe_5, socket_spe_6 ]
 
 func _ready() -> void:
@@ -18,8 +18,9 @@ func _ready() -> void:
 
 
 func usar_mutagenos() -> void:
-	for i in sockets :
-		i._on_something(mutante)
+	if can_apply_mutagens:
+		for i in sockets :
+			i._on_something(mutante)
 		
 func _update_label() -> void:
 	var danio_efectivo = int(mutante.fuerza * mutante.multi_danio)
@@ -36,8 +37,12 @@ func _update_label() -> void:
 		+ "DEF: %d%%\n" % defensa_pct
 		+ "HP: %d / %d" % [int(mutante.current_health), int(mutante.max_health)]
 	)
+	if not can_apply_mutagens:
+		apply_mutagen_button.disabled = true
+	else: apply_mutagen_button.disabled = false
 	
 
 
 func _on_apply_mutagen_pressed() -> void:
+	_update_label()
 	usar_mutagenos()
