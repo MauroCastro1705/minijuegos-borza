@@ -41,8 +41,15 @@ var _defensa_bonus: float = 0.0
 var _pos_spawn_enemigo: Vector2
 var _spawneando_enemigo: bool = false
 
+var tutorial_mensajes:Array[String] = [
+		"Bienvenido al laboratorio de M enterprises, aqui crearas y mejoraras al sujeto de prueba",
+		"En la parte inferior tenes varios espacios para guardar, instalar o consumir ADN",
+		"Deberas combatir con tu sujeto de pruba contra otros, luego de cada batalla podras colocar nuevos ADN en tu mutante para mejorar",
+		"Los Mutantes pelean automaticamente, Usa el mouse para jugar!"
+	]
 
 func _ready() -> void:
+	set_tutorial_text()
 	tuto.show()
 	Global.drag_limits = reference_rect.get_global_rect()
 	item_spawner.item_spawned.connect(_on_item_spawned)
@@ -65,6 +72,9 @@ func _ready() -> void:
 		mutante.died.connect(_on_mutante_aliado_muerto)
 	if enemy_mutant.has_signal("died"):
 		enemy_mutant.died.connect(_on_mutante_enemigo_muerto)
+
+func set_tutorial_text():
+	tuto.set_mensajes(tutorial_mensajes)
 
 
 func _on_start_button_pressed() -> void:

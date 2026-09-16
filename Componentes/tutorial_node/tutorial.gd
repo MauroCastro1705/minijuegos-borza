@@ -1,10 +1,10 @@
 extends Control
 
 signal tutorial_finished
+@onready var next_tutorial_button: Button = %next_tutorial_button
 
-@onready var next_tutorial_button: Button = $next_tutorial_button
 @onready var info: Label = %info
-@onready var panel: Panel = $Panel
+@onready var panel: PanelContainer = $Panel
 
 
 # Textos del tutorial (se pueden setear desde afuera)
@@ -16,7 +16,7 @@ var indice_actual: int = 0
 func _ready() -> void:
 	# Si no se cargaron mensajes desde afuera, mostramos uno por defecto
 	if mensajes.is_empty():
-		mensajes = ["Tutorial..."]
+		mensajes = ["Bievenido..."]
 	
 	_mostrar_mensaje_actual()
 
@@ -52,3 +52,10 @@ static func crear(mensajes_tutorial: Array[String], parent: Node) -> Control:
 	instancia.mensajes = mensajes_tutorial
 	parent.add_child(instancia)
 	return instancia
+	
+func set_mensajes(nuevos: Array[String]) -> void:
+	mensajes = nuevos
+	indice_actual = 0
+	# Si ya se mostró algo (o sea, ya corrió _ready), refrescamos
+	if is_node_ready():
+		_mostrar_mensaje_actual()
