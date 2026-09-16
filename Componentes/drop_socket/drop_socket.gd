@@ -4,6 +4,7 @@ class_name DropSocket extends StaticBody2D
 
 var special_socket: bool = false
 var occupied_item: Item = null
+var stat_target: Node = null
 
 const COLOR_IDLE     := Color(0.68, 0.85, 0.9, 0.5)
 const COLOR_HOVER    := Color(1, 1, 1, 1)
@@ -28,6 +29,28 @@ func set_occupied(occupied: bool) -> void:
 	_apply_color(COLOR_OCCUPIED if occupied else COLOR_IDLE)
 
 
+func set_stat_target(target: Node) -> void:
+	stat_target = target
+
+
+func equip_item(item: Item) -> void:
+	if item == null or stat_target == null or item.already_applied:
+		return
+
+	stat_target.aplicar_item(item.data)
+	item.already_applied = true
+
+
+func remove_item() -> void:
+	if not has_item():
+		return
+
+	var item := occupied_item
+	if stat_target != null and item.already_applied:
+		stat_target.remover_item(item.data)
+	item.already_applied = false
+
+
 func _apply_color(c: Color) -> void:
 	var t := create_tween()
 	t.tween_property(self, "modulate", c, 0.1)
@@ -50,6 +73,7 @@ func get_item() -> Item:
 
 
 func clear_item() -> void:
+	remove_item()
 	occupied_item = null
 	get_node("CollisionShape2D").set_deferred("disabled", false)
 	_apply_color(COLOR_IDLE)

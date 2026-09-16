@@ -15,13 +15,12 @@ var can_apply_mutagens:bool = true
 
 func _ready() -> void:
 	Global.pick_up.connect(_update_label)
+	for socket in sockets:
+		socket.set_stat_target(mutante)
 	_update_label()
 
 
-func usar_mutagenos() -> void:
-	if can_apply_mutagens:
-		for i in sockets :
-			i._on_something(mutante)
+
 		
 func _update_label() -> void:
 	var danio_efectivo = int(mutante.fuerza * mutante.multi_danio)
@@ -43,7 +42,11 @@ func _update_label() -> void:
 func _on_apply_mutagen_pressed() -> void:
 	usar_mutagenos()
 	_update_label()
-
+	
+func usar_mutagenos() -> void:
+	if can_apply_mutagens:
+		for i in sockets :
+			i._on_something(mutante)
 
 func _on_dna_for_hp_pressed() -> void:
 	if not heal_socket.has_item():

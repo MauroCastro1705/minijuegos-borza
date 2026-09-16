@@ -144,3 +144,29 @@ func aplicar_item(item: ItemData) -> void:
 			pass
 		_:
 			push_warning("Tipo de item no manejado: %s" % item.type)
+
+
+func remover_item(item: ItemData) -> void:
+	if item == null:
+		push_warning("remover_item: item nulo")
+		return
+
+	match item.type:
+		ItemData.ItemType.STR:
+			mejorar_fuerza(-STR_POR_ITEM)
+		ItemData.ItemType.AGI:
+			mejorar_velocidad(-AGI_POR_ITEM)
+		ItemData.ItemType.INT:
+			pass
+		ItemData.ItemType.DEF:
+			mejorar_defensa(-DEF_POR_ITEM)
+		ItemData.ItemType.HP:
+			max_health = max_health - HP_POR_ITEM
+			current_health = min(current_health - HP_POR_ITEM, max_health)
+			if barra_vida:
+				barra_vida.max_health = max_health
+				barra_vida.current_health = current_health
+		ItemData.ItemType.SP:
+			pass
+		_:
+			push_warning("Tipo de item no manejado: %s" % item.type)

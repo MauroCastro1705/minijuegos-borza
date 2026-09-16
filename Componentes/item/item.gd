@@ -16,6 +16,7 @@ var socket_to_ignore: DropSocket = null
 
 # Estado permanente cuando el item está en un socket
 var occupied_socket: DropSocket = null
+var drag_start_position: Vector2 = Vector2.ZERO
 
 var base_scale: Vector2 = Vector2(1.0, 1.0)
 var offset: Vector2 = Vector2(0.0, 0.0)
@@ -58,7 +59,7 @@ func _input(event: InputEvent) -> void:
 		if particles:
 			particles.emitting = false
 
-		if is_hovering_socket and drop_socket_ref:
+		if is_hovering_socket and drop_socket_ref and not drop_socket_ref.has_item():
 			var tween = get_tree().create_tween()
 			tween.tween_property(self, "global_position", drop_socket_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
 
@@ -66,11 +67,17 @@ func _input(event: InputEvent) -> void:
 			occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", true)
 			occupied_socket.occupied_item = self   # <-- ahora sí funciona
 			occupied_socket.set_occupied(true)     # <-- color verde (reemplaza a body.modulate)
+			occupied_socket.equip_item(self)
 
 			is_hovering_socket = false
 			drop_socket_ref = null
 			socket_to_ignore = null
 		else:
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "global_position", drag_start_position, 0.1).set_ease(Tween.EASE_OUT)
+			is_hovering_socket = false
+			drop_socket_ref = null
+			socket_to_ignore = null
 			tooltip_requested.emit(data, self.global_position)
 
 		# --- NUEVO: emitir señal al soltar el item ---
@@ -105,11 +112,12 @@ func _handle_left_mouse_down() -> void:
 	if Global.is_dragging:
 		return
 
+	drag_start_position = global_position
+
 	# Si el item estaba en un socket, lo liberamos y marcamos ese socket para ignorarlo
 	if occupied_socket:
+		occupied_socket.clear_item()
 		occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", false)
-		occupied_socket.occupied_item = null
-		occupied_socket.set_occupied(false)
 		socket_to_ignore = occupied_socket
 		occupied_socket = null
 		is_hovering_socket = false
@@ -161,6 +169,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 
 	if body == socket_to_ignore:
+		return
+
+	if body.has_method("has_item") and body.has_item():
 		return
 
 	is_hovering_socket = true

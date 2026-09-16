@@ -375,7 +375,6 @@ offset_right = 137.0
 offset_bottom = 42.0
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=916593841]
-visible = false
 material = ExtResource("7_ldo6a")
 anchors_preset = -1
 anchor_right = 1.018
