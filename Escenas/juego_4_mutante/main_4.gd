@@ -17,6 +17,7 @@ extends Node2D
 @onready var item_tooltip: Panel = $CanvasLayer/ItemTooltip
 @onready var item: Item = $Item
 @onready var timer_for_attaks: Timer = $Timer_for_attaks
+@onready var item_spawner: ItemSpawner = $ItemSpawner
 
 # --- Estado del combate ---
 enum Turno { JUGADOR, ENEMIGO }

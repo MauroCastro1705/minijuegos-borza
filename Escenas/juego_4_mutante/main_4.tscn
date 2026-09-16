@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dk4ronipsfh" path="res://Escenas/juego_4_mutante/mutante/mutante.tscn" id="4_4gp5x"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="7_ldo6a"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="8_1ypsl"]
-[ext_resource type="PackedScene" uid="uid://mmi2bm0him43" path="res://Componentes/item/item.tscn" id="8_6h3ti"]
-[ext_resource type="Resource" uid="uid://cgbfvlvfohxr7" path="res://Escenas/juego_4_mutante/items_dna/dna_1.tres" id="9_ldo6a"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="10_1ypsl"]
+[ext_resource type="PackedScene" uid="uid://cbybj5wspya8b" path="res://Componentes/item_spawner/item_spawner.tscn" id="10_ldo6a"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="11_4mr71"]
 
 [sub_resource type="Shader" id="Shader_kssi1"]
@@ -240,26 +239,6 @@ mutante = NodePath("../Mutante")
 position = Vector2(315, 235)
 scale = Vector2(1.7, 1.7)
 
-[node name="Item" parent="." unique_id=1982616256 instance=ExtResource("8_6h3ti")]
-position = Vector2(753, 301)
-data = ExtResource("9_ldo6a")
-
-[node name="Item2" parent="." unique_id=932787270 instance=ExtResource("8_6h3ti")]
-position = Vector2(612, 271)
-data = ExtResource("9_ldo6a")
-
-[node name="Item3" parent="." unique_id=673907411 instance=ExtResource("8_6h3ti")]
-position = Vector2(552, 197)
-data = ExtResource("9_ldo6a")
-
-[node name="Item4" parent="." unique_id=260746570 instance=ExtResource("8_6h3ti")]
-position = Vector2(761, 194)
-data = ExtResource("9_ldo6a")
-
-[node name="Item5" parent="." unique_id=604519992 instance=ExtResource("8_6h3ti")]
-position = Vector2(861, 142)
-data = ExtResource("9_ldo6a")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=777729258]
 
 [node name="ItemTooltip" parent="CanvasLayer" unique_id=951043355 instance=ExtResource("2_px0uf")]
@@ -296,6 +275,9 @@ position = Vector2(664, 173)
 scale = Vector2(2, 2)
 
 [node name="Timer_for_attaks" type="Timer" parent="." unique_id=1742553077]
+
+[node name="ItemSpawner" parent="." unique_id=937600891 instance=ExtResource("10_ldo6a")]
+position = Vector2(692, 204)
 
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="Timer_for_attaks" to="." method="_on_timer_for_attaks_timeout"]
