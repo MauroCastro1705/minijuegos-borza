@@ -1,0 +1,234 @@
+[gd_scene format=3 uid="uid://cdrot0pf04wpx"]
+
+[ext_resource type="Texture2D" uid="uid://62hu7kqbpmcr" path="res://assets/portadas/portada4sinfondo.png" id="1_lnaxn"]
+[ext_resource type="Script" uid="uid://brckfes42es1f" path="res://Escenas/juego_4_mutante/main_menu/menu_mutante.gd" id="1_pyho0"]
+[ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="2_m0xm4"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_v08r8"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="4_lrov7"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="5_bjo0h"]
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="6_1sipf"]
+[ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="7_pyho0"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="8_edc8y"]
+[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="9_upkqa"]
+[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="10_dkayg"]
+[ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="11_wloae"]
+
+[sub_resource type="Shader" id="Shader_m0xm4"]
+code = "shader_type canvas_item;
+
+uniform vec4 background_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 line_color : source_color = vec4(0.0, 1.0, 1.0, 1.0);
+uniform float line_freq = 9.56;
+uniform float height = 0.6;
+uniform float speed = 0.8;
+uniform vec2 scale = vec2(2.0, 16.0);
+
+void fragment()
+{
+	vec2 uv = UV * scale;
+	float shift = cos(floor(uv.y));
+	uv.x += shift;
+
+	float freq = clamp(cos(uv.x * line_freq) * 3.0, 0.0, 1.0) * height;
+	float line = 1.0 - clamp(abs(freq - mod(uv.y, 1.0)) * 11.0, 0.0, 1.0);
+
+	COLOR = mix(background_color, line_color, line * mod(uv.x - TIME * speed * abs(shift), 1.0));
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgn3o"]
+shader = SubResource("Shader_m0xm4")
+shader_parameter/background_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+shader_parameter/line_color = Color(0, 0.29803923, 0, 1)
+shader_parameter/line_freq = 20.0
+shader_parameter/height = 0.2
+shader_parameter/speed = 0.2
+shader_parameter/scale = Vector2(3, 3)
+
+[sub_resource type="Resource" id="Resource_wf8mm"]
+script = ExtResource("4_lrov7")
+color = Color(0, 1, 0, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_4jai8"]
+offsets = PackedFloat32Array(0.09917355, 1)
+colors = PackedColorArray(0.20784314, 0.6666667, 0, 1, 0, 0.2175481, 1.2032687e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8qer"]
+gradient = SubResource("Gradient_4jai8")
+fill_from = Vector2(0.85945946, 1)
+fill_to = Vector2(0.17297298, 0.043243244)
+
+[sub_resource type="StyleBox" id="StyleBox_qxtg1"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("5_bjo0h")
+color = Color(0.50140655, 0.5014065, 0.5014065, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("4_lrov7")]([SubResource("Resource_wf8mm")])
+texture = SubResource("GradientTexture2D_a8qer")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Resource" id="Resource_a8qer"]
+script = ExtResource("4_lrov7")
+color = Color(0, 1, 0, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_qnhgk"]
+offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
+colors = PackedColorArray(0.0018410678, 0.0018410682, 0.0018410678, 1, 0, 0.2175481, 1.2032687e-07, 1, 0, 0.37354112, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xjwfm"]
+gradient = SubResource("Gradient_qnhgk")
+fill_from = Vector2(0.55128205, 1)
+fill_to = Vector2(0.7606838, 0.0042735045)
+
+[sub_resource type="StyleBox" id="StyleBox_1sipf"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("5_bjo0h")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("4_lrov7")]([SubResource("Resource_a8qer")])
+texture = SubResource("GradientTexture2D_xjwfm")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="LabelSettings" id="LabelSettings_1sipf"]
+font = ExtResource("3_v08r8")
+font_size = 25
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MenuMutante" type="Node2D" unique_id=592524246]
+script = ExtResource("1_pyho0")
+
+[node name="lines" type="ColorRect" parent="." unique_id=429798987]
+material = SubResource("ShaderMaterial_wgn3o")
+offset_left = -19.0
+offset_top = -38.0
+offset_right = 1025.0
+offset_bottom = 838.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1391326125]
+offset_left = 58.933838
+offset_top = 60.0
+offset_right = 948.06616
+offset_bottom = 407.0
+texture = ExtResource("1_lnaxn")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=774877180]
+
+[node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=1667985205]
+material = ExtResource("2_m0xm4")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="play" type="Button" parent="." unique_id=1336704372]
+offset_left = 409.0
+offset_top = 638.0
+offset_right = 586.0
+offset_bottom = 720.0
+theme_override_fonts/font = ExtResource("3_v08r8")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBox_qxtg1")
+theme_override_styles/hover = SubResource("StyleBox_1sipf")
+text = "COMENZAR"
+
+[node name="InteractionFeedback" type="Node" parent="play" unique_id=545880225]
+script = ExtResource("6_1sipf")
+
+[node name="FeedbackStickyEffect" type="Node" parent="play/InteractionFeedback" unique_id=453787904]
+script = ExtResource("7_pyho0")
+
+[node name="FeedbackScaleEffect" type="Node" parent="play/InteractionFeedback" unique_id=210441122]
+script = ExtResource("8_edc8y")
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="play/InteractionFeedback" unique_id=1865658716]
+script = ExtResource("9_upkqa")
+degrees = 5.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="play/InteractionFeedback" unique_id=202284136]
+script = ExtResource("10_dkayg")
+mode = 1
+trigger = 1
+
+[node name="FeedbackModulateOnceEffect" type="Node" parent="play/InteractionFeedback" unique_id=444509803]
+script = ExtResource("11_wloae")
+color = Color(0, 0.99607843, 0, 1)
+transition = 1
+metadata/_custom_type_script = "uid://cw31nl0ldqdv0"
+
+[node name="volver" type="Button" parent="." unique_id=1645913086]
+offset_left = 856.0
+offset_top = 716.0
+offset_right = 971.0
+offset_bottom = 766.0
+theme_override_fonts/font = ExtResource("3_v08r8")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBox_qxtg1")
+theme_override_styles/hover = SubResource("StyleBox_1sipf")
+text = "Volver"
+
+[node name="Label3" type="Label" parent="." unique_id=351126196]
+custom_minimum_size = Vector2(50, 50)
+offset_left = 200.0
+offset_top = 415.0
+offset_right = 750.0
+offset_bottom = 610.0
+text = "Como cientifico del laboratorio super secreto \"M\" tenes que experimentar con mutagenos modificando el ADN del sujeto de prueba.
+El mutante debera luchar y ganar, para eso deberas elegir la mejor combinacion de propiedades, no te olvides de aplicar las mutaciones del ADN antes de combatir"
+label_settings = SubResource("LabelSettings_1sipf")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="volver" to="." method="_on_volver_pressed"]

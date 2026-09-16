@@ -20,6 +20,8 @@ extends Node2D
 @onready var item_tooltip: Panel = $CanvasLayer/ItemTooltip
 @onready var timer_for_attaks: Timer = $Timer_for_attaks
 @onready var item_spawner: ItemSpawner = $ItemSpawner
+@onready var tuto: Control = $tuto
+@onready var game_over_screen: Node2D = $game_over_screen
 
 # --- Estado del combate ---
 enum Turno { JUGADOR, ENEMIGO }
@@ -41,6 +43,7 @@ var _spawneando_enemigo: bool = false
 
 
 func _ready() -> void:
+	tuto.show()
 	Global.drag_limits = reference_rect.get_global_rect()
 	item_spawner.item_spawned.connect(_on_item_spawned)
 	Global.player_died.connect(_player_died)
@@ -232,6 +235,7 @@ func on_derrota() -> void:
 	print("Derrota en ronda %d..." % ronda_actual)
 	inventory.can_apply_mutagens = true
 	# TODO: mostrar UI de derrota, reiniciar, etc.
+	game_over_screen.show()
 
 
 # ---------------- UTILIDADES ----------------
@@ -250,3 +254,7 @@ func spawn_dna(level: int) -> void:
 func _on_item_spawned(item: Item) -> void:
 	item.tooltip_requested.connect(item_tooltip._on_item_tooltip_requested)
 	item.tooltip_hidden.connect(item_tooltip._on_item_tooltip_hidden)
+
+
+func _on_tutorial_button_pressed() -> void:
+	tuto.hide()

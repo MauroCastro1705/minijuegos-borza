@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="5_v2is1"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
 [ext_resource type="Texture2D" uid="uid://ckyru12bu7naa" path="res://assets/portadas/planeta.png" id="9_nrt5e"]
+[ext_resource type="Texture2D" uid="uid://n6buvueqgxk7" path="res://assets/portadas/portada4.png" id="10_chgxx"]
 [ext_resource type="Texture2D" uid="uid://dlo72kqsitvog" path="res://assets/portadas/patagonia.png" id="10_kehw0"]
 [ext_resource type="Texture2D" uid="uid://wxefl0ouq20b" path="res://assets/portadas/testla.jpg" id="11_kehw0"]
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
@@ -124,7 +125,7 @@ offset_right = -774.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "v 0.0.39"
+text = "v 0.0.52"
 label_settings = SubResource("LabelSettings_ckk3t")
 
 [node name="version2" type="Label" parent="." unique_id=1413113268]
@@ -204,8 +205,10 @@ alignment = 1
 [node name="BotonMainMenu" parent="juegos/HBoxContainer2" unique_id=1873821953 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-game_name = "Tema sorpresa"
-game_img = ExtResource("5_8cngx")
+scene_path = "res://Escenas/juego_4_mutante/main_menu/menu_mutante.tscn"
+game_name = "Tema 4 : Mutante"
+game_img = ExtResource("10_chgxx")
+disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer2" unique_id=445309188 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)

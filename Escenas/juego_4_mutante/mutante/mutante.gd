@@ -96,7 +96,11 @@ func _on_health_depleted():
 	queue_free()
 
 
-
+func heal(value:float):
+	max_health += value
+	current_health += value
+	if barra_vida:
+		barra_vida.heal(value)
 
 
 

@@ -46,8 +46,20 @@ func _on_apply_mutagen_pressed() -> void:
 
 
 func _on_dna_for_hp_pressed() -> void:
-	if heal_socket.has_item():
-		pass
-	else:
+	if not heal_socket.has_item():
 		print("no hay item para consumir")
-		pass
+		return
+
+	# Curar al mutante
+	mutante.heal(20)
+
+	# Consumir el item
+	var item_consumido = heal_socket.occupied_item
+	if is_instance_valid(item_consumido):
+		item_consumido.queue_free()
+
+	# Limpiar el socket: referencia, color y colisión
+	heal_socket.clear_item()  # ya pone occupied_item = null y color IDLE
+	heal_socket.get_node("CollisionShape2D").set_deferred("disabled", false)
+
+	_update_label()

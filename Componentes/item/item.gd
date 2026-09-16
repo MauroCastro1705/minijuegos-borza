@@ -11,17 +11,16 @@ var is_being_dragged: bool = false
 
 # Estado temporal mientras el item está sobre un socket
 var is_hovering_socket: bool = false
-var drop_socket_ref: StaticBody2D = null
-
-# Socket que acabamos de dejar y que debemos ignorar hasta salir de su área
-var socket_to_ignore: StaticBody2D = null
+var drop_socket_ref: DropSocket = null
+var socket_to_ignore: DropSocket = null
 
 # Estado permanente cuando el item está en un socket
-var occupied_socket: StaticBody2D = null
+var occupied_socket: DropSocket = null
 
 var base_scale: Vector2 = Vector2(1.0, 1.0)
 var offset: Vector2 = Vector2(0.0, 0.0)
 var particles: CPUParticles2D = null
+
 
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -59,14 +58,14 @@ func _input(event: InputEvent) -> void:
 		if particles:
 			particles.emitting = false
 
-		if is_hovering_socket:
+		if is_hovering_socket and drop_socket_ref:
 			var tween = get_tree().create_tween()
 			tween.tween_property(self, "global_position", drop_socket_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
 
 			occupied_socket = drop_socket_ref
 			occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", true)
-			if occupied_socket.special_socket:
-				occupied_socket.occupied_item = self
+			occupied_socket.occupied_item = self   # <-- ahora sí funciona
+			occupied_socket.set_occupied(true)     # <-- color verde (reemplaza a body.modulate)
 
 			is_hovering_socket = false
 			drop_socket_ref = null
@@ -109,7 +108,8 @@ func _handle_left_mouse_down() -> void:
 	# Si el item estaba en un socket, lo liberamos y marcamos ese socket para ignorarlo
 	if occupied_socket:
 		occupied_socket.get_node("CollisionShape2D").set_deferred("disabled", false)
-		occupied_socket.occupied_item = null 
+		occupied_socket.occupied_item = null
+		occupied_socket.set_occupied(false)
 		socket_to_ignore = occupied_socket
 		occupied_socket = null
 		is_hovering_socket = false

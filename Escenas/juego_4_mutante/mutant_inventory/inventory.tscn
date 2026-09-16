@@ -423,7 +423,7 @@ theme_override_fonts/font = ExtResource("4_6vckb")
 theme_override_font_sizes/font_size = 21
 theme_override_styles/normal = SubResource("StyleBox_0fppw")
 theme_override_styles/hover = SubResource("StyleBox_n15gj")
-text = "Intercambiar
+text = "Consumir ADN
 para Curar"
 
 [connection signal="pressed" from="apply_mutagen" to="." method="_on_apply_mutagen_pressed"]
