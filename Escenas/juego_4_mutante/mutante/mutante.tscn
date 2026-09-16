@@ -1,48 +1,72 @@
 [gd_scene format=3 uid="uid://dk4ronipsfh"]
 
-[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_bo6g5"]
 [ext_resource type="Script" uid="uid://bemxtyy6akosh" path="res://Escenas/juego_4_mutante/mutante/mutante.gd" id="1_efigm"]
-[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_efigm"]
+[ext_resource type="Texture2D" uid="uid://dwqa8fqvkqgik" path="res://assets/juego4/verde.png" id="3_efigm"]
 [ext_resource type="PackedScene" uid="uid://24axemrsl1cw" path="res://Componentes/barra_vida_mutante/barra_vida_mutante.tscn" id="4_scori"]
-
-[sub_resource type="Resource" id="Resource_7c4s7"]
-script = ExtResource("1_bo6g5")
-color = Color(0.32156864, 0.72156864, 0, 1)
-width_left = 4
-width_top = 4
-width_right = 4
-width_bottom = 4
-metadata/_custom_type_script = "uid://cjmmhbp1b5312"
-
-[sub_resource type="StyleBox" id="StyleBox_yowuo"]
-resource_local_to_scene = false
-resource_name = ""
-content_margin_left = -1.0
-content_margin_top = -1.0
-content_margin_right = -1.0
-content_margin_bottom = -1.0
-script = ExtResource("2_efigm")
-borders = Array[ExtResource("1_bo6g5")]([SubResource("Resource_7c4s7")])
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yowuo"]
 radius = 23.0
 height = 78.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_scori"]
+atlas = ExtResource("3_efigm")
+region = Rect2(188, 0, 153, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxtj0"]
+atlas = ExtResource("3_efigm")
+region = Rect2(354, 0, 153, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdafe"]
+atlas = ExtResource("3_efigm")
+region = Rect2(520, 0, 153, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd2sb"]
+atlas = ExtResource("3_efigm")
+region = Rect2(686, 0, 153, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs54g"]
+atlas = ExtResource("3_efigm")
+region = Rect2(852, 0, 153, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxdbv"]
+atlas = ExtResource("3_efigm")
+region = Rect2(1018, 0, 153, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8sdr"]
+atlas = ExtResource("3_efigm")
+region = Rect2(1184, 0, 153, 142)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yowuo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scori")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxtj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mdafe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd2sb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs54g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxdbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8sdr")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Mutante" type="CharacterBody2D" unique_id=405837163 groups=["player"]]
 script = ExtResource("1_efigm")
-
-[node name="Panel" type="Panel" parent="." unique_id=280769983]
-offset_left = -23.0
-offset_top = -27.0
-offset_right = 24.0
-offset_bottom = 45.307693
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBox_yowuo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2061624710]
 position = Vector2(0, 8)
@@ -51,7 +75,13 @@ shape = SubResource("CapsuleShape2D_yowuo")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1871246234]
 
 [node name="BarraVida_mutante" parent="." unique_id=571050010 instance=ExtResource("4_scori")]
-position = Vector2(-1, -53)
+position = Vector2(-1, -77)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=747976388]
 position = Vector2(73, -49)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1615108985]
+position = Vector2(7, -15)
+sprite_frames = SubResource("SpriteFrames_yowuo")
+autoplay = "default"
+frame_progress = 0.7580564

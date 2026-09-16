@@ -5,6 +5,7 @@ extends Node2D
 @onready var socket_spe_4: StaticBody2D = $sockets_mutante/socket_spe4
 @onready var socket_spe_5: StaticBody2D = $sockets_mutante/socket_spe5
 @onready var socket_spe_6: StaticBody2D = $sockets_mutante/socket_spe6
+@onready var heal_socket: StaticBody2D = $sockets_inventario/heal_socket
 
 @export var mutante:CharacterBody2D
 var can_apply_mutagens:bool = true
@@ -42,3 +43,11 @@ func _update_label() -> void:
 func _on_apply_mutagen_pressed() -> void:
 	usar_mutagenos()
 	_update_label()
+
+
+func _on_dna_for_hp_pressed() -> void:
+	if heal_socket.has_item():
+		pass
+	else:
+		print("no hay item para consumir")
+		pass

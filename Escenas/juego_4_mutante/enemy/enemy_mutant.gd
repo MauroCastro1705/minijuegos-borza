@@ -10,7 +10,7 @@ signal died
 # --- Stats base (matchean con el GameManager) ---
 var max_health: float = 60
 var current_health: float
-var fuerza: int = 10             # daño base
+var fuerza: int = 5            # daño base
 var velocidad: float = 100.0     # solo informativo en formato Pokémon
 var defensa: float = 0.0         # 0.0 = sin reducción, 0.5 = 50% menos daño
 const DEFENSA_MAX: float = 0.9

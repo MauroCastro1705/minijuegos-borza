@@ -1,6 +1,8 @@
 extends Node2D
 # Game Manager - Combate por turnos estilo Pokémon
 
+
+
 @export var base_enemy: PackedScene
 
 # --- Incrementos por ronda (ajustables desde el inspector) ---
@@ -9,13 +11,13 @@ extends Node2D
 @export var incremento_velocidad: float = 0.05   # +5% velocidad por ronda
 @export var incremento_defensa: float = 0.03     # +3% defensa acumulada por ronda
 @export var delay_spawn_enemigo: float = 1.0     # pausa antes de spawnear al siguiente
+@onready var dna_loot: Node2D = $DNA_loot
 
 @onready var reference_rect: ReferenceRect = $ReferenceRect
 @onready var inventory: Node2D = $Inventory
 @onready var enemy_mutant: CharacterBody2D = $Enemy_mutant
 @onready var mutante: CharacterBody2D = $Mutante
 @onready var item_tooltip: Panel = $CanvasLayer/ItemTooltip
-@onready var item: Item = $Item
 @onready var timer_for_attaks: Timer = $Timer_for_attaks
 @onready var item_spawner: ItemSpawner = $ItemSpawner
 
@@ -40,8 +42,7 @@ var _spawneando_enemigo: bool = false
 
 func _ready() -> void:
 	Global.drag_limits = reference_rect.get_global_rect()
-	item.tooltip_requested.connect(item_tooltip._on_item_tooltip_requested)
-	item.tooltip_hidden.connect(item_tooltip._on_item_tooltip_hidden)
+	item_spawner.item_spawned.connect(_on_item_spawned)
 	Global.player_died.connect(_player_died)
 
 	# Guardar la posición inicial del enemigo para futuros spawns
@@ -170,8 +171,6 @@ func _crear_nuevo_enemigo() -> void:
 	# Instanciar el nuevo enemigo
 	var nuevo := base_enemy.instantiate()
 
-	# ⚠️ IMPORTANTE: aplicar stats ANTES de add_child,
-	# porque el _ready() del enemigo hace current_health = max_health
 	nuevo.max_health = int(nuevo.max_health * _hp_multi)
 	nuevo.fuerza = int(nuevo.fuerza * _fuerza_multi)
 	nuevo.velocidad = nuevo.velocidad * _velocidad_multi
@@ -213,7 +212,7 @@ func _on_mutante_enemigo_muerto() -> void:
 		return
 	batalla_activa = false
 	timer_for_attaks.stop()
-
+	spawn_dna(4)
 	# Guardar stats y acumular progresión
 	_guardar_y_mejorar_stats()
 
@@ -243,3 +242,11 @@ func resetear_progreso() -> void:
 	_velocidad_multi = 1.0
 	_defensa_bonus = 0.0
 	print("Progresión del enemigo reseteada")
+	
+func spawn_dna(level: int) -> void:
+	var dna_items = dna_loot.get_dna_loot(level)
+	item_spawner.spawn_items(dna_items)
+
+func _on_item_spawned(item: Item) -> void:
+	item.tooltip_requested.connect(item_tooltip._on_item_tooltip_requested)
+	item.tooltip_hidden.connect(item_tooltip._on_item_tooltip_hidden)

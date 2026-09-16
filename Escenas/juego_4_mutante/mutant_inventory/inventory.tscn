@@ -113,13 +113,13 @@ width_bottom = 2
 metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
 [sub_resource type="Gradient" id="Gradient_nupf2"]
-offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
-colors = PackedColorArray(0.0018410678, 0.0018410682, 0.0018410678, 1, 0, 0.2175481, 1.2032687e-07, 1, 0, 0.37354112, 1.92523e-07, 1)
+offsets = PackedFloat32Array(0.09917355, 1)
+colors = PackedColorArray(0.20784314, 0.6666667, 0, 1, 0, 0.2175481, 1.2032687e-07, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a8qer"]
 gradient = SubResource("Gradient_nupf2")
-fill_from = Vector2(0.55128205, 1)
-fill_to = Vector2(0.7606838, 0.0042735045)
+fill_from = Vector2(0.85945946, 1)
+fill_to = Vector2(0.17297298, 0.043243244)
 
 [sub_resource type="StyleBox" id="StyleBox_xjwfm"]
 resource_local_to_scene = false
@@ -190,6 +190,66 @@ shadow_color = Color(0, 0, 0, 0.84705883)
 shadow_offset = Vector2(4, 4)
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
+[sub_resource type="Gradient" id="Gradient_a8qer"]
+offsets = PackedFloat32Array(0.2644628, 0.49586776, 0.8181818)
+colors = PackedColorArray(0.20784314, 0.6666667, 0, 1, 0, 0.2175481, 1.2032687e-07, 1, 0.12156863, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wn21o"]
+gradient = SubResource("Gradient_a8qer")
+fill_from = Vector2(0.15675676, 0.94054055)
+fill_to = Vector2(0.97837836, 0.037837837)
+
+[sub_resource type="StyleBox" id="StyleBox_0fppw"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("2_efo6j")
+color = Color(0.50140655, 0.5014065, 0.5014065, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("1_umoio")]([SubResource("Resource_wf8mm")])
+texture = SubResource("GradientTexture2D_wn21o")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="StyleBox" id="StyleBox_n15gj"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("2_efo6j")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("1_umoio")]([SubResource("Resource_a8qer")])
+texture = SubResource("GradientTexture2D_xjwfm")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
 [node name="Inventory" type="Node2D" unique_id=1484637582]
 script = ExtResource("1_l7s1y")
 metadata/_edit_lock_ = true
@@ -198,6 +258,22 @@ metadata/_edit_lock_ = true
 offset_left = 7.0
 offset_right = 213.0
 offset_bottom = 198.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_6vckb")
+
+[node name="fondo4" type="Panel" parent="." unique_id=94270146]
+offset_left = 7.0
+offset_top = 211.0
+offset_right = 197.0
+offset_bottom = 389.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_6vckb")
+
+[node name="fondo3" type="Panel" parent="." unique_id=269063344]
+offset_left = 697.0
+offset_top = 17.0
+offset_right = 903.0
+offset_bottom = 215.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBox_6vckb")
 
@@ -265,6 +341,9 @@ position = Vector2(163, 46)
 [node name="DropSocket4" parent="sockets_inventario" unique_id=1342252216 instance=ExtResource("1_aujlm")]
 position = Vector2(140, 124)
 
+[node name="heal_socket" parent="sockets_inventario" unique_id=912133307 instance=ExtResource("1_aujlm")]
+position = Vector2(107, 266)
+
 [node name="tank" type="Node2D" parent="." unique_id=503277126]
 position = Vector2(35, -14)
 scale = Vector2(0.8411057, 0.8411057)
@@ -281,7 +360,7 @@ texture = SubResource("GradientTexture2D_yowuo")
 position = Vector2(684, 253)
 amount = 28
 texture = SubResource("GradientTexture2D_wf8mm")
-lifetime = 3.0
+lifetime = 2.6999999999999997
 emission_shape = 3
 emission_rect_extents = Vector2(50, 20)
 gravity = Vector2(0, -40)
@@ -313,10 +392,10 @@ stretch_mode = 5
 
 [node name="mutant_info" type="Label" parent="." unique_id=137594564]
 unique_name_in_owner = true
-offset_left = 700.0
-offset_top = 21.0
-offset_right = 934.0
-offset_bottom = 295.0
+offset_left = 713.0
+offset_top = 19.0
+offset_right = 903.0
+offset_bottom = 213.0
 text = "adwasdsadfqw
 qweqweasfasfd
 asdasd
@@ -335,4 +414,17 @@ theme_override_styles/hover = SubResource("StyleBox_ouor8")
 text = "Aplicar
 Mutagenos"
 
+[node name="dna_for_hp" type="Button" parent="." unique_id=1804231999]
+offset_left = 25.0
+offset_top = 324.0
+offset_right = 174.0
+offset_bottom = 374.0
+theme_override_fonts/font = ExtResource("4_6vckb")
+theme_override_font_sizes/font_size = 21
+theme_override_styles/normal = SubResource("StyleBox_0fppw")
+theme_override_styles/hover = SubResource("StyleBox_n15gj")
+text = "Intercambiar
+para Curar"
+
 [connection signal="pressed" from="apply_mutagen" to="." method="_on_apply_mutagen_pressed"]
+[connection signal="pressed" from="dna_for_hp" to="." method="_on_dna_for_hp_pressed"]

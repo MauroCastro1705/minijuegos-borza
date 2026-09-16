@@ -1,10 +1,75 @@
 [gd_scene format=3 uid="uid://deegte0xglo30"]
 
 [ext_resource type="Script" uid="uid://cow8mtrrrrnu8" path="res://Escenas/juego_4_mutante/enemy/enemy_mutant.gd" id="1_56uo5"]
+[ext_resource type="Texture2D" uid="uid://buhgfkoo7ilok" path="res://assets/juego4/cubo_rojo.png" id="3_a6evs"]
 [ext_resource type="PackedScene" uid="uid://24axemrsl1cw" path="res://Componentes/barra_vida_mutante/barra_vida_mutante.tscn" id="4_ypk5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
 size = Vector2(42, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypk5e"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(44, 0, 133, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8373"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(210, 0, 133, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mc3hd"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(376, 0, 133, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vunqx"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(542, 0, 133, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72xca"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(708, 0, 133, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dih88"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(874, 0, 133, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk6np"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(1040, 0, 133, 153)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkhcw"]
+atlas = ExtResource("3_a6evs")
+region = Rect2(1206, 0, 133, 153)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypk5e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypk5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8373")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mc3hd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vunqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72xca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dih88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk6np")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkhcw")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 7.0
+}]
 
 [node name="Enemy_mutant" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
 z_index = 4
@@ -19,7 +84,6 @@ position = Vector2(67, -63)
 
 [node name="BarraVida_mutante" parent="." unique_id=571050010 instance=ExtResource("4_ypk5e")]
 position = Vector2(0, -62)
-scale = Vector2(0.75999963, 0.75999963)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=870777890]
 offset_left = -20.0
@@ -27,3 +91,10 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 color = Color(0.6392157, 0.11372549, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1152826164]
+position = Vector2(-1, 14)
+sprite_frames = SubResource("SpriteFrames_ypk5e")
+autoplay = "default"
+frame_progress = 0.58420813
+flip_h = true
