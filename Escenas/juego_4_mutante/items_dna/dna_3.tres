@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dyv7bjge155ni"]
 
 [ext_resource type="Script" uid="uid://cr677umm4ntgt" path="res://Componentes/item/item_data.gd" id="1_bo0yt"]
-[ext_resource type="Texture2D" uid="uid://cdteedwo1tdos" path="res://assets/juego4/dna-no-fondo-speed.png" id="2_bo0yt"]
+[ext_resource type="Texture2D" uid="uid://ba14tuc00s0dm" path="res://assets/juego4/adn_agi.png" id="2_bo0yt"]
 
 [resource]
 script = ExtResource("1_bo0yt")

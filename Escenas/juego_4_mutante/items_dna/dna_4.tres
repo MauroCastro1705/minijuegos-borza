@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dme67xheoeoeo"]
 
 [ext_resource type="Script" uid="uid://cr677umm4ntgt" path="res://Componentes/item/item_data.gd" id="1_lok4x"]
-[ext_resource type="Texture2D" uid="uid://c5bdu5vgoiyk8" path="res://assets/juego4/dna-no-fondo-vida.png" id="2_lok4x"]
+[ext_resource type="Texture2D" uid="uid://daaiglug643hu" path="res://assets/juego4/adn_hp.png" id="2_lok4x"]
 
 [resource]
 script = ExtResource("1_lok4x")
