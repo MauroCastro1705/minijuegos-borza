@@ -254,7 +254,3 @@ func spawn_dna(level: int) -> void:
 func _on_item_spawned(item: Item) -> void:
 	item.tooltip_requested.connect(item_tooltip._on_item_tooltip_requested)
 	item.tooltip_hidden.connect(item_tooltip._on_item_tooltip_hidden)
-
-
-func _on_tutorial_button_pressed() -> void:
-	tuto.hide()

@@ -1,0 +1,230 @@
+[gd_scene format=3 uid="uid://bj158bjxawmad"]
+
+[ext_resource type="Script" uid="uid://fgxgw2ifgvyi" path="res://Componentes/tutorial_node/tutorial.gd" id="1_tr5xr"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="2_ve1no"]
+[ext_resource type="Theme" uid="uid://bvdlqc82iykv8" path="res://themas/boton.tres" id="3_jlpra"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="4_jlpra"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="5_1q2wl"]
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="6_founr"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="7_wexoq"]
+
+[sub_resource type="Resource" id="Resource_5qj16"]
+script = ExtResource("4_jlpra")
+blend = true
+width_left = 6
+width_top = 6
+width_right = 6
+width_bottom = 6
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_founr"]
+offsets = PackedFloat32Array(0, 0.51794875, 0.9836956)
+colors = PackedColorArray(0.12349691, 0.15873888, 0.19826499, 1, 0.4457571, 0.4276185, 0.41682765, 1, 0.80387944, 0.79363626, 0.7934594, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wexoq"]
+gradient = SubResource("Gradient_founr")
+fill_from = Vector2(0.51282054, 0.98717946)
+fill_to = Vector2(0.4957265, 0)
+
+[sub_resource type="StyleBox" id="StyleBox_kijg2"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("5_1q2wl")
+borders = Array[ExtResource("4_jlpra")]([SubResource("Resource_5qj16")])
+texture = SubResource("GradientTexture2D_wexoq")
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="LabelSettings" id="LabelSettings_2dlkg"]
+font = ExtResource("2_ve1no")
+font_size = 20
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bm71k"]
+font = ExtResource("2_ve1no")
+font_size = 34
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Resource" id="Resource_l7s1y"]
+script = ExtResource("4_jlpra")
+blend = true
+width_left = 6
+width_top = 6
+width_right = 6
+width_bottom = 6
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_nupf2"]
+offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
+colors = PackedColorArray(0.10980392, 0.10980392, 0.22745098, 1, 0.090998255, 0.13514984, 0.4002703, 1, 0.50889105, 0.5888476, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yowuo"]
+gradient = SubResource("Gradient_nupf2")
+fill_from = Vector2(0.55128205, 1)
+fill_to = Vector2(0.7606838, 0.0042735045)
+
+[sub_resource type="StyleBox" id="StyleBox_5qj16"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("5_1q2wl")
+borders = Array[ExtResource("4_jlpra")]([SubResource("Resource_l7s1y")])
+texture = SubResource("GradientTexture2D_yowuo")
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Resource" id="Resource_jlpra"]
+script = ExtResource("4_jlpra")
+blend = true
+width_left = 6
+width_top = 6
+width_right = 6
+width_bottom = 6
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_1q2wl"]
+offsets = PackedFloat32Array(0, 0.61538464, 0.9836956)
+colors = PackedColorArray(0.10980392, 0.10980392, 0.22745098, 1, 0.090998255, 0.13514984, 0.4002703, 1, 0.4141817, 0.4881118, 0.9999909, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5qj16"]
+gradient = SubResource("Gradient_1q2wl")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0.82905984, 0.15384616)
+
+[sub_resource type="StyleBox" id="StyleBox_founr"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("5_1q2wl")
+borders = Array[ExtResource("4_jlpra")]([SubResource("Resource_jlpra")])
+texture = SubResource("GradientTexture2D_5qj16")
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[node name="tuto" type="Control" unique_id=2013548593]
+z_index = 16
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -151.66669
+offset_bottom = -120.833374
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+script = ExtResource("1_tr5xr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2006148472]
+custom_minimum_size = Vector2(1000, 800)
+layout_mode = 0
+offset_right = 1000.0
+offset_bottom = 800.0
+color = Color(0.16078432, 0.16078432, 0.16078432, 0.76862746)
+
+[node name="Panel" type="Panel" parent="." unique_id=1198550992]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.287
+anchor_top = 0.185
+anchor_right = 0.69900006
+anchor_bottom = 0.55
+offset_left = -0.13833618
+offset_top = 0.1875
+offset_right = 0.3482666
+offset_bottom = -0.2083435
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_kijg2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1231142252]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0120001
+anchor_bottom = 1.0
+offset_right = 0.053344727
+offset_bottom = 92.33333
+
+[node name="tittle" type="Label" parent="Panel/VBoxContainer" unique_id=1719944026]
+layout_mode = 2
+text = "Tutorial"
+label_settings = SubResource("LabelSettings_2dlkg")
+horizontal_alignment = 1
+
+[node name="info" type="Label" parent="Panel/VBoxContainer" unique_id=1591281206]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Vencer enemigos te otorga \"Electricidad\" para comprar mejoras, usa el boton para comenzar la oleada"
+label_settings = SubResource("LabelSettings_bm71k")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="next_tutorial_button" type="Button" parent="." unique_id=1822669925]
+z_index = 15
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 546.6666
+offset_top = 354.16666
+offset_right = -227.83331
+offset_bottom = -280.5116
+theme = ExtResource("3_jlpra")
+theme_override_styles/normal = SubResource("StyleBox_5qj16")
+theme_override_styles/hover = SubResource("StyleBox_founr")
+text = "OK"
+
+[node name="InteractionFeedback" type="Node" parent="next_tutorial_button" unique_id=1601517638]
+script = ExtResource("6_founr")
+
+[node name="FeedbackScaleEffect" type="Node" parent="next_tutorial_button/InteractionFeedback" unique_id=288677272]
+script = ExtResource("7_wexoq")
+transition = 10
+
+[connection signal="pressed" from="next_tutorial_button" to="." method="_on_next_tutorial_button_pressed"]
