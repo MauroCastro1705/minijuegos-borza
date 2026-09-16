@@ -13,9 +13,12 @@ var fuerza: int = 15
 var velocidad: float = 150.0
 var multi_danio: float = 1.0
 var multi_velocidad: float = 1.0
+var crit_chance: float = 0.0
 
 var defensa: float = 0.0
 const DEFENSA_MAX: float = 0.9
+const CRIT_CHANCE_MAX: float = 1.0
+const CRIT_DAMAGE_MULTIPLIER: float = 2.0
 var bonus_vida: int = 0
 
 var puede_atacar: bool = true
@@ -49,6 +52,9 @@ func atacar(objetivo: Node2D) -> void:
 		return
 
 	var damage: int = int(fuerza * multi_danio)
+	var es_critico := randf() < crit_chance
+	if es_critico:
+		damage = int(damage * CRIT_DAMAGE_MULTIPLIER)
 	if objetivo.has_method("take_damage"):
 		# Dirección hacia el objetivo
 		var direccion := (objetivo.global_position - global_position).normalized()
@@ -66,7 +72,7 @@ func atacar(objetivo: Node2D) -> void:
 		# 2. Aplicar daño justo en el impacto
 		tween.tween_callback(func():
 			objetivo.take_damage(damage)
-			print("mutante ataco")
+			print("mutante ataco", " CRITICO" if es_critico else "")
 		)
 
 		# 3. Volver a la posición original
@@ -112,6 +118,9 @@ func mejorar_fuerza(cantidad: float) -> void:
 func mejorar_velocidad(cantidad: float) -> void:
 	multi_velocidad += cantidad
 
+func mejorar_agilidad(cantidad: float) -> void:
+	crit_chance = clamp(crit_chance + cantidad, 0.0, CRIT_CHANCE_MAX)
+
 func mejorar_defensa(cantidad: float) -> void:
 	defensa = min(defensa + cantidad, DEFENSA_MAX)
 
@@ -133,7 +142,7 @@ func aplicar_item(item: ItemData) -> void:
 		ItemData.ItemType.STR:
 			mejorar_fuerza(STR_POR_ITEM)
 		ItemData.ItemType.AGI:
-			mejorar_velocidad(AGI_POR_ITEM)
+			mejorar_agilidad(AGI_POR_ITEM)
 		ItemData.ItemType.INT:
 			pass
 		ItemData.ItemType.DEF:
@@ -155,7 +164,7 @@ func remover_item(item: ItemData) -> void:
 		ItemData.ItemType.STR:
 			mejorar_fuerza(-STR_POR_ITEM)
 		ItemData.ItemType.AGI:
-			mejorar_velocidad(-AGI_POR_ITEM)
+			mejorar_agilidad(-AGI_POR_ITEM)
 		ItemData.ItemType.INT:
 			pass
 		ItemData.ItemType.DEF:

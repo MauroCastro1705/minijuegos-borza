@@ -26,10 +26,12 @@ func _update_label() -> void:
 	var danio_efectivo = int(mutante.fuerza * mutante.multi_danio)
 	var vel_efectiva = mutante.velocidad * mutante.multi_velocidad
 	var defensa_pct := int(round(mutante.defensa * 100))
+	var crit_chance_pct := int(round(mutante.crit_chance * 100))
 
 	mutant_info.text = (
 		"Fuerza: %d\n" % danio_efectivo
 		+ "Velocidad: %.0f\n" % vel_efectiva
+		+ "Critico: %d%%\n" % crit_chance_pct
 		+ "DEF: %d%%\n" % defensa_pct
 		+ "HP: %d / %d" % [int(mutante.current_health), int(mutante.max_health)]
 	)
