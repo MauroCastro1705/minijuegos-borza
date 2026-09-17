@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://62hu7kqbpmcr" path="res://assets/portadas/portada4sinfondo.png" id="1_lnaxn"]
 [ext_resource type="Script" uid="uid://brckfes42es1f" path="res://Escenas/juego_4_mutante/main_menu/menu_mutante.gd" id="1_pyho0"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="2_m0xm4"]
+[ext_resource type="Texture2D" uid="uid://dduh1tyfaorvk" path="res://assets/portadas/1Recurso 8.png" id="3_upkqa"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="3_v08r8"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="4_lrov7"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="5_bjo0h"]
@@ -43,6 +44,10 @@ shader_parameter/line_freq = 20.0
 shader_parameter/height = 0.2
 shader_parameter/speed = 0.2
 shader_parameter/scale = Vector2(3, 3)
+
+[sub_resource type="Gradient" id="Gradient_upkqa"]
+offsets = PackedFloat32Array(0.6638298, 0.9574468)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_wf8mm"]
 script = ExtResource("4_lrov7")
@@ -147,6 +152,25 @@ offset_top = -38.0
 offset_right = 1025.0
 offset_bottom = 838.0
 mouse_filter = 2
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=769670142]
+texture_filter = 1
+position = Vector2(501, -68)
+amount = 40
+texture = ExtResource("3_upkqa")
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(500, 10)
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 400)
+angular_velocity_min = 50.0
+angular_velocity_max = 100.0
+scale_amount_min = 0.2
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_upkqa")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1391326125]
 offset_left = 58.933838

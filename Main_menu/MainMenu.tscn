@@ -59,6 +59,12 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_7c4s7")
 color_ramp = SubResource("GradientTexture1D_s20xc")
 
+[sub_resource type="LabelSettings" id="LabelSettings_stx74"]
+font = ExtResource("20_rt2ic")
+font_size = 19
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_ckk3t"]
 font = ExtResource("5_rmre0")
 font_size = 19
@@ -212,25 +218,25 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 7.0
 offset_top = 772.0
-offset_right = -774.0
+offset_right = -848.0
 offset_bottom = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "v 0.0.52"
-label_settings = SubResource("LabelSettings_ckk3t")
+text = "V 0.1.05"
+label_settings = SubResource("LabelSettings_stx74")
 
 [node name="version2" type="Label" parent="." unique_id=1413113268]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 845.0
-offset_top = 772.0
-offset_right = 1.0
-offset_bottom = -3.0
+offset_left = 745.0
+offset_top = 771.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "seminario 2 - 2026"
+text = "Mauro Castro - seminario 2 - 2026"
 label_settings = SubResource("LabelSettings_ckk3t")
 
 [node name="titulo" type="Label" parent="." unique_id=1169261422]
