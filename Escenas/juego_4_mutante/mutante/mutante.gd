@@ -98,6 +98,11 @@ func take_damage(damage: int) -> void:
 func _on_health_depleted():
 	if is_dead:
 		return
+	if not en_batalla:
+		current_health = 1
+		if barra_vida:
+			barra_vida.current_health = current_health
+		return
 	is_dead = true
 	died.emit()
 	barra_vida.hide()
@@ -175,7 +180,7 @@ func remover_item(item: ItemData) -> void:
 			mejorar_defensa(-DEF_POR_ITEM)
 		ItemData.ItemType.HP:
 			max_health = max_health - HP_POR_ITEM
-			current_health = min(current_health - HP_POR_ITEM, max_health)
+			current_health = max(min(current_health - HP_POR_ITEM, max_health), 1)
 			if barra_vida:
 				barra_vida.max_health = max_health
 				barra_vida.current_health = current_health

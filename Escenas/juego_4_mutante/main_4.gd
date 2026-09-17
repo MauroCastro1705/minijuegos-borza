@@ -22,6 +22,7 @@ extends Node2D
 @onready var item_spawner: ItemSpawner = $ItemSpawner
 @onready var tuto: Control = $tuto
 @onready var game_over_screen: Node2D = $game_over_screen
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 # --- Estado del combate ---
 enum Turno { JUGADOR, ENEMIGO }
@@ -49,6 +50,7 @@ var tutorial_mensajes:Array[String] = [
 	]
 
 func _ready() -> void:
+	canvas_layer.show()
 	game_over_screen.hide()
 	set_tutorial_text()
 	tuto.show()
@@ -80,11 +82,13 @@ func set_tutorial_text():
 
 func _on_start_button_pressed() -> void:
 	inventory.can_apply_mutagens = false
+	inventory.set_items_locked(true)
 	iniciar_batalla()
 
 
 func _player_died() -> void:
 	inventory.can_apply_mutagens = true
+	inventory.set_items_locked(false)
 	detener_batalla()
 
 
@@ -96,12 +100,14 @@ func iniciar_batalla() -> void:
 		push_warning("Faltan mutantes para iniciar batalla")
 		return
 	batalla_activa = true
+	mutante.en_batalla = true
 	turno_actual = Turno.JUGADOR
 	_siguiente_turno()
 
 
 func detener_batalla() -> void:
 	batalla_activa = false
+	mutante.en_batalla = false
 	timer_for_attaks.stop()
 
 
@@ -240,11 +246,13 @@ func _on_mutante_enemigo_muerto() -> void:
 func on_victoria() -> void:
 	print("¡Victoria! Ronda %d superada" % ronda_actual)
 	inventory.can_apply_mutagens = true
+	inventory.set_items_locked(false)
 	# TODO: mostrar UI de victoria, sumar recompensa, etc.
 
 func on_derrota() -> void:
 	print("Derrota en ronda %d..." % ronda_actual)
 	inventory.can_apply_mutagens = true
+	inventory.set_items_locked(false)
 	# TODO: mostrar UI de derrota, reiniciar, etc.
 	game_over_screen.show()
 

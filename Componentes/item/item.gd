@@ -59,7 +59,7 @@ func _input(event: InputEvent) -> void:
 		if particles:
 			particles.emitting = false
 
-		if is_hovering_socket and drop_socket_ref and not drop_socket_ref.has_item():
+		if is_hovering_socket and drop_socket_ref and drop_socket_ref.can_interact() and not drop_socket_ref.has_item():
 			var tween = get_tree().create_tween()
 			tween.tween_property(self, "global_position", drop_socket_ref.global_position, 0.05).set_ease(Tween.EASE_OUT)
 
@@ -110,6 +110,8 @@ func _init_scale() -> void:
 func _handle_left_mouse_down() -> void:
 	# Como todo lo que sigue es lógica de arrastrar, si ya lo estoy haciendo no debería seguir
 	if Global.is_dragging:
+		return
+	if occupied_socket and not occupied_socket.can_interact():
 		return
 
 	drag_start_position = global_position
@@ -169,6 +171,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 
 	if body == socket_to_ignore:
+		return
+	if body.has_method("can_interact") and not body.can_interact():
 		return
 
 	if body.has_method("has_item") and body.has_item():

@@ -20,24 +20,58 @@ func _ready() -> void:
 	_update_label()
 
 
+func set_items_locked(locked: bool) -> void:
+	for socket in sockets:
+		socket.set_interaction_locked(locked)
+	heal_socket.set_interaction_locked(locked)
+
+
 
 		
 func _update_label() -> void:
-	var danio_efectivo = int(mutante.fuerza * mutante.multi_danio)
-	var vel_efectiva = mutante.velocidad * mutante.multi_velocidad
-	var defensa_pct := int(round(mutante.defensa * 100))
-	var crit_chance_pct := int(round(mutante.crit_chance * 100))
+	if not is_instance_valid(mutante) or not is_instance_valid(mutant_info):
+		return
+
+	var fuerza = mutante.get("fuerza")
+	var multi_danio = mutante.get("multi_danio")
+	var velocidad = mutante.get("velocidad")
+	var multi_velocidad = mutante.get("multi_velocidad")
+	var defensa = mutante.get("defensa")
+	var crit_chance = mutante.get("crit_chance")
+	var current_health = mutante.get("current_health")
+	var max_health = mutante.get("max_health")
+
+	if not fuerza is int and not fuerza is float:
+		fuerza = 0
+	if not multi_danio is int and not multi_danio is float:
+		multi_danio = 1.0
+	if not velocidad is int and not velocidad is float:
+		velocidad = 0.0
+	if not multi_velocidad is int and not multi_velocidad is float:
+		multi_velocidad = 1.0
+	if not defensa is int and not defensa is float:
+		defensa = 0.0
+	if not crit_chance is int and not crit_chance is float:
+		crit_chance = 0.0
+	if not current_health is int and not current_health is float:
+		current_health = 0.0
+	if not max_health is int and not max_health is float:
+		max_health = 0.0
+
+	var danio_efectivo = int(fuerza * multi_danio)
+	var vel_efectiva = velocidad * multi_velocidad
+	var defensa_pct := int(round(defensa * 100))
+	var crit_chance_pct := int(round(crit_chance * 100))
 
 	mutant_info.text = (
 		"Fuerza: %d\n" % danio_efectivo
 		+ "Velocidad: %.0f\n" % vel_efectiva
 		+ "Critico: %d%%\n" % crit_chance_pct
 		+ "DEF: %d%%\n" % defensa_pct
-		+ "HP: %d / %d" % [int(mutante.current_health), int(mutante.max_health)]
+		+ "HP: %d / %d" % [int(current_health), int(max_health)]
 	)
-	if not can_apply_mutagens:
-		apply_mutagen_button.disabled = true
-	else: apply_mutagen_button.disabled = false
+	if is_instance_valid(apply_mutagen_button):
+		apply_mutagen_button.disabled = not can_apply_mutagens
 	
 
 

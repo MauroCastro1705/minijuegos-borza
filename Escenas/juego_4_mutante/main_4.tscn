@@ -508,6 +508,7 @@ position = Vector2(289, 264)
 position = Vector2(729, 189)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=777729258]
+visible = false
 
 [node name="ItemTooltip" parent="CanvasLayer" unique_id=951043355 instance=ExtResource("2_px0uf")]
 visible = false

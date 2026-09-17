@@ -205,6 +205,7 @@ autowrap_mode = 3
 [node name="next_tutorial_button" type="Button" parent="Panel/VBoxContainer" unique_id=1822669925]
 unique_name_in_owner = true
 z_index = 15
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme = ExtResource("3_jlpra")
 theme_override_styles/normal = SubResource("StyleBox_5qj16")

@@ -5,6 +5,7 @@ class_name DropSocket extends StaticBody2D
 var special_socket: bool = false
 var occupied_item: Item = null
 var stat_target: Node = null
+var interaction_locked: bool = false
 
 const COLOR_IDLE     := Color(0.68, 0.85, 0.9, 0.5)
 const COLOR_HOVER    := Color(1, 1, 1, 1)
@@ -31,6 +32,16 @@ func set_occupied(occupied: bool) -> void:
 
 func set_stat_target(target: Node) -> void:
 	stat_target = target
+
+
+func set_interaction_locked(locked: bool) -> void:
+	interaction_locked = locked
+	if locked:
+		_apply_color(COLOR_OCCUPIED if has_item() else COLOR_IDLE)
+
+
+func can_interact() -> bool:
+	return not interaction_locked
 
 
 func equip_item(item: Item) -> void:
