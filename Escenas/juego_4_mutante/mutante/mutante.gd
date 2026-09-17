@@ -93,7 +93,7 @@ func take_damage(damage: int) -> void:
 	DamageNumbers.display_numbers_tesla(danio_final, number_real_position)
 	current_health -= danio_final
 	if barra_vida:
-		barra_vida.take_damage(danio_final)
+		barra_vida.current_health = current_health
 
 func _on_health_depleted():
 	if is_dead:
@@ -115,7 +115,8 @@ func heal(value:float):
 	max_health += value
 	current_health += value
 	if barra_vida:
-		barra_vida.heal(value)
+		barra_vida.max_health = max_health
+		barra_vida.current_health = current_health
 
 
 
