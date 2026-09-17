@@ -7,6 +7,8 @@ var is_dead: bool = false
 var max_health: float = 50
 var current_health: float
 @onready var marker_2d: Marker2D = $Marker2D
+@onready var heal_effect: CPUParticles2D = $heal_effect
+@onready var hurt_effect: CPUParticles2D = $hurt_effect
 
 # --- Stats base ---
 var fuerza: int = 15
@@ -85,6 +87,7 @@ func take_damage(damage: int) -> void:
 	var danio_final: int = int(round(damage * (1.0 - defensa)))
 	danio_final = max(danio_final, 1)
 	print("mutante recibió daño: ", danio_final, " (original: ", damage, ")")
+	hurt_effect.emitting = true
 	DamageNumbers.flash_sprite(self)
 	number_real_position = marker_2d.global_position
 	DamageNumbers.display_numbers_tesla(danio_final, number_real_position)
@@ -103,6 +106,7 @@ func _on_health_depleted():
 
 
 func heal(value:float):
+	heal_effect.emitting = true
 	max_health += value
 	current_health += value
 	if barra_vida:

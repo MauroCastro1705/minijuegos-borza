@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var barra_vida: HealthBar3 = $BarraVida_mutante
 @onready var number_position: Marker2D = $Marker2D
 var number_real_position
+@onready var hurt_effect: CPUParticles2D = $hurt_effect
 
 signal died
 
@@ -46,6 +47,7 @@ func take_damage(damage: int) -> void:
 	print("enemigo recibió daño: ", danio_final, " (original: ", damage, ")")
 	number_real_position = number_position.global_position
 	DamageNumbers.display_numbers_tesla(danio_final, number_real_position)
+	hurt_effect.emitting = true
 	DamageNumbers.flash_sprite(self)
 
 	current_health -= danio_final

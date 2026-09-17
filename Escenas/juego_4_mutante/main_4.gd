@@ -49,6 +49,7 @@ var tutorial_mensajes:Array[String] = [
 	]
 
 func _ready() -> void:
+	game_over_screen.hide()
 	set_tutorial_text()
 	tuto.show()
 	Global.drag_limits = reference_rect.get_global_rect()
@@ -264,3 +265,7 @@ func spawn_dna(level: int) -> void:
 func _on_item_spawned(item: Item) -> void:
 	item.tooltip_requested.connect(item_tooltip._on_item_tooltip_requested)
 	item.tooltip_hidden.connect(item_tooltip._on_item_tooltip_hidden)
+
+
+func _on_volver_pressed() -> void:
+	TransitionManager.change_scene("res://Escenas/juego_4_mutante/main_menu/menu_mutante.tscn")
