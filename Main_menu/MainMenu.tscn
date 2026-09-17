@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dc57ytm35ij54" path="res://Componentes/botones_main_menu/boton_main_menu.tscn" id="4_lq512"]
 [ext_resource type="Texture2D" uid="uid://dqh61q05muhb1" path="res://assets/locked_level.png" id="5_8cngx"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_rmre0"]
+[ext_resource type="FontFile" uid="uid://pc2vl0wcr3u4" path="res://assets/fonts/HyperbonnardRegular.otf" id="5_stx74"]
 [ext_resource type="FontFile" uid="uid://co56q25ba3y8l" path="res://assets/fonts/coin_font.ttf" id="5_v2is1"]
 [ext_resource type="PackedScene" uid="uid://5h8uptv56eq2" path="res://particulas/special_floor.tscn" id="8_xfihy"]
 [ext_resource type="Texture2D" uid="uid://ckyru12bu7naa" path="res://assets/portadas/planeta.png" id="9_nrt5e"]
@@ -15,6 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
 [ext_resource type="PackedScene" uid="uid://cc80d7jrn58h4" path="res://Componentes/boton_generico_lindo/button_nice.tscn" id="14_chgxx"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="14_x1cxr"]
+[ext_resource type="FontFile" uid="uid://ohilp3fj4bjr" path="res://assets/fonts/Korean Looks.ttf" id="16_d8bvs"]
+[ext_resource type="FontFile" uid="uid://dg6jcs60v7j6q" path="res://assets/fonts/Milany-Regular.otf" id="17_mhndg"]
+[ext_resource type="FontFile" uid="uid://deq7kinrh10v1" path="res://assets/fonts/FFF_Bold_TRIAL.ttf" id="19_cpe8a"]
+[ext_resource type="FontFile" uid="uid://b5ty1wy1ihugt" path="res://assets/fonts/MagazineLetterByBrntlbrnl-Regular.ttf" id="20_rt2ic"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oii30"]
 
@@ -26,13 +31,13 @@ shader_parameter/pixelation = Vector2(2, 2)
 shader_parameter/zoom = 2.0
 shader_parameter/background_threshold = 9.49999998667295e-08
 shader_parameter/color_threshold = 0.6670000316825
-shader_parameter/color = Color(0.21691772, 0.28846666, 0.33728176, 1)
+shader_parameter/color = Color(0.10273417, 0.14745203, 0.17565385, 1)
 shader_parameter/seed = 0.1
 
 [sub_resource type="Gradient" id="Gradient_nrt5e"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.5502392, 1)
-colors = PackedColorArray(1, 0, 0, 1, 1, 0.23529412, 0.34509805, 1, 1, 1, 0, 1)
+offsets = PackedFloat32Array(0, 0.4871795, 0.92820513)
+colors = PackedColorArray(0.2204673, 0.57417417, 0.7563411, 1, 1, 0.23529412, 0.34509805, 1, 0.04367934, 0.30515596, 0.6758372, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_s20xc"]
 gradient = SubResource("Gradient_nrt5e")
@@ -61,7 +66,7 @@ outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rmre0"]
-font = ExtResource("5_v2is1")
+font = ExtResource("5_stx74")
 font_size = 56
 font_color = Color(0.5921569, 0.02745098, 0.2784314, 1)
 outline_size = 7
@@ -72,6 +77,92 @@ shadow_offset = Vector2(5, 8)
 stacked_outline_count = 1
 stacked_outline_0/size = 6
 stacked_outline_0/color = Color(0.09803922, 0.5372549, 0.6745098, 1)
+
+[sub_resource type="Animation" id="Animation_50btx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("titulo:label_settings:font")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_stx74")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("titulo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("titulo:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 114)]
+}
+
+[sub_resource type="Animation" id="Animation_6qni4"]
+resource_name = "new_animation"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("titulo:label_settings:font")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.0333333, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("5_stx74"), ExtResource("16_d8bvs"), ExtResource("17_mhndg"), ExtResource("5_v2is1"), ExtResource("19_cpe8a"), ExtResource("20_rt2ic")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("titulo:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5034807, 2.6666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 1.02)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("titulo:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1666667, 3.3666666),
+"transitions": PackedFloat32Array(1.5691683, 2.219139),
+"update": 0,
+"values": [Vector2(-1, 114), Vector2(-1, 130)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5mxeu"]
+_data = {
+&"RESET": SubResource("Animation_50btx"),
+&"new_animation": SubResource("Animation_6qni4")
+}
 
 [node name="Control" type="Control" unique_id=405304890]
 layout_mode = 3
@@ -91,7 +182,7 @@ anchor_bottom = 1.0
 offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.11764706, 0.21176471, 0.23137255, 0.8862745)
+color = Color(0.100035585, 0.18485665, 0.20252296, 1)
 metadata/_edit_lock_ = true
 
 [node name="ColorRect3" type="ColorRect" parent="." unique_id=1251269853]
@@ -103,7 +194,7 @@ anchor_bottom = 1.0
 offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.14601266, 0.2168428, 0.21923369, 1)
+color = Color(0.39454764, 0.2770077, 0.095723934, 1)
 metadata/_edit_lock_ = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=351254279]
@@ -150,7 +241,7 @@ anchor_bottom = 0.35500002
 offset_left = -1.0
 offset_top = 114.0
 offset_right = -3.0
-offset_bottom = -35.000015
+offset_bottom = -34.99881
 text = "Seminario II"
 label_settings = SubResource("LabelSettings_rmre0")
 horizontal_alignment = 1
@@ -277,5 +368,9 @@ position = Vector2(236, 2)
 scale = Vector2(4.5427666, 2.2829287)
 amount = 31
 lifetime = 2.1999999999999997
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=660822737]
+libraries/ = SubResource("AnimationLibrary_5mxeu")
+autoplay = &"new_animation"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
