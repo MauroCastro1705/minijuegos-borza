@@ -17,7 +17,7 @@ extends Node2D
 @onready var inventory: Node2D = $Inventory
 @onready var enemy_mutant: CharacterBody2D = $Enemy_mutant
 @onready var mutante: CharacterBody2D = $Mutante
-@onready var item_tooltip: Panel = $CanvasLayer/ItemTooltip
+@onready var item_tooltip: PanelContainer = $CanvasLayer/ItemTooltip
 @onready var timer_for_attaks: Timer = $Timer_for_attaks
 @onready var item_spawner: ItemSpawner = $ItemSpawner
 @onready var tuto: Control = $tuto
@@ -46,7 +46,8 @@ var tutorial_mensajes:Array[String] = [
 		"Bienvenido al laboratorio de M enterprises, aqui crearas y mejoraras al sujeto de prueba",
 		"En la parte inferior tenes varios espacios para guardar, instalar o consumir ADN",
 		"Deberas combatir con tu sujeto de pruba contra otros, luego de cada batalla podras colocar nuevos ADN en tu mutante para mejorar",
-		"Los Mutantes pelean automaticamente, Usa el mouse para jugar!"
+		"Los Mutantes pelean automaticamente, Usa el mouse para jugar!",
+		"Aca tenes algunos mutagenos para empezar..."
 	]
 
 func _ready() -> void:
@@ -57,7 +58,7 @@ func _ready() -> void:
 	Global.drag_limits = reference_rect.get_global_rect()
 	item_spawner.item_spawned.connect(_on_item_spawned)
 	Global.player_died.connect(_player_died)
-
+	tuto.connect("tutorial_finished", _tutorial_termino)
 	# Guardar la posición inicial del enemigo para futuros spawns
 	if is_instance_valid(enemy_mutant):
 		_pos_spawn_enemigo = enemy_mutant.global_position
@@ -79,6 +80,9 @@ func _ready() -> void:
 func set_tutorial_text():
 	tuto.set_mensajes(tutorial_mensajes)
 
+func _tutorial_termino():
+	await get_tree().create_timer(0.4).timeout
+	spawn_dna(2)
 
 func _on_start_button_pressed() -> void:
 	inventory.can_apply_mutagens = false
@@ -201,6 +205,8 @@ func _crear_nuevo_enemigo() -> void:
 
 	# Meter a la escena
 	add_child(nuevo)
+	if nuevo.has_method("randomizar_nombre"):
+		nuevo.randomizar_nombre()
 
 	# Actualizar referencia y reconectar señal
 	enemy_mutant = nuevo as CharacterBody2D
@@ -224,6 +230,7 @@ func _on_mutante_aliado_muerto() -> void:
 		return
 	batalla_activa = false
 	timer_for_attaks.stop()
+	await get_tree().create_timer(2).timeout
 	on_derrota()
 
 

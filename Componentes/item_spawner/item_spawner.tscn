@@ -2,9 +2,14 @@
 
 [ext_resource type="Script" uid="uid://lrkqs7vb5nxv" path="res://Componentes/item_spawner/item_spawner.gd" id="1_w0sbd"]
 [ext_resource type="PackedScene" uid="uid://mmi2bm0him43" path="res://Componentes/item/item.tscn" id="2_0neqk"]
+[ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="3_ya64n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
 size = Vector2(336, 218)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
+atlas = ExtResource("3_ya64n")
+region = Rect2(22, 21, 7, 7)
 
 [node name="ItemSpawner" type="Node2D" unique_id=937600891 node_paths=PackedStringArray("spawn_area")]
 script = ExtResource("1_w0sbd")
@@ -16,3 +21,26 @@ item_scene = ExtResource("2_0neqk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="spawn_area" unique_id=1368248492]
 position = Vector2(-3, -14)
 shape = SubResource("RectangleShape2D_yowuo")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1756062410]
+texture_filter = 1
+position = Vector2(-2, -125)
+emitting = false
+amount = 16
+texture = SubResource("AtlasTexture_yowuo")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(100, 1)
+direction = Vector2(1, 1)
+spread = 138.46
+gravity = Vector2(0, 700)
+initial_velocity_min = 100.0
+initial_velocity_max = 430.77
+angular_velocity_min = 50.0
+angular_velocity_max = 100.0
+scale_amount_min = 1.2
+scale_amount_max = 1.8
+color = Color(0, 0.7607843, 0, 1)

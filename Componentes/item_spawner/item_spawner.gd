@@ -1,4 +1,5 @@
 class_name ItemSpawner extends Node2D
+@onready var spawn_effect: CPUParticles2D = $CPUParticles2D
 
 signal all_items_spawned()
 signal item_spawned(item: Item)
@@ -60,7 +61,7 @@ func spawn_items(items: Array[ItemData]) -> void:
 	
 	if rows == 0:
 		rows = ceil(float(spawn_queue.size()) / float(columns))
-	
+	spawn_effect.emitting = true
 	_spawn_next_item()
 
 

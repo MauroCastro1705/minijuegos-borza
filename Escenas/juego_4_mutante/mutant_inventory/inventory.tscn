@@ -456,6 +456,7 @@ asdasd"
 label_settings = SubResource("LabelSettings_wf8mm")
 
 [node name="apply_mutagen" type="Button" parent="." unique_id=1335745374]
+visible = false
 offset_left = 550.0
 offset_top = 271.0
 offset_right = 665.0

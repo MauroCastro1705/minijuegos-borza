@@ -5,8 +5,13 @@ extends CharacterBody2D
 @onready var number_position: Marker2D = $Marker2D
 var number_real_position
 @onready var hurt_effect: CPUParticles2D = $hurt_effect
+@onready var mutant_info: Label = %mutant_info
 
 signal died
+
+# --- Identidad y nombres ---
+@export var nombre: String = "Test XC-047"
+@export var nombres_disponibles: Array[String] = ["Fran Mutantear", "El ArtE", "La Furia v.015", "Moco rojo", "Claudio" , "Borza splinter 74" , "Ar3p4 Vol4t1L" ]
 
 # --- Stats base (matchean con el GameManager) ---
 var max_health: float = 60
@@ -22,6 +27,7 @@ var enemy_dmg: int:
 	set(value): fuerza = value
 
 var is_dead: bool = false
+var nombre_anterior: String = ""
 
 
 func _ready() -> void:
@@ -30,6 +36,7 @@ func _ready() -> void:
 	barra_vida.health_depleted.connect(_on_health_depleted)
 	barra_vida.max_health = max_health
 	barra_vida.current_health = current_health
+	_actualizar_info()
 
 
 func _physics_process(_delta: float) -> void:
@@ -53,6 +60,35 @@ func take_damage(damage: int) -> void:
 	current_health -= danio_final
 	if barra_vida:
 		barra_vida.take_damage(danio_final)
+	_actualizar_info()
+
+
+func randomizar_nombre() -> void:
+	if nombres_disponibles.is_empty():
+		return
+
+	var opciones := nombres_disponibles.duplicate()
+	if not nombre_anterior.is_empty():
+		opciones.erase(nombre_anterior)
+
+	if opciones.is_empty():
+		nombre = nombre_anterior if not nombre_anterior.is_empty() else nombres_disponibles.pick_random()
+	else:
+		nombre = opciones.pick_random()
+
+	nombre_anterior = nombre
+	_actualizar_info()
+
+
+func _actualizar_info() -> void:
+	if not is_instance_valid(mutant_info):
+		return
+	mutant_info.text = (
+		"%s\n" % nombre
+		+ "HP: %d / %d\n" % [int(current_health), int(max_health)]
+		+ "Daño: %d\n" % fuerza
+		+ "DEF: %d%%" % int(round(defensa * 100))
+	)
 
 
 func _on_health_depleted():

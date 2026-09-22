@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://buhgfkoo7ilok" path="res://assets/juego4/cubo_rojo.png" id="3_a6evs"]
 [ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="4_s8373"]
 [ext_resource type="PackedScene" uid="uid://24axemrsl1cw" path="res://Componentes/barra_vida_mutante/barra_vida_mutante.tscn" id="4_ypk5e"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="5_mc3hd"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="6_vunqx"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="7_vunqx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
 size = Vector2(42, 40)
@@ -81,6 +84,44 @@ _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.7916666), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Resource" id="Resource_l7s1y"]
+script = ExtResource("5_mc3hd")
+color = Color(0, 1, 0, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_72xca"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("6_vunqx")
+color = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("5_mc3hd")]([SubResource("Resource_l7s1y")])
+corner_detail = 9
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+corner_curvature_top_right = -2.0
+corner_curvature_bottom_right = -2.0
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="LabelSettings" id="LabelSettings_mc3hd"]
+font = ExtResource("7_vunqx")
+font_size = 20
+
 [node name="Enemy_mutant" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
 z_index = 4
 input_pickable = true
@@ -135,3 +176,28 @@ scale_amount_min = 3.0
 scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_oxa6g")
 color = Color(1, 0.023529412, 0, 1)
+
+[node name="panel" type="PanelContainer" parent="." unique_id=2005674469]
+custom_maximum_size = Vector2(200, 80)
+offset_left = 109.0
+offset_top = -124.0
+offset_right = 291.0
+offset_bottom = -46.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_72xca")
+
+[node name="MarginContainer" type="MarginContainer" parent="panel" unique_id=1297011348]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 0
+
+[node name="mutant_info" type="Label" parent="panel/MarginContainer" unique_id=1227362699]
+unique_name_in_owner = true
+custom_maximum_size = Vector2(150, -1)
+layout_mode = 2
+text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+label_settings = SubResource("LabelSettings_mc3hd")
+vertical_alignment = 1
+autowrap_mode = 3

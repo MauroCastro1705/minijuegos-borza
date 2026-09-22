@@ -55,31 +55,25 @@ font_size = 23
 font = ExtResource("4_6jtov")
 font_size = 20
 
-[node name="ItemTooltip" type="Panel" unique_id=1085770684]
+[node name="ItemTooltip" type="PanelContainer" unique_id=393144929]
 custom_minimum_size = Vector2(50, 50)
 custom_maximum_size = Vector2(300, 100)
 anchors_preset = -1
-anchor_right = 0.22800002
-anchor_bottom = 0.17
-offset_left = 5.0
-offset_top = 23.5
-offset_right = -1.5258789e-05
-offset_bottom = -12.5
+anchor_top = 0.029000001
+anchor_right = 0.26900002
+anchor_bottom = 0.14400001
+offset_left = 3.0
+offset_top = -20.2
+offset_right = -2.0000305
+offset_bottom = -20.200005
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBox_nva4u")
 script = ExtResource("1_u8bui")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=23689905]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3.0
-offset_top = 7.5
-offset_right = -35.0
-offset_bottom = -4.5
-theme_override_constants/margin_left = 5
+layout_mode = 2
+theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
