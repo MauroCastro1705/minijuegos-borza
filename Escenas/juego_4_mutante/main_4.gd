@@ -23,6 +23,7 @@ extends Node2D
 @onready var tuto: Control = $tuto
 @onready var game_over_screen: Node2D = $game_over_screen
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var musica: AudioStreamPlayer2D = $musica
 
 # --- Estado del combate ---
 enum Turno { JUGADOR, ENEMIGO }
@@ -51,6 +52,7 @@ var tutorial_mensajes:Array[String] = [
 	]
 
 func _ready() -> void:
+	musica.play()
 	canvas_layer.show()
 	game_over_screen.hide()
 	set_tutorial_text()
@@ -284,3 +286,7 @@ func _on_item_spawned(item: Item) -> void:
 
 func _on_volver_pressed() -> void:
 	TransitionManager.change_scene("res://Escenas/juego_4_mutante/main_menu/menu_mutante.tscn")
+
+
+func _on_musica_finished() -> void:
+	musica.play()

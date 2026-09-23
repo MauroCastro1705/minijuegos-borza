@@ -657,6 +657,10 @@ offset_bottom = 666.6666
 grow_horizontal = 1
 grow_vertical = 1
 
+[node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=1289140867]
+position = Vector2(520, 323)
+
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="Timer_for_attaks" to="." method="_on_timer_for_attaks_timeout"]
 [connection signal="pressed" from="game_over_screen/volver" to="." method="_on_volver_pressed"]
+[connection signal="finished" from="musica" to="." method="_on_musica_finished"]
