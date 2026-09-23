@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="9_upkqa"]
 [ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="10_dkayg"]
 [ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="11_wloae"]
+[ext_resource type="AudioStream" uid="uid://co14lhkr00kwv" path="res://assets/musica/mutante2.wav" id="14_upkqa"]
 
 [sub_resource type="Shader" id="Shader_m0xm4"]
 code = "shader_type canvas_item;
@@ -254,5 +255,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=753803944]
+position = Vector2(511, 351)
+stream = ExtResource("14_upkqa")
+
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="volver" to="." method="_on_volver_pressed"]
+[connection signal="finished" from="musica" to="." method="_on_musica_finished"]

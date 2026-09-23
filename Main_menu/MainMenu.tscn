@@ -347,7 +347,6 @@ stream = ExtResource("12_nrt5e")
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=322618874]
-visible = false
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=220204203]
 material = ExtResource("14_x1cxr")

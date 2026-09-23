@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="14_sb25l"]
 [ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="15_4sukb"]
 [ext_resource type="Texture2D" uid="uid://c2w10nxxjox4p" path="res://assets/juego3/robottesla.png" id="19_03vod"]
+[ext_resource type="AudioStream" uid="uid://co14lhkr00kwv" path="res://assets/musica/mutante2.wav" id="20_l0ayt"]
 [ext_resource type="PackedScene" uid="uid://bj158bjxawmad" path="res://Componentes/tutorial_node/tutorial.tscn" id="21_03vod"]
 
 [sub_resource type="Shader" id="Shader_kssi1"]
@@ -659,6 +660,7 @@ grow_vertical = 1
 
 [node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=1289140867]
 position = Vector2(520, 323)
+stream = ExtResource("20_l0ayt")
 
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="Timer_for_attaks" to="." method="_on_timer_for_attaks_timeout"]
