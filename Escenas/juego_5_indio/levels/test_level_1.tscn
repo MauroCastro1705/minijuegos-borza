@@ -3,6 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://ducp7rsjpf40n" path="res://Escenas/juego_5_indio/player/player.tscn" id="1_cxdpd"]
 [ext_resource type="Script" uid="uid://b65aof0kwt0de" path="res://Escenas/juego_5_indio/levels/test_level_1.gd" id="1_jxdqn"]
 [ext_resource type="Texture2D" uid="uid://dxqlrhmqmomx1" path="res://assets/juego5/tileset_prision_1.png" id="2_w8h6t"]
+[ext_resource type="PackedScene" uid="uid://dsf6cf1eu1cx7" path="res://Escenas/juego_5_indio/trampas/trap_1.tscn" id="4_m1c1d"]
+
+[sub_resource type="Gradient" id="Gradient_w8h6t"]
+colors = PackedColorArray(0.028623987, 2.3961593e-05, 0.06784354, 1, 0.10490657, 0.000117096104, 0.18281695, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yowuo"]
+gradient = SubResource("Gradient_w8h6t")
+fill = 1
+fill_from = Vector2(0.517094, 0.525641)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m1c1d"]
 texture = ExtResource("2_w8h6t")
@@ -10,6 +19,7 @@ separation = Vector2i(31, 11)
 texture_region_size = Vector2i(160, 160)
 5:4/0 = 0
 4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, -4, -80, -4, 80, -80, 80)
 3:1/0 = 0
 3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
 2:1/0 = 0
@@ -33,11 +43,15 @@ texture_region_size = Vector2i(160, 160)
 4:3/0 = 0
 5:3/0 = 0
 5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -2.0490417, 80, -1, 80, 80, -80, 80)
 4:2/0 = 0
+4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -2.0490417, 80, -1, 80, 80, -80, 80)
 3:2/0 = 0
 3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -80, 80, -80, 80, 80, -80, 80)
 6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -2.0490417, 80, -1, 80, 80, -80, 80)
 7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, -2.0490417, 80, -1, 80, 80, -80, 80)
 5:1/0 = 0
 6:1/0 = 0
 7:1/0 = 0
@@ -142,15 +156,16 @@ size = Vector2(2916, 340)
 script = ExtResource("1_jxdqn")
 metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=259612568]
+[node name="ColorRect" type="TextureRect" parent="." unique_id=1854533305]
 offset_left = -887.0
+offset_top = -1359.0
 offset_right = 3938.0
 offset_bottom = 1691.0
-color = Color(0.113051236, 0.0025872705, 0.0883469, 1)
+texture = SubResource("GradientTexture2D_yowuo")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1470291061]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAEAAUAAAACAAIAAAAEAAQAAAACAAAAAAADAAUAAAABAAIAAAADAAQAAAABAAAAAAACAAUAAAABAAIAAAACAAQAAAABAAAAAAABAAUAAAABAAIAAAABAAQAAAABAAAAAAAAAAUAAAAAAAIAAAAAAAQAAAAAAAAAAAAKAAUAAAACAAIAAAAKAAQAAAACAAAAAAAJAAUAAAABAAIAAAAJAAQAAAABAAAAAAAIAAUAAAABAAIAAAAIAAQAAAABAAAAAAAHAAUAAAABAAIAAAAHAAQAAAABAAAAAAAGAAUAAAAAAAIAAAAGAAQAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAEAAUAAAACAAIAAAAEAAQAAAACAAAAAAADAAUAAAABAAIAAAADAAQAAAABAAAAAAACAAUAAAABAAIAAAACAAQAAAABAAAAAAABAAUAAAABAAIAAAABAAQAAAABAAAAAAAAAAUAAAAAAAIAAAAAAAQAAAAAAAAAAAAKAAUAAAACAAIAAAAKAAQAAAACAAAAAAAJAAUAAAABAAIAAAAJAAQAAAABAAAAAAAIAAUAAAABAAIAAAAIAAQAAAABAAAAAAAHAAUAAAABAAIAAAAHAAQAAAABAAAAAAAGAAUAAAAAAAIAAAAGAAQAAAAAAAAAAAAFAAMAAAAHAAIAAAAGAAIAAAAHAAIAAAAHAAEAAAAHAAIAAAA=")
 tile_set = SubResource("TileSet_jxdqn")
 
 [node name="Player" parent="." unique_id=1767514809 groups=["player"] instance=ExtResource("1_cxdpd")]
@@ -165,3 +180,6 @@ position = Vector2(4, -33)
 position = Vector2(1079, 1145)
 shape = SubResource("RectangleShape2D_jxdqn")
 debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="Trap1" parent="." unique_id=1958687352 instance=ExtResource("4_m1c1d")]
+position = Vector2(866, 559)

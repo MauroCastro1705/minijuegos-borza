@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dsf6cf1eu1cx7"]
+
+[ext_resource type="SpriteFrames" uid="uid://0wtme045bpwe" path="res://assets/juego5/trampas.tres" id="1_bsjh8"]
+
+[node name="Trap1" type="Node2D" unique_id=1958687352]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1676429937]
+sprite_frames = ExtResource("1_bsjh8")
+animation = &"sierra"
+autoplay = "sierra"
+frame_progress = 0.14235915
