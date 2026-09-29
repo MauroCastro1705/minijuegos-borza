@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch8u3rf8xate6"
-path="res://.godot/imported/icon.png-85c15d258d36e01c1b0b596395d8f797.ctex"
+uid="uid://dxqlrhmqmomx1"
+path="res://.godot/imported/tileset_prision_1.png-439891c9443321267640ce3d8b59a7a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Escenas/2d_platform/icons/icon.png"
-dest_files=["res://.godot/imported/icon.png-85c15d258d36e01c1b0b596395d8f797.ctex"]
+source_file="res://assets/juego5/tileset_prision_1.png"
+dest_files=["res://.godot/imported/tileset_prision_1.png-439891c9443321267640ce3d8b59a7a8.ctex"]
 
 [params]
 
