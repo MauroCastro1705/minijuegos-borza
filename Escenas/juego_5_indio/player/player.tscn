@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://ducp7rsjpf40n"]
 
-[ext_resource type="Script" uid="uid://spewh8xv7lts" path="res://Escenas/2d_platform/src/player/player.gd" id="1_4anbu"]
-[ext_resource type="Script" uid="uid://bwbxypkqm7bgl" path="res://Escenas/2d_platform/src/state_machine/state_machine.gd" id="2_rxibo"]
-[ext_resource type="Script" uid="uid://btp87202ddbxl" path="res://Escenas/2d_platform/src/player/states/air_entry_state.gd" id="3_x42xx"]
-[ext_resource type="Script" uid="uid://dx15tnwh62i1l" path="res://Escenas/2d_platform/src/player/states/fall_state.gd" id="4_l271a"]
-[ext_resource type="Script" uid="uid://cl2swaeebfu0s" path="res://Escenas/2d_platform/src/player/states/jump_state.gd" id="5_8ydov"]
-[ext_resource type="Script" uid="uid://b6w2sn3ikefko" path="res://Escenas/2d_platform/src/player/states/floor_entry_state.gd" id="6_ylhto"]
-[ext_resource type="Script" uid="uid://m06e3ohv0ud1" path="res://Escenas/2d_platform/src/player/states/idle_state.gd" id="7_cwolq"]
-[ext_resource type="Script" uid="uid://bgrdchyvffn8v" path="res://Escenas/2d_platform/src/player/states/run_state.gd" id="8_2smqc"]
-[ext_resource type="Script" uid="uid://b04xgcpknjjdw" path="res://Escenas/2d_platform/src/player/states/wall_slide_state.gd" id="9_8ydov"]
-[ext_resource type="Script" uid="uid://d00j5gw538kn2" path="res://Escenas/2d_platform/src/player/states/wall_jump_state.gd" id="10_ylhto"]
-[ext_resource type="Script" uid="uid://crbn04ab1d1vk" path="res://Escenas/2d_platform/src/player/states/dash_state.gd" id="11_ylhto"]
+[ext_resource type="Script" uid="uid://spewh8xv7lts" path="res://Escenas/juego_5_indio/player/player.gd" id="1_4anbu"]
+[ext_resource type="Script" uid="uid://bwbxypkqm7bgl" path="res://Escenas/juego_5_indio/state_machine/state_machine.gd" id="2_rxibo"]
+[ext_resource type="Script" uid="uid://btp87202ddbxl" path="res://Escenas/juego_5_indio/player/states/air_entry_state.gd" id="3_x42xx"]
+[ext_resource type="Script" uid="uid://dx15tnwh62i1l" path="res://Escenas/juego_5_indio/player/states/fall_state.gd" id="4_l271a"]
+[ext_resource type="Script" uid="uid://cl2swaeebfu0s" path="res://Escenas/juego_5_indio/player/states/jump_state.gd" id="5_8ydov"]
+[ext_resource type="Script" uid="uid://b6w2sn3ikefko" path="res://Escenas/juego_5_indio/player/states/floor_entry_state.gd" id="6_ylhto"]
+[ext_resource type="Script" uid="uid://m06e3ohv0ud1" path="res://Escenas/juego_5_indio/player/states/idle_state.gd" id="7_cwolq"]
+[ext_resource type="Script" uid="uid://bgrdchyvffn8v" path="res://Escenas/juego_5_indio/player/states/run_state.gd" id="8_2smqc"]
+[ext_resource type="Script" uid="uid://b04xgcpknjjdw" path="res://Escenas/juego_5_indio/player/states/wall_slide_state.gd" id="9_8ydov"]
+[ext_resource type="Script" uid="uid://d00j5gw538kn2" path="res://Escenas/juego_5_indio/player/states/wall_jump_state.gd" id="10_ylhto"]
+[ext_resource type="Script" uid="uid://crbn04ab1d1vk" path="res://Escenas/juego_5_indio/player/states/dash_state.gd" id="11_ylhto"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qnmj6"]
 size = Vector3(48, 64, 1)
@@ -83,6 +83,7 @@ position = Vector2(-5, -44)
 mesh = SubResource("BoxMesh_4anbu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=561696663]
+visible = false
 position = Vector2(0, -31)
 shape = SubResource("RectangleShape2D_qnmj6")
 
@@ -171,6 +172,9 @@ unique_name_in_owner = true
 process_callback = 0
 wait_time = 0.1
 one_shot = true
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1192596907]
+position = Vector2(31, -94)
 
 [connection signal="wall_entered" from="." to="." method="_on_wall_entered"]
 [connection signal="wall_exited" from="." to="." method="_on_wall_exited"]

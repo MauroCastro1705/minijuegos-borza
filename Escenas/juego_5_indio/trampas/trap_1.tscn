@@ -1,11 +1,28 @@
 [gd_scene format=3 uid="uid://dsf6cf1eu1cx7"]
 
 [ext_resource type="SpriteFrames" uid="uid://0wtme045bpwe" path="res://assets/juego5/trampas.tres" id="1_bsjh8"]
+[ext_resource type="Script" uid="uid://ceome5wfp1t0" path="res://Escenas/juego_5_indio/trampas/trap_1.gd" id="1_guea5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
+radius = 38.013157
 
 [node name="Trap1" type="Node2D" unique_id=1958687352]
+script = ExtResource("1_guea5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1676429937]
 sprite_frames = ExtResource("1_bsjh8")
 animation = &"sierra"
 autoplay = "sierra"
 frame_progress = 0.14235915
+
+[node name="Area2D" type="Area2D" parent="." unique_id=97384373]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=849528196]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_yowuo")
+
+[node name="Timer" type="Timer" parent="." unique_id=240822306]
+wait_time = 1.5
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

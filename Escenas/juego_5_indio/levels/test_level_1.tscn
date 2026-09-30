@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://b65aof0kwt0de" path="res://Escenas/juego_5_indio/levels/test_level_1.gd" id="1_jxdqn"]
 [ext_resource type="Texture2D" uid="uid://dxqlrhmqmomx1" path="res://assets/juego5/tileset_prision_1.png" id="2_w8h6t"]
 [ext_resource type="PackedScene" uid="uid://dsf6cf1eu1cx7" path="res://Escenas/juego_5_indio/trampas/trap_1.tscn" id="4_m1c1d"]
+[ext_resource type="PackedScene" uid="uid://c48u7ruyn0bh" path="res://Componentes/barra_vida_barbazul/barra_vida_barbazul.tscn" id="5_f12vh"]
 
 [sub_resource type="Gradient" id="Gradient_w8h6t"]
-colors = PackedColorArray(0.028623987, 2.3961593e-05, 0.06784354, 1, 0.10490657, 0.000117096104, 0.18281695, 1)
+offsets = PackedFloat32Array(0, 0.8920188)
+colors = PackedColorArray(0.055630736, 0.046252802, 0.032182842, 1, 0.45073605, 0.4135246, 0.3721108, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yowuo"]
 gradient = SubResource("Gradient_w8h6t")
@@ -161,6 +163,7 @@ offset_left = -887.0
 offset_top = -1359.0
 offset_right = 3938.0
 offset_bottom = 1691.0
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_yowuo")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1470291061]
@@ -168,11 +171,15 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAAEAAUAAAACAAIAAAAEAAQAAAACAAAAAAADAAUAAAABAAIAAAADAAQAAAABAAAAAAACAAUAAAABAAIAAAACAAQAAAABAAAAAAABAAUAAAABAAIAAAABAAQAAAABAAAAAAAAAAUAAAAAAAIAAAAAAAQAAAAAAAAAAAAKAAUAAAACAAIAAAAKAAQAAAACAAAAAAAJAAUAAAABAAIAAAAJAAQAAAABAAAAAAAIAAUAAAABAAIAAAAIAAQAAAABAAAAAAAHAAUAAAABAAIAAAAHAAQAAAABAAAAAAAGAAUAAAAAAAIAAAAGAAQAAAAAAAAAAAAFAAMAAAAHAAIAAAAGAAIAAAAHAAIAAAAHAAEAAAAHAAIAAAA=")
 tile_set = SubResource("TileSet_jxdqn")
 
-[node name="Player" parent="." unique_id=1767514809 groups=["player"] instance=ExtResource("1_cxdpd")]
+[node name="Player" parent="." unique_id=1767514809 node_paths=PackedStringArray("barra_vida") groups=["player"] instance=ExtResource("1_cxdpd")]
 position = Vector2(189, 633)
+barra_vida = NodePath("BarraVida_barbazul")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=59552220]
 position = Vector2(4, -33)
+
+[node name="BarraVida_barbazul" parent="Player" unique_id=571050010 instance=ExtResource("5_f12vh")]
+position = Vector2(-361, -386)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1866147113]
 

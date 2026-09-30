@@ -1,9 +1,17 @@
 class_name Player
 extends CharacterBody2D
 
+
 signal wall_entered
 signal wall_exited
+signal died
+var is_dead: bool = false
+#nuevas
+var max_health: float = 130
+var current_health: float
 
+@export var barra_vida:HealthBar3
+@onready var marker_2d: Marker2D = $Marker2D
 @export var flip_h: bool: set = set_flip_h
 
 @export_group("Horizontal Movement")
@@ -98,6 +106,40 @@ var _on_wall: bool = false: # This variable mustn't be edited manually
 @onready var after_dash_gravity_timer: Timer = %AfterDashGravity as Timer
 
 @onready var _default_shape_scale: Vector2 = shape.scale
+
+func _ready() -> void:
+	if barra_vida:
+		health_setup()
+
+func health_setup():
+	current_health = max_health
+	barra_vida.health_depleted.connect(_on_health_depleted)
+	barra_vida.max_health = max_health
+	barra_vida.current_health = current_health
+
+func _on_health_depleted():
+	if is_dead:
+		return
+	is_dead = true
+	#Global.enemy_died.emit()
+	died.emit()
+	barra_vida.hide()
+	print("player murio")
+	queue_free()
+
+func take_damage(damage: int) -> void:
+	if is_dead:
+		return
+
+	print("enemigo recibió daño: ", damage)
+	var number_real_position = marker_2d.global_position
+	DamageNumbers.display_numbers_tesla(damage, number_real_position)
+	#hurt_effect.emitting = true
+	DamageNumbers.flash_sprite(self)
+
+	current_health -= damage
+	if barra_vida:
+		barra_vida.take_damage(damage)
 
 func _physics_process(_delta: float) -> void:
 	_on_wall = is_on_wall()
