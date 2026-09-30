@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="6_mgj0n"]
 [ext_resource type="PackedScene" uid="uid://cr47np8t6e46n" path="res://Componentes/pick_ups/pick_up.tscn" id="7_orbjx"]
 [ext_resource type="Texture2D" uid="uid://bp5eepkrjh6ly" path="res://assets/juego5/manzana.png" id="8_b67ji"]
+[ext_resource type="PackedScene" uid="uid://cmwixqd2h5367" path="res://Escenas/juego_5_indio/enemigos/enemigo_1/warden_1.tscn" id="9_b67ji"]
 
 [sub_resource type="Gradient" id="Gradient_w8h6t"]
 offsets = PackedFloat32Array(0, 0.8920188)
@@ -251,3 +252,6 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(395, 610)
 SPEED = 0.0
 pick_texture = ExtResource("8_b67ji")
+
+[node name="Enemy_warden" parent="." unique_id=816020656 instance=ExtResource("9_b67ji")]
+position = Vector2(880, 460)

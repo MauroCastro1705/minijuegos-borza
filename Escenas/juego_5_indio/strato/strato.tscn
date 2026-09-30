@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://d3qt7mlub61le"]
+
+[ext_resource type="Texture2D" uid="uid://c5eo77e806ysn" path="res://assets/juego5/strato.png" id="1_cggf6"]
+
+[node name="Strato" type="Node2D" unique_id=2040012188]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1425996134]
+position = Vector2(22, -12.000001)
+rotation = 1.0517703
+scale = Vector2(0.292, 0.292)
+texture = ExtResource("1_cggf6")
