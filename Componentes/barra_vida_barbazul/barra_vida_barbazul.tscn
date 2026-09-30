@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c48u7ruyn0bh"]
 
-[ext_resource type="Script" uid="uid://dwydly52qbmok" path="res://Componentes/barra_vida_barbazul/barra_vida.gd" id="1_g2hdf"]
+[ext_resource type="Script" uid="uid://d030r741fvuhv" path="res://Componentes/barra_vida_electrica/barra_vida.gd" id="1_1e2sw"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="2_cug1u"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="3_75237"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="4_afj23"]
@@ -86,7 +86,7 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(1, 0.5)
 
 [node name="BarraVida_barbazul" type="Node2D" unique_id=571050010]
-script = ExtResource("1_g2hdf")
+script = ExtResource("1_1e2sw")
 
 [node name="life_bar" type="ProgressBar" parent="." unique_id=81290640]
 custom_minimum_size = Vector2(70, 8)

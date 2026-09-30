@@ -9,10 +9,16 @@ var is_dead: bool = false
 #nuevas
 var max_health: float = 130
 var current_health: float
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var attack_effect: Sprite2D = %attack_effect
 
-@export var barra_vida:HealthBar3
+@export var barra_vida:HealthBar2
 @onready var marker_2d: Marker2D = $Marker2D
 @export var flip_h: bool: set = set_flip_h
+var has_strato:bool = false
+@onready var strato: Node2D = $Shape/Strato
+
+
 
 @export_group("Horizontal Movement")
 @export var max_speed: float
@@ -110,6 +116,7 @@ var _on_wall: bool = false: # This variable mustn't be edited manually
 func _ready() -> void:
 	if barra_vida:
 		health_setup()
+	#animation_player.play("attack")
 
 func health_setup():
 	current_health = max_health
@@ -131,7 +138,7 @@ func take_damage(damage: int) -> void:
 	if is_dead:
 		return
 
-	print("enemigo recibió daño: ", damage)
+	print("player recibió daño: ", damage)
 	var number_real_position = marker_2d.global_position
 	DamageNumbers.display_numbers_tesla(damage, number_real_position)
 	#hurt_effect.emitting = true
@@ -143,6 +150,14 @@ func take_damage(damage: int) -> void:
 
 func _physics_process(_delta: float) -> void:
 	_on_wall = is_on_wall()
+	if Input.is_action_pressed("attack") and has_strato:
+		strato.show()
+		animation_player.play("pull_out_strato")
+		await animation_player.animation_finished
+		attack_effect.show()
+		animation_player.play("attack")
+		await  animation_player.animation_finished
+		animation_player.play("store_strato")
 
 func get_facing_dir() -> float:
 	return -1.0 if flip_h else 1.0
