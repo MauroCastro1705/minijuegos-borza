@@ -318,3 +318,21 @@ scale = Vector2(2.5, 2.5)
 
 [node name="manzana" parent="pickups" unique_id=351516574 instance=ExtResource("9_uou7r")]
 position = Vector2(417, 598)
+
+[node name="manzana2" parent="pickups" unique_id=65845269 instance=ExtResource("9_uou7r")]
+position = Vector2(1203, 525)
+
+[node name="manzana3" parent="pickups" unique_id=491776559 instance=ExtResource("9_uou7r")]
+position = Vector2(1847, 349)
+
+[node name="manzana4" parent="pickups" unique_id=1086086395 instance=ExtResource("9_uou7r")]
+position = Vector2(1851, 210)
+
+[node name="manzana5" parent="pickups" unique_id=1004611987 instance=ExtResource("9_uou7r")]
+position = Vector2(1857, 74)
+
+[node name="manzana6" parent="pickups" unique_id=1616235058 instance=ExtResource("9_uou7r")]
+position = Vector2(2298, 58)
+
+[node name="manzana7" parent="pickups" unique_id=438457175 instance=ExtResource("9_uou7r")]
+position = Vector2(1972, -532)
