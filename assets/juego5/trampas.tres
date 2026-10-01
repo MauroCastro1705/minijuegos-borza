@@ -141,10 +141,16 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_af6it")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8efe1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f160g")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"rayo",
-"speed": 7.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
