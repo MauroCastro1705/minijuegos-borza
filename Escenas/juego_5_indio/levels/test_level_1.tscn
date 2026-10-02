@@ -373,7 +373,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(2470, 760)
 
 [node name="Enemy_warden2" parent="." unique_id=686176991 instance=ExtResource("9_b67ji")]
-position = Vector2(1842, -506)
+position = Vector2(338, 609)
 
 [node name="pickups" type="Node2D" parent="." unique_id=180554475]
 

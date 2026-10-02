@@ -9,7 +9,7 @@ func _physics_update(delta: float) -> void:
 	player.update_flip_h()
 	player.apply_move_anim()
 	player.update_shape_scale(delta)
-	
+	player.animacion.play("walk")
 	player.move_and_slide()
 	
 	if not player.is_on_floor():

@@ -5,6 +5,7 @@ extends CharacterBody2D
 var number_real_position
 @onready var hurt_effect: CPUParticles2D = $hurt_effect
 @onready var attack_area: Area2D = $attack_area
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
 signal died
@@ -58,8 +59,10 @@ func _physics_process(delta: float) -> void:
 	if _jugador_en_area:
 		# El jugador está encima/pegado: nos detenemos
 		velocity.x = 0
+		
 	else:
 		velocity.x = _direccion * velocidad
+		animated_sprite_2d.play("walk")
 
 		# Chequear límites de patrulla
 		var desplazamiento = global_position.x - _pos_inicial.x
@@ -76,7 +79,7 @@ func _physics_process(delta: float) -> void:
 			_girar()
 
 	move_and_slide()
-
+	
 	# --- Cooldown de ataque ---
 	if not _puede_atacar:
 		_timer_ataque -= delta
@@ -123,6 +126,7 @@ func atacar(objetivo: Node2D) -> void:
 
 	var damage: int = int(fuerza)
 	if objetivo.has_method("take_damage"):
+		animated_sprite_2d.play("attack")
 		objetivo.take_damage(damage)
 
 

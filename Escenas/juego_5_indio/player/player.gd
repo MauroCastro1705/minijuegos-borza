@@ -218,7 +218,6 @@ func calculate_gravity_limit() -> float:
 func jump() -> void:
 	velocity.y = jump_velocity
 	apply_stretch()
-	animacion.play("idle")
 
 func try_jump() -> void:
 	if Input.is_action_just_pressed("jump"):
@@ -350,7 +349,6 @@ func try_oneway_platform_assist() -> void:
 
 func apply_move_anim() -> void:
 	var max_move_skew_rad: float = deg_to_rad(max_move_skew)
-	animacion.play("walk")
 	
 	shape.skew = remap(velocity.x, max_speed, -max_speed, -max_move_skew_rad, max_move_skew_rad)
 
