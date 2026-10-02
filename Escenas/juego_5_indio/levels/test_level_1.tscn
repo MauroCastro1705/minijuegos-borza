@@ -255,10 +255,10 @@ position = Vector2(3112, -440)
 metadata/_edit_lock_ = true
 
 [node name="mas_lejos" type="Parallax2D" parent="paralax" unique_id=1670910170]
-scroll_scale = Vector2(0.1, 0.1)
+scroll_scale = Vector2(0.2, 0.2)
 repeat_size = Vector2(4000, 0)
 autoscroll = Vector2(15, 0)
-repeat_times = 2
+repeat_times = 5
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="paralax/mas_lejos" unique_id=387072441]
@@ -282,7 +282,7 @@ texture = ExtResource("3_gruqq")
 metadata/_edit_lock_ = true
 
 [node name="cerca" type="Parallax2D" parent="paralax" unique_id=1882048716]
-scroll_scale = Vector2(0.5, 0.5)
+scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(2000, 0)
 repeat_times = 2
 metadata/_edit_lock_ = true
@@ -369,7 +369,10 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Enemy_warden" parent="." unique_id=816020656 instance=ExtResource("9_b67ji")]
-position = Vector2(231, 614)
+position = Vector2(2470, 760)
+
+[node name="Enemy_warden2" parent="." unique_id=686176991 instance=ExtResource("9_b67ji")]
+position = Vector2(1842, -506)
 
 [node name="pickups" type="Node2D" parent="." unique_id=180554475]
 
