@@ -13,12 +13,96 @@
 [ext_resource type="Script" uid="uid://crbn04ab1d1vk" path="res://Escenas/juego_5_indio/player/states/dash_state.gd" id="11_ylhto"]
 [ext_resource type="PackedScene" uid="uid://d3qt7mlub61le" path="res://Escenas/juego_5_indio/strato/strato.tscn" id="12_8bnbq"]
 [ext_resource type="Texture2D" uid="uid://c5mpd2dx12fa5" path="res://assets/kenney_particlePack/PNG/twirl_03.png" id="13_08ho2"]
+[ext_resource type="Texture2D" uid="uid://ceksvap72mpxj" path="res://assets/juego5/cellmate2.png" id="14_erve3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qnmj6"]
 size = Vector3(48, 64, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4anbu"]
 size = Vector3(16, 16, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yle0v"]
+atlas = ExtResource("14_erve3")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwre5"]
+atlas = ExtResource("14_erve3")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gydxa"]
+atlas = ExtResource("14_erve3")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwmsa"]
+atlas = ExtResource("14_erve3")
+region = Rect2(480, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erve3"]
+atlas = ExtResource("14_erve3")
+region = Rect2(0, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl072"]
+atlas = ExtResource("14_erve3")
+region = Rect2(160, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfplj"]
+atlas = ExtResource("14_erve3")
+region = Rect2(320, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av4ne"]
+atlas = ExtResource("14_erve3")
+region = Rect2(480, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qur5e"]
+atlas = ExtResource("14_erve3")
+region = Rect2(640, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbb6w"]
+atlas = ExtResource("14_erve3")
+region = Rect2(800, 160, 160, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yowuo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yle0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwre5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gydxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwmsa")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erve3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl072")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yfplj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av4ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qur5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbb6w")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 7.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnmj6"]
 size = Vector2(44, 62)
@@ -274,15 +358,18 @@ metadata/_edit_group_ = true
 [node name="Shape" type="Node2D" parent="." unique_id=2007078952]
 
 [node name="Body" type="MeshInstance2D" parent="Shape" unique_id=131135876]
+visible = false
 position = Vector2(0, -32)
 mesh = SubResource("BoxMesh_qnmj6")
 
 [node name="LeftEye" type="MeshInstance2D" parent="Shape" unique_id=825883615]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 position = Vector2(19, -44)
 mesh = SubResource("BoxMesh_4anbu")
 
 [node name="RightEye" type="MeshInstance2D" parent="Shape" unique_id=512478368]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 position = Vector2(-5, -44)
 mesh = SubResource("BoxMesh_4anbu")
@@ -300,6 +387,14 @@ offset = Vector2(58.586445, -28.115578)
 [node name="Strato" parent="Shape" unique_id=2040012188 instance=ExtResource("12_8bnbq")]
 visible = false
 position = Vector2(8, -8)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shape" unique_id=1029020376]
+unique_name_in_owner = true
+position = Vector2(0.99999905, -58)
+scale = Vector2(0.7375, 0.7375)
+sprite_frames = SubResource("SpriteFrames_yowuo")
+animation = &"walk"
+frame_progress = 0.3223609
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=561696663]
 visible = false

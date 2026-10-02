@@ -337,6 +337,7 @@ barra_vida = NodePath("BarraVida_barbazul")
 position = Vector2(4, -33)
 
 [node name="BarraVida_barbazul" parent="Player" unique_id=571050010 instance=ExtResource("5_f12vh")]
+z_index = 5
 position = Vector2(-361, -386)
 
 [node name="trampas" type="Node2D" parent="." unique_id=335553725]
