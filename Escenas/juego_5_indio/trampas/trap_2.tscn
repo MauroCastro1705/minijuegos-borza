@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://0wtme045bpwe" path="res://assets/juego5/trampas.tres" id="2_nrduf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lwbfv"]
-size = Vector2(36, 175)
+size = Vector2(22, 175)
 
 [node name="Trap_rayo" type="Node2D" unique_id=1958687352]
 script = ExtResource("1_lwbfv")

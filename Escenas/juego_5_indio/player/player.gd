@@ -5,23 +5,25 @@ extends CharacterBody2D
 
 signal wall_entered
 signal wall_exited
+@warning_ignore("unused_signal")
 signal died
 var is_dead: bool = false
+@onready var hurt_effect: CPUParticles2D = $hurt_effect
 
 #nuevas
-var max_health: float = 80
+var max_health: float = 3
 var current_health: float
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_effect: Sprite2D = %attack_effect
 
-@export var barra_vida:HealthBar2
-@onready var marker_2d: Marker2D = $Marker2D
+@export var barra_vida:Node
+
 @export var flip_h: bool: set = set_flip_h
 var has_strato:bool = false
 @onready var strato: Node2D = $Shape/Strato
 
 
-
+#ORIGINALES
 @export_group("Horizontal Movement")
 @export var max_speed: float
 @export_range(1.0, 5.0) var max_h_velocity_ratio: float # Multiplied by max_speed
@@ -122,33 +124,17 @@ func _ready() -> void:
 
 func health_setup():
 	current_health = max_health
-	barra_vida.health_depleted.connect(_on_health_depleted)
-	barra_vida.max_health = max_health
-	barra_vida.current_health = current_health
 
-func _on_health_depleted():
-	if is_dead:
-		return
-	is_dead = true
-	#Global.enemy_died.emit()
-	died.emit()
-	barra_vida.hide()
-	print("player murio")
-	queue_free()
 
 func take_damage(damage: int) -> void:
 	if is_dead:
 		return
 
 	print("player recibió daño: ", damage)
-	var number_real_position = marker_2d.global_position
-	DamageNumbers.display_numbers_tesla(damage, number_real_position)
-	#hurt_effect.emitting = true
-	DamageNumbers.flash_sprite(self)
-
+	hurt_effect.emitting = true
 	current_health -= damage
 	if barra_vida:
-		barra_vida.take_damage(damage)
+		barra_vida.reduce_life()
 
 func _physics_process(_delta: float) -> void:
 	_on_wall = is_on_wall()

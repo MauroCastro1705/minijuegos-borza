@@ -13,7 +13,7 @@ signal died
 # --- Stats base (matchean con el GameManager) ---
 var max_health: float = 60
 var current_health: float
-var fuerza: int = 5            # daño base
+var fuerza: int = 1            # daño base
 var velocidad: float = 100.0
 
 # Alias por compatibilidad con código viejo

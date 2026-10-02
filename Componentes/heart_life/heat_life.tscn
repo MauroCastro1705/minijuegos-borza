@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://c5uav8nt0mpe1"]
+
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_0rck6"]
+[ext_resource type="Texture2D" uid="uid://dyj25qq1la7ve" path="res://assets/juego5/heart.png" id="1_2tma2"]
+[ext_resource type="Script" uid="uid://bb3u8r1ngt8td" path="res://Componentes/heart_life/heat_life.gd" id="1_jb6du"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_jb6du"]
+
+[sub_resource type="Gradient" id="Gradient_fy6xy"]
+colors = PackedColorArray(2.117753e-06, 0.4308628, 0.67105836, 1, 1.92523e-07, 0.15374368, 0.25694004, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x75fr"]
+gradient = SubResource("Gradient_fy6xy")
+
+[sub_resource type="Resource" id="Resource_5rcss"]
+script = ExtResource("1_0rck6")
+texture = SubResource("GradientTexture1D_x75fr")
+width_left = 3
+width_top = 3
+width_right = 3
+width_bottom = 3
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_5rcss"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("2_jb6du")
+color = Color(0.34752983, 0.5428373, 0.7046059, 1)
+skew = Vector2(0.3, 0)
+borders = Array[ExtResource("1_0rck6")]([SubResource("Resource_5rcss")])
+corner_detail = 11
+corner_curvature_top_left = 0.0
+corner_curvature_top_right = 0.0
+corner_curvature_bottom_right = 0.0
+corner_curvature_bottom_left = 0.7800000000000002
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[node name="HeatLife" type="Node2D" unique_id=2011571059]
+script = ExtResource("1_jb6du")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1339711060]
+offset_right = 98.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBox_5rcss")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1616118829]
+layout_mode = 2
+
+[node name="heart_1" type="TextureRect" parent="Panel/HBoxContainer" unique_id=689691153]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(35, 30)
+layout_mode = 2
+texture = ExtResource("1_2tma2")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="heart_2" type="TextureRect" parent="Panel/HBoxContainer" unique_id=1810276547]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(35, 30)
+layout_mode = 2
+texture = ExtResource("1_2tma2")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="heart_3" type="TextureRect" parent="Panel/HBoxContainer" unique_id=1218466934]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(35, 30)
+layout_mode = 2
+texture = ExtResource("1_2tma2")
+expand_mode = 5
+stretch_mode = 5

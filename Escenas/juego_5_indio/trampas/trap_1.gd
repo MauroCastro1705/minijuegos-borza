@@ -1,5 +1,5 @@
 extends Node2D
-@export var trap_dmg:int = 15
+@export var trap_dmg:int = 1
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var timer: Timer = $Timer
 
