@@ -17,7 +17,7 @@
 
 [sub_resource type="Gradient" id="Gradient_w8h6t"]
 offsets = PackedFloat32Array(0.8920188)
-colors = PackedColorArray(0.53418404, 0.47563875, 0.4993778, 1)
+colors = PackedColorArray(0.6075563, 0.7497183, 0.74413234, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yowuo"]
 gradient = SubResource("Gradient_w8h6t")
@@ -243,9 +243,9 @@ metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="TextureRect" parent="." unique_id=1854533305]
 offset_left = -2015.0
-offset_top = -3059.0
-offset_right = 10047.5
-offset_bottom = 4566.0
+offset_top = -2064.0
+offset_right = 19280.0
+offset_bottom = 3073.0
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_yowuo")
 metadata/_edit_lock_ = true
@@ -266,6 +266,7 @@ texture_filter = 1
 position = Vector2(4048.8562, 984.8749)
 scale = Vector2(7.2817054, 6.5918202)
 texture = ExtResource("2_mqtyr")
+metadata/_edit_lock_ = true
 
 [node name="medio" type="Parallax2D" parent="paralax" unique_id=799027607]
 scroll_scale = Vector2(0.3, 0.3)
@@ -275,9 +276,10 @@ metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="paralax/medio" unique_id=1940980659]
 texture_filter = 1
-position = Vector2(796.35864, 381.75)
+position = Vector2(659, 363.00003)
 scale = Vector2(5.681801, 5.652778)
 texture = ExtResource("3_gruqq")
+metadata/_edit_lock_ = true
 
 [node name="cerca" type="Parallax2D" parent="paralax" unique_id=1882048716]
 scroll_scale = Vector2(0.5, 0.5)
@@ -287,21 +289,23 @@ metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="paralax/cerca" unique_id=313259436]
 texture_filter = 1
-position = Vector2(149.52515, 856.5)
-scale = Vector2(3.5238144, 3.8117282)
+position = Vector2(129.07089, 986.99994)
+scale = Vector2(3.482394, 3.8117282)
 texture = ExtResource("4_ah7jv")
+metadata/_edit_lock_ = true
 
 [node name="muy_cerca" type="Parallax2D" parent="paralax" unique_id=751730280]
 scroll_scale = Vector2(0.8, 0.8)
 repeat_size = Vector2(2300, 0)
-repeat_times = 2
+repeat_times = 5
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="paralax/muy_cerca" unique_id=1111654968]
 texture_filter = 1
-position = Vector2(334.18738, 887.50006)
-scale = Vector2(4.124493, 4.2993827)
+position = Vector2(355.99988, 820)
+scale = Vector2(4.124493, 5.632716)
 texture = ExtResource("5_va6mr")
+metadata/_edit_lock_ = true
 
 [node name="death_fall" type="Area2D" parent="." unique_id=1866147113]
 metadata/_edit_lock_ = true
