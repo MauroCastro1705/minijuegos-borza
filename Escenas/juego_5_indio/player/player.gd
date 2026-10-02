@@ -7,7 +7,7 @@ signal wall_exited
 signal died
 var is_dead: bool = false
 #nuevas
-var max_health: float = 130
+var max_health: float = 80
 var current_health: float
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var attack_effect: Sprite2D = %attack_effect

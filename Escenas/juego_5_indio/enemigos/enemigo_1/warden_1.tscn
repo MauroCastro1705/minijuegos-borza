@@ -169,6 +169,9 @@ _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.7916666), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
+size = Vector2(120, 78)
+
 [node name="Enemy_warden" type="CharacterBody2D" unique_id=816020656 groups=["enemigo"]]
 z_index = 4
 input_pickable = true
@@ -179,7 +182,7 @@ position = Vector2(0, -23)
 shape = SubResource("RectangleShape2D_5rcss")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1921398640]
-position = Vector2(67, -63)
+position = Vector2(2, -83)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1152826164]
 position = Vector2(-1, 9)
@@ -213,3 +216,10 @@ scale_amount_min = 3.0
 scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_oxa6g")
 color = Color(1, 0.023529412, 0, 1)
+
+[node name="attack_area" type="Area2D" parent="." unique_id=526903579]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=1296512485]
+position = Vector2(3, -19)
+shape = SubResource("RectangleShape2D_yowuo")
+debug_color = Color(0.94174194, 0.24345106, 0, 0.41960785)
