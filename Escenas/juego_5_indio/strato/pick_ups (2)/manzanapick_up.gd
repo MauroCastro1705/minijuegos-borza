@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @onready var effect: CPUParticles2D = $effect
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
@@ -10,6 +11,7 @@ extends Node2D
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		Global.materia += 1
 		Global.pick_up.emit()
 		texture_rect.hide()
 		audio_stream_player_2d.play()

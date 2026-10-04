@@ -248,7 +248,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-50, -8), Vector2(8, -8)]
+"values": [Vector2(-50, -8), Vector2(0, -39)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -288,7 +288,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(8, -8), Vector2(-50, -8)]
+"values": [Vector2(8, -39), Vector2(-50, -8)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -388,7 +388,7 @@ mesh = SubResource("BoxMesh_4anbu")
 unique_name_in_owner = true
 visible = false
 modulate = Color(0.043137256, 0.7019608, 0.7529412, 1)
-position = Vector2(11.7272625, -11.454529)
+position = Vector2(11.7272625, -52.693478)
 rotation = -0.7115511
 scale = Vector2(0.6640625, 0.6640625)
 texture = ExtResource("13_08ho2")

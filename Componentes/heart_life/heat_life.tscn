@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dyj25qq1la7ve" path="res://assets/juego5/heart.png" id="1_2tma2"]
 [ext_resource type="Script" uid="uid://bb3u8r1ngt8td" path="res://Componentes/heart_life/heat_life.gd" id="1_jb6du"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_jb6du"]
+[ext_resource type="Texture2D" uid="uid://bp5eepkrjh6ly" path="res://assets/juego5/manzana.png" id="5_fy6xy"]
 
 [sub_resource type="Gradient" id="Gradient_fy6xy"]
 colors = PackedColorArray(2.117753e-06, 0.4308628, 0.67105836, 1, 1.92523e-07, 0.15374368, 0.25694004, 1)
@@ -76,3 +77,24 @@ layout_mode = 2
 texture = ExtResource("1_2tma2")
 expand_mode = 5
 stretch_mode = 5
+
+[node name="Panel2" type="PanelContainer" parent="." unique_id=172946818]
+offset_top = 47.0
+offset_right = 113.0
+offset_bottom = 87.0
+theme_override_styles/panel = SubResource("StyleBox_5rcss")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel2" unique_id=345025392]
+layout_mode = 2
+alignment = 1
+
+[node name="manzans" type="TextureRect" parent="Panel2/HBoxContainer" unique_id=1793024008]
+custom_minimum_size = Vector2(35, 30)
+layout_mode = 2
+texture = ExtResource("5_fy6xy")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="amount" type="Label" parent="Panel2/HBoxContainer" unique_id=2095208093]
+layout_mode = 2
+text = "250"
