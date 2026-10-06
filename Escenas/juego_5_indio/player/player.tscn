@@ -106,7 +106,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnmj6"]
-size = Vector2(44, 62)
+size = Vector2(47, 96)
 
 [sub_resource type="Animation" id="Animation_08ho2"]
 length = 0.001
@@ -320,6 +320,9 @@ _limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.7916666), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
+radius = 157.05095
+
 [node name="Player" type="CharacterBody2D" unique_id=1669516616]
 safe_margin = 0.1
 script = ExtResource("1_4anbu")
@@ -406,8 +409,7 @@ visible = false
 position = Vector2(8, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=561696663]
-visible = false
-position = Vector2(0, -31)
+position = Vector2(-1.5, -48)
 shape = SubResource("RectangleShape2D_qnmj6")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1247229065 node_paths=PackedStringArray("target_node", "default_state")]
@@ -510,7 +512,7 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.23
 emission_shape = 3
-emission_rect_extents = Vector2(1, 1)
+emission_rect_extents = Vector2(20, 20)
 spread = 180.0
 gravity = Vector2(0, 900)
 initial_velocity_min = 200.0
@@ -526,5 +528,14 @@ scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_nltsh")
 color = Color(1, 0.023529412, 0, 1)
 
+[node name="attack_area" type="Area2D" parent="." unique_id=1565661837]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area" unique_id=1972708538]
+position = Vector2(35, -97)
+shape = SubResource("CircleShape2D_yowuo")
+debug_color = Color(0.16747314, 0.63037723, 0.38848612, 0.41960785)
+
 [connection signal="wall_entered" from="." to="." method="_on_wall_entered"]
 [connection signal="wall_exited" from="." to="." method="_on_wall_exited"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="attack_area" to="." method="_on_attack_area_body_exited"]

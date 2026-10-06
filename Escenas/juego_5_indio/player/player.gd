@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var animacion: AnimatedSprite2D = %AnimatedSprite2D
+@onready var attack_area: Area2D = $attack_area
 
 signal wall_entered
 signal wall_exited
@@ -9,7 +10,7 @@ signal wall_exited
 signal died
 var is_dead: bool = false
 @onready var hurt_effect: CPUParticles2D = $hurt_effect
-
+var current_enemy:CharacterBody2D
 #nuevas
 var max_health: float = 3
 var current_health: float
@@ -144,8 +145,23 @@ func _physics_process(_delta: float) -> void:
 		await animation_player.animation_finished
 		attack_effect.show()
 		animation_player.play("attack")
+		attack_enemy()
 		await  animation_player.animation_finished
 		animation_player.play("store_strato")
+
+func attack_enemy():
+	if current_enemy and current_enemy.has_method("apply_knockback"):
+		current_enemy.apply_knockback(global_position, 1600.0)  # 600 = fuerza
+
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemigo"):
+		current_enemy = body
+
+
+func _on_attack_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("enemigo"):
+		current_enemy = null
+
 
 func get_facing_dir() -> float:
 	return -1.0 if flip_h else 1.0

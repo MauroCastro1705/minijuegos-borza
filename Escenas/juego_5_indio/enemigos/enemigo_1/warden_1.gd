@@ -7,6 +7,8 @@ var number_real_position
 @onready var attack_area: Area2D = $attack_area
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
+var knockback_velocity: Vector2 = Vector2.ZERO
+@export var knockback_friction: float = 900.0  # qué tan rápido se frena
 
 signal died
 
@@ -33,7 +35,7 @@ var _pos_inicial: Vector2
 var _puede_atacar: bool = true
 var _timer_ataque: float = 0.0
 var _jugador_en_area: bool = false              # true si el jugador está dentro del área
-
+var atacado:bool = false
 
 func _ready() -> void:
 	number_real_position = number_position.position
@@ -50,33 +52,39 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
-
 	# --- Gravedad ---
 	if not is_on_floor():
 		velocity.y += 980 * delta
-
-	# --- Movimiento ---
-	if _jugador_en_area:
-		# El jugador está encima/pegado: nos detenemos
-		velocity.x = 0
 		
+	if knockback_velocity.length() > 0:
+		velocity = knockback_velocity
+		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_friction * delta)
 	else:
-		velocity.x = _direccion * velocidad
-		animated_sprite_2d.play("walk")
+		if not atacado:
+			# --- Movimiento ---
+			if _jugador_en_area:
+				# El jugador está encima/pegado: nos detenemos
+				velocity.x = 0
+				
+			else:
+				velocity.x = _direccion * velocidad
+				animated_sprite_2d.play("walk")
 
-		# Chequear límites de patrulla
-		var desplazamiento = global_position.x - _pos_inicial.x
-		if _direccion == 1 and desplazamiento >= distancia_patrulla:
-			_direccion = -1
-			_girar()
-		elif _direccion == -1 and desplazamiento <= -distancia_patrulla:
-			_direccion = 1
-			_girar()
+				# Chequear límites de patrulla
+				var desplazamiento = global_position.x - _pos_inicial.x
+				if _direccion == 1 and desplazamiento >= distancia_patrulla:
+					_direccion = -1
+					_girar()
+				elif _direccion == -1 and desplazamiento <= -distancia_patrulla:
+					_direccion = 1
+					_girar()
 
-		# También gira si toca pared
-		if is_on_wall():
-			_direccion *= -1
-			_girar()
+				# También gira si toca pared
+				if is_on_wall():
+					_direccion *= -1
+					_girar()
+		else:
+			velocity.x = 0
 
 	move_and_slide()
 	
@@ -85,6 +93,10 @@ func _physics_process(delta: float) -> void:
 		_timer_ataque -= delta
 		if _timer_ataque <= 0.0:
 			_puede_atacar = true
+
+func apply_knockback(origin_position: Vector2, force: float) -> void:
+	var direction = (global_position - origin_position).normalized()
+	knockback_velocity = direction * force
 
 
 func _girar() -> void:
