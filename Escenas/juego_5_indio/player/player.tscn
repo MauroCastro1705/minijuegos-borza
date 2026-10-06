@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://c5mpd2dx12fa5" path="res://assets/kenney_particlePack/PNG/twirl_03.png" id="13_08ho2"]
 [ext_resource type="Texture2D" uid="uid://ceksvap72mpxj" path="res://assets/juego5/cellmate2.png" id="14_erve3"]
 [ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="15_yle0v"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="16_gydxa"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="17_kwmsa"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qnmj6"]
 size = Vector3(48, 64, 1)
@@ -185,7 +187,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_erve3"]
 resource_name = "attack"
-length = 0.3
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -193,7 +195,7 @@ tracks/0/path = NodePath("Shape/attack_effect:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.099999994),
 "transitions": PackedFloat32Array(1, 2.143547),
 "update": 0,
 "values": [-0.7115511, 0.17453292519943295]
@@ -205,7 +207,7 @@ tracks/1/path = NodePath("Shape/attack_effect:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.13333334, 0.3),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.099999994),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -217,7 +219,7 @@ tracks/2/path = NodePath("Shape/attack_effect:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.099999994),
 "transitions": PackedFloat32Array(1, 1.6817929),
 "update": 0,
 "values": [Vector2(0.5, 0.5), Vector2(0.7, 0.7)]
@@ -225,7 +227,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_yle0v"]
 resource_name = "pull_out_strato"
-length = 0.3
+length = 0.19999999999999998
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -233,7 +235,7 @@ tracks/0/path = NodePath("Shape/Strato:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 2.5491211),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(1, 1)]
@@ -245,7 +247,7 @@ tracks/1/path = NodePath("Shape/Strato:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-50, -8), Vector2(0, -39)]
@@ -257,7 +259,7 @@ tracks/2/path = NodePath("Shape/Strato:rotation")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1.7411014, 1),
 "update": 0,
 "values": [1.5707963267948966, 0.0]
@@ -323,6 +325,53 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
 radius = 157.05095
 
+[sub_resource type="Resource" id="Resource_dwre5"]
+script = ExtResource("16_gydxa")
+color = Color(0, 0, 0, 1)
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="StyleBox" id="StyleBox_yle0v"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("17_kwmsa")
+borders = Array[ExtResource("16_gydxa")]([SubResource("Resource_dwre5")])
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Resource" id="Resource_jl072"]
+script = ExtResource("16_gydxa")
+color = Color(0, 0, 0, 1)
+width_left = 1
+width_top = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_yfplj"]
+offsets = PackedFloat32Array(0.57988167, 1)
+colors = PackedColorArray(0.03751927, 0.27537757, 1, 1, 0.47843137, 0.60784316, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gydxa"]
+gradient = SubResource("Gradient_yfplj")
+
+[sub_resource type="StyleBox" id="StyleBox_av4ne"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("17_kwmsa")
+borders = Array[ExtResource("16_gydxa")]([SubResource("Resource_jl072")])
+texture = SubResource("GradientTexture1D_gydxa")
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
 [node name="Player" type="CharacterBody2D" unique_id=1669516616]
 safe_margin = 0.1
 script = ExtResource("1_4anbu")
@@ -367,6 +416,7 @@ squash_height_scale_at_max_fall = 0.6
 stretch_width_scale = 0.6
 stretch_height_scale = 1.2
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Shape" type="Node2D" parent="." unique_id=2007078952]
 
@@ -534,6 +584,16 @@ color = Color(1, 0.023529412, 0, 1)
 position = Vector2(35, -97)
 shape = SubResource("CircleShape2D_yowuo")
 debug_color = Color(0.16747314, 0.63037723, 0.38848612, 0.41960785)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=858787232]
+offset_left = -37.0
+offset_top = -113.0
+offset_right = 34.0
+offset_bottom = -104.0
+theme_override_styles/background = SubResource("StyleBox_yle0v")
+theme_override_styles/fill = SubResource("StyleBox_av4ne")
+value = 50.0
+show_percentage = false
 
 [connection signal="wall_entered" from="." to="." method="_on_wall_entered"]
 [connection signal="wall_exited" from="." to="." method="_on_wall_exited"]

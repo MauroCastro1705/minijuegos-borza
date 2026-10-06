@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @onready var animacion: AnimatedSprite2D = %AnimatedSprite2D
 @onready var attack_area: Area2D = $attack_area
-
+@export var attack_cooldown: float = 1.5  ## segundos que tarda en llenarse la barrita
 signal wall_entered
 signal wall_exited
 @warning_ignore("unused_signal")
@@ -20,9 +20,12 @@ var current_health: float
 @export var barra_vida:Node
 
 @export var flip_h: bool: set = set_flip_h
-var has_strato:bool = false
+var has_strato:bool = true
 @onready var strato: Node2D = $Shape/Strato
 
+var knockback_velocity: Vector2 = Vector2.ZERO
+@export var knockback_friction: float = 900.0  # qué tan rápido se frena
+@onready var progress_bar: ProgressBar = $ProgressBar
 
 #ORIGINALES
 @export_group("Horizontal Movement")
@@ -119,9 +122,9 @@ var _on_wall: bool = false: # This variable mustn't be edited manually
 @onready var _default_shape_scale: Vector2 = shape.scale
 
 func _ready() -> void:
+	progress_bar.hide()
 	if barra_vida:
 		health_setup()
-	#animation_player.play("attack")
 
 func health_setup():
 	current_health = max_health
@@ -139,24 +142,51 @@ func take_damage(damage: int) -> void:
 
 func _physics_process(_delta: float) -> void:
 	_on_wall = is_on_wall()
-	if Input.is_action_pressed("attack") and has_strato:
-		strato.show()
-		animation_player.play("pull_out_strato")
-		await animation_player.animation_finished
-		attack_effect.show()
-		animation_player.play("attack")
-		attack_enemy()
-		await  animation_player.animation_finished
-		animation_player.play("store_strato")
 
-func attack_enemy():
+	if Input.is_action_just_pressed("attack") and has_strato and can_attack:
+		_do_attack()
+
+var can_attack: bool = true
+
+
+func _do_attack() -> void:
+	if not can_attack:
+		return
+	can_attack = false
+
+	# 1) Salto inmediato
 	if current_enemy and current_enemy.has_method("apply_knockback"):
-		current_enemy.apply_knockback(global_position, 1600.0)  # 600 = fuerza
+		current_enemy.apply_knockback(global_position, 1600.0)
+	else:
+		special_jump()
+
+	# 2) Animaciones
+	strato.show()
+	animation_player.play("pull_out_strato")
+	await animation_player.animation_finished
+	attack_effect.show()
+	animation_player.play("attack")
+	await animation_player.animation_finished
+	animation_player.play("store_strato")
+
+	# 3) Empieza el cooldown al terminar el ataque
+	_start_cooldown()
+
+func _start_cooldown() -> void:
+	progress_bar.show()
+	progress_bar.value = 0
+	var tween := create_tween()
+	tween.tween_property(progress_bar, "value", 100.0, attack_cooldown)
+	await tween.finished
+	progress_bar.hide()
+	can_attack = true
 
 func _on_attack_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemigo"):
 		current_enemy = body
 
+func special_jump() -> void:
+	velocity.y = (jump_velocity*1.3)
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("enemigo"):
