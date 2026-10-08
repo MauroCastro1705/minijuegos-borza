@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bb3u8r1ngt8td" path="res://Componentes/heart_life/heat_life.gd" id="1_jb6du"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_jb6du"]
 [ext_resource type="Texture2D" uid="uid://bp5eepkrjh6ly" path="res://assets/juego5/manzana.png" id="5_fy6xy"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="6_u2d40"]
 
 [sub_resource type="Gradient" id="Gradient_fy6xy"]
 colors = PackedColorArray(2.117753e-06, 0.4308628, 0.67105836, 1, 1.92523e-07, 0.15374368, 0.25694004, 1)
@@ -21,6 +22,13 @@ width_right = 3
 width_bottom = 3
 metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
+[sub_resource type="Gradient" id="Gradient_sb3tf"]
+colors = PackedColorArray(0.9137255, 0.2509804, 0, 1, 0.9843137, 0.7176471, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sb3tf"]
+gradient = SubResource("Gradient_sb3tf")
+fill_from = Vector2(0.5107296, 1)
+
 [sub_resource type="StyleBox" id="StyleBox_5rcss"]
 resource_local_to_scene = false
 resource_name = ""
@@ -29,9 +37,9 @@ content_margin_top = -1.0
 content_margin_right = -1.0
 content_margin_bottom = -1.0
 script = ExtResource("2_jb6du")
-color = Color(0.34752983, 0.5428373, 0.7046059, 1)
 skew = Vector2(0.3, 0)
 borders = Array[ExtResource("1_0rck6")]([SubResource("Resource_5rcss")])
+texture = SubResource("GradientTexture2D_sb3tf")
 corner_detail = 11
 corner_curvature_top_left = 0.0
 corner_curvature_top_right = 0.0
@@ -42,6 +50,40 @@ expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Gradient" id="Gradient_u2d40"]
+colors = PackedColorArray(0, 0.28627452, 0, 1, 0.52163076, 0.7945371, 1.2706519e-05, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u2d40"]
+gradient = SubResource("Gradient_u2d40")
+fill_from = Vector2(0.5064378, 1)
+fill_to = Vector2(0.53648067, 0.008583691)
+
+[sub_resource type="StyleBox" id="StyleBox_fy6xy"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("2_jb6du")
+skew = Vector2(0.3, 0)
+borders = Array[ExtResource("1_0rck6")]([SubResource("Resource_5rcss")])
+texture = SubResource("GradientTexture2D_u2d40")
+corner_detail = 11
+corner_curvature_top_left = 0.0
+corner_curvature_top_right = 0.0
+corner_curvature_bottom_right = 0.0
+corner_curvature_bottom_left = 0.7800000000000002
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="LabelSettings" id="LabelSettings_sb3tf"]
+font = ExtResource("6_u2d40")
+font_size = 27
 
 [node name="HeatLife" type="Node2D" unique_id=2011571059]
 script = ExtResource("1_jb6du")
@@ -79,10 +121,11 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="Panel2" type="PanelContainer" parent="." unique_id=172946818]
-offset_top = 47.0
-offset_right = 113.0
-offset_bottom = 87.0
-theme_override_styles/panel = SubResource("StyleBox_5rcss")
+offset_left = 15.0
+offset_top = 53.0
+offset_right = 128.0
+offset_bottom = 93.0
+theme_override_styles/panel = SubResource("StyleBox_fy6xy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel2" unique_id=345025392]
 layout_mode = 2
@@ -98,3 +141,4 @@ stretch_mode = 5
 [node name="amount" type="Label" parent="Panel2/HBoxContainer" unique_id=2095208093]
 layout_mode = 2
 text = "250"
+label_settings = SubResource("LabelSettings_sb3tf")

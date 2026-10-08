@@ -11,7 +11,6 @@
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="6_mgj0n"]
 [ext_resource type="PackedScene" uid="uid://fadojlxcj3h8" path="res://Escenas/juego_5_indio/trampas/trap_2.tscn" id="6_uou7r"]
 [ext_resource type="PackedScene" uid="uid://c5uav8nt0mpe1" path="res://Componentes/heart_life/heat_life.tscn" id="9_ah7jv"]
-[ext_resource type="PackedScene" uid="uid://cmwixqd2h5367" path="res://Escenas/juego_5_indio/enemigos/enemigo_1/warden_1.tscn" id="9_b67ji"]
 [ext_resource type="AudioStream" uid="uid://e8634km8ivgq" path="res://assets/musica/Barbazul.mp3" id="9_gruqq"]
 [ext_resource type="PackedScene" uid="uid://dpis830xld60c" path="res://Escenas/juego_5_indio/strato/pick_ups (2)/manzana.tscn" id="9_uou7r"]
 [ext_resource type="PackedScene" uid="uid://b8ju6s3n301fb" path="res://Escenas/juego_5_indio/strato/pick_ups/strato_pick_up.tscn" id="10_uou7r"]
@@ -460,7 +459,7 @@ text = "Volver a empezar"
 [node name="pickups" type="Node2D" parent="." unique_id=180554475]
 
 [node name="strato_pick_up" parent="pickups" unique_id=1242132590 instance=ExtResource("10_uou7r")]
-position = Vector2(1371.0001, -213)
+position = Vector2(3772, -1025)
 scale = Vector2(2.5, 2.5)
 
 [node name="manzana" parent="pickups" unique_id=351516574 instance=ExtResource("9_uou7r")]
@@ -489,11 +488,32 @@ position = Vector2(1972, -532)
 
 [node name="enemys" type="Node2D" parent="." unique_id=1985341714]
 
-[node name="Enemy_warden" parent="enemys" unique_id=816020656 instance=ExtResource("9_b67ji")]
-position = Vector2(2470, 760)
+[node name="Enemy_warden2n" parent="enemys" unique_id=215555053 instance=ExtResource("19_5u5xt")]
+position = Vector2(2920, 453)
 
-[node name="Enemy_warden2" parent="enemys" unique_id=686176991 instance=ExtResource("9_b67ji")]
-position = Vector2(1761, -508)
+[node name="Enemy_warden2n3" parent="enemys" unique_id=816020656 instance=ExtResource("19_5u5xt")]
+position = Vector2(5591, -36)
+
+[node name="Enemy_warden2n4" parent="enemys" unique_id=2086890963 instance=ExtResource("19_5u5xt")]
+position = Vector2(6891, -508)
+
+[node name="Enemy_warden2n6" parent="enemys" unique_id=397247488 instance=ExtResource("19_5u5xt")]
+position = Vector2(9769, 1245)
+
+[node name="Enemy_warden2n7" parent="enemys" unique_id=291775315 instance=ExtResource("19_5u5xt")]
+position = Vector2(9832, -35)
+
+[node name="Enemy_warden2n8" parent="enemys" unique_id=365184210 instance=ExtResource("19_5u5xt")]
+position = Vector2(10277, -841)
+
+[node name="Enemy_warden2n9" parent="enemys" unique_id=1342036507 instance=ExtResource("19_5u5xt")]
+position = Vector2(9050, -1311)
+
+[node name="Enemy_warden2n5" parent="enemys" unique_id=1060824765 instance=ExtResource("19_5u5xt")]
+position = Vector2(8229, -666)
+
+[node name="Enemy_warden2n2" parent="enemys" unique_id=1840661258 instance=ExtResource("19_5u5xt")]
+position = Vector2(1740, -513)
 
 [node name="presos" type="Node2D" parent="." unique_id=826242273]
 
@@ -514,9 +534,6 @@ position = Vector2(5839, 1279)
 
 [node name="Cellmate6" parent="presos" unique_id=469285828 instance=ExtResource("18_yogvq")]
 position = Vector2(6156, 481)
-
-[node name="Enemy_warden2n" parent="." unique_id=215555053 instance=ExtResource("19_5u5xt")]
-position = Vector2(329, 607)
 
 [connection signal="body_entered" from="death_fall" to="." method="_on_death_fall_body_entered"]
 [connection signal="finished" from="Player/AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

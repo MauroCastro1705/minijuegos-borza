@@ -4,6 +4,7 @@ extends Node2D
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $Player/AudioStreamPlayer2D
 var show_tuto:bool = true
 @onready var player: Player = $Player
+@onready var vhs_efecto: ColorRect = $CanvasLayer/vhs_efecto
 
 @onready var game_over_screen: Node2D = $CanvasLayer/game_over
 
@@ -17,12 +18,15 @@ var tutorial_mensajes:Array[String] = [
 
 func _ready() -> void:
 	canvas_layer.show()
+	vhs_efecto.show()
 	set_tutorial_text()
-	tuto.show()
 	game_over_screen.hide()
-	tuto.connect("tutorial_finished", _tutorial_termino)
 	player.is_dead = false
-	if not show_tuto:
+	show_tuto = Global.show_tuto
+	if show_tuto:
+		tuto.show()
+		tuto.connect("tutorial_finished", _tutorial_termino)
+	else:
 		tuto.hide()
 
 
@@ -31,6 +35,7 @@ func set_tutorial_text():
 	
 func _tutorial_termino():
 	show_tuto = false
+	Global.show_tuto = false
 
 
 func _on_audio_stream_player_2d_finished() -> void:
@@ -38,6 +43,7 @@ func _on_audio_stream_player_2d_finished() -> void:
 
 
 func _on_restart_pressed() -> void:
+	Global.materia = 0
 	get_tree().reload_current_scene()
 
 

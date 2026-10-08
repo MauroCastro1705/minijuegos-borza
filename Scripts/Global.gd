@@ -37,3 +37,6 @@ var click_cooldown: float = 1.0  # Cooldown entre clicks en segundos
 ##juego 4
 var is_dragging: bool = false
 var drag_limits: Rect2 = Rect2()
+
+##tutorial juego 5
+var show_tuto: bool = true
