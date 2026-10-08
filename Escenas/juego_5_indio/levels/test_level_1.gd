@@ -2,7 +2,7 @@ extends Node2D
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var tuto: Control = $CanvasLayer/tuto
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $Player/AudioStreamPlayer2D
-
+var show_tuto:bool = true
 @onready var game_over: Node2D = $game_over
 
 var tutorial_mensajes:Array[String] = [
@@ -19,15 +19,20 @@ func _ready() -> void:
 	set_tutorial_text()
 	tuto.show()
 	tuto.connect("tutorial_finished", _tutorial_termino)
+	if not show_tuto:
+		tuto.hide()
 
 
 func set_tutorial_text():
 	tuto.set_mensajes(tutorial_mensajes)
 	
 func _tutorial_termino():
-	pass
-	#await get_tree().create_timer(0.4).timeout
+	show_tuto = false
 
 
 func _on_audio_stream_player_2d_finished() -> void:
 	audio_stream_player_2d.play()
+
+
+func _on_restart_pressed() -> void:
+	get_tree().reload_current_scene()

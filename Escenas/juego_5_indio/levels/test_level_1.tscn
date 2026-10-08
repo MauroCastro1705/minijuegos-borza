@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dpis830xld60c" path="res://Escenas/juego_5_indio/strato/pick_ups (2)/manzana.tscn" id="9_uou7r"]
 [ext_resource type="PackedScene" uid="uid://b8ju6s3n301fb" path="res://Escenas/juego_5_indio/strato/pick_ups/strato_pick_up.tscn" id="10_uou7r"]
 [ext_resource type="PackedScene" uid="uid://bj158bjxawmad" path="res://Componentes/tutorial_node/tutorial.tscn" id="16_ah7jv"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="18_cy5s8"]
 
 [sub_resource type="Gradient" id="Gradient_w8h6t"]
 offsets = PackedFloat32Array(0.8920188)
@@ -236,6 +237,10 @@ terrain_set_0/terrain_0/name = "piso1"
 terrain_set_0/terrain_0/color = Color(0.72857463, 0, 0.14738593, 1)
 sources/0 = SubResource("TileSetAtlasSource_m1c1d")
 
+[sub_resource type="LabelSettings" id="LabelSettings_yowuo"]
+font = ExtResource("18_cy5s8")
+font_size = 30
+
 [node name="TestLevel1" type="Node2D" unique_id=498010661]
 script = ExtResource("1_jxdqn")
 metadata/_edit_lock_ = true
@@ -407,15 +412,16 @@ position = Vector2(8397, -720)
 position = Vector2(1622, 405)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1275813837]
-visible = false
 
 [node name="tuto" parent="CanvasLayer" unique_id=2013548593 instance=ExtResource("16_ah7jv")]
+visible = false
 offset_left = -175.83334
 offset_top = -160.41669
 offset_right = -327.5
 offset_bottom = -281.25006
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=996701555]
+visible = false
 material = ExtResource("6_mgj0n")
 anchors_preset = -1
 anchor_right = 1.018
@@ -423,6 +429,30 @@ anchor_bottom = 1.024
 offset_bottom = -0.2000122
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="game_over" type="Node2D" parent="CanvasLayer" unique_id=1056040356]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/game_over" unique_id=1786909681]
+offset_right = 1049.0
+offset_bottom = 837.0
+color = Color(0.23392546, 0.23392546, 0.23392543, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/game_over" unique_id=660295295]
+offset_left = 205.0
+offset_top = 340.0
+offset_right = 865.0
+offset_bottom = 403.0
+text = "PERDISTE
+la prision te encanta, vas a tener que escapar de nuevo"
+label_settings = SubResource("LabelSettings_yowuo")
+horizontal_alignment = 1
+
+[node name="restart" type="Button" parent="CanvasLayer/game_over" unique_id=1177577233]
+offset_left = 438.0
+offset_top = 532.0
+offset_right = 596.0
+offset_bottom = 587.0
+text = "Volver a empezar"
 
 [node name="pickups" type="Node2D" parent="." unique_id=180554475]
 
@@ -462,6 +492,5 @@ position = Vector2(2470, 760)
 [node name="Enemy_warden2" parent="enemys" unique_id=686176991 instance=ExtResource("9_b67ji")]
 position = Vector2(1761, -508)
 
-[node name="game_over" type="Node2D" parent="." unique_id=1056040356]
-
 [connection signal="finished" from="Player/AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
+[connection signal="pressed" from="CanvasLayer/game_over/restart" to="." method="_on_restart_pressed"]
