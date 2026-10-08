@@ -9,6 +9,10 @@ signal wall_exited
 @warning_ignore("unused_signal")
 signal died
 var is_dead: bool = false
+@onready var camera_2d: Camera2D = $Camera2D
+@onready var _camera_default_offset: Vector2 = camera_2d.offset
+var _camera_shake_tween: Tween
+
 @onready var hurt_effect: CPUParticles2D = $hurt_effect
 var current_enemy:CharacterBody2D
 #nuevas
@@ -135,10 +139,64 @@ func take_damage(damage: int) -> void:
 		return
 
 	print("player recibió daño: ", damage)
+	_shake_camera()
 	hurt_effect.emitting = true
 	current_health -= damage
 	if barra_vida:
 		barra_vida.reduce_life()
+
+func _shake_camera() -> void:
+	if _camera_shake_tween and _camera_shake_tween.is_running():
+		_camera_shake_tween.kill()
+	camera_2d.offset = _camera_default_offset
+
+	_camera_shake_tween = create_tween()
+	var shake_duration := 0.24
+	var shake_strength := 5.0
+	var shake_steps := 4
+	for step in range(shake_steps):
+		var strength := shake_strength * (1.0 - float(step) / shake_steps)
+		var shake_offset := Vector2(
+			randf_range(-strength, strength),
+			randf_range(-strength, strength)
+		)
+		_camera_shake_tween.tween_property(
+			camera_2d,
+			"offset",
+			_camera_default_offset + shake_offset,
+			shake_duration / shake_steps
+		)
+	_camera_shake_tween.tween_property(
+		camera_2d,
+		"offset",
+		_camera_default_offset,
+		shake_duration / shake_steps
+	)
+
+func _shake_camera_for_dash() -> void:
+	if _camera_shake_tween and _camera_shake_tween.is_running():
+		_camera_shake_tween.kill()
+	camera_2d.offset = _camera_default_offset
+
+	_camera_shake_tween = create_tween()
+	_camera_shake_tween.tween_property(
+		camera_2d,
+		"offset",
+		_camera_default_offset + Vector2(0.0, 9.0),
+		0.06
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_camera_shake_tween.tween_property(
+		camera_2d,
+		"offset",
+		_camera_default_offset + Vector2(0.0, -2.0),
+		0.05
+	)
+	_camera_shake_tween.tween_property(
+		camera_2d,
+		"offset",
+		_camera_default_offset,
+		0.09
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 func _physics_process(_delta: float) -> void:
 	_on_wall = is_on_wall()
@@ -186,6 +244,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		current_enemy = body
 
 func special_jump() -> void:
+	_shake_camera_for_dash()
 	velocity.y = (jump_velocity*1.3)
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
