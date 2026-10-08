@@ -34,13 +34,14 @@ var _direccion: int = 1                         # 1 = derecha, -1 = izquierda
 var _pos_inicial: Vector2
 var _puede_atacar: bool = true
 var _timer_ataque: float = 0.0
-var _jugador_en_area: bool = false              # true si el jugador está dentro del área
+var _jugador: Node2D
 var atacado:bool = false
 
 func _ready() -> void:
 	number_real_position = number_position.position
 	_pos_inicial = global_position
 	current_health = max_health
+	_girar_hacia(_direccion)
 
 	# Conectar el área de ataque con el jugador
 	if not attack_area.body_entered.is_connected(_on_attack_area_body_entered):
@@ -55,38 +56,43 @@ func _physics_process(delta: float) -> void:
 	# --- Gravedad ---
 	if not is_on_floor():
 		velocity.y += 980 * delta
+
+	if is_instance_valid(_jugador):
+		var diferencia_x := _jugador.global_position.x - global_position.x
+		if not is_zero_approx(diferencia_x):
+			_girar_hacia(1 if diferencia_x > 0.0 else -1)
 		
 	if knockback_velocity.length() > 0:
 		velocity = knockback_velocity
 		knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_friction * delta)
 	else:
 		if not atacado:
-			# --- Movimiento ---
-			if _jugador_en_area:
-				# El jugador está encima/pegado: nos detenemos
+			if is_instance_valid(_jugador):
 				velocity.x = 0
-				
+				if animated_sprite_2d.animation != "attack" or not animated_sprite_2d.is_playing():
+					if animated_sprite_2d.animation != "idle" or not animated_sprite_2d.is_playing():
+						animated_sprite_2d.play("idle")
 			else:
-				velocity.x = _direccion * velocidad
-				animated_sprite_2d.play("walk")
-
-				# Chequear límites de patrulla
-				var desplazamiento = global_position.x - _pos_inicial.x
+				# Chequear límites de patrulla antes de avanzar para evitar sobrepasarlos.
+				var desplazamiento := global_position.x - _pos_inicial.x
 				if _direccion == 1 and desplazamiento >= distancia_patrulla:
 					_direccion = -1
-					_girar()
+					_girar_hacia(_direccion)
 				elif _direccion == -1 and desplazamiento <= -distancia_patrulla:
 					_direccion = 1
-					_girar()
+					_girar_hacia(_direccion)
 
-				# También gira si toca pared
-				if is_on_wall():
-					_direccion *= -1
-					_girar()
+				velocity.x = _direccion * velocidad
+				if animated_sprite_2d.animation != "walk" or not animated_sprite_2d.is_playing():
+					animated_sprite_2d.play("walk")
 		else:
 			velocity.x = 0
 
 	move_and_slide()
+
+	if not is_instance_valid(_jugador) and not atacado and knockback_velocity.length() == 0 and is_on_wall():
+		_direccion *= -1
+		_girar_hacia(_direccion)
 	
 	# --- Cooldown de ataque ---
 	if not _puede_atacar:
@@ -99,9 +105,8 @@ func apply_knockback(origin_position: Vector2, force: float) -> void:
 	knockback_velocity = direction * force
 
 
-func _girar() -> void:
-	scale.x = abs(scale.x) * _direccion
-	# attack_area.position.x = abs(attack_area.position.x) * _direccion
+func _girar_hacia(direccion: int) -> void:
+	animated_sprite_2d.flip_h = direccion < 0
 
 
 # ------------------ RECIBIR DAÑO ------------------
@@ -148,7 +153,10 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 		return
 
 	if body.is_in_group("player"):
-		_jugador_en_area = true
+		_jugador = body
+		var diferencia_x := body.global_position.x - global_position.x
+		if not is_zero_approx(diferencia_x):
+			_girar_hacia(1 if diferencia_x > 0.0 else -1)
 		if _puede_atacar:
 			atacar(body)
 			_puede_atacar = false
@@ -156,5 +164,6 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		_jugador_en_area = false
+	if body == _jugador:
+		_jugador = null
+		_girar_hacia(_direccion)
