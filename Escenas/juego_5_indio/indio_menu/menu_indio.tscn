@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://dqk3fog3a1gd7"]
 
 [ext_resource type="Script" uid="uid://cbpae0q4xtdjp" path="res://Escenas/juego_5_indio/indio_menu/menu_indio.gd" id="1_blcrt"]
-[ext_resource type="Texture2D" uid="uid://dduh1tyfaorvk" path="res://assets/portadas/1Recurso 8.png" id="2_28f3v"]
-[ext_resource type="Texture2D" uid="uid://62hu7kqbpmcr" path="res://assets/portadas/portada4sinfondo.png" id="3_osqdg"]
+[ext_resource type="Texture2D" uid="uid://wytbw2vnalvj" path="res://assets/juego5/2.png" id="2_gvrgc"]
+[ext_resource type="Texture2D" uid="uid://dvhypcl6yash2" path="res://assets/juego5/barba (3).png" id="3_blcrt"]
+[ext_resource type="Texture2D" uid="uid://cni75baynldap" path="res://assets/juego5/3.png" id="3_car46"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="4_m81qi"]
+[ext_resource type="Texture2D" uid="uid://coa35q05qy7no" path="res://assets/juego5/4.png" id="4_tevv8"]
+[ext_resource type="Texture2D" uid="uid://dujijrfn2kt6x" path="res://assets/juego5/5.png" id="5_lyoc4"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="5_tb47d"]
+[ext_resource type="Texture2D" uid="uid://c5eo77e806ysn" path="res://assets/juego5/strato.png" id="6_gvrgc"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="6_m5th7"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="7_lgl08"]
 [ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="8_dh7em"]
@@ -13,38 +17,7 @@
 [ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="11_cml5t"]
 [ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="12_cau6n"]
 [ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="13_2q2iu"]
-[ext_resource type="AudioStream" uid="uid://co14lhkr00kwv" path="res://assets/musica/mutante2.wav" id="14_bv5u4"]
-
-[sub_resource type="Shader" id="Shader_m0xm4"]
-code = "shader_type canvas_item;
-
-uniform vec4 background_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform vec4 line_color : source_color = vec4(0.0, 1.0, 1.0, 1.0);
-uniform float line_freq = 9.56;
-uniform float height = 0.6;
-uniform float speed = 0.8;
-uniform vec2 scale = vec2(2.0, 16.0);
-
-void fragment()
-{
-	vec2 uv = UV * scale;
-	float shift = cos(floor(uv.y));
-	uv.x += shift;
-
-	float freq = clamp(cos(uv.x * line_freq) * 3.0, 0.0, 1.0) * height;
-	float line = 1.0 - clamp(abs(freq - mod(uv.y, 1.0)) * 11.0, 0.0, 1.0);
-
-	COLOR = mix(background_color, line_color, line * mod(uv.x - TIME * speed * abs(shift), 1.0));
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wgn3o"]
-shader = SubResource("Shader_m0xm4")
-shader_parameter/background_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
-shader_parameter/line_color = Color(0, 0.29803923, 0, 1)
-shader_parameter/line_freq = 20.0
-shader_parameter/height = 0.2
-shader_parameter/speed = 0.2
-shader_parameter/scale = Vector2(3, 3)
+[ext_resource type="AudioStream" uid="uid://e8634km8ivgq" path="res://assets/musica/Barbazul.mp3" id="18_gvrgc"]
 
 [sub_resource type="Gradient" id="Gradient_upkqa"]
 offsets = PackedFloat32Array(0.6638298, 0.9574468)
@@ -52,7 +25,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_wf8mm"]
 script = ExtResource("6_m5th7")
-color = Color(0, 1, 0, 1)
+color = Color(0, 0.8392157, 1, 1)
 width_left = 2
 width_top = 2
 width_right = 2
@@ -61,14 +34,14 @@ metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
 [sub_resource type="Gradient" id="Gradient_4jai8"]
 offsets = PackedFloat32Array(0.09917355, 1)
-colors = PackedColorArray(0.20784314, 0.6666667, 0, 1, 0, 0.2175481, 1.2032687e-07, 1)
+colors = PackedColorArray(0.015686275, 0.3647059, 0.70980394, 1, 0.11764706, 0.24705882, 0.3764706, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a8qer"]
 gradient = SubResource("Gradient_4jai8")
 fill_from = Vector2(0.85945946, 1)
 fill_to = Vector2(0.17297298, 0.043243244)
 
-[sub_resource type="StyleBox" id="StyleBox_qxtg1"]
+[sub_resource type="StyleBox" id="StyleBox_gvrgc"]
 resource_local_to_scene = false
 resource_name = ""
 content_margin_left = 2.0
@@ -102,6 +75,66 @@ width_top = 2
 width_right = 2
 width_bottom = 2
 metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_gvrgc"]
+offsets = PackedFloat32Array(0.09917355, 1)
+colors = PackedColorArray(0.015686275, 0.3647059, 0.70980394, 1, 0.11764706, 0.24705882, 0.3764706, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_car46"]
+gradient = SubResource("Gradient_gvrgc")
+fill_from = Vector2(0.85945946, 1)
+fill_to = Vector2(0.17297298, 0.043243244)
+
+[sub_resource type="StyleBox" id="StyleBox_car46"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("7_lgl08")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("6_m5th7")]([SubResource("Resource_a8qer")])
+texture = SubResource("GradientTexture2D_car46")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(4, 4)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="StyleBox" id="StyleBox_qxtg1"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("7_lgl08")
+color = Color(0.50140655, 0.5014065, 0.5014065, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("6_m5th7")]([SubResource("Resource_wf8mm")])
+texture = SubResource("GradientTexture2D_a8qer")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="Gradient" id="Gradient_qnhgk"]
 offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
@@ -146,19 +179,71 @@ outline_color = Color(0, 0, 0, 1)
 [node name="MenuIndio" type="Node2D" unique_id=592524246]
 script = ExtResource("1_blcrt")
 
-[node name="lines" type="ColorRect" parent="." unique_id=429798987]
-material = SubResource("ShaderMaterial_wgn3o")
-offset_left = -19.0
-offset_top = -38.0
-offset_right = 1025.0
-offset_bottom = 838.0
-mouse_filter = 2
+[node name="paralax" type="Node2D" parent="." unique_id=425953935]
+position = Vector2(2282, -51)
+scale = Vector2(0.5, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="paralax" unique_id=1183683034]
+offset_left = -4650.0
+offset_top = 88.0
+offset_right = -2272.0
+offset_bottom = 1886.0
+color = Color(0.6945556, 0.8172223, 0.81208956, 1)
+metadata/_edit_lock_ = true
+
+[node name="mas_lejos" type="Parallax2D" parent="paralax" unique_id=1947294638]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(4000, 0)
+autoscroll = Vector2(15, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="paralax/mas_lejos" unique_id=1314530952]
+texture_filter = 1
+position = Vector2(3985.9998, 1019.99994)
+scale = Vector2(7.2817054, 6.5918202)
+texture = ExtResource("2_gvrgc")
+
+[node name="medio" type="Parallax2D" parent="paralax" unique_id=916705553]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(4000, 0)
+autoscroll = Vector2(20, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="paralax/medio" unique_id=2111754832]
+texture_filter = 1
+position = Vector2(231.99994, 756)
+scale = Vector2(5.681801, 5.652778)
+texture = ExtResource("3_car46")
+
+[node name="cerca" type="Parallax2D" parent="paralax" unique_id=1674345455]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(2000, 0)
+autoscroll = Vector2(50, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="paralax/cerca" unique_id=386819777]
+texture_filter = 1
+position = Vector2(-321.9999, 1055.9999)
+scale = Vector2(3.482394, 3.8117282)
+texture = ExtResource("4_tevv8")
+
+[node name="muy_cerca" type="Parallax2D" parent="paralax" unique_id=1516857202]
+scroll_scale = Vector2(0.8, 0.8)
+repeat_size = Vector2(2300, 0)
+autoscroll = Vector2(70, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="paralax/muy_cerca" unique_id=1541954351]
+texture_filter = 1
+position = Vector2(321.99988, 826)
+scale = Vector2(4.124493, 5.632716)
+texture = ExtResource("5_lyoc4")
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=769670142]
 texture_filter = 1
 position = Vector2(501, -68)
-amount = 40
-texture = ExtResource("2_28f3v")
+amount = 30
+texture = ExtResource("6_gvrgc")
 lifetime = 2.0
 emission_shape = 3
 emission_rect_extents = Vector2(500, 10)
@@ -167,18 +252,21 @@ spread = 0.0
 gravity = Vector2(0, 400)
 angular_velocity_min = 50.0
 angular_velocity_max = 100.0
-scale_amount_min = 0.2
-scale_amount_max = 0.5
+angle_min = 34.8
+angle_max = 220.6
+scale_amount_min = 0.1
+scale_amount_max = 0.2
 color_ramp = SubResource("Gradient_upkqa")
 hue_variation_min = -1.0
 hue_variation_max = 1.0
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1391326125]
-offset_left = 58.933838
-offset_top = 60.0
-offset_right = 948.06616
-offset_bottom = 407.0
-texture = ExtResource("3_osqdg")
+texture_filter = 1
+offset_left = 125.0
+offset_top = 98.0
+offset_right = 855.2672
+offset_bottom = 383.0
+texture = ExtResource("3_blcrt")
 expand_mode = 3
 stretch_mode = 5
 
@@ -201,8 +289,8 @@ offset_right = 586.0
 offset_bottom = 720.0
 theme_override_fonts/font = ExtResource("5_tb47d")
 theme_override_font_sizes/font_size = 46
-theme_override_styles/normal = SubResource("StyleBox_qxtg1")
-theme_override_styles/hover = SubResource("StyleBox_1sipf")
+theme_override_styles/normal = SubResource("StyleBox_gvrgc")
+theme_override_styles/hover = SubResource("StyleBox_car46")
 text = "COMENZAR"
 
 [node name="InteractionFeedback" type="Node" parent="play" unique_id=545880225]
@@ -228,7 +316,7 @@ trigger = 1
 
 [node name="FeedbackModulateOnceEffect" type="Node" parent="play/InteractionFeedback" unique_id=444509803]
 script = ExtResource("13_2q2iu")
-color = Color(0, 0.99607843, 0, 1)
+color = Color(0.015686275, 0.3647059, 0.70980394, 1)
 transition = 1
 metadata/_custom_type_script = "uid://cw31nl0ldqdv0"
 
@@ -249,8 +337,11 @@ offset_left = 200.0
 offset_top = 415.0
 offset_right = 750.0
 offset_bottom = 610.0
-text = "Como cientifico del laboratorio super secreto \"M\" tenes que experimentar con mutagenos modificando el ADN del sujeto de prueba.
-El mutante debera luchar y ganar, para eso deberas elegir la mejor combinacion de propiedades, no te olvides de aplicar las mutaciones del ADN antes de combatir"
+text = "Gatas lindas, sirenas llenas
+Camisa apretada, pezón radioactivo
+Reclamando el botín para la prisión
+Del Dios, prisión, feliz prisión del Dios Barbazul
+De esta prisión"
 label_settings = SubResource("LabelSettings_1sipf")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -258,7 +349,7 @@ autowrap_mode = 3
 
 [node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=753803944]
 position = Vector2(511, 351)
-stream = ExtResource("14_bv5u4")
+stream = ExtResource("18_gvrgc")
 
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="volver" to="." method="_on_volver_pressed"]

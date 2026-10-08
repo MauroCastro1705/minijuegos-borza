@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://n6buvueqgxk7" path="res://assets/portadas/portada4.png" id="10_chgxx"]
 [ext_resource type="Texture2D" uid="uid://dlo72kqsitvog" path="res://assets/portadas/patagonia.png" id="10_kehw0"]
 [ext_resource type="Texture2D" uid="uid://wxefl0ouq20b" path="res://assets/portadas/testla.jpg" id="11_kehw0"]
+[ext_resource type="Texture2D" uid="uid://cs15gcojxmvob" path="res://assets/juego5/barba cuadrado.png" id="12_d8bvs"]
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
 [ext_resource type="PackedScene" uid="uid://cc80d7jrn58h4" path="res://Componentes/boton_generico_lindo/button_nice.tscn" id="14_chgxx"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="14_x1cxr"]
@@ -254,7 +255,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="juegos" type="VBoxContainer" parent="." unique_id=342789019]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -310,8 +310,10 @@ disable_buton = false
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer2" unique_id=445309188 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-game_name = "Tema sorpresa"
-game_img = ExtResource("5_8cngx")
+scene_path = "res://Escenas/juego_5_indio/indio_menu/menu_indio.tscn"
+game_name = "Tema 5 : El indio"
+game_img = ExtResource("12_d8bvs")
+disable_buton = false
 
 [node name="BotonMainMenu3" parent="juegos/HBoxContainer2" unique_id=1314581509 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
@@ -347,6 +349,7 @@ stream = ExtResource("12_nrt5e")
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=322618874]
+visible = false
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=220204203]
 material = ExtResource("14_x1cxr")
