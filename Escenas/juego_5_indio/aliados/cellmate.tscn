@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c8bddi4pbr4go"]
+
+[ext_resource type="Texture2D" uid="uid://cwxnlo22h4ps3" path="res://assets/juego5/cellmate32.png" id="1_0df0t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycfiy"]
+atlas = ExtResource("1_0df0t")
+region = Rect2(0, 657, 208, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6dig"]
+atlas = ExtResource("1_0df0t")
+region = Rect2(208, 657, 208, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67ig8"]
+atlas = ExtResource("1_0df0t")
+region = Rect2(416, 657, 208, 219)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p00ok"]
+atlas = ExtResource("1_0df0t")
+region = Rect2(624, 657, 208, 219)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yowuo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycfiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6dig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67ig8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p00ok")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Cellmate" type="Node2D" unique_id=817240595]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2068935051]
+self_modulate = Color(0.8862616, 0.88626146, 0.8862615, 1)
+position = Vector2(-1, -36)
+scale = Vector2(0.71, 0.71)
+sprite_frames = SubResource("SpriteFrames_yowuo")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.7647933

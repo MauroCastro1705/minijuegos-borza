@@ -3,7 +3,9 @@ extends Node2D
 @onready var tuto: Control = $CanvasLayer/tuto
 @onready var audio_stream_player_2d: AudioStreamPlayer2D = $Player/AudioStreamPlayer2D
 var show_tuto:bool = true
-@onready var game_over: Node2D = $game_over
+@onready var player: Player = $Player
+
+@onready var game_over_screen: Node2D = $CanvasLayer/game_over
 
 var tutorial_mensajes:Array[String] = [
 		"Estas en la carcel del Dios prision Barbazul",
@@ -15,10 +17,11 @@ var tutorial_mensajes:Array[String] = [
 
 func _ready() -> void:
 	canvas_layer.show()
-	game_over.hide()
 	set_tutorial_text()
 	tuto.show()
+	game_over_screen.hide()
 	tuto.connect("tutorial_finished", _tutorial_termino)
+	player.is_dead = false
 	if not show_tuto:
 		tuto.hide()
 
@@ -36,3 +39,9 @@ func _on_audio_stream_player_2d_finished() -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_death_fall_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		player.is_dead = true
+		game_over_screen.show()

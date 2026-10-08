@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b8ju6s3n301fb" path="res://Escenas/juego_5_indio/strato/pick_ups/strato_pick_up.tscn" id="10_uou7r"]
 [ext_resource type="PackedScene" uid="uid://bj158bjxawmad" path="res://Componentes/tutorial_node/tutorial.tscn" id="16_ah7jv"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="18_cy5s8"]
+[ext_resource type="PackedScene" uid="uid://c8bddi4pbr4go" path="res://Escenas/juego_5_indio/aliados/cellmate.tscn" id="18_yogvq"]
 
 [sub_resource type="Gradient" id="Gradient_w8h6t"]
 offsets = PackedFloat32Array(0.8920188)
@@ -431,6 +432,7 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="game_over" type="Node2D" parent="CanvasLayer" unique_id=1056040356]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/game_over" unique_id=1786909681]
 offset_right = 1049.0
@@ -438,9 +440,9 @@ offset_bottom = 837.0
 color = Color(0.23392546, 0.23392546, 0.23392543, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer/game_over" unique_id=660295295]
-offset_left = 205.0
+offset_left = 2.0
 offset_top = 340.0
-offset_right = 865.0
+offset_right = 1002.0
 offset_bottom = 403.0
 text = "PERDISTE
 la prision te encanta, vas a tener que escapar de nuevo"
@@ -448,9 +450,9 @@ label_settings = SubResource("LabelSettings_yowuo")
 horizontal_alignment = 1
 
 [node name="restart" type="Button" parent="CanvasLayer/game_over" unique_id=1177577233]
-offset_left = 438.0
+offset_left = 422.0
 offset_top = 532.0
-offset_right = 596.0
+offset_right = 580.0
 offset_bottom = 587.0
 text = "Volver a empezar"
 
@@ -492,5 +494,9 @@ position = Vector2(2470, 760)
 [node name="Enemy_warden2" parent="enemys" unique_id=686176991 instance=ExtResource("9_b67ji")]
 position = Vector2(1761, -508)
 
+[node name="Cellmate" parent="." unique_id=817240595 instance=ExtResource("18_yogvq")]
+position = Vector2(250, 642)
+
+[connection signal="body_entered" from="death_fall" to="." method="_on_death_fall_body_entered"]
 [connection signal="finished" from="Player/AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
 [connection signal="pressed" from="CanvasLayer/game_over/restart" to="." method="_on_restart_pressed"]
