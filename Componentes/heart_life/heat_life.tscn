@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_jb6du"]
 [ext_resource type="Texture2D" uid="uid://bp5eepkrjh6ly" path="res://assets/juego5/manzana.png" id="5_fy6xy"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="6_u2d40"]
+[ext_resource type="Texture2D" uid="uid://cwxnlo22h4ps3" path="res://assets/juego5/cellmate32.png" id="7_sb3tf"]
 
 [sub_resource type="Gradient" id="Gradient_fy6xy"]
 colors = PackedColorArray(2.117753e-06, 0.4308628, 0.67105836, 1, 1.92523e-07, 0.15374368, 0.25694004, 1)
@@ -52,7 +53,7 @@ expand_margin_bottom = 3.0
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="Gradient" id="Gradient_u2d40"]
-colors = PackedColorArray(0, 0.28627452, 0, 1, 0.52163076, 0.7945371, 1.2706519e-05, 1)
+colors = PackedColorArray(3.6098065e-08, 0.27646765, 0.1965855, 1, 0.52163076, 0.7945371, 1.2706519e-05, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_u2d40"]
 gradient = SubResource("Gradient_u2d40")
@@ -84,6 +85,40 @@ metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 [sub_resource type="LabelSettings" id="LabelSettings_sb3tf"]
 font = ExtResource("6_u2d40")
 font_size = 27
+
+[sub_resource type="Gradient" id="Gradient_nvua5"]
+colors = PackedColorArray(0.027394483, 0.23721936, 0.40996245, 1, 0.48564744, 0.7248836, 0.9402298, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_umic8"]
+gradient = SubResource("Gradient_nvua5")
+fill_from = Vector2(0.5064378, 1)
+fill_to = Vector2(0.53648067, 0.008583691)
+
+[sub_resource type="StyleBox" id="StyleBox_4qrf4"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("2_jb6du")
+skew = Vector2(0.3, 0)
+borders = Array[ExtResource("1_0rck6")]([SubResource("Resource_5rcss")])
+texture = SubResource("GradientTexture2D_umic8")
+corner_detail = 11
+corner_curvature_top_left = 0.0
+corner_curvature_top_right = 0.0
+corner_curvature_bottom_right = 0.0
+corner_curvature_bottom_left = 0.7800000000000002
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2d40"]
+atlas = ExtResource("7_sb3tf")
+region = Rect2(58, 675, 86, 131)
 
 [node name="HeatLife" type="Node2D" unique_id=2011571059]
 script = ExtResource("1_jb6du")
@@ -139,6 +174,29 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="amount" type="Label" parent="Panel2/HBoxContainer" unique_id=2095208093]
+layout_mode = 2
+text = "250"
+label_settings = SubResource("LabelSettings_sb3tf")
+
+[node name="Panel3" type="PanelContainer" parent="." unique_id=1222906050]
+offset_left = 31.0
+offset_top = 108.0
+offset_right = 144.0
+offset_bottom = 162.0
+theme_override_styles/panel = SubResource("StyleBox_4qrf4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel3" unique_id=1798429783]
+layout_mode = 2
+alignment = 1
+
+[node name="manzans" type="TextureRect" parent="Panel3/HBoxContainer" unique_id=2103979741]
+custom_minimum_size = Vector2(35, 30)
+layout_mode = 2
+texture = SubResource("AtlasTexture_u2d40")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="presos" type="Label" parent="Panel3/HBoxContainer" unique_id=1714720354]
 layout_mode = 2
 text = "250"
 label_settings = SubResource("LabelSettings_sb3tf")

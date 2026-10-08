@@ -4,6 +4,7 @@ extends Node2D
 @onready var heart_2: TextureRect = %heart_2
 @onready var heart_3: TextureRect = %heart_3
 @onready var amount: Label = $Panel2/HBoxContainer/amount
+@onready var presos: Label = $Panel3/HBoxContainer/presos
 
 var hearts: Array[TextureRect] = []
 var current_life: int = 3
@@ -17,10 +18,11 @@ func _ready() -> void:
 	hearts = [heart_1, heart_2, heart_3]
 	current_life = hearts.size()
 	_update_hearts()
-	amount.text = str(Global.materia)
+	_manzana()
 
 func _manzana():
 	amount.text = str(Global.materia)
+	presos.text = str(Global.comida)
 
 func reduce_life() -> void:
 	if current_life <= 0:
