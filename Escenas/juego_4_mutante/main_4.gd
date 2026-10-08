@@ -57,10 +57,11 @@ func _ready() -> void:
 	game_over_screen.hide()
 	set_tutorial_text()
 	tuto.show()
+	tuto.connect("tutorial_finished", _tutorial_termino)
 	Global.drag_limits = reference_rect.get_global_rect()
 	item_spawner.item_spawned.connect(_on_item_spawned)
 	Global.player_died.connect(_player_died)
-	tuto.connect("tutorial_finished", _tutorial_termino)
+	
 	# Guardar la posición inicial del enemigo para futuros spawns
 	if is_instance_valid(enemy_mutant):
 		_pos_spawn_enemigo = enemy_mutant.global_position
