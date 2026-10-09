@@ -754,7 +754,7 @@ position = Vector2(10959, 1111)
 [node name="Cellmate10" parent="presos" unique_id=1905729222 instance=ExtResource("18_yogvq")]
 position = Vector2(13035, 1126)
 
-[node name="Cellmate" parent="." unique_id=2075076891 instance=ExtResource("18_yogvq")]
+[node name="Cellmate11" parent="presos" unique_id=2075076891 instance=ExtResource("18_yogvq")]
 position = Vector2(715, 557)
 
 [connection signal="body_entered" from="death_fall" to="." method="_on_death_fall_body_entered"]
