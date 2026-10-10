@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnrflxkkn4uos"
+path="res://.godot/imported/chord strum.mp3-045f0599b0adcf08aa443e6c3173fba1.mp3str"
+
+[deps]
+
+source_file="res://assets/500 Sound Effects by Jalastram/chord strum.mp3"
+dest_files=["res://.godot/imported/chord strum.mp3-045f0599b0adcf08aa443e6c3173fba1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

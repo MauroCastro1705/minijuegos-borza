@@ -7,6 +7,8 @@ var show_tuto:bool = true
 @onready var vhs_efecto: ColorRect = $CanvasLayer/vhs_efecto
 
 @onready var game_over_screen: Node2D = $CanvasLayer/game_over
+@onready var game_finish_screen: Node2D = $CanvasLayer/game_finish
+@onready var score_label: Label = $CanvasLayer/game_finish/score_label
 
 var tutorial_mensajes:Array[String] = [
 		"Estas en la carcel del Dios prision Barbazul",
@@ -51,3 +53,13 @@ func _on_death_fall_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player.is_dead = true
 		game_over_screen.show()
+
+
+func _on_finish_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player"):
+		score_label.text = "Encontraste " + str(Global.materia)+ " Manzanas firmes y rescataste a " + str(Global.comida) + " presos."
+		game_finish_screen.show()
+
+
+func _on_menu_pressed() -> void:
+	TransitionManager.change_scene("res://Escenas/juego_5_indio/indio_menu/menu_indio.tscn")

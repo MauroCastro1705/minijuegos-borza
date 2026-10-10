@@ -1,5 +1,8 @@
 class_name Player
 extends CharacterBody2D
+@onready var damage_sound: AudioStreamPlayer2D = $damage_sound
+@onready var jump_sound: AudioStreamPlayer2D = $jump_sound
+@onready var guitarra: AudioStreamPlayer2D = $guitarra
 
 @onready var animacion: AnimatedSprite2D = %AnimatedSprite2D
 @onready var attack_area: Area2D = $attack_area
@@ -24,7 +27,7 @@ var current_health: float
 @export var barra_vida:Node
 
 @export var flip_h: bool: set = set_flip_h
-var has_strato:bool = true
+var has_strato:bool = false
 @onready var strato: Node2D = $Shape/Strato
 
 var knockback_velocity: Vector2 = Vector2.ZERO
@@ -141,6 +144,7 @@ func take_damage(damage: int) -> void:
 	print("player recibió daño: ", damage)
 	_shake_camera()
 	hurt_effect.emitting = true
+	damage_sound.play()
 	current_health -= damage
 	if barra_vida:
 		barra_vida.reduce_life()
@@ -245,6 +249,7 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 
 func special_jump() -> void:
 	_shake_camera_for_dash()
+	guitarra.play()
 	velocity.y = (jump_velocity*1.3)
 
 func _on_attack_area_body_exited(body: Node2D) -> void:
@@ -308,6 +313,7 @@ func calculate_gravity_limit() -> float:
 
 func jump() -> void:
 	velocity.y = jump_velocity
+	jump_sound.play()
 	apply_stretch()
 
 func try_jump() -> void:

@@ -242,6 +242,9 @@ sources/0 = SubResource("TileSetAtlasSource_m1c1d")
 font = ExtResource("18_cy5s8")
 font_size = 30
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rcss"]
+size = Vector2(488.5, 530)
+
 [node name="TestLevel1" type="Node2D" unique_id=498010661]
 script = ExtResource("1_jxdqn")
 metadata/_edit_lock_ = true
@@ -340,7 +343,7 @@ tile_set = SubResource("TileSet_jxdqn")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." unique_id=1767514809 node_paths=PackedStringArray("barra_vida") groups=["player"] instance=ExtResource("1_cxdpd")]
-position = Vector2(-83, 643)
+position = Vector2(-81, 639)
 barra_vida = NodePath("HeatLife")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=59552220]
@@ -449,7 +452,7 @@ position = Vector2(1040, 552)
 position = Vector2(1442, 436)
 
 [node name="Trap5" parent="trampas" unique_id=314398647 instance=ExtResource("4_m1c1d")]
-position = Vector2(1849, -161)
+position = Vector2(1697, -275)
 
 [node name="Trap6" parent="trampas" unique_id=638144135 instance=ExtResource("4_m1c1d")]
 position = Vector2(2140, -542)
@@ -539,6 +542,40 @@ offset_top = 532.0
 offset_right = 580.0
 offset_bottom = 587.0
 text = "Volver a empezar"
+
+[node name="game_finish" type="Node2D" parent="CanvasLayer" unique_id=2138029691]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/game_finish" unique_id=292106573]
+offset_right = 1049.0
+offset_bottom = 837.0
+color = Color(0.11695843, 0.24981931, 0.3410834, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/game_finish" unique_id=293627118]
+offset_left = 2.0
+offset_top = 340.0
+offset_right = 1002.0
+offset_bottom = 403.0
+text = "ESCAPASTE DE LA PRISION
+Barbazul esta sorprendido que no hayas quedado..."
+label_settings = SubResource("LabelSettings_yowuo")
+horizontal_alignment = 1
+
+[node name="score_label" type="Label" parent="CanvasLayer/game_finish" unique_id=100461999]
+offset_left = 3.0
+offset_top = 424.0
+offset_right = 1003.0
+offset_bottom = 487.0
+text = "puntaje"
+label_settings = SubResource("LabelSettings_yowuo")
+horizontal_alignment = 1
+
+[node name="menu" type="Button" parent="CanvasLayer/game_finish" unique_id=877358997]
+offset_left = 422.0
+offset_top = 532.0
+offset_right = 580.0
+offset_bottom = 587.0
+text = "Menu"
 
 [node name="pickups" type="Node2D" parent="." unique_id=180554475]
 
@@ -757,6 +794,16 @@ position = Vector2(13035, 1126)
 [node name="Cellmate11" parent="presos" unique_id=2075076891 instance=ExtResource("18_yogvq")]
 position = Vector2(715, 557)
 
+[node name="finish_area" type="Area2D" parent="." unique_id=1307880263]
+position = Vector2(16443, -127)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="finish_area" unique_id=1478858809]
+position = Vector2(335.25, 122)
+shape = SubResource("RectangleShape2D_5rcss")
+debug_color = Color(0, 0.64197993, 0.33058468, 0.41960785)
+
 [connection signal="body_entered" from="death_fall" to="." method="_on_death_fall_body_entered"]
 [connection signal="finished" from="Player/AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
 [connection signal="pressed" from="CanvasLayer/game_over/restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/game_finish/menu" to="." method="_on_menu_pressed"]
+[connection signal="body_entered" from="finish_area" to="." method="_on_finish_area_body_entered"]

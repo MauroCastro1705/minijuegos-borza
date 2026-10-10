@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="15_yle0v"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="16_gydxa"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="17_kwmsa"]
+[ext_resource type="AudioStream" uid="uid://t8i101duai2j" path="res://assets/500 Sound Effects by Jalastram/bullet_hit.wav" id="18_kwmsa"]
+[ext_resource type="AudioStream" uid="uid://rhfk04joei0y" path="res://assets/500 Sound Effects by Jalastram/jump.mp3" id="19_yfplj"]
+[ext_resource type="AudioStream" uid="uid://bagdeikeinqim" path="res://assets/juego5/chord strum2.wav" id="20_yfplj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qnmj6"]
 size = Vector3(48, 64, 1)
@@ -227,7 +230,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_yle0v"]
 resource_name = "pull_out_strato"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -594,6 +597,30 @@ theme_override_styles/background = SubResource("StyleBox_yle0v")
 theme_override_styles/fill = SubResource("StyleBox_av4ne")
 value = 50.0
 show_percentage = false
+
+[node name="damage_sound" type="AudioStreamPlayer2D" parent="." unique_id=1531443223]
+position = Vector2(-1, -46)
+stream = ExtResource("18_kwmsa")
+volume_db = 10.0
+pitch_scale = 0.69
+attenuation = 0.0020220007
+panning_strength = 0.0
+
+[node name="jump_sound" type="AudioStreamPlayer2D" parent="." unique_id=417092727]
+position = Vector2(-1, -46)
+stream = ExtResource("19_yfplj")
+volume_db = 10.0
+pitch_scale = 0.86
+attenuation = 0.0020220007
+panning_strength = 0.0
+
+[node name="guitarra" type="AudioStreamPlayer2D" parent="." unique_id=403260062]
+position = Vector2(-1, -46)
+stream = ExtResource("20_yfplj")
+volume_db = 3.0
+pitch_scale = 0.86
+attenuation = 0.0020220007
+panning_strength = 0.0
 
 [connection signal="wall_entered" from="." to="." method="_on_wall_entered"]
 [connection signal="wall_exited" from="." to="." method="_on_wall_exited"]
