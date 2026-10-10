@@ -145,7 +145,10 @@ func take_damage(damage: int) -> void:
 	_shake_camera()
 	hurt_effect.emitting = true
 	damage_sound.play()
-	current_health -= damage
+	if current_health <= 0:
+		emit_signal("died")
+	else:
+		current_health -= damage
 	if barra_vida:
 		barra_vida.reduce_life()
 

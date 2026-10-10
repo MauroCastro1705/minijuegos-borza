@@ -23,6 +23,7 @@ func _ready() -> void:
 	vhs_efecto.show()
 	set_tutorial_text()
 	game_over_screen.hide()
+	player.connect("died", _player_died)
 	player.is_dead = false
 	show_tuto = Global.show_tuto
 	if show_tuto:
@@ -38,6 +39,9 @@ func set_tutorial_text():
 func _tutorial_termino():
 	show_tuto = false
 	Global.show_tuto = false
+
+func _player_died():
+	game_over_screen.show()
 
 
 func _on_audio_stream_player_2d_finished() -> void:
