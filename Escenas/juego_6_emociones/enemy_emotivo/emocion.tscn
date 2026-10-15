@@ -1,11 +1,37 @@
 [gd_scene format=3 uid="uid://die7j8j20ttvg"]
 
 [ext_resource type="Script" uid="uid://0j3v6ojfagln" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion.gd" id="1_exeub"]
+[ext_resource type="Texture2D" uid="uid://b2j0ehycvt4au" path="res://assets/juego6/Layer 1.png" id="2_qwtnm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
 radius = 22.090721
 
 [sub_resource type="SphereMesh" id="SphereMesh_yowuo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0mbn"]
+atlas = ExtResource("2_qwtnm")
+region = Rect2(541, 1384, 476, 316)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qwtnm"]
+load_path = "res://.godot/imported/Layer 1.png-30408782e44f0db31fbadba2818b754d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj6kj"]
+atlas = SubResource("CompressedTexture2D_qwtnm")
+region = Rect2(544, 1099, 476, 316)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t0mbn"]
+load_path = "res://.godot/imported/Layer 1.png-30408782e44f0db31fbadba2818b754d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6mwv"]
+atlas = SubResource("CompressedTexture2D_t0mbn")
+region = Rect2(-12, -5, 504, 354)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gj6kj"]
+load_path = "res://.godot/imported/Layer 1.png-30408782e44f0db31fbadba2818b754d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amr7w"]
+atlas = SubResource("CompressedTexture2D_gj6kj")
+region = Rect2(515, 724, 502, 345)
 
 [node name="Emocion" type="Area2D" unique_id=1497038107]
 script = ExtResource("1_exeub")
@@ -17,3 +43,43 @@ shape = SubResource("CircleShape2D_yowuo")
 position = Vector2(0, 5.722046e-06)
 scale = Vector2(48.05443, 48.05443)
 mesh = SubResource("SphereMesh_yowuo")
+
+[node name="cara_enojo" type="TextureRect" parent="." unique_id=716554054]
+visible = false
+offset_left = -18.0
+offset_top = -20.705883
+offset_right = 21.0
+offset_bottom = 22.445381
+texture = SubResource("AtlasTexture_t0mbn")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="cara_alegria" type="TextureRect" parent="." unique_id=743925572]
+visible = false
+offset_left = -18.0
+offset_top = -20.705883
+offset_right = 21.0
+offset_bottom = 22.445381
+texture = SubResource("AtlasTexture_gj6kj")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="cara_3" type="TextureRect" parent="." unique_id=871277650]
+visible = false
+offset_left = -18.0
+offset_top = -20.705883
+offset_right = 21.0
+offset_bottom = 22.445381
+texture = SubResource("AtlasTexture_b6mwv")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="cara_4" type="TextureRect" parent="." unique_id=752991081]
+visible = false
+offset_left = -18.0
+offset_top = -20.705883
+offset_right = 21.0
+offset_bottom = 22.445381
+texture = SubResource("AtlasTexture_amr7w")
+expand_mode = 5
+stretch_mode = 5

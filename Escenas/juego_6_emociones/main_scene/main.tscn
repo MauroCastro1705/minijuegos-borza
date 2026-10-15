@@ -4,24 +4,36 @@
 [ext_resource type="PackedScene" uid="uid://die7j8j20ttvg" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion.tscn" id="2_toogh"]
 [ext_resource type="PackedScene" uid="uid://dljtof5dac2ie" path="res://Escenas/juego_6_emociones/centro.tscn" id="3_ds20p"]
 
+[sub_resource type="Gradient" id="Gradient_ds20p"]
+colors = PackedColorArray(0.7518304, 0.65983546, 0.5350682, 1, 0.5798776, 0.5988925, 0.49171245, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yowuo"]
+gradient = SubResource("Gradient_ds20p")
+
 [node name="Main" type="Node2D" unique_id=1368539246]
 script = ExtResource("1_ud3rw")
 emocion_scene = ExtResource("2_toogh")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1583859046]
+offset_right = 1017.0
+offset_bottom = 838.0
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_yowuo")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1342672333]
 position = Vector2(494, 362)
 
 [node name="Marker2D2" type="Marker2D" parent="." unique_id=575486304]
-position = Vector2(-60, -74)
+position = Vector2(-10, -17)
 
 [node name="Marker2D3" type="Marker2D" parent="." unique_id=720385838]
-position = Vector2(-71, 888)
+position = Vector2(-7, 805)
 
 [node name="Marker2D4" type="Marker2D" parent="." unique_id=1260308898]
-position = Vector2(1076, 879)
+position = Vector2(1011, 808)
 
 [node name="Marker2D5" type="Marker2D" parent="." unique_id=1507645620]
-position = Vector2(1107, -53)
+position = Vector2(1008, -12)
 
 [node name="centro" parent="." unique_id=365556037 instance=ExtResource("3_ds20p")]
 position = Vector2(496, 362)
