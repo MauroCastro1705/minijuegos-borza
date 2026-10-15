@@ -1,9 +1,15 @@
 [gd_scene format=3 uid="uid://dljtof5dac2ie"]
 
 [ext_resource type="Script" uid="uid://32uyggn40sml" path="res://Escenas/juego_6_emociones/main_scene/centro.gd" id="1_qh71y"]
+[ext_resource type="Texture2D" uid="uid://b2j0ehycvt4au" path="res://assets/juego6/Layer 1.png" id="2_2x66h"]
+[ext_resource type="Texture2D" uid="uid://ceuyonlfsoxrp" path="res://assets/juego6/corner.png" id="3_3hngr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
 size = Vector2(43, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
+atlas = ExtResource("2_2x66h")
+region = Rect2(0, 756, 476, 316)
 
 [node name="centro" type="Node2D" unique_id=365556037]
 script = ExtResource("1_qh71y")
@@ -16,12 +22,6 @@ position = Vector2(11.5, 10.5)
 shape = SubResource("RectangleShape2D_yowuo")
 debug_color = Color(0.9875826, 0.06837226, 0.22504988, 0.41960785)
 
-[node name="ColorRect" type="ColorRect" parent="emocion_1" unique_id=164171426]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 33.0
-offset_bottom = 32.0
-
 [node name="emocion_2" type="Area2D" parent="." unique_id=655484930]
 position = Vector2(12, -32)
 
@@ -29,12 +29,6 @@ position = Vector2(12, -32)
 position = Vector2(11.5, 10.5)
 shape = SubResource("RectangleShape2D_yowuo")
 debug_color = Color(0.6725585, 0.5083312, 0.026129799, 0.41960785)
-
-[node name="ColorRect2" type="ColorRect" parent="emocion_2" unique_id=656456860]
-offset_left = -10.0
-offset_top = -9.0
-offset_right = 33.0
-offset_bottom = 33.0
 
 [node name="emocion_3" type="Area2D" parent="." unique_id=1094793385]
 position = Vector2(12, 12)
@@ -44,12 +38,6 @@ position = Vector2(11.5, 10.5)
 shape = SubResource("RectangleShape2D_yowuo")
 debug_color = Color(0, 0.65157866, 0.15452811, 0.41960785)
 
-[node name="ColorRect3" type="ColorRect" parent="emocion_3" unique_id=484983768]
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 33.0
-offset_bottom = 32.0
-
 [node name="emocion_4" type="Area2D" parent="." unique_id=934261923]
 position = Vector2(-33, 12)
 
@@ -58,11 +46,55 @@ position = Vector2(11.5, 10.5)
 shape = SubResource("RectangleShape2D_yowuo")
 debug_color = Color(4.813075e-07, 0.6085364, 0.6602243, 0.41960785)
 
-[node name="ColorRect4" type="ColorRect" parent="emocion_4" unique_id=2078297588]
-offset_left = -11.0
-offset_top = -10.0
-offset_right = 32.0
-offset_bottom = 32.0
+[node name="cara" type="TextureRect" parent="." unique_id=1381709038]
+offset_left = -31.0
+offset_top = -30.0
+offset_right = 34.0
+offset_bottom = 31.739498
+texture = SubResource("AtlasTexture_yowuo")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="corner" type="TextureRect" parent="." unique_id=562866542]
+offset_left = -53.0
+offset_top = -4.0
+offset_right = -3.234375
+offset_bottom = 45.0
+rotation = -1.5661533
+texture = ExtResource("3_3hngr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="corner2" type="TextureRect" parent="." unique_id=1849373473]
+offset_left = 4.0
+offset_top = -54.0
+offset_right = 53.765625
+offset_bottom = -5.0
+texture = ExtResource("3_3hngr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="corner3" type="TextureRect" parent="." unique_id=809706778]
+offset_left = 54.0
+offset_top = 4.0
+offset_right = 103.765625
+offset_bottom = 53.0
+rotation = 1.5707964
+texture = ExtResource("3_3hngr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="corner4" type="TextureRect" parent="." unique_id=1509975298]
+offset_left = -4.0
+offset_top = 54.0
+offset_right = 45.765625
+offset_bottom = 103.0
+rotation = 3.1415927
+texture = ExtResource("3_3hngr")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="centro" type="Marker2D" parent="." unique_id=1584007168]
 
 [connection signal="area_entered" from="emocion_1" to="." method="_on_emocion_1_area_entered"]
 [connection signal="area_entered" from="emocion_2" to="." method="_on_emocion_2_area_entered"]

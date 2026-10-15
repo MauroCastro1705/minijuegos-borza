@@ -9,6 +9,7 @@ var spawn_timer
 var emocion_positions: Array[Marker2D] = []
 @onready var centro: Node2D = $centro
 @onready var label: Label = $Label
+@onready var score:int = 0
 
 func _ready() -> void:
 	emocion_positions = [marker_2d_2, marker_2d_3, marker_2d_4, marker_2d_5]
@@ -17,10 +18,15 @@ func _ready() -> void:
 	spawn_timer.wait_time = 2
 	spawn_timer.timeout.connect(_spawn_emocion)
 	spawn_timer.start()
+	centro.score_up.connect(_score_up)
 
+
+func _score_up():
+	score += 1
+	label.text = "Score: " + str(score)
 
 func _spawn_emocion():
 	var new_emocion = emocion_scene.instantiate()
 	get_parent().add_child(new_emocion)
 	new_emocion.position = emocion_positions.pick_random().global_position
-	new_emocion.marker = center
+	new_emocion.marker = centro.centro_marker
