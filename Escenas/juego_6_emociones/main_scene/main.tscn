@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dpk1vehs8odvs"]
+
+[ext_resource type="Script" uid="uid://cfqwewyeaftgs" path="res://Escenas/juego_6_emociones/main_scene/main.gd" id="1_ud3rw"]
+[ext_resource type="PackedScene" uid="uid://die7j8j20ttvg" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion.tscn" id="2_toogh"]
+[ext_resource type="PackedScene" uid="uid://dljtof5dac2ie" path="res://Escenas/juego_6_emociones/centro.tscn" id="3_ds20p"]
+
+[node name="Main" type="Node2D" unique_id=1368539246]
+script = ExtResource("1_ud3rw")
+emocion_scene = ExtResource("2_toogh")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1342672333]
+position = Vector2(494, 362)
+
+[node name="Marker2D2" type="Marker2D" parent="." unique_id=575486304]
+position = Vector2(-60, -74)
+
+[node name="Marker2D3" type="Marker2D" parent="." unique_id=720385838]
+position = Vector2(-71, 888)
+
+[node name="Marker2D4" type="Marker2D" parent="." unique_id=1260308898]
+position = Vector2(1076, 879)
+
+[node name="Marker2D5" type="Marker2D" parent="." unique_id=1507645620]
+position = Vector2(1107, -53)
+
+[node name="centro" parent="." unique_id=365556037 instance=ExtResource("3_ds20p")]
+position = Vector2(496, 362)
+
+[node name="Label" type="Label" parent="." unique_id=184744206]
+offset_left = 475.0
+offset_top = 246.0
+offset_right = 515.0
+offset_bottom = 269.0

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://die7j8j20ttvg"]
+
+[ext_resource type="Script" uid="uid://0j3v6ojfagln" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion.gd" id="1_exeub"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
+radius = 22.090721
+
+[sub_resource type="SphereMesh" id="SphereMesh_yowuo"]
+
+[node name="Emocion" type="Area2D" unique_id=1497038107]
+script = ExtResource("1_exeub")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1388477899]
+shape = SubResource("CircleShape2D_yowuo")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=940334474]
+position = Vector2(0, 5.722046e-06)
+scale = Vector2(48.05443, 48.05443)
+mesh = SubResource("SphereMesh_yowuo")
