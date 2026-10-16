@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cfqwewyeaftgs" path="res://Escenas/juego_6_emociones/main_scene/main.gd" id="1_ud3rw"]
 [ext_resource type="PackedScene" uid="uid://die7j8j20ttvg" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion.tscn" id="2_toogh"]
 [ext_resource type="PackedScene" uid="uid://dljtof5dac2ie" path="res://Escenas/juego_6_emociones/centro.tscn" id="3_ds20p"]
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="4_t0gme"]
 [ext_resource type="Shader" uid="uid://dab1uksiy332v" path="res://shaders/vhs_wiggle.gdshader" id="4_vv7du"]
 
 [sub_resource type="Gradient" id="Gradient_ds20p"]
@@ -111,6 +112,12 @@ shader_parameter/wiggle_speed = 10.0
 shader_parameter/smear = 0.2000000095
 shader_parameter/blur_samples = 15
 
+[sub_resource type="LabelSettings" id="LabelSettings_6v6d6"]
+font = ExtResource("4_t0gme")
+font_size = 30
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vv7du"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
@@ -121,15 +128,19 @@ script = ExtResource("1_ud3rw")
 emocion_scene = ExtResource("2_toogh")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1583859046]
-offset_right = 1017.0
-offset_bottom = 838.0
+offset_left = -1022.0
+offset_top = -449.0
+offset_right = 2039.0
+offset_bottom = 1287.0
 mouse_filter = 2
 texture = SubResource("GradientTexture1D_yowuo")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1358333101]
 material = SubResource("ShaderMaterial_ds20p")
-offset_right = 1020.0
-offset_bottom = 831.0
+offset_left = -1041.0
+offset_top = -485.0
+offset_right = 2061.0
+offset_bottom = 1316.0
 mouse_filter = 2
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1342672333]
@@ -137,6 +148,9 @@ position = Vector2(494, 362)
 
 [node name="centro" parent="." unique_id=365556037 instance=ExtResource("3_ds20p")]
 position = Vector2(496, 362)
+
+[node name="Camera2D" type="Camera2D" parent="centro" unique_id=1389053890]
+position = Vector2(1, 4)
 
 [node name="Marker2D2" type="Marker2D" parent="centro" unique_id=575486304]
 unique_name_in_owner = true
@@ -154,12 +168,6 @@ position = Vector2(515, 446)
 unique_name_in_owner = true
 position = Vector2(512, -374)
 
-[node name="Label" type="Label" parent="." unique_id=184744206]
-offset_left = 475.0
-offset_top = 246.0
-offset_right = 515.0
-offset_bottom = 269.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1805962344]
 visible = false
 
@@ -171,6 +179,15 @@ anchor_bottom = 1.024
 offset_bottom = -0.2000122
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="CanvasLayer" unique_id=184744206]
+unique_name_in_owner = true
+offset_left = 66.0
+offset_top = 19.0
+offset_right = 126.0
+offset_bottom = 49.0
+text = "score"
+label_settings = SubResource("LabelSettings_6v6d6")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=618036457]
 position = Vector2(236, 290)

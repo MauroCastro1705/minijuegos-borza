@@ -5,13 +5,13 @@ var spawn_timer
 
 var emocion_positions: Array[Marker2D] = []
 @onready var centro: Node2D = $centro
-@onready var label: Label = $Label
 @onready var score:int = 0
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var marker_2d_2: Marker2D = %Marker2D2
 @onready var marker_2d_3: Marker2D = %Marker2D3
 @onready var marker_2d_4: Marker2D = %Marker2D4
 @onready var marker_2d_5: Marker2D = %Marker2D5
+@onready var score_label: Label = %score
 
 func _ready() -> void:
 	canvas_layer.show()
@@ -26,7 +26,7 @@ func _ready() -> void:
 
 func _score_up():
 	score += 1
-	label.text = "Score: " + str(score)
+	score_label.text = "Score: " + str(score)
 
 func _spawn_emocion():
 	var new_emocion = emocion_scene.instantiate()

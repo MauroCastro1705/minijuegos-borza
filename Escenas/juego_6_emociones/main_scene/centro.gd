@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var emocion_3: Area2D = $emocion_3
 @onready var emocion_4: Area2D = $emocion_4
 @onready var centro_marker: Marker2D = $centro
+@onready var mesh_instance_2d: MeshInstance2D = $MeshInstance2D
 
 @onready var corner: TextureRect = $corner
 @onready var corner_2: TextureRect = $corner2
@@ -60,8 +61,7 @@ func _on_emocion_1_area_entered(area: Area2D) -> void:
 		score_up.emit()
 		area.queue_free()
 	else:
-		print("mal")
-		area.queue_free()
+		hurt(area)
 
 
 func _on_emocion_2_area_entered(area: Area2D) -> void:
@@ -70,8 +70,7 @@ func _on_emocion_2_area_entered(area: Area2D) -> void:
 		area.queue_free()
 		score_up.emit()
 	else:
-		print("mal")
-		area.queue_free()
+		hurt(area)
 
 
 func _on_emocion_3_area_entered(area: Area2D) -> void:
@@ -80,8 +79,7 @@ func _on_emocion_3_area_entered(area: Area2D) -> void:
 		area.queue_free()
 		score_up.emit()
 	else:
-		print("mal")
-		area.queue_free()
+		hurt(area)
 
 
 func _on_emocion_4_area_entered(area: Area2D) -> void:
@@ -89,6 +87,15 @@ func _on_emocion_4_area_entered(area: Area2D) -> void:
 		print("enojo")
 		area.queue_free()
 		score_up.emit()
-	else:
-		print("mal")
-		area.queue_free()
+	else:		
+		hurt(area)
+		
+		
+func hurt(cuerpo):
+	print("mal")
+	cuerpo.queue_free()
+	var tween = mesh_instance_2d.get_tree().create_tween()
+	tween.set_loops(2)  # Titila dos veces (apagado y encendido)
+	tween.set_parallel(false)  # Que sea secuencial
+	tween.tween_property(mesh_instance_2d, "modulate:g", 0.0, 0.1)
+	tween.tween_property(mesh_instance_2d, "modulate:g", 1.0, 0.1)
