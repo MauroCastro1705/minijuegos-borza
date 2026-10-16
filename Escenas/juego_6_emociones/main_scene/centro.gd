@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 @onready var emocion_1: Area2D = $emocion_1
 @onready var emocion_2: Area2D = $emocion_2
@@ -17,6 +17,7 @@ var color_3: Color = Color.DARK_GREEN
 var color_4: Color = Color.DARK_GOLDENROD
 signal score_up
 @export var speed: float = 300.0   # píxeles por segundo
+
 # --- Rotación ---
 @export var rotation_step_deg: float = 90.0   # cuánto gira por pulsación
 @export var rotation_speed: float = 15.0      # qué tan rápido alcanza el objetivo
@@ -40,11 +41,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		target_rotation += deg_to_rad(rotation_step_deg)
 		rotating = true
 
-func _process(delta: float) -> void:
-	# --- Movimiento ---
+func _physics_process(delta: float) -> void:
+	# --- Movimiento con colisiones ---
 	var input_dir := Input.get_vector("left", "right", "up", "down")
-	if input_dir != Vector2.ZERO:
-		global_position += input_dir * speed * delta
+	velocity = input_dir * speed
+	move_and_slide()
 
 	# --- Rotación ---
 	if rotating:
@@ -52,7 +53,6 @@ func _process(delta: float) -> void:
 		if abs(angle_difference(rotation, target_rotation)) < 0.01:
 			rotation = target_rotation
 			rotating = false
-
 
 func _on_emocion_1_area_entered(area: Area2D) -> void:
 	if area.is_in_group("alegria"):

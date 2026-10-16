@@ -3,12 +3,118 @@
 [ext_resource type="Script" uid="uid://cfqwewyeaftgs" path="res://Escenas/juego_6_emociones/main_scene/main.gd" id="1_ud3rw"]
 [ext_resource type="PackedScene" uid="uid://die7j8j20ttvg" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion.tscn" id="2_toogh"]
 [ext_resource type="PackedScene" uid="uid://dljtof5dac2ie" path="res://Escenas/juego_6_emociones/centro.tscn" id="3_ds20p"]
+[ext_resource type="Shader" uid="uid://dab1uksiy332v" path="res://shaders/vhs_wiggle.gdshader" id="4_vv7du"]
 
 [sub_resource type="Gradient" id="Gradient_ds20p"]
-colors = PackedColorArray(0.7518304, 0.65983546, 0.5350682, 1, 0.5798776, 0.5988925, 0.49171245, 1)
+colors = PackedColorArray(0.88709784, 0.81226707, 0.5261492, 1, 0.5876569, 0.77836025, 0.62372947, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_yowuo"]
 gradient = SubResource("Gradient_ds20p")
+
+[sub_resource type="Shader" id="Shader_h3e0d"]
+code = "shader_type canvas_item;
+
+uniform float progress = 0.0;
+uniform float speed = 0.1; 
+
+uniform vec2 pixelation = vec2(2.0, 2.0);
+uniform float zoom = 2.0;
+
+uniform float background_threshold : hint_range(-2.0, 1.0) = 0.0;
+uniform float color_threshold : hint_range(0.0, 1.0)  = 0.24;
+
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0); 
+
+uniform float seed = 0.0;
+
+#define iTime (TIME * speed - seed)
+
+const mat2 mtx = mat2( vec2(0.80, -0.60), vec2(0.60, 0.80) );
+
+float rand(vec2 n) { 
+    return fract(sin(dot(n, vec2(12.9898 + seed, 4.1414 - seed))) * (43758.5453 + seed * 1000.0));
+}
+
+float noise(vec2 p){
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u * u * (3.0 - 2.0 * u);
+
+    float res = mix(
+        mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
+        mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
+        
+    return res * res;
+}
+
+float fbm( vec2 p )
+{
+    float f = 0.0;
+    
+    f += 0.500000 * noise( p + iTime ); p = mtx * p * 2.02;
+    f += 0.031250 * noise( p ); p = mtx * p * 2.01;
+    f += 0.250000 * noise( p ); p = mtx * p * 2.03;
+    f += 0.125000 * noise( p ); p = mtx * p * 2.01;
+    f += 0.062500 * noise( p ); p = mtx * p * 2.04;
+    f += 0.015625 * noise( p + sin(iTime) );
+
+    return f / 0.96875;
+}
+
+float pattern( in vec2 p )
+{
+	return fbm( p + fbm( p + fbm( p ) ) );
+}
+
+vec4 colormap(float x, vec2 uv) {
+	
+	x *= max(0.0, min(-abs(progress * 4.0 - uv.x - uv.y - 1.0) + 1.0, 1.0) * 2.0);
+    
+    if (x < background_threshold) { 
+        return vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else if (x < color_threshold) { 
+        return mix(
+			vec4(0.0, 0.0, 0.0, 0.0),
+			color,
+			round((x - background_threshold) / (color_threshold - background_threshold))
+		);
+    }
+	else {
+		return color;
+	}
+}
+
+void fragment()
+{
+	vec2 modifier = 1.0/(SCREEN_PIXEL_SIZE * pixelation);
+	vec2 uv = floor(UV * modifier) / modifier;
+	float shade = pattern(uv * zoom);
+	COLOR = colormap(shade, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ds20p"]
+shader = SubResource("Shader_h3e0d")
+shader_parameter/progress = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/pixelation = Vector2(5, 5)
+shader_parameter/zoom = 5.0
+shader_parameter/background_threshold = 0.5430001207925002
+shader_parameter/color_threshold = 0.0
+shader_parameter/color = Color(0.27974266, 0.4721796, 0.4860174, 0.12941177)
+shader_parameter/seed = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0gme"]
+shader = ExtResource("4_vv7du")
+shader_parameter/wiggle = 0.06999999843536
+shader_parameter/wiggle_speed = 10.0
+shader_parameter/smear = 0.2000000095
+shader_parameter/blur_samples = 15
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vv7du"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
+size = Vector2(105, 68)
 
 [node name="Main" type="Node2D" unique_id=1368539246]
 script = ExtResource("1_ud3rw")
@@ -20,26 +126,56 @@ offset_bottom = 838.0
 mouse_filter = 2
 texture = SubResource("GradientTexture1D_yowuo")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1358333101]
+material = SubResource("ShaderMaterial_ds20p")
+offset_right = 1020.0
+offset_bottom = 831.0
+mouse_filter = 2
+
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1342672333]
 position = Vector2(494, 362)
 
-[node name="Marker2D2" type="Marker2D" parent="." unique_id=575486304]
-position = Vector2(-10, -17)
-
-[node name="Marker2D3" type="Marker2D" parent="." unique_id=720385838]
-position = Vector2(-7, 805)
-
-[node name="Marker2D4" type="Marker2D" parent="." unique_id=1260308898]
-position = Vector2(1011, 808)
-
-[node name="Marker2D5" type="Marker2D" parent="." unique_id=1507645620]
-position = Vector2(1008, -12)
-
 [node name="centro" parent="." unique_id=365556037 instance=ExtResource("3_ds20p")]
 position = Vector2(496, 362)
+
+[node name="Marker2D2" type="Marker2D" parent="centro" unique_id=575486304]
+unique_name_in_owner = true
+position = Vector2(-506, -379)
+
+[node name="Marker2D3" type="Marker2D" parent="centro" unique_id=720385838]
+unique_name_in_owner = true
+position = Vector2(-503, 443)
+
+[node name="Marker2D4" type="Marker2D" parent="centro" unique_id=1260308898]
+unique_name_in_owner = true
+position = Vector2(515, 446)
+
+[node name="Marker2D5" type="Marker2D" parent="centro" unique_id=1507645620]
+unique_name_in_owner = true
+position = Vector2(512, -374)
 
 [node name="Label" type="Label" parent="." unique_id=184744206]
 offset_left = 475.0
 offset_top = 246.0
 offset_right = 515.0
 offset_bottom = 269.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1805962344]
+visible = false
+
+[node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=1344776129]
+material = SubResource("ShaderMaterial_t0gme")
+anchors_preset = -1
+anchor_right = 1.018
+anchor_bottom = 1.024
+offset_bottom = -0.2000122
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=618036457]
+position = Vector2(236, 290)
+physics_material_override = SubResource("PhysicsMaterial_vv7du")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1763067876]
+position = Vector2(42.5, 24)
+shape = SubResource("RectangleShape2D_yowuo")

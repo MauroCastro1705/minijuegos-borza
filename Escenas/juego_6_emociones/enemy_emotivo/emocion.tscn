@@ -46,6 +46,8 @@ mesh = SubResource("SphereMesh_yowuo")
 
 [node name="cara_enojo" type="TextureRect" parent="." unique_id=716554054]
 visible = false
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
 offset_left = -18.0
 offset_top = -20.705883
 offset_right = 21.0
@@ -56,6 +58,8 @@ stretch_mode = 5
 
 [node name="cara_alegria" type="TextureRect" parent="." unique_id=743925572]
 visible = false
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
 offset_left = -18.0
 offset_top = -20.705883
 offset_right = 21.0
@@ -66,6 +70,8 @@ stretch_mode = 5
 
 [node name="cara_3" type="TextureRect" parent="." unique_id=871277650]
 visible = false
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
 offset_left = -18.0
 offset_top = -20.705883
 offset_right = 21.0

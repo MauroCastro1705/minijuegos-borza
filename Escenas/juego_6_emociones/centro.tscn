@@ -4,15 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://b2j0ehycvt4au" path="res://assets/juego6/Layer 1.png" id="2_2x66h"]
 [ext_resource type="Texture2D" uid="uid://ceuyonlfsoxrp" path="res://assets/juego6/corner.png" id="3_3hngr"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
+radius = 55.226807
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
 size = Vector2(43, 41)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3hngr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yowuo"]
 atlas = ExtResource("2_2x66h")
 region = Rect2(0, 756, 476, 316)
 
-[node name="centro" type="Node2D" unique_id=365556037]
+[node name="centro" type="CharacterBody2D" unique_id=283893627]
 script = ExtResource("1_qh71y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=435165435]
+shape = SubResource("CircleShape2D_yowuo")
 
 [node name="emocion_1" type="Area2D" parent="." unique_id=1228472169]
 position = Vector2(-34, -31)
@@ -45,6 +53,12 @@ position = Vector2(-33, 12)
 position = Vector2(11.5, 10.5)
 shape = SubResource("RectangleShape2D_yowuo")
 debug_color = Color(4.813075e-07, 0.6085364, 0.6602243, 0.41960785)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1352095588]
+self_modulate = Color(0.75500035, 0.62834847, 0.4444435, 1)
+position = Vector2(0, 1.145058e-05)
+scale = Vector2(108.12247, 108.122475)
+mesh = SubResource("SphereMesh_3hngr")
 
 [node name="cara" type="TextureRect" parent="." unique_id=1381709038]
 offset_left = -31.0

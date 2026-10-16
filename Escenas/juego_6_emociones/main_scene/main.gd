@@ -2,16 +2,19 @@ extends Node2D
 @export var emocion_scene:PackedScene
 var spawn_timer
 @onready var center: Marker2D = $Marker2D
-@onready var marker_2d_2: Marker2D = $Marker2D2
-@onready var marker_2d_3: Marker2D = $Marker2D3
-@onready var marker_2d_4: Marker2D = $Marker2D4
-@onready var marker_2d_5: Marker2D = $Marker2D5
+
 var emocion_positions: Array[Marker2D] = []
 @onready var centro: Node2D = $centro
 @onready var label: Label = $Label
 @onready var score:int = 0
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var marker_2d_2: Marker2D = %Marker2D2
+@onready var marker_2d_3: Marker2D = %Marker2D3
+@onready var marker_2d_4: Marker2D = %Marker2D4
+@onready var marker_2d_5: Marker2D = %Marker2D5
 
 func _ready() -> void:
+	canvas_layer.show()
 	emocion_positions = [marker_2d_2, marker_2d_3, marker_2d_4, marker_2d_5]
 	spawn_timer = Timer.new()
 	add_child(spawn_timer)
