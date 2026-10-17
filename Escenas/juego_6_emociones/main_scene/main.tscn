@@ -6,6 +6,9 @@
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="4_t0gme"]
 [ext_resource type="Shader" uid="uid://dab1uksiy332v" path="res://shaders/vhs_wiggle.gdshader" id="4_vv7du"]
 [ext_resource type="Texture2D" uid="uid://bc2vmu3mirxcw" path="res://assets/juego6/brain.png" id="6_6v6d6"]
+[ext_resource type="PackedScene" uid="uid://dc0imh708c7a3" path="res://Escenas/juego_6_emociones/life_bar/lifebaremocion.tscn" id="7_g12yl"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="8_p8b6k"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="9_grgya"]
 
 [sub_resource type="Gradient" id="Gradient_6v6d6"]
 colors = PackedColorArray(1, 0.38680217, 0.41039777, 1, 0.19784468, 0.042708084, 0.047159873, 1)
@@ -109,6 +112,12 @@ shader_parameter/color_threshold = 0.0
 shader_parameter/color = Color(0.7867219, 0.32069483, 0.428191, 0.6784314)
 shader_parameter/seed = 0.5
 
+[sub_resource type="LabelSettings" id="LabelSettings_6v6d6"]
+font = ExtResource("4_t0gme")
+font_size = 45
+outline_size = 30
+outline_color = Color(0.06879827, 0.06879828, 0.06879828, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0gme"]
 shader = ExtResource("4_vv7du")
 shader_parameter/wiggle = 0.06999999843536
@@ -116,11 +125,54 @@ shader_parameter/wiggle_speed = 10.0
 shader_parameter/smear = 0.2000000095
 shader_parameter/blur_samples = 15
 
-[sub_resource type="LabelSettings" id="LabelSettings_6v6d6"]
+[sub_resource type="LabelSettings" id="LabelSettings_yowuo"]
 font = ExtResource("4_t0gme")
-font_size = 45
-outline_size = 30
-outline_color = Color(0.06879827, 0.06879828, 0.06879828, 1)
+font_size = 40
+outline_size = 10
+outline_color = Color(0.20954207, 2.9792935e-05, 0.20954037, 1)
+
+[sub_resource type="Resource" id="Resource_mxlkd"]
+script = ExtResource("8_p8b6k")
+color = Color(0, 0.8392157, 1, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_bof0q"]
+offsets = PackedFloat32Array(0.13227513, 0.537037, 1)
+colors = PackedColorArray(0.8752258, 0.5802287, 0.6263345, 1, 0.8251283, 0.35928845, 0.5183849, 1, 0.65730345, 0.13332494, 0.26920366, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xp5dg"]
+gradient = SubResource("Gradient_bof0q")
+fill_from = Vector2(0.102564104, 0.991453)
+fill_to = Vector2(0.74786323, 0.0982906)
+
+[sub_resource type="StyleBox" id="StyleBox_e1gaj"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("9_grgya")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("8_p8b6k")]([SubResource("Resource_mxlkd")])
+texture = SubResource("GradientTexture2D_xp5dg")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vv7du"]
 
@@ -188,7 +240,21 @@ unique_name_in_owner = true
 position = Vector2(512, -374)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1805962344]
-visible = false
+
+[node name="score" type="Label" parent="CanvasLayer" unique_id=184744206]
+unique_name_in_owner = true
+offset_left = 51.0
+offset_top = 82.0
+offset_right = 141.0
+offset_bottom = 127.0
+text = "score"
+label_settings = SubResource("LabelSettings_6v6d6")
+
+[node name="Lifebaremocion" parent="CanvasLayer" unique_id=319219422 instance=ExtResource("7_g12yl")]
+offset_left = 25.0
+offset_top = 39.0
+offset_right = 25.0
+offset_bottom = 39.0
 
 [node name="vhs_efecto" type="ColorRect" parent="CanvasLayer" unique_id=1344776129]
 material = SubResource("ShaderMaterial_t0gme")
@@ -199,14 +265,40 @@ offset_bottom = -0.2000122
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="score" type="Label" parent="CanvasLayer" unique_id=184744206]
-unique_name_in_owner = true
-offset_left = 66.0
-offset_top = 19.0
-offset_right = 126.0
-offset_bottom = 49.0
-text = "score"
-label_settings = SubResource("LabelSettings_6v6d6")
+[node name="game_over" type="Node2D" parent="CanvasLayer" unique_id=1186709558]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/game_over" unique_id=1319148944]
+offset_right = 1049.0
+offset_bottom = 837.0
+color = Color(0.23392546, 0.23392546, 0.23392543, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="efecto ondas" type="ColorRect" parent="CanvasLayer/game_over" unique_id=629191168]
+material = SubResource("ShaderMaterial_ds20p")
+offset_left = 4.0
+offset_top = -5.0
+offset_right = 1004.0
+offset_bottom = 823.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/game_over" unique_id=715572122]
+offset_left = 2.0
+offset_top = 340.0
+offset_right = 1002.0
+offset_bottom = 403.0
+text = "PERDISTE
+No pudiste estabilizar las emociones"
+label_settings = SubResource("LabelSettings_yowuo")
+horizontal_alignment = 1
+
+[node name="restart" type="Button" parent="CanvasLayer/game_over" unique_id=328186862]
+offset_left = 422.0
+offset_top = 532.0
+offset_right = 580.0
+offset_bottom = 587.0
+theme_override_styles/normal = SubResource("StyleBox_e1gaj")
+text = "Volver al menu"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=618036457]
 visible = false
@@ -249,3 +341,5 @@ physics_material_override = SubResource("PhysicsMaterial_vv7du")
 visible = false
 position = Vector2(42.5, 161)
 shape = SubResource("RectangleShape2D_6v6d6")
+
+[connection signal="pressed" from="CanvasLayer/game_over/restart" to="." method="_on_restart_pressed"]

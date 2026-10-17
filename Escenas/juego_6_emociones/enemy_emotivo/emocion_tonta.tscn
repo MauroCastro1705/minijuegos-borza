@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://cmlfv262tme8k"]
+
+[ext_resource type="Script" uid="uid://craj3o46phflq" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion_tonta.gd" id="1_yjqch"]
+[ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="2_helu6"]
+[ext_resource type="Texture2D" uid="uid://b2j0ehycvt4au" path="res://assets/juego6/Layer 1.png" id="3_i2gxd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
+radius = 22.090721
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rcss"]
+atlas = ExtResource("2_helu6")
+region = Rect2(10, 23, 3, 3)
+
+[sub_resource type="Curve" id="Curve_t0mbn"]
+_limits = [0.0, 15.0, 0.0, 1.0]
+_data = [Vector2(0, 15), 0.0, 0.0, 0, 0, Vector2(0.99549544, 2.2099447), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SphereMesh" id="SphereMesh_yowuo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0mbn"]
+atlas = ExtResource("3_i2gxd")
+region = Rect2(541, 1384, 476, 316)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qwtnm"]
+load_path = "res://.godot/imported/Layer 1.png-30408782e44f0db31fbadba2818b754d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj6kj"]
+atlas = SubResource("CompressedTexture2D_qwtnm")
+region = Rect2(544, 1099, 476, 316)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t0mbn"]
+load_path = "res://.godot/imported/Layer 1.png-30408782e44f0db31fbadba2818b754d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6mwv"]
+atlas = SubResource("CompressedTexture2D_t0mbn")
+region = Rect2(-12, -5, 504, 354)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gj6kj"]
+load_path = "res://.godot/imported/Layer 1.png-30408782e44f0db31fbadba2818b754d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amr7w"]
+atlas = SubResource("CompressedTexture2D_gj6kj")
+region = Rect2(515, 724, 502, 345)
+
+[node name="Emocion_tnt" type="Area2D" unique_id=1497038107]
+script = ExtResource("1_yjqch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1388477899]
+shape = SubResource("CircleShape2D_yowuo")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=730093527]
+texture_filter = 1
+position = Vector2(1, 0)
+amount = 10
+texture = SubResource("AtlasTexture_5rcss")
+lifetime = 2.0
+gravity = Vector2(0, 10)
+angular_velocity_min = -75.46
+angular_velocity_max = 44.02
+scale_amount_curve = SubResource("Curve_t0mbn")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=940334474]
+position = Vector2(0, 5.722046e-06)
+scale = Vector2(48.05443, 48.05443)
+mesh = SubResource("SphereMesh_yowuo")
+
+[node name="cara_enojo" type="TextureRect" parent="." unique_id=716554054]
+visible = false
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
+texture = SubResource("AtlasTexture_t0mbn")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="cara_alegria" type="TextureRect" parent="." unique_id=743925572]
+visible = false
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
+texture = SubResource("AtlasTexture_gj6kj")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="cara_3" type="TextureRect" parent="." unique_id=871277650]
+visible = false
+modulate = Color(1.353256, 1.353256, 1.353256, 1)
+self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
+texture = SubResource("AtlasTexture_b6mwv")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="cara_4" type="TextureRect" parent="." unique_id=752991081]
+visible = false
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
+texture = SubResource("AtlasTexture_amr7w")
+expand_mode = 5
+stretch_mode = 5

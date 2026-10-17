@@ -9,7 +9,8 @@ func _ready() -> void:
 	canvas_layer.show()
 
 func _on_play_pressed() -> void:
-	TransitionManager.change_scene("res://Escenas/juego_5_indio/levels/test_level_1.tscn")
+	TransitionManager.change_scene("res://Escenas/juego_6_emociones/main_scene/main.tscn")
+
 
 
 func _on_volver_pressed() -> void:

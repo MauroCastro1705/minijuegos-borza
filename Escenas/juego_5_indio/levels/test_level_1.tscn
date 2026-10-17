@@ -613,12 +613,12 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="game_over" type="Node2D" parent="CanvasLayer" unique_id=1056040356]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/game_over" unique_id=1786909681]
 offset_right = 1049.0
 offset_bottom = 837.0
 color = Color(0.23392546, 0.23392546, 0.23392543, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="CanvasLayer/game_over" unique_id=660295295]
 offset_left = 2.0

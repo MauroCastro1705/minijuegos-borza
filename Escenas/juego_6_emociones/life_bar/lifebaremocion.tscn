@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dc0imh708c7a3"]
+
+[ext_resource type="Script" uid="uid://bvhfpmxnriiey" path="res://Escenas/juego_6_emociones/life_bar/lifebaremocion.gd" id="1_fe3eq"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_l6g33"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_fe3eq"]
+
+[sub_resource type="Resource" id="Resource_qgiml"]
+script = ExtResource("1_l6g33")
+color = Color(0.320098, 1.8049031e-06, 0.006181661, 1)
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_cgihd"]
+script = ExtResource("1_l6g33")
+color = Color(1.6852883, 0.6437999, 0.6567376, 1)
+blend = true
+width_top = 5
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_f4tp4"]
+colors = PackedColorArray(0.6123028, 0, 0, 1, 0.8489667, 0, 0.2075879, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_x75fr"]
+gradient = SubResource("Gradient_f4tp4")
+
+[sub_resource type="StyleBox" id="StyleBox_5rcss"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("2_fe3eq")
+skew = Vector2(-0.1, -0.1)
+borders = Array[ExtResource("1_l6g33")]([SubResource("Resource_qgiml"), SubResource("Resource_cgihd")])
+texture = SubResource("GradientTexture1D_x75fr")
+corner_detail = 10
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[node name="Lifebaremocion" type="Control" unique_id=319219422]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fe3eq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1979697329]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.23700002
+anchor_bottom = 0.142
+offset_right = -16.000015
+offset_bottom = -76.600006
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=1520137450]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 20)
+custom_maximum_size = Vector2(45, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_5rcss")
+
+[node name="Panel2" type="Panel" parent="HBoxContainer" unique_id=82177204]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 20)
+custom_maximum_size = Vector2(45, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_5rcss")
+
+[node name="Panel3" type="Panel" parent="HBoxContainer" unique_id=2009015454]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 20)
+custom_maximum_size = Vector2(45, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_5rcss")
+
+[node name="Panel4" type="Panel" parent="HBoxContainer" unique_id=35662370]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 20)
+custom_maximum_size = Vector2(45, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_5rcss")
+
+[node name="Panel5" type="Panel" parent="HBoxContainer" unique_id=803061459]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(45, 20)
+custom_maximum_size = Vector2(45, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_5rcss")

@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://wxefl0ouq20b" path="res://assets/portadas/testla.jpg" id="11_kehw0"]
 [ext_resource type="Texture2D" uid="uid://cs15gcojxmvob" path="res://assets/juego5/barba cuadrado.png" id="12_d8bvs"]
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
+[ext_resource type="Texture2D" uid="uid://641ubhngi22x" path="res://assets/portadas/emociones_game.png" id="13_mhndg"]
 [ext_resource type="PackedScene" uid="uid://cc80d7jrn58h4" path="res://Componentes/boton_generico_lindo/button_nice.tscn" id="14_chgxx"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="14_x1cxr"]
 [ext_resource type="FontFile" uid="uid://ohilp3fj4bjr" path="res://assets/fonts/Korean Looks.ttf" id="16_d8bvs"]
@@ -318,8 +319,10 @@ disable_buton = false
 [node name="BotonMainMenu3" parent="juegos/HBoxContainer2" unique_id=1314581509 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-game_name = "Tema sorpresa"
-game_img = ExtResource("5_8cngx")
+scene_path = "res://Escenas/juego_6_emociones/emociones_menu/menu_emociones.tscn"
+game_name = "Tema 6 : Emociones"
+game_img = ExtResource("13_mhndg")
+disable_buton = false
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="juegos" unique_id=2109818826]
 layout_mode = 2
