@@ -4,6 +4,7 @@ var spawn_timer
 @onready var center: Marker2D = $Marker2D
 @onready var camera_2d: Camera2D = $centro/Camera2D
 
+
 var emocion_positions: Array[Marker2D] = []
 @onready var centro: Node2D = $centro
 @onready var score:int = 0
@@ -49,6 +50,8 @@ func _player_died():
 	can_spawn = false
 	game_over.show()
 
+func _termino_tiempo():
+	pass
 
 func _shake_camera() -> void:
 	if _camera_shake_tween and _camera_shake_tween.is_running():

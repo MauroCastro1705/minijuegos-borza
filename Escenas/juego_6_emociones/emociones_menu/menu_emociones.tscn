@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="11_dourv"]
 [ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="12_f3jtx"]
 [ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="13_rtjot"]
-[ext_resource type="Script" uid="uid://c0uinloahiiub" path="res://Escenas/juego_6_emociones/emociones_menu/spawer_menui.gd" id="14_7rc5g"]
 [ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="14_nuxor"]
 [ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="15_y620c"]
 [ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="16_6g0if"]
@@ -390,9 +389,6 @@ autowrap_mode = 3
 
 [node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=753803944]
 position = Vector2(511, 351)
-
-[node name="Node" type="Node" parent="." unique_id=1590386842]
-script = ExtResource("14_7rc5g")
 
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="volver" to="." method="_on_volver_pressed"]
