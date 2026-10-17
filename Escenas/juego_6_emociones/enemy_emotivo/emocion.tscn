@@ -2,9 +2,24 @@
 
 [ext_resource type="Script" uid="uid://0j3v6ojfagln" path="res://Escenas/juego_6_emociones/enemy_emotivo/emocion.gd" id="1_exeub"]
 [ext_resource type="Texture2D" uid="uid://b2j0ehycvt4au" path="res://assets/juego6/Layer 1.png" id="2_qwtnm"]
+[ext_resource type="Texture2D" uid="uid://daigtpoop4em6" path="res://assets/particulas_genericas.png" id="3_t0mbn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yowuo"]
 radius = 22.090721
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rcss"]
+atlas = ExtResource("3_t0mbn")
+region = Rect2(10, 23, 3, 3)
+
+[sub_resource type="Curve" id="Curve_t0mbn"]
+_limits = [0.0, 15.0, 0.0, 1.0]
+_data = [Vector2(0, 15), 0.0, 0.0, 0, 0, Vector2(0.99549544, 2.2099447), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_x75fr"]
+_limits = [0.0, 15.0, 0.0, 1.0]
+_data = [Vector2(0, 7.8729277), 0.0, 0.0, 0, 0, Vector2(0.99549544, 2.2099447), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_yowuo"]
 
@@ -39,6 +54,36 @@ script = ExtResource("1_exeub")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1388477899]
 shape = SubResource("CircleShape2D_yowuo")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=730093527]
+texture_filter = 1
+position = Vector2(1, 0)
+amount = 10
+texture = SubResource("AtlasTexture_5rcss")
+lifetime = 2.0
+gravity = Vector2(0, 10)
+angular_velocity_min = -75.46
+angular_velocity_max = 44.02
+scale_amount_curve = SubResource("Curve_t0mbn")
+
+[node name="explosion" type="CPUParticles2D" parent="." unique_id=1904938909]
+texture_filter = 1
+emitting = false
+amount = 20
+texture = SubResource("AtlasTexture_5rcss")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 20.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 114.52
+initial_velocity_max = 363.42
+angular_velocity_min = -75.46
+angular_velocity_max = 44.02
+scale_amount_curve = SubResource("Curve_x75fr")
+
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=940334474]
 position = Vector2(0, 5.722046e-06)
 scale = Vector2(48.05443, 48.05443)
@@ -48,10 +93,11 @@ mesh = SubResource("SphereMesh_yowuo")
 visible = false
 modulate = Color(1.353256, 1.353256, 1.353256, 1)
 self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
-offset_left = -18.0
-offset_top = -20.705883
-offset_right = 21.0
-offset_bottom = 22.445381
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
 texture = SubResource("AtlasTexture_t0mbn")
 expand_mode = 5
 stretch_mode = 5
@@ -60,10 +106,11 @@ stretch_mode = 5
 visible = false
 modulate = Color(1.353256, 1.353256, 1.353256, 1)
 self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
-offset_left = -18.0
-offset_top = -20.705883
-offset_right = 21.0
-offset_bottom = 22.445381
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
 texture = SubResource("AtlasTexture_gj6kj")
 expand_mode = 5
 stretch_mode = 5
@@ -72,20 +119,22 @@ stretch_mode = 5
 visible = false
 modulate = Color(1.353256, 1.353256, 1.353256, 1)
 self_modulate = Color(0.008729293, 0.0034077172, 0.0048653586, 1)
-offset_left = -18.0
-offset_top = -20.705883
-offset_right = 21.0
-offset_bottom = 22.445381
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
 texture = SubResource("AtlasTexture_b6mwv")
 expand_mode = 5
 stretch_mode = 5
 
 [node name="cara_4" type="TextureRect" parent="." unique_id=752991081]
 visible = false
-offset_left = -18.0
-offset_top = -20.705883
-offset_right = 21.0
-offset_bottom = 22.445381
+offset_left = -21.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = 18.151264
+scale = Vector2(1.1, 1.1)
 texture = SubResource("AtlasTexture_amr7w")
 expand_mode = 5
 stretch_mode = 5

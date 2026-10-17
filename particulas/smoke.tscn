@@ -13,7 +13,7 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 [node name="smoke" type="CPUParticles2D" unique_id=109544643]
 amount = 20
 texture = ExtResource("1_mgmc5")
-lifetime = 2.4899999999999998
+lifetime = 2.49
 randomness = 0.07
 spread = 88.23
 gravity = Vector2(0, -200)

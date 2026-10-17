@@ -11,12 +11,14 @@ extends CharacterBody2D
 @onready var corner_2: TextureRect = $corner2
 @onready var corner_3: TextureRect = $corner3
 @onready var corner_4: TextureRect = $corner4
-
+@onready  var color_original = mesh_instance_2d.modulate
 var color_1: Color = Color.DARK_RED
 var color_2: Color = Color.BLUE_VIOLET
 var color_3: Color = Color.DARK_GREEN
 var color_4: Color = Color.DARK_GOLDENROD
+
 signal score_up
+signal wrong_emotion
 @export var speed: float = 300.0   # píxeles por segundo
 
 # --- Rotación ---
@@ -57,45 +59,46 @@ func _physics_process(delta: float) -> void:
 
 func _on_emocion_1_area_entered(area: Area2D) -> void:
 	if area.is_in_group("alegria"):
-		print("Alegria")
-		score_up.emit()
-		area.queue_free()
+		correct(area)
 	else:
 		hurt(area)
 
 
 func _on_emocion_2_area_entered(area: Area2D) -> void:
 	if area.is_in_group("tristeza"):
-		print("tristeza")
-		area.queue_free()
-		score_up.emit()
+		correct(area)
 	else:
 		hurt(area)
 
 
 func _on_emocion_3_area_entered(area: Area2D) -> void:
 	if area.is_in_group("calma"):
-		print("calma")
-		area.queue_free()
-		score_up.emit()
+		correct(area)
 	else:
 		hurt(area)
 
 
 func _on_emocion_4_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enojo"):
-		print("enojo")
-		area.queue_free()
-		score_up.emit()
-	else:		
+		correct(area)
+	else:
 		hurt(area)
 		
 		
 func hurt(cuerpo):
 	print("mal")
-	cuerpo.queue_free()
+	wrong_emotion.emit()
+	cuerpo.efecto_colision()
 	var tween = mesh_instance_2d.get_tree().create_tween()
-	tween.set_loops(2)  # Titila dos veces (apagado y encendido)
-	tween.set_parallel(false)  # Que sea secuencial
-	tween.tween_property(mesh_instance_2d, "modulate:g", 0.0, 0.1)
-	tween.tween_property(mesh_instance_2d, "modulate:g", 1.0, 0.1)
+	tween.set_loops(2)  # Titila dos veces
+	tween.tween_property(mesh_instance_2d, "modulate", Color(1, 0, 0, 1), 0.1)  # Rojo
+	tween.tween_property(mesh_instance_2d, "modulate", color_original, 0.1)
+
+func correct(cuerpo):
+	print("bien")
+	score_up.emit()
+	cuerpo.efecto_colision()
+	var tween = mesh_instance_2d.get_tree().create_tween()
+	tween.set_loops(2)  # Titila dos veces
+	tween.tween_property(mesh_instance_2d, "modulate", Color(0, 1, 0, 1), 0.1)  # Verde
+	tween.tween_property(mesh_instance_2d, "modulate", color_original, 0.1)

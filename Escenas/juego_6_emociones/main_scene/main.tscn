@@ -5,12 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://dljtof5dac2ie" path="res://Escenas/juego_6_emociones/centro.tscn" id="3_ds20p"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="4_t0gme"]
 [ext_resource type="Shader" uid="uid://dab1uksiy332v" path="res://shaders/vhs_wiggle.gdshader" id="4_vv7du"]
+[ext_resource type="Texture2D" uid="uid://bc2vmu3mirxcw" path="res://assets/juego6/brain.png" id="6_6v6d6"]
 
-[sub_resource type="Gradient" id="Gradient_ds20p"]
-colors = PackedColorArray(0.88709784, 0.81226707, 0.5261492, 1, 0.5876569, 0.77836025, 0.62372947, 1)
+[sub_resource type="Gradient" id="Gradient_6v6d6"]
+colors = PackedColorArray(1, 0.38680217, 0.41039777, 1, 0.19784468, 0.042708084, 0.047159873, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yowuo"]
-gradient = SubResource("Gradient_ds20p")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g12yl"]
+gradient = SubResource("Gradient_6v6d6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.47863248, 0.047008548)
 
 [sub_resource type="Shader" id="Shader_h3e0d"]
 code = "shader_type canvas_item;
@@ -98,11 +102,11 @@ void fragment()
 shader = SubResource("Shader_h3e0d")
 shader_parameter/progress = 0.5
 shader_parameter/speed = 0.5
-shader_parameter/pixelation = Vector2(5, 5)
+shader_parameter/pixelation = Vector2(2, 2)
 shader_parameter/zoom = 5.0
 shader_parameter/background_threshold = 0.5430001207925002
 shader_parameter/color_threshold = 0.0
-shader_parameter/color = Color(0.27974266, 0.4721796, 0.4860174, 0.12941177)
+shader_parameter/color = Color(0.7867219, 0.32069483, 0.428191, 0.6784314)
 shader_parameter/seed = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t0gme"]
@@ -114,34 +118,49 @@ shader_parameter/blur_samples = 15
 
 [sub_resource type="LabelSettings" id="LabelSettings_6v6d6"]
 font = ExtResource("4_t0gme")
-font_size = 30
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
+font_size = 45
+outline_size = 30
+outline_color = Color(0.06879827, 0.06879828, 0.06879828, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vv7du"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
-size = Vector2(105, 68)
+size = Vector2(105, 1754)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6v6d6"]
+size = Vector2(105, 2536)
 
 [node name="Main" type="Node2D" unique_id=1368539246]
 script = ExtResource("1_ud3rw")
 emocion_scene = ExtResource("2_toogh")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1583859046]
-offset_left = -1022.0
-offset_top = -449.0
-offset_right = 2039.0
-offset_bottom = 1287.0
+offset_left = -1136.9316
+offset_top = -1096.0
+offset_right = 2050.2173
+offset_bottom = 1958.0
 mouse_filter = 2
-texture = SubResource("GradientTexture1D_yowuo")
+texture = SubResource("GradientTexture2D_g12yl")
+metadata/_edit_lock_ = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1358333101]
+[node name="cerebro" type="TextureRect" parent="." unique_id=1597772223]
+offset_left = -649.0
+offset_top = -722.0
+offset_right = 1708.0
+offset_bottom = 1635.0
+texture = ExtResource("6_6v6d6")
+expand_mode = 5
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="efecto ondas" type="ColorRect" parent="." unique_id=1358333101]
 material = SubResource("ShaderMaterial_ds20p")
-offset_left = -1041.0
-offset_top = -485.0
-offset_right = 2061.0
-offset_bottom = 1316.0
+offset_left = -1221.0
+offset_top = -883.0
+offset_right = 2463.0
+offset_bottom = 1701.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1342672333]
 position = Vector2(494, 362)
@@ -190,9 +209,43 @@ text = "score"
 label_settings = SubResource("LabelSettings_6v6d6")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=618036457]
-position = Vector2(236, 290)
+visible = false
+position = Vector2(-589, 249)
 physics_material_override = SubResource("PhysicsMaterial_vv7du")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1763067876]
-position = Vector2(42.5, 24)
+visible = false
+position = Vector2(42.5, 161)
 shape = SubResource("RectangleShape2D_yowuo")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=353907573]
+visible = false
+position = Vector2(1734, 249)
+physics_material_override = SubResource("PhysicsMaterial_vv7du")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=266922261]
+visible = false
+position = Vector2(42.5, 161)
+shape = SubResource("RectangleShape2D_yowuo")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1388663737]
+visible = false
+position = Vector2(707, -432)
+rotation = 1.5707964
+physics_material_override = SubResource("PhysicsMaterial_vv7du")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=1626552890]
+visible = false
+position = Vector2(42.5, 161)
+shape = SubResource("RectangleShape2D_6v6d6")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=465158873]
+visible = false
+position = Vector2(707, 1185)
+rotation = 1.5707964
+physics_material_override = SubResource("PhysicsMaterial_vv7du")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=200766356]
+visible = false
+position = Vector2(42.5, 161)
+shape = SubResource("RectangleShape2D_6v6d6")
