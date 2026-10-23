@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://d3htuii2tthgl"]
 
-[ext_resource type="Texture2D" uid="uid://bjia166mrmom7" path="res://assets/particulas_panda.png" id="1_0l05m"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_udmlc"]
-atlas = ExtResource("1_0l05m")
 region = Rect2(1, 1, 11, 11)
 
 [sub_resource type="Gradient" id="Gradient_0l05m"]

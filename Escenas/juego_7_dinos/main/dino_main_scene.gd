@@ -8,6 +8,8 @@ signal fossil_excavated(fossil_texture: Texture2D, score_awarded: int, total_sco
 
 @onready var fossils_area: Area2D = $Fossils_area
 
+var picar_piedra: PackedScene = preload("res://particulas/picar_piedra.tscn")
+
 @export_range(1, 100, 1) var mining_power: int = 1
 @export_range(1, 100, 1) var tile_health: int = 1
 @export_range(0, 31, 1) var terrain_set_id: int = 0
@@ -159,7 +161,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func mine_at_global_position(global_position_new: Vector2) -> bool:
 	var local_position := tile_map_layer.to_local(global_position_new)
 	var cell := tile_map_layer.local_to_map(local_position)
-	return mine_cell(cell)
+	if not mine_cell(cell):
+		return false
+
+	_play_cell_destroy_particles(global_position_new)
+	return true
 
 
 func mine_cell(cell: Vector2i) -> bool:
@@ -178,12 +184,15 @@ func mine_cell(cell: Vector2i) -> bool:
 	_tile_health_by_cell.erase(cell)
 	_update_surrounding_terrain(cell)
 	tile_mined.emit(cell)
-	_play_cell_destroy_particles(tile_map_layer.to_global(tile_map_layer.map_to_local(cell)))
 	return true
 
 
-func _play_cell_destroy_particles(_global_position: Vector2) -> void:
-	pass
+func _play_cell_destroy_particles(global_position_new: Vector2) -> void:
+	var particles := picar_piedra.instantiate() as CPUParticles2D
+	add_child(particles)
+	particles.global_position = global_position_new
+	particles.finished.connect(particles.queue_free)
+	particles.emitting = true
 
 
 func _update_surrounding_terrain(cell: Vector2i) -> void:
