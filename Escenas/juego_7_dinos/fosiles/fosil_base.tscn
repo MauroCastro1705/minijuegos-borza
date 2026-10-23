@@ -11,6 +11,7 @@ region = Rect2(-2, 3, 287, 232)
 size = Vector2(90, 62)
 
 [node name="FosilBase" type="Node2D" unique_id=1653278641]
+z_index = -1
 script = ExtResource("1_cpu47")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1155139521]
