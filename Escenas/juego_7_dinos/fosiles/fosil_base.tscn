@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://das6m8f24vgrx"]
+
+[ext_resource type="Script" uid="uid://b2vypyg77x2j8" path="res://Escenas/juego_7_dinos/fosiles/fosil_base.gd" id="1_cpu47"]
+[ext_resource type="Texture2D" uid="uid://isyajo2t3gg0" path="res://assets/juegos7/fosil_2_mejor.png" id="2_cpu47"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kscn"]
+atlas = ExtResource("2_cpu47")
+region = Rect2(-2, 3, 287, 232)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
+size = Vector2(90, 62)
+
+[node name="FosilBase" type="Node2D" unique_id=1653278641]
+script = ExtResource("1_cpu47")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1155139521]
+texture_filter = 1
+offset_left = -65.0
+offset_top = -52.0
+offset_right = 67.0
+offset_bottom = 50.765106
+texture = SubResource("AtlasTexture_0kscn")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1017856180]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1007265819]
+shape = SubResource("RectangleShape2D_yowuo")
