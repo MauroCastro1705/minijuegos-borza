@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://das6m8f24vgrx"]
 
 [ext_resource type="Script" uid="uid://b2vypyg77x2j8" path="res://Escenas/juego_7_dinos/fosiles/fosil_base.gd" id="1_cpu47"]
-[ext_resource type="Texture2D" uid="uid://isyajo2t3gg0" path="res://assets/juegos7/fosil_2_mejor.png" id="2_cpu47"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_uksse"]
+load_path = "res://.godot/imported/fosil_2_mejor.png-64b0a9e806b1f1856955cb0863e1aad2.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0kscn"]
-atlas = ExtResource("2_cpu47")
-region = Rect2(-2, 3, 287, 232)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
-size = Vector2(90, 62)
+atlas = SubResource("CompressedTexture2D_uksse")
+region = Rect2(-2, 5, 285, 231)
 
 [node name="FosilBase" type="Node2D" unique_id=1653278641]
 z_index = -1
@@ -19,12 +18,13 @@ texture_filter = 1
 offset_left = -65.0
 offset_top = -52.0
 offset_right = 67.0
-offset_bottom = 50.765106
+offset_bottom = 54.703835
 texture = SubResource("AtlasTexture_0kscn")
 expand_mode = 5
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1017856180]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1007265819]
-shape = SubResource("RectangleShape2D_yowuo")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" unique_id=1007265819]
+polygon = PackedVector2Array(-49, -42, -21, -48, -8, -45, -8, -30, 12, -28, 24, -16, 56, -11, 64, -5, 59, 11, 50, 42, 27, 44, 5, 47, -45, 31, -57, 12, -50, -14, -56, -36)

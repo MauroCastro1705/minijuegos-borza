@@ -2,7 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dtijcro2iqs2r" path="res://Escenas/juego_7_dinos/main/dino_main_scene.gd" id="1_1sqd0"]
 [ext_resource type="Texture2D" uid="uid://bgj5r0l3cnfm2" path="res://assets/juegos7/ground_tilest/MorningAdventuresV2/MorningSheet.png" id="1_htr03"]
+[ext_resource type="PackedScene" uid="uid://jla3a0p5lnpc" path="res://Escenas/juego_7_dinos/fosiles/fosil_2.tscn" id="3_1lnc5"]
 [ext_resource type="PackedScene" uid="uid://das6m8f24vgrx" path="res://Escenas/juego_7_dinos/fosiles/fosil_base.tscn" id="3_vx8jk"]
+[ext_resource type="PackedScene" uid="uid://b7s41t4kwh6t6" path="res://Escenas/juego_7_dinos/fosiles/fosil_3.tscn" id="4_cnexa"]
+[ext_resource type="PackedScene" uid="uid://qocwfvpp5xds" path="res://Escenas/juego_7_dinos/fosiles/fosil_4.tscn" id="5_bdq32"]
+[ext_resource type="PackedScene" uid="uid://wfe277smdehl" path="res://Escenas/juego_7_dinos/fosiles/fosil_5.tscn" id="6_5t73g"]
+[ext_resource type="PackedScene" uid="uid://bvd7bj4poc1i5" path="res://Escenas/juego_7_dinos/fosiles/fosil_6.tscn" id="7_dh5qa"]
+[ext_resource type="PackedScene" uid="uid://der5765p28wh" path="res://Escenas/juego_7_dinos/fosiles/fosil_7.tscn" id="8_nkif6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1sqd0"]
 texture = ExtResource("1_htr03")
@@ -137,12 +143,19 @@ terrain_set_0/terrain_0/name = "piso"
 terrain_set_0/terrain_0/color = Color(0.7261347, 0.05105914, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_1sqd0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
+size = Vector2(706, 673.5)
+
 [node name="MainScene" type="Node2D" unique_id=1791501728]
 script = ExtResource("1_1sqd0")
 mining_power = 6
-tile_health = null
-terrain_set_id = null
-terrain_id = null
+fossil_1 = ExtResource("3_vx8jk")
+fossil_2 = ExtResource("3_1lnc5")
+fossil_3 = ExtResource("4_cnexa")
+fossil_4 = ExtResource("5_bdq32")
+fossil_5 = ExtResource("6_5t73g")
+fossil_6 = ExtResource("7_dh5qa")
+fossil_7 = ExtResource("8_nkif6")
 
 [node name="fondos" type="Node2D" parent="." unique_id=1920946447]
 
@@ -168,5 +181,8 @@ tile_set = SubResource("TileSet_yowuo")
 
 [node name="fosiles" type="Node2D" parent="." unique_id=324085309]
 
-[node name="FosilBase" parent="fosiles" unique_id=1653278641 instance=ExtResource("3_vx8jk")]
-position = Vector2(337, 189)
+[node name="Fossils_area" type="Area2D" parent="." unique_id=1987936773]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fossils_area" unique_id=2012877534]
+position = Vector2(500, 443.25)
+shape = SubResource("RectangleShape2D_yowuo")

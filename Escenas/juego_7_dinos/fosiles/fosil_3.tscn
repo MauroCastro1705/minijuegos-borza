@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b7s41t4kwh6t6"]
+
+[ext_resource type="PackedScene" uid="uid://das6m8f24vgrx" path="res://Escenas/juego_7_dinos/fosiles/fosil_base.tscn" id="1_pw1jd"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pw1jd"]
+load_path = "res://.godot/imported/fosil_2_mejor.png-64b0a9e806b1f1856955cb0863e1aad2.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc8vi"]
+atlas = SubResource("CompressedTexture2D_pw1jd")
+region = Rect2(196, 234, 359, 237)
+
+[node name="Fosil3" unique_id=1653278641 instance=ExtResource("1_pw1jd")]
+
+[node name="TextureRect" parent="." index="0" unique_id=1155139521]
+texture = SubResource("AtlasTexture_dc8vi")
+
+[node name="CollisionPolygon2D" parent="Area2D" parent_id_path=PackedInt32Array(1017856180) index="0" unique_id=1007265819]
+polygon = PackedVector2Array(-57, -41, -22, -34, -9, -23, 26, -16, 38, -3, 59, 3, 66, 22, 57, 32, 37, 29, 28, 37, -34, 21, -53, -2, -62, -36)

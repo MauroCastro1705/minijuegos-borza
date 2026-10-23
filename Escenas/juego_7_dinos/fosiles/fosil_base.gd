@@ -12,7 +12,7 @@ enum ExcavationState {
 
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var area_2d: Area2D = $Area2D
-@onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
+@onready var collision_polygon_2d: CollisionPolygon2D = $Area2D/CollisionPolygon2D
 
 var state: ExcavationState = ExcavationState.BURIED
 var _cells_to_mine: Dictionary[Vector2i, bool] = {}
@@ -29,21 +29,14 @@ func setup_excavation(tile_map_layer: TileMapLayer) -> void:
 	_cells_to_mine.clear()
 	state = ExcavationState.BURIED
 
-	var rectangle := collision_shape_2d.shape as RectangleShape2D
-	if rectangle == null:
-		push_error("Fossil excavation requires a RectangleShape2D collision shape.")
+	if collision_polygon_2d.polygon.size() < 3:
+		push_error("Fossil excavation requires a CollisionPolygon2D with at least three points.")
 		return
 
-	var half_size := rectangle.size / 2.0
 	var fossil_polygon := PackedVector2Array()
-	for corner in [
-		Vector2(-half_size.x, -half_size.y),
-		Vector2(half_size.x, -half_size.y),
-		Vector2(half_size.x, half_size.y),
-		Vector2(-half_size.x, half_size.y)
-	]:
-		var global_corner: Vector2 = collision_shape_2d.global_transform * corner
-		fossil_polygon.append(tile_map_layer.to_local(global_corner))
+	for point in collision_polygon_2d.polygon:
+		var global_point: Vector2 = collision_polygon_2d.global_transform * point
+		fossil_polygon.append(tile_map_layer.to_local(global_point))
 
 	var tile_size := Vector2(tile_map_layer.tile_set.tile_size)
 	for cell in tile_map_layer.get_used_cells():
@@ -87,4 +80,4 @@ func disappear() -> void:
 	hide()
 	area_2d.monitoring = false
 	area_2d.monitorable = false
-	collision_shape_2d.set_deferred("disabled", true)
+	collision_polygon_2d.set_deferred("disabled", true)
