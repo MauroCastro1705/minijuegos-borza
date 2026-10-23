@@ -1,6 +1,6 @@
 extends Node2D
 
-signal excavated(fossil_texture: Texture2D, score_award: int)
+signal excavated(fossil_texture: Texture2D, score_award: int, fossil_global_position: Vector2)
 
 enum ExcavationState {
 	BURIED,
@@ -73,7 +73,7 @@ func _mark_excavated() -> void:
 
 	state = ExcavationState.EXCAVATED
 	disappear()
-	excavated.emit(get_fossil_texture(), score_value)
+	excavated.emit(get_fossil_texture(), score_value, global_position)
 
 
 func disappear() -> void:

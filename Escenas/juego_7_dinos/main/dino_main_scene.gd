@@ -4,6 +4,7 @@ signal tile_damaged(cell: Vector2i, remaining_health: int)
 signal tile_mined(cell: Vector2i)
 signal score_changed(new_score: int)
 signal fossil_excavated(fossil_texture: Texture2D, score_awarded: int, total_score: int)
+@onready var score_label: Label = %score_label
 
 @onready var fossils_area: Area2D = $Fossils_area
 
@@ -34,6 +35,7 @@ var score: int = 0
 
 
 func _ready() -> void:
+	update_score()
 	_build_fossils_array()
 	_spawn_fossils()
 
@@ -72,7 +74,7 @@ func _spawn_fossils() -> void:
 	var spawned_outlines: Array[PackedVector2Array] = []
 
 	for _i in range(fossil_spawn_count):
-		var fossil_scene: PackedScene = fossils_array.pick_random()
+		var fossil_scene = fossils_array.pick_random()
 		var fossil := fossil_scene.instantiate() as Node2D
 		var outline := _get_fossil_outline(fossil)
 		if outline.size() < 3:
@@ -90,8 +92,6 @@ func _spawn_fossils() -> void:
 			var candidate_position := fosiles.to_local(candidate_global)
 			var candidate_outline := _offset_polygon(outline, candidate_position)
 			if not _polygon_fits_in_area(candidate_outline, area_rect):
-				continue
-			if not _overlaps_terrain(candidate_outline):
 				continue
 			if _overlaps_spawned_fossil(candidate_outline, spawned_outlines):
 				continue
@@ -142,28 +142,6 @@ func _overlaps_spawned_fossil(polygon: PackedVector2Array, spawned_outlines: Arr
 	return false
 
 
-func _overlaps_terrain(polygon: PackedVector2Array) -> bool:
-	var terrain_polygon := PackedVector2Array()
-	for point in polygon:
-		terrain_polygon.append(tile_map_layer.to_local(fosiles.to_global(point)))
-
-	var terrain_bounds := _get_polygon_bounds(terrain_polygon)
-	var tile_size := Vector2(tile_map_layer.tile_set.tile_size)
-	for cell in tile_map_layer.get_used_cells():
-		var center := tile_map_layer.map_to_local(cell)
-		var tile_polygon := PackedVector2Array([
-			center + Vector2(-tile_size.x, -tile_size.y) / 2.0,
-			center + Vector2(tile_size.x, -tile_size.y) / 2.0,
-			center + tile_size / 2.0,
-			center + Vector2(-tile_size.x, tile_size.y) / 2.0
-		])
-		if not terrain_bounds.intersects(_get_polygon_bounds(tile_polygon)):
-			continue
-		if not Geometry2D.intersect_polygons(terrain_polygon, tile_polygon).is_empty():
-			return true
-	return false
-
-
 func _get_polygon_bounds(polygon: PackedVector2Array) -> Rect2:
 	var bounds := Rect2(polygon[0], Vector2.ZERO)
 	for point in polygon:
@@ -200,7 +178,12 @@ func mine_cell(cell: Vector2i) -> bool:
 	_tile_health_by_cell.erase(cell)
 	_update_surrounding_terrain(cell)
 	tile_mined.emit(cell)
+	_play_cell_destroy_particles(tile_map_layer.to_global(tile_map_layer.map_to_local(cell)))
 	return true
+
+
+func _play_cell_destroy_particles(_global_position: Vector2) -> void:
+	pass
 
 
 func _update_surrounding_terrain(cell: Vector2i) -> void:
@@ -224,11 +207,25 @@ func _update_surrounding_terrain(cell: Vector2i) -> void:
 		tile_map_layer.set_cells_terrain_connect([connected_cell], terrain_set_id, terrain_id, false)
 
 
-func _on_fossil_excavated(fossil_texture: Texture2D, score_awarded: int) -> void:
+func _on_fossil_excavated(
+	fossil_texture: Texture2D,
+	score_awarded: int,
+	fossil_global_position: Vector2
+) -> void:
 	score += score_awarded
-	score_changed.emit(score)
+	update_score()
 	fossil_excavated.emit(fossil_texture, score_awarded, score)
+	_play_fossil_excavated_particles(fossil_global_position, fossil_texture)
 	print("excavaste: " + str(score))
+
+
+func update_score():
+	score_label.text = "Puntaje: " + str(score)
+	score_changed.emit(score)
+
+func _play_fossil_excavated_particles(_global_position: Vector2,_fossil_texture: Texture2D
+) -> void:
+	pass
 
 
 func apply_mining_upgrade(power_increase: int) -> void:
