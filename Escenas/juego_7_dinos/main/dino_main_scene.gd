@@ -13,10 +13,24 @@ signal fossil_excavated(fossil_texture: Texture2D, score_awarded: int, total_sco
 var picar_piedra: PackedScene = preload("res://particulas/picar_piedra.tscn")
 var _pickaxe_swing_tween: Tween
 
+@export_group("Mining")
 @export_range(1, 100, 1) var mining_power: int = 1
 @export_range(1, 100, 1) var tile_health: int = 1
+@export_range(0, 100, 1) var max_damage_numbers_per_swing: int = 5
+@export_range(0.0, 1.0, 0.05) var damaged_tile_darkening: float = 0.4
+
+@export_group("Progression")
+@export_range(1, 10000, 1) var starting_level: int = 1
+@export_range(0, 10000, 1) var tile_health_increase_per_level: int = 1
+@export_range(0, 100000, 1) var dirt_money_reward: int = 1
+@export_range(0, 100000, 1) var fossil_money_reward: int = 50
+@export_range(0.0, 10.0, 0.05) var level_transition_delay: float = 0.4
+
+@export_group("Terrain")
 @export_range(0, 31, 1) var terrain_set_id: int = 0
 @export_range(0, 255, 1) var terrain_id: int = 0
+
+@export_group("Fossil spawning")
 @export_range(0, 50, 1) var fossil_spawn_count: int = 5
 @export_range(0.0, 256.0, 1.0) var fossil_spacing: float = 24.0
 @export_range(1, 500, 1) var fossil_placement_attempts: int = 100
@@ -32,23 +46,54 @@ var _pickaxe_swing_tween: Tween
 @export var fossil_5:PackedScene
 @export var fossil_6:PackedScene
 @export var fossil_7:PackedScene
+@onready var level_label: Label = %level_label
+@onready var damage_label: Label = %damage
+@onready var size_label: Label = %size
+@onready var multiplier_label: Label = %multiplier
+@onready var upgrade_1: Button = %upgrade_1
+@onready var upgrade_2: Button = %upgrade_2
+@onready var upgrade_3: Button = %upgrade_3
+@onready var money_label: Label = %money_label
+@onready var money_texture: TextureRect = $money/money_texture
+
+
 
 var fossils_array: Array[PackedScene] = []
 
 var _tile_health_by_cell: Dictionary[Vector2i, int] = {}
+var _damaged_tile_overlays: Dictionary[Vector2i, Polygon2D] = {}
+var _initial_tile_data: Dictionary = {}
 var score: int = 0
+var money: int = 0
+var level: int = 1
+var money_multiplier: int = 1
+var mining_width: int = 1
+var mining_height: int = 1
+var _remaining_fossils: int = 0
+var _level_transition_pending: bool = false
+var damage_upgrade_cost: int = 10
+var size_upgrade_cost: int = 25
+var multiplier_upgrade_cost: int = 50
 
 
 func _ready() -> void:
 	canvas_layer.show()
+	#level_texture.hide()
 	pickaxe.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	pickaxe.z_index = 100
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	_update_pickaxe_position()
+	level = starting_level
+	_capture_initial_terrain()
 	update_score()
+	_update_upgrade_ui()
 	_build_fossils_array()
 	_spawn_fossils()
+	_setup_fossils()
 
+
+func _setup_fossils() -> void:
+	_remaining_fossils = 0
 	for fossil_node in fosiles.get_children():
 		var fossil := fossil_node as Node
 		if not fossil.has_method("on_tile_mined") \
@@ -60,6 +105,17 @@ func _ready() -> void:
 		tile_mined.connect(Callable(fossil, "on_tile_mined"))
 		fossil.connect("excavated", Callable(self, "_on_fossil_excavated"))
 		fossil.call("setup_excavation", tile_map_layer)
+		_remaining_fossils += 1
+
+
+func _capture_initial_terrain() -> void:
+	_initial_tile_data.clear()
+	for cell in tile_map_layer.get_used_cells():
+		_initial_tile_data[cell] = {
+			"source_id": tile_map_layer.get_cell_source_id(cell),
+			"atlas_coords": tile_map_layer.get_cell_atlas_coords(cell),
+			"alternative_tile": tile_map_layer.get_cell_alternative_tile(cell)
+		}
 
 
 func _process(_delta: float) -> void:
@@ -175,6 +231,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and event.pressed:
+		if _level_transition_pending:
+			return
 		_swing_pickaxe()
 		mine_at_global_position(get_global_mouse_position())
 
@@ -193,30 +251,83 @@ func _swing_pickaxe() -> void:
 func mine_at_global_position(global_position_new: Vector2) -> bool:
 	var local_position := tile_map_layer.to_local(global_position_new)
 	var cell := tile_map_layer.local_to_map(local_position)
-	if not mine_cell(cell):
-		return false
 
-	_play_cell_destroy_particles(global_position_new)
-	return true
+	var mined_any := false
+	var damage_numbers_displayed := 0
+	@warning_ignore("integer_division")
+	var start_cell := cell - Vector2i(mining_width / 2, mining_height / 2)
+	for y in range(start_cell.y, start_cell.y + mining_height):
+		for x in range(start_cell.x, start_cell.x + mining_width):
+			var target_cell := Vector2i(x, y)
+			var has_dirt := tile_map_layer.get_cell_source_id(target_cell) >= 0
+			var show_damage_number := damage_numbers_displayed < max_damage_numbers_per_swing
+			if has_dirt and show_damage_number:
+				damage_numbers_displayed += 1
+			if not mine_cell(target_cell, show_damage_number):
+				continue
+
+			var cell_position := tile_map_layer.to_global(tile_map_layer.map_to_local(target_cell))
+			_play_cell_destroy_particles(cell_position)
+			mined_any = true
+
+	return mined_any
 
 
-func mine_cell(cell: Vector2i) -> bool:
+func mine_cell(cell: Vector2i, show_damage_number: bool = true) -> bool:
 	if tile_map_layer.get_cell_source_id(cell) < 0:
 		_tile_health_by_cell.erase(cell)
 		return false
 
-	var remaining_health: int = _tile_health_by_cell.get(cell, tile_health)
+	var level_tile_health := tile_health + (level - 1) * tile_health_increase_per_level
+	var remaining_health: int = _tile_health_by_cell.get(cell, level_tile_health)
+	var damage_dealt: int = mini(mining_power, remaining_health)
+	var cell_global_position := tile_map_layer.to_global(tile_map_layer.map_to_local(cell))
+	if show_damage_number:
+		DamageNumbers.display_numbers(damage_dealt, cell_global_position)
 	remaining_health -= mining_power
 	if remaining_health > 0:
 		_tile_health_by_cell[cell] = remaining_health
+		_darkened_tile(cell)
 		tile_damaged.emit(cell, remaining_health)
 		return false
 
 	tile_map_layer.erase_cell(cell)
 	_tile_health_by_cell.erase(cell)
+	_clear_damaged_tile_overlay(cell)
 	_update_surrounding_terrain(cell)
+	money += dirt_money_reward
+	_update_upgrade_ui()
 	tile_mined.emit(cell)
 	return true
+
+
+func _darkened_tile(cell: Vector2i) -> void:
+	if _damaged_tile_overlays.has(cell):
+		return
+
+	var tile_size := Vector2(tile_map_layer.tile_set.tile_size)
+	var half_tile := tile_size / 2.0
+	var center := tile_map_layer.map_to_local(cell)
+	var overlay := Polygon2D.new()
+	overlay.polygon = PackedVector2Array([
+		center + Vector2(-half_tile.x, -half_tile.y),
+		center + Vector2(half_tile.x, -half_tile.y),
+		center + Vector2(half_tile.x, half_tile.y),
+		center + Vector2(-half_tile.x, half_tile.y)
+	])
+	overlay.color = Color(0.0, 0.0, 0.0, damaged_tile_darkening)
+	overlay.z_index = 1
+	tile_map_layer.add_child(overlay)
+	_damaged_tile_overlays[cell] = overlay
+
+
+func _clear_damaged_tile_overlay(cell: Vector2i) -> void:
+	var overlay := _damaged_tile_overlays.get(cell) as Polygon2D
+	if overlay == null:
+		return
+
+	overlay.queue_free()
+	_damaged_tile_overlays.erase(cell)
 
 
 func _play_cell_destroy_particles(global_position_new: Vector2) -> void:
@@ -254,10 +365,16 @@ func _on_fossil_excavated(
 	fossil_global_position: Vector2
 ) -> void:
 	score += score_awarded
+	money += fossil_money_reward * money_multiplier
 	update_score()
+	_update_upgrade_ui()
 	fossil_excavated.emit(fossil_texture, score_awarded, score)
 	_play_fossil_excavated_particles(fossil_global_position, fossil_texture)
 	print("excavaste: " + str(score))
+	_remaining_fossils -= 1
+	if _remaining_fossils == 0 and not _level_transition_pending:
+		_level_transition_pending = true
+		call_deferred("_start_next_level")
 
 
 func update_score():
@@ -274,3 +391,102 @@ func apply_mining_upgrade(power_increase: int) -> void:
 		push_error("Mining upgrade power must be greater than zero.")
 		return
 	mining_power += power_increase
+	_update_upgrade_ui()
+
+
+func _on_upgrade_1_pressed() -> void:
+	if not _try_purchase_upgrade(damage_upgrade_cost):
+		return
+
+	apply_mining_upgrade(1)
+	damage_upgrade_cost = _get_next_upgrade_cost(damage_upgrade_cost)
+	_update_upgrade_ui()
+
+
+func _on_upgrade_2_pressed() -> void:
+	if not _try_purchase_upgrade(size_upgrade_cost):
+		return
+
+	if mining_width == mining_height:
+		mining_height += 1
+	else:
+		mining_width += 1
+	size_upgrade_cost = _get_next_upgrade_cost(size_upgrade_cost)
+	_update_upgrade_ui()
+
+
+func _on_upgrade_3_pressed() -> void:
+	if not _try_purchase_upgrade(multiplier_upgrade_cost):
+		return
+
+	money_multiplier *= 2
+	multiplier_upgrade_cost = _get_next_upgrade_cost(multiplier_upgrade_cost)
+	_update_upgrade_ui()
+
+
+func _try_purchase_upgrade(cost: int) -> bool:
+	if money < cost:
+		return false
+
+	money -= cost
+	_update_upgrade_ui()
+	return true
+
+
+func _get_next_upgrade_cost(current_cost: int) -> int:
+	return ceili(current_cost * 1.5)
+
+
+func _start_next_level() -> void:
+	await get_tree().create_timer(level_transition_delay).timeout
+
+	level += 1
+	_tile_health_by_cell.clear()
+	for overlay_value in _damaged_tile_overlays.values():
+		var overlay := overlay_value as Polygon2D
+		if is_instance_valid(overlay):
+			overlay.queue_free()
+	_damaged_tile_overlays.clear()
+	var terrain_tint := tile_map_layer.self_modulate
+	tile_map_layer.self_modulate = Color(terrain_tint.r, terrain_tint.g, terrain_tint.b, 0.0)
+	tile_map_layer.clear()
+	for cell_variant in _initial_tile_data:
+		var cell: Vector2i = cell_variant
+		var tile: Dictionary = _initial_tile_data[cell]
+		var source_id: int = tile["source_id"]
+		var atlas_coords: Vector2i = tile["atlas_coords"]
+		var alternative_tile: int = tile["alternative_tile"]
+		tile_map_layer.set_cell(
+			cell,
+			source_id,
+			atlas_coords,
+			alternative_tile
+		)
+
+	var terrain_tween := create_tween()
+	terrain_tween.tween_property(tile_map_layer, "self_modulate", terrain_tint, 0.35)
+	await terrain_tween.finished
+
+	for fossil_node in fosiles.get_children():
+		fosiles.remove_child(fossil_node)
+		fossil_node.queue_free()
+
+	_spawn_fossils()
+	_setup_fossils()
+	_level_transition_pending = false
+	_update_upgrade_ui()
+
+
+func _update_upgrade_ui() -> void:
+	money_label.text = str(money)
+	level_label.text = "Level: %d" % level
+	damage_label.text = "Damage: %d" % mining_power
+	size_label.text = "Size: %dx%d" % [mining_width, mining_height]
+	multiplier_label.text = "Multiplier: x%d" % money_multiplier
+
+	upgrade_1.text = "Damage +1 ($%d)" % damage_upgrade_cost
+	upgrade_2.text = "Size +1 ($%d)" % size_upgrade_cost
+	upgrade_3.text = "Income x2 ($%d)" % multiplier_upgrade_cost
+	upgrade_1.disabled = money < damage_upgrade_cost
+	upgrade_2.disabled = money < size_upgrade_cost
+	upgrade_3.disabled = money < multiplier_upgrade_cost

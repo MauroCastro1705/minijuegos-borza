@@ -15,7 +15,6 @@ atlas = SubResource("CompressedTexture2D_uksse")
 region = Rect2(-2, 5, 285, 231)
 
 [node name="FosilBase" type="Node2D" unique_id=1653278641]
-z_index = -1
 script = ExtResource("1_cpu47")
 
 [node name="excavated_effect" type="CPUParticles2D" parent="." unique_id=636653029]
