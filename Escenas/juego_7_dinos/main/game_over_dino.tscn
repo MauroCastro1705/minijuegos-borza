@@ -1,0 +1,182 @@
+[gd_scene format=3 uid="uid://2duwpoqc1jbd"]
+
+[ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="1_347tt"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="2_5tjk6"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="3_cwdvt"]
+
+[sub_resource type="Shader" id="Shader_h3e0d"]
+code = "shader_type canvas_item;
+
+uniform float progress = 0.0;
+uniform float speed = 0.1; 
+
+uniform vec2 pixelation = vec2(2.0, 2.0);
+uniform float zoom = 2.0;
+
+uniform float background_threshold : hint_range(-2.0, 1.0) = 0.0;
+uniform float color_threshold : hint_range(0.0, 1.0)  = 0.24;
+
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0); 
+
+uniform float seed = 0.0;
+
+#define iTime (TIME * speed - seed)
+
+const mat2 mtx = mat2( vec2(0.80, -0.60), vec2(0.60, 0.80) );
+
+float rand(vec2 n) { 
+    return fract(sin(dot(n, vec2(12.9898 + seed, 4.1414 - seed))) * (43758.5453 + seed * 1000.0));
+}
+
+float noise(vec2 p){
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u * u * (3.0 - 2.0 * u);
+
+    float res = mix(
+        mix(rand(ip), rand(ip + vec2(1.0, 0.0)), u.x),
+        mix(rand(ip + vec2(0.0, 1.0)), rand(ip + vec2(1.0, 1.0)), u.x), u.y);
+        
+    return res * res;
+}
+
+float fbm( vec2 p )
+{
+    float f = 0.0;
+    
+    f += 0.500000 * noise( p + iTime ); p = mtx * p * 2.02;
+    f += 0.031250 * noise( p ); p = mtx * p * 2.01;
+    f += 0.250000 * noise( p ); p = mtx * p * 2.03;
+    f += 0.125000 * noise( p ); p = mtx * p * 2.01;
+    f += 0.062500 * noise( p ); p = mtx * p * 2.04;
+    f += 0.015625 * noise( p + sin(iTime) );
+
+    return f / 0.96875;
+}
+
+float pattern( in vec2 p )
+{
+	return fbm( p + fbm( p + fbm( p ) ) );
+}
+
+vec4 colormap(float x, vec2 uv) {
+	
+	x *= max(0.0, min(-abs(progress * 4.0 - uv.x - uv.y - 1.0) + 1.0, 1.0) * 2.0);
+    
+    if (x < background_threshold) { 
+        return vec4(0.0, 0.0, 0.0, 0.0);
+    }
+    else if (x < color_threshold) { 
+        return mix(
+			vec4(0.0, 0.0, 0.0, 0.0),
+			color,
+			round((x - background_threshold) / (color_threshold - background_threshold))
+		);
+    }
+	else {
+		return color;
+	}
+}
+
+void fragment()
+{
+	vec2 modifier = 1.0/(SCREEN_PIXEL_SIZE * pixelation);
+	vec2 uv = floor(UV * modifier) / modifier;
+	float shade = pattern(uv * zoom);
+	COLOR = colormap(shade, uv);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1flkd"]
+shader = SubResource("Shader_h3e0d")
+shader_parameter/progress = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/pixelation = Vector2(2, 2)
+shader_parameter/zoom = 5.0
+shader_parameter/background_threshold = 0.5430001207925002
+shader_parameter/color_threshold = 0.0
+shader_parameter/color = Color(0.7867219, 0.32069483, 0.428191, 0.6784314)
+shader_parameter/seed = 0.5
+
+[sub_resource type="LabelSettings" id="LabelSettings_1285c"]
+font = ExtResource("1_347tt")
+font_size = 40
+outline_size = 10
+outline_color = Color(0.20954207, 2.9792935e-05, 0.20954037, 1)
+
+[sub_resource type="Resource" id="Resource_mxlkd"]
+script = ExtResource("2_5tjk6")
+color = Color(0, 0.8392157, 1, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_0yt8m"]
+offsets = PackedFloat32Array(0.13227513, 0.537037, 1)
+colors = PackedColorArray(0.8752258, 0.5802287, 0.6263345, 1, 0.8251283, 0.35928845, 0.5183849, 1, 0.65730345, 0.13332494, 0.26920366, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xp5dg"]
+gradient = SubResource("Gradient_0yt8m")
+fill_from = Vector2(0.102564104, 0.991453)
+fill_to = Vector2(0.74786323, 0.0982906)
+
+[sub_resource type="StyleBox" id="StyleBox_d1a1j"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("3_cwdvt")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("2_5tjk6")]([SubResource("Resource_mxlkd")])
+texture = SubResource("GradientTexture2D_xp5dg")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[node name="game_over" type="Node2D" unique_id=244699212]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=365573452]
+offset_right = 1049.0
+offset_bottom = 837.0
+mouse_filter = 2
+color = Color(0.23392546, 0.23392546, 0.23392543, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="efecto ondas" type="ColorRect" parent="." unique_id=1229060678]
+material = SubResource("ShaderMaterial_1flkd")
+offset_left = 4.0
+offset_top = -5.0
+offset_right = 1004.0
+offset_bottom = 823.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="." unique_id=2126368863]
+offset_left = 2.0
+offset_top = 340.0
+offset_right = 1002.0
+offset_bottom = 403.0
+text = "PERDISTE
+No pudiste estabilizar las emociones"
+label_settings = SubResource("LabelSettings_1285c")
+horizontal_alignment = 1
+
+[node name="restart" type="Button" parent="." unique_id=914760714]
+offset_left = 422.0
+offset_top = 532.0
+offset_right = 580.0
+offset_bottom = 587.0
+theme_override_styles/normal = SubResource("StyleBox_d1a1j")
+text = "Volver al menu"

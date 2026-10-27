@@ -5,10 +5,13 @@ signal tile_mined(cell: Vector2i)
 signal score_changed(new_score: int)
 signal fossil_excavated(fossil_texture: Texture2D, score_awarded: int, total_score: int)
 @onready var score_label: Label = %score_label
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var pickaxe: TextureRect = $pickaxe
 
 @onready var fossils_area: Area2D = $Fossils_area
 
 var picar_piedra: PackedScene = preload("res://particulas/picar_piedra.tscn")
+var _pickaxe_swing_tween: Tween
 
 @export_range(1, 100, 1) var mining_power: int = 1
 @export_range(1, 100, 1) var tile_health: int = 1
@@ -37,6 +40,11 @@ var score: int = 0
 
 
 func _ready() -> void:
+	canvas_layer.show()
+	pickaxe.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	pickaxe.z_index = 100
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	_update_pickaxe_position()
 	update_score()
 	_build_fossils_array()
 	_spawn_fossils()
@@ -52,6 +60,18 @@ func _ready() -> void:
 		tile_mined.connect(Callable(fossil, "on_tile_mined"))
 		fossil.connect("excavated", Callable(self, "_on_fossil_excavated"))
 		fossil.call("setup_excavation", tile_map_layer)
+
+
+func _process(_delta: float) -> void:
+	_update_pickaxe_position()
+
+
+func _exit_tree() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _update_pickaxe_position() -> void:
+	pickaxe.position = get_global_mouse_position() - pickaxe.pivot_offset
 
 
 func _build_fossils_array() -> void:
@@ -155,7 +175,19 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and event.pressed:
+		_swing_pickaxe()
 		mine_at_global_position(get_global_mouse_position())
+
+
+func _swing_pickaxe() -> void:
+	if _pickaxe_swing_tween != null and _pickaxe_swing_tween.is_running():
+		_pickaxe_swing_tween.kill()
+
+	pickaxe.rotation = 0.0
+	_pickaxe_swing_tween = create_tween()
+	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", deg_to_rad(-45.0), 0.04)
+	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", deg_to_rad(18.0), 0.08)
+	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", 0.0, 0.1)
 
 
 func mine_at_global_position(global_position_new: Vector2) -> bool:

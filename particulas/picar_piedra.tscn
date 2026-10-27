@@ -1,13 +1,25 @@
 [gd_scene format=3 uid="uid://cagm8dkpdbijp"]
 
+[ext_resource type="Texture2D" uid="uid://b52ytjg48dtik" path="res://assets/kenney_particlePack/PNG/star_07.png" id="1_ef6t6"]
+
+[sub_resource type="Curve" id="Curve_uqwp1"]
+_data = [Vector2(0, 0.4615385), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="PicarPiedra" type="CPUParticles2D" unique_id=1767190303]
+texture_filter = 2
 emitting = false
-amount = 5
+amount = 3
+texture = ExtResource("1_ef6t6")
+lifetime = 0.5
 one_shot = true
-explosiveness = 0.58
+explosiveness = 0.8
 direction = Vector2(0, 1)
 spread = 159.68
 gravity = Vector2(0, 600)
-initial_velocity_min = 30.0
-initial_velocity_max = 56.45
-scale_amount_max = 5.0
+initial_velocity_min = 110.65
+initial_velocity_max = 225.8
+scale_amount_min = 0.2
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_uqwp1")
+color = Color(0.9393411, 0.5107076, 3.85046e-07, 1)
