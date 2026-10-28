@@ -20,6 +20,7 @@ var _cells_to_mine: Dictionary[Vector2i, bool] = {}
 
 
 func _ready() -> void:
+	texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if fossil_texture != null:
 		texture_rect.texture = fossil_texture
 	else:

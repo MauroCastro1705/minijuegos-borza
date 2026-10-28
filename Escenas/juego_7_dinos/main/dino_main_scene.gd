@@ -7,17 +7,20 @@ signal fossil_excavated(fossil_texture: Texture2D, score_awarded: int, total_sco
 @onready var score_label: Label = %score_label
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var pickaxe: TextureRect = $pickaxe
+@onready var money_counter: Control = $money
 
 @onready var fossils_area: Area2D = $Fossils_area
 
 var picar_piedra: PackedScene = preload("res://particulas/picar_piedra.tscn")
 var _pickaxe_swing_tween: Tween
+var _money_pulse_tween: Tween
 
 @export_group("Mining")
 @export_range(1, 100, 1) var mining_power: int = 1
 @export_range(1, 100, 1) var tile_health: int = 1
 @export_range(0, 100, 1) var max_damage_numbers_per_swing: int = 5
 @export_range(0.0, 1.0, 0.05) var damaged_tile_darkening: float = 0.4
+@export_range(0.05, 1.0, 0.05) var manual_mining_interval: float = 0.15
 
 @export_group("Progression")
 @export_range(1, 10000, 1) var starting_level: int = 1
@@ -50,9 +53,11 @@ var _pickaxe_swing_tween: Tween
 @onready var damage_label: Label = %damage
 @onready var size_label: Label = %size
 @onready var multiplier_label: Label = %multiplier
+@onready var auto_mining_label: Label = %auto_mining
 @onready var upgrade_1: Button = %upgrade_1
 @onready var upgrade_2: Button = %upgrade_2
 @onready var upgrade_3: Button = %upgrade_3
+@onready var upgrade_4: Button = %upgrade_4
 @onready var money_label: Label = %money_label
 @onready var money_texture: TextureRect = $money/money_texture
 
@@ -71,9 +76,14 @@ var mining_width: int = 1
 var mining_height: int = 1
 var _remaining_fossils: int = 0
 var _level_transition_pending: bool = false
+var _manual_mining: bool = false
+var _manual_mining_cooldown: float = 0.0
+var _auto_mining_cooldown: float = 0.0
 var damage_upgrade_cost: int = 10
 var size_upgrade_cost: int = 25
 var multiplier_upgrade_cost: int = 50
+var auto_mining_upgrade_cost: int = 100
+var auto_mining_level: int = 0
 
 
 func _ready() -> void:
@@ -120,6 +130,26 @@ func _capture_initial_terrain() -> void:
 
 func _process(_delta: float) -> void:
 	_update_pickaxe_position()
+	if _level_transition_pending:
+		return
+
+	_manual_mining_cooldown = maxf(_manual_mining_cooldown - _delta, 0.0)
+	if _manual_mining and _manual_mining_cooldown == 0.0:
+		_mine_from_pointer()
+		_manual_mining_cooldown = manual_mining_interval
+
+	if auto_mining_level > 0:
+		_auto_mining_cooldown -= _delta
+		if _auto_mining_cooldown <= 0.0:
+			_mine_from_pointer()
+			_auto_mining_cooldown = 1.0 / float(auto_mining_level)
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_LEFT \
+	and not event.pressed:
+		_manual_mining = false
 
 
 func _exit_tree() -> void:
@@ -233,8 +263,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	and event.pressed:
 		if _level_transition_pending:
 			return
-		_swing_pickaxe()
-		mine_at_global_position(get_global_mouse_position())
+		_manual_mining = true
+		_manual_mining_cooldown = manual_mining_interval
+		_mine_from_pointer()
+
+
+func _mine_from_pointer() -> void:
+	_swing_pickaxe()
+	mine_at_global_position(get_global_mouse_position())
 
 
 func _swing_pickaxe() -> void:
@@ -243,9 +279,12 @@ func _swing_pickaxe() -> void:
 
 	pickaxe.rotation = 0.0
 	_pickaxe_swing_tween = create_tween()
-	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", deg_to_rad(-45.0), 0.04)
-	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", deg_to_rad(18.0), 0.08)
-	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", 0.0, 0.1)
+	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", deg_to_rad(-45.0), 0.04) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", deg_to_rad(18.0), 0.08) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_pickaxe_swing_tween.tween_property(pickaxe, "rotation", 0.0, 0.1) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 
 func mine_at_global_position(global_position_new: Vector2) -> bool:
@@ -295,7 +334,7 @@ func mine_cell(cell: Vector2i, show_damage_number: bool = true) -> bool:
 	_tile_health_by_cell.erase(cell)
 	_clear_damaged_tile_overlay(cell)
 	_update_surrounding_terrain(cell)
-	money += dirt_money_reward
+	money += dirt_money_reward * money_multiplier
 	_update_upgrade_ui()
 	tile_mined.emit(cell)
 	return true
@@ -370,7 +409,12 @@ func _on_fossil_excavated(
 	_update_upgrade_ui()
 	fossil_excavated.emit(fossil_texture, score_awarded, score)
 	_play_fossil_excavated_particles(fossil_global_position, fossil_texture)
-	print("excavaste: " + str(score))
+	DamageNumbers.display_text(
+		"Fossil! +%d points  +$%d" % [score_awarded, fossil_money_reward * money_multiplier],
+		fossil_global_position,
+		Color("#ffe45e"),
+		24
+	)
 	_remaining_fossils -= 1
 	if _remaining_fossils == 0 and not _level_transition_pending:
 		_level_transition_pending = true
@@ -383,7 +427,17 @@ func update_score():
 
 func _play_fossil_excavated_particles(_global_position: Vector2,_fossil_texture: Texture2D
 ) -> void:
-	pass
+	var particles := picar_piedra.instantiate() as CPUParticles2D
+	particles.texture = _fossil_texture
+	particles.amount = 16
+	particles.lifetime = 0.75
+	particles.initial_velocity_min = 70.0
+	particles.initial_velocity_max = 150.0
+	particles.gravity = Vector2(0.0, 300.0)
+	add_child(particles)
+	particles.global_position = _global_position
+	particles.finished.connect(particles.queue_free)
+	particles.emitting = true
 
 
 func apply_mining_upgrade(power_increase: int) -> void:
@@ -421,6 +475,16 @@ func _on_upgrade_3_pressed() -> void:
 
 	money_multiplier *= 2
 	multiplier_upgrade_cost = _get_next_upgrade_cost(multiplier_upgrade_cost)
+	_update_upgrade_ui()
+
+
+func _on_upgrade_4_pressed() -> void:
+	if not _try_purchase_upgrade(auto_mining_upgrade_cost):
+		return
+
+	auto_mining_level += 1
+	auto_mining_upgrade_cost = ceili(auto_mining_upgrade_cost * 1.6)
+	_auto_mining_cooldown = 1.0 / float(auto_mining_level)
 	_update_upgrade_ui()
 
 
@@ -478,15 +542,34 @@ func _start_next_level() -> void:
 
 
 func _update_upgrade_ui() -> void:
-	money_label.text = str(money)
 	level_label.text = "Level: %d" % level
 	damage_label.text = "Damage: %d" % mining_power
 	size_label.text = "Size: %dx%d" % [mining_width, mining_height]
 	multiplier_label.text = "Multiplier: x%d" % money_multiplier
+	auto_mining_label.text = "Auto dig: %d/s" % auto_mining_level
 
 	upgrade_1.text = "Damage +1 ($%d)" % damage_upgrade_cost
 	upgrade_2.text = "Size +1 ($%d)" % size_upgrade_cost
 	upgrade_3.text = "Income x2 ($%d)" % multiplier_upgrade_cost
+	upgrade_4.text = "Auto dig +1/s ($%d)" % auto_mining_upgrade_cost
 	upgrade_1.disabled = money < damage_upgrade_cost
 	upgrade_2.disabled = money < size_upgrade_cost
 	upgrade_3.disabled = money < multiplier_upgrade_cost
+	upgrade_4.disabled = money < auto_mining_upgrade_cost
+
+	var money_text := str(money)
+	if money_label.text != money_text:
+		money_label.text = money_text
+		_pulse_money_counter()
+
+
+func _pulse_money_counter() -> void:
+	if _money_pulse_tween != null and _money_pulse_tween.is_running():
+		_money_pulse_tween.kill()
+
+	money_counter.scale = Vector2.ONE
+	_money_pulse_tween = create_tween()
+	_money_pulse_tween.tween_property(money_counter, "scale", Vector2(1.15, 1.15), 0.08) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_money_pulse_tween.tween_property(money_counter, "scale", Vector2.ONE, 0.14) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)

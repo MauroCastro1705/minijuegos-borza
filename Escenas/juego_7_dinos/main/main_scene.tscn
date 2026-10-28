@@ -416,11 +416,16 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "multi"
 
+[node name="auto_mining" type="Label" parent="info_text"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Auto dig: 0/s"
+
 [node name="upgrade_buttons" type="VBoxContainer" parent="." unique_id=1095630239]
 offset_left = 849.0
 offset_top = 309.0
 offset_right = 974.0
-offset_bottom = 410.0
+offset_bottom = 444.0
 alignment = 1
 
 [node name="upgrade_1" type="Button" parent="upgrade_buttons" unique_id=2012428452]
@@ -437,6 +442,11 @@ text = "buy uprade"
 unique_name_in_owner = true
 layout_mode = 2
 text = "buy uprade"
+
+[node name="upgrade_4" type="Button" parent="upgrade_buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Auto dig"
 
 [node name="money" type="HBoxContainer" parent="." unique_id=71477612]
 anchors_preset = 8
@@ -471,3 +481,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="upgrade_buttons/upgrade_1" to="." method="_on_upgrade_1_pressed"]
 [connection signal="pressed" from="upgrade_buttons/upgrade_2" to="." method="_on_upgrade_2_pressed"]
 [connection signal="pressed" from="upgrade_buttons/upgrade_3" to="." method="_on_upgrade_3_pressed"]
+[connection signal="pressed" from="upgrade_buttons/upgrade_4" to="." method="_on_upgrade_4_pressed"]
