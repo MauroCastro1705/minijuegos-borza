@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cce05a44idi32"]
 
 [ext_resource type="Script" uid="uid://c0iext3pp8mfs" path="res://Escenas/juego_7_dinos/menu/menu_dino.gd" id="1_b54jd"]
-[ext_resource type="FontFile" uid="uid://b5ty1wy1ihugt" path="res://assets/fonts/MagazineLetterByBrntlbrnl-Regular.ttf" id="2_u16sw"]
+[ext_resource type="FontFile" uid="uid://f5gf4gdcddjy" path="res://assets/fonts/Revive 80-Font-Pack/Revive 80 Phatt.otf" id="2_xhu6q"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="3_1psh4"]
 [ext_resource type="FontFile" uid="uid://haihwqpdrecl" path="res://assets/fonts/VT323-Regular.ttf" id="4_487xl"]
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="5_cnxxb"]
@@ -12,9 +12,10 @@
 [ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="10_86jio"]
 [ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="11_lqiod"]
 [ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="12_dcwws"]
+[ext_resource type="AudioStream" uid="uid://cgrttdu68toao" path="res://assets/musica/fossil_music.wav" id="13_8gfec"]
 
 [sub_resource type="Gradient" id="Gradient_6v6d6"]
-colors = PackedColorArray(1, 0.38680217, 0.41039777, 1, 0.19784468, 0.042708084, 0.047159873, 1)
+colors = PackedColorArray(0.8742246, 0.61666954, 7.70092e-07, 1, 0.19450262, 0.11383835, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4aixg"]
 gradient = SubResource("Gradient_6v6d6")
@@ -112,16 +113,16 @@ shader_parameter/pixelation = Vector2(2, 2)
 shader_parameter/zoom = 5.0
 shader_parameter/background_threshold = 0.5430001207925002
 shader_parameter/color_threshold = 0.0
-shader_parameter/color = Color(0.7867219, 0.32069483, 0.428191, 0.6784314)
+shader_parameter/color = Color(0.44104266, 0.3856619, 0.111679204, 1)
 shader_parameter/seed = 0.5
 
 [sub_resource type="LabelSettings" id="LabelSettings_5rcss"]
-font = ExtResource("2_u16sw")
+font = ExtResource("2_xhu6q")
 font_size = 98
 outline_size = 20
-outline_color = Color(0.49580032, 0.014401226, 0.20557505, 1)
+outline_color = Color(0.5764706, 0.37254903, 0, 1)
 shadow_size = 40
-shadow_color = Color(0.31042334, 0, 0.05857092, 0.9098039)
+shadow_color = Color(0.19607843, 0.11372549, 0, 1)
 shadow_offset = Vector2(15, 15)
 
 [sub_resource type="Resource" id="Resource_wf8mm"]
@@ -135,9 +136,9 @@ metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
 [sub_resource type="Gradient" id="Gradient_4jai8"]
 offsets = PackedFloat32Array(0.09917355, 0.5873016, 1)
-colors = PackedColorArray(0.6230535, 0.19065514, 0.32109395, 1, 0.7385808, 0.27779135, 0.45615065, 1, 0.44662225, 0.071317755, 0.08802711, 1)
+colors = PackedColorArray(0.48245692, 0.32381696, 9.62615e-08, 1, 0.60635257, 0.4246466, 0.20217744, 1, 0.3639146, 0.1869281, 0.0075576347, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a8qer"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xhu6q"]
 gradient = SubResource("Gradient_4jai8")
 fill_from = Vector2(0.14957266, 0.98717946)
 fill_to = Vector2(0.8247863, 0.034188036)
@@ -152,7 +153,7 @@ content_margin_bottom = 2.0
 script = ExtResource("6_gdpov")
 skew = Vector2(0.1, 0)
 borders = Array[ExtResource("5_cnxxb")]([SubResource("Resource_wf8mm")])
-texture = SubResource("GradientTexture2D_a8qer")
+texture = SubResource("GradientTexture2D_xhu6q")
 corner_detail = 9
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -210,7 +211,25 @@ shadow_color = Color(0, 0, 0, 0.84705883)
 shadow_offset = Vector2(2, 2)
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
-[sub_resource type="StyleBox" id="StyleBox_qxtg1"]
+[sub_resource type="Resource" id="Resource_xhu6q"]
+script = ExtResource("5_cnxxb")
+color = Color(0, 0.8392157, 1, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_8gfec"]
+offsets = PackedFloat32Array(0.09917355, 0.5873016, 1)
+colors = PackedColorArray(0.48245692, 0.32381696, 9.62615e-08, 1, 0.60635257, 0.4246466, 0.20217744, 1, 0.3639146, 0.1869281, 0.0075576347, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7upwi"]
+gradient = SubResource("Gradient_8gfec")
+fill_from = Vector2(0.14957266, 0.98717946)
+fill_to = Vector2(0.8247863, 0.034188036)
+
+[sub_resource type="StyleBox" id="StyleBox_snqfh"]
 resource_local_to_scene = false
 resource_name = ""
 content_margin_left = 2.0
@@ -219,8 +238,8 @@ content_margin_right = 2.0
 content_margin_bottom = 2.0
 script = ExtResource("6_gdpov")
 skew = Vector2(0.1, 0)
-borders = Array[ExtResource("5_cnxxb")]([SubResource("Resource_wf8mm")])
-texture = SubResource("GradientTexture2D_a8qer")
+borders = Array[ExtResource("5_cnxxb")]([SubResource("Resource_xhu6q")])
+texture = SubResource("GradientTexture2D_7upwi")
 corner_detail = 9
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -235,25 +254,25 @@ shadow_color = Color(0, 0, 0, 0.84705883)
 shadow_offset = Vector2(2, 2)
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
-[sub_resource type="Resource" id="Resource_a8qer"]
+[sub_resource type="Resource" id="Resource_wdcpc"]
 script = ExtResource("5_cnxxb")
-color = Color(0, 1, 0, 1)
+color = Color(0, 0.8392157, 1, 1)
 width_left = 2
 width_top = 2
 width_right = 2
 width_bottom = 2
 metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
-[sub_resource type="Gradient" id="Gradient_qnhgk"]
-offsets = PackedFloat32Array(0, 0.8423913, 0.9836956)
-colors = PackedColorArray(0.0018410678, 0.0018410682, 0.0018410678, 1, 0, 0.2175481, 1.2032687e-07, 1, 0, 0.37354112, 1.92523e-07, 1)
+[sub_resource type="Gradient" id="Gradient_ek57n"]
+offsets = PackedFloat32Array(0.09917355, 0.44973546, 0.9656085)
+colors = PackedColorArray(0.6230535, 0.19065514, 0.32109395, 1, 0.44662225, 0.071317755, 0.08802711, 1, 0.7385808, 0.27779135, 0.45615065, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xjwfm"]
-gradient = SubResource("Gradient_qnhgk")
-fill_from = Vector2(0.55128205, 1)
-fill_to = Vector2(0.7606838, 0.0042735045)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0jvjj"]
+gradient = SubResource("Gradient_ek57n")
+fill_from = Vector2(0.9102564, 0.025641026)
+fill_to = Vector2(0.21367522, 0.8418803)
 
-[sub_resource type="StyleBox" id="StyleBox_1sipf"]
+[sub_resource type="StyleBox" id="StyleBox_t04e4"]
 resource_local_to_scene = false
 resource_name = ""
 content_margin_left = 2.0
@@ -262,8 +281,8 @@ content_margin_right = 2.0
 content_margin_bottom = 2.0
 script = ExtResource("6_gdpov")
 skew = Vector2(0.1, 0)
-borders = Array[ExtResource("5_cnxxb")]([SubResource("Resource_a8qer")])
-texture = SubResource("GradientTexture2D_xjwfm")
+borders = Array[ExtResource("5_cnxxb")]([SubResource("Resource_wdcpc")])
+texture = SubResource("GradientTexture2D_0jvjj")
 corner_detail = 9
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -275,7 +294,7 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.84705883)
-shadow_offset = Vector2(4, 4)
+shadow_offset = Vector2(2, 2)
 metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 
 [sub_resource type="LabelSettings" id="LabelSettings_1sipf"]
@@ -288,30 +307,30 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_b54jd")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1068259991]
-offset_left = -151.71436
-offset_top = -84.0
-offset_right = 1065.0
-offset_bottom = 946.0
+offset_left = -32.0
+offset_top = -35.0
+offset_right = 1024.0
+offset_bottom = 835.0
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_4aixg")
 metadata/_edit_lock_ = true
 
 [node name="efecto ondas" type="ColorRect" parent="." unique_id=1296046130]
 material = SubResource("ShaderMaterial_3it33")
-offset_left = -116.0
-offset_top = -79.0
-offset_right = 1150.0
-offset_bottom = 911.0
+offset_left = -11.0
+offset_top = -6.0
+offset_right = 1009.0
+offset_bottom = 810.0
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="." unique_id=895074737]
-offset_left = 219.0
-offset_top = 179.0
-offset_right = 711.0
-offset_bottom = 380.0
-text = "EmOTION
-CONTROL"
+offset_left = 62.0
+offset_top = 177.0
+offset_right = 883.0
+offset_bottom = 378.0
+text = "Fossil 
+     Digger"
 label_settings = SubResource("LabelSettings_5rcss")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=774877180]
@@ -360,7 +379,7 @@ trigger = 1
 
 [node name="FeedbackModulateOnceEffect" type="Node" parent="play/InteractionFeedback" unique_id=444509803]
 script = ExtResource("12_dcwws")
-color = Color(0.66201216, 0.04498595, 0.41172692, 1)
+color = Color(0.5764706, 0.37254903, 0, 1)
 transition = 1
 metadata/_custom_type_script = "uid://cw31nl0ldqdv0"
 
@@ -371,15 +390,15 @@ offset_right = 971.0
 offset_bottom = 766.0
 theme_override_fonts/font = ExtResource("4_487xl")
 theme_override_font_sizes/font_size = 21
-theme_override_styles/normal = SubResource("StyleBox_qxtg1")
-theme_override_styles/hover = SubResource("StyleBox_1sipf")
+theme_override_styles/normal = SubResource("StyleBox_snqfh")
+theme_override_styles/hover = SubResource("StyleBox_t04e4")
 text = "Volver"
 
 [node name="Label3" type="Label" parent="." unique_id=351126196]
 custom_minimum_size = Vector2(50, 50)
-offset_left = 200.0
+offset_left = 243.0
 offset_top = 415.0
-offset_right = 750.0
+offset_right = 760.0
 offset_bottom = 610.0
 text = "En este juego tenes que controlar las emociones y pensamientos intrusivos que atacan la sinapsis de tu  cerebro, usando los clicks del raton podes girar y con WASD te moves, hace coincidir la emocion que te ataca con el lado de tu personaje que corresponde"
 label_settings = SubResource("LabelSettings_1sipf")
@@ -388,7 +407,9 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=753803944]
-position = Vector2(511, 351)
+position = Vector2(501, 443)
+stream = ExtResource("13_8gfec")
+autoplay = true
 
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="volver" to="." method="_on_volver_pressed"]

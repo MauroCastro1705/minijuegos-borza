@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://bg15ysvwirn51"]
+
+[ext_resource type="Script" uid="uid://nyg0yybhtwls" path="res://Escenas/juego_7_dinos/dinoenemigos/dinoenemigo_1.gd" id="1_76vom"]
+[ext_resource type="Texture2D" uid="uid://duafprghs8egj" path="res://assets/juegos7/dinos.png" id="1_u35oy"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="2_8jsbk"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="3_kxva1"]
+[ext_resource type="LabelSettings" uid="uid://cd0oo28yvvyom" path="res://themas/texto_pixelart_muchoborde.tres" id="5_euo2j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rcss"]
+atlas = ExtResource("1_u35oy")
+region = Rect2(290, 238, 163, 143)
+
+[sub_resource type="Resource" id="Resource_8jsbk"]
+script = ExtResource("2_8jsbk")
+color = Color(0.4347438, 1.4439226e-07, 0.22585589, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+inset_left = -2
+inset_top = -2
+inset_right = -2
+inset_bottom = -2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_76vom"]
+offsets = PackedFloat32Array(0.11640212, 0.93650794)
+colors = PackedColorArray(0.24705882, 0.007843138, 0.1254902, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_736rf"]
+gradient = SubResource("Gradient_76vom")
+fill_from = Vector2(0.48290598, 0.82905984)
+fill_to = Vector2(0.4957265, 0)
+
+[sub_resource type="StyleBox" id="StyleBox_u35oy"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_kxva1")
+color = Color(0.26162738, 1.2032688e-08, 0.12759003, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("2_8jsbk")]([SubResource("Resource_8jsbk"), null])
+texture = SubResource("GradientTexture2D_736rf")
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Gradient" id="Gradient_euo2j"]
+offsets = PackedFloat32Array(0.11640212, 0.93650794)
+colors = PackedColorArray(0.24705882, 0.007843138, 0.1254902, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_us70q"]
+gradient = SubResource("Gradient_euo2j")
+fill_from = Vector2(0.48290598, 0.82905984)
+fill_to = Vector2(0.4957265, 0)
+
+[sub_resource type="StyleBox" id="StyleBox_wpo1m"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("3_kxva1")
+color = Color(0.9999996, 0.30287123, 0.60685384, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("2_8jsbk")]([null])
+texture = SubResource("GradientTexture2D_us70q")
+corner_curvature_top_left = 7.0
+corner_curvature_top_right = 0.7249999999999996
+corner_curvature_bottom_right = 0.0
+corner_curvature_bottom_left = 7.0
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Curve" id="Curve_5rcss"]
+_data = [Vector2(0.002252251, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Dinoenemigo1" type="Node2D" unique_id=1589991327]
+script = ExtResource("1_76vom")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1962138368]
+texture_filter = 1
+offset_left = -93.0
+offset_top = -149.0
+offset_right = 80.0
+offset_bottom = 2.7730103
+texture = SubResource("AtlasTexture_5rcss")
+expand_mode = 5
+stretch_mode = 5
+flip_h = true
+
+[node name="life_bar" type="ProgressBar" parent="." unique_id=1657602072]
+offset_left = -78.0
+offset_top = -160.0
+offset_right = 82.0
+offset_bottom = -146.0
+theme_override_styles/background = SubResource("StyleBox_u35oy")
+theme_override_styles/fill = SubResource("StyleBox_wpo1m")
+value = 75.0
+show_percentage = false
+
+[node name="life_value" type="Label" parent="." unique_id=791455158]
+offset_left = -78.0
+offset_top = -180.0
+offset_right = 84.0
+offset_bottom = -163.0
+text = "156432/1564"
+label_settings = ExtResource("5_euo2j")
+horizontal_alignment = 1
+
+[node name="hurt_particle" type="CPUParticles2D" parent="." unique_id=625899823]
+position = Vector2(-8, -75)
+emitting = false
+amount = 15
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.77
+emission_shape = 1
+emission_sphere_radius = 25.04
+direction = Vector2(0, 0)
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+scale_amount_min = 4.0
+scale_amount_max = 5.0
+scale_amount_curve = SubResource("Curve_5rcss")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxofotjesgx3l"
-path="res://.godot/imported/rigid_sprite.png-9703d0c695a400681bbd2ae85e275470.ctex"
+uid="uid://duafprghs8egj"
+path="res://.godot/imported/dinos.png-5a9d87b8fa3999f77cd1058b00226bfb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Escenas/juego_7_dinos/terreno_old/rigid_sprite.png"
-dest_files=["res://.godot/imported/rigid_sprite.png-9703d0c695a400681bbd2ae85e275470.ctex"]
+source_file="res://assets/juegos7/dinos.png"
+dest_files=["res://.godot/imported/dinos.png-5a9d87b8fa3999f77cd1058b00226bfb.ctex"]
 
 [params]
 

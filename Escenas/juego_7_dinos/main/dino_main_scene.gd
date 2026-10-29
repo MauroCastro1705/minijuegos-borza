@@ -1,5 +1,9 @@
 extends Node2D
 
+const RETRO_UI_FONT: FontFile = preload("res://assets/fonts/VT323-Regular.ttf")
+const MIN_MANUAL_MINING_INTERVAL: float = 0.05
+const DINO_VICTORY_SCENE: String = "res://Escenas/juego_7_dinos/main/game_over_dino.tscn"
+
 signal tile_damaged(cell: Vector2i, remaining_health: int)
 signal tile_mined(cell: Vector2i)
 signal score_changed(new_score: int)
@@ -10,17 +14,36 @@ signal fossil_excavated(fossil_texture: Texture2D, score_awarded: int, total_sco
 @onready var money_counter: Control = $money
 
 @onready var fossils_area: Area2D = $Fossils_area
+@onready var musica: AudioStreamPlayer2D = $musica
+@onready var button_click: AudioStreamPlayer2D = $button_click
 
 var picar_piedra: PackedScene = preload("res://particulas/picar_piedra.tscn")
 var _pickaxe_swing_tween: Tween
 var _money_pulse_tween: Tween
+@onready var upgrade_menu_button: Button = $upgrade_menu_button
+@onready var upgrade_menu: Control = $Upgrade_menu
+@onready var upgrade_panel: PanelContainer = $Upgrade_menu/CenterContainer/PanelContainer
+@onready var upgrade_close_button: Button = \
+	$Upgrade_menu/CenterContainer/PanelContainer/MenuContent/Header/CloseButton
+@onready var info_panel: PanelContainer = $info_text
+@onready var upgrade_money_label: Label = %upgrade_money_label
+@onready var upgrade_stats_label: Label = %upgrade_stats_label
+var _upgrade_menu_tween: Tween
+var _upgrade_wallet_tween: Tween
+
+@onready var pickaxe_sound: AudioStreamPlayer2D = $pickaxe/pickaxe_sound
+var _pickaxe_sound_volume_db: float
+
+@onready var enemys: Node2D = $enemys
+@onready var dinoenemigo_1: DinoEnemy = $enemys/Dinoenemigo1
+
+
 
 @export_group("Mining")
 @export_range(1, 100, 1) var mining_power: int = 1
 @export_range(1, 100, 1) var tile_health: int = 1
-@export_range(0, 100, 1) var max_damage_numbers_per_swing: int = 5
 @export_range(0.0, 1.0, 0.05) var damaged_tile_darkening: float = 0.4
-@export_range(0.05, 1.0, 0.05) var manual_mining_interval: float = 0.15
+@export_range(0.05, 1.0, 0.01) var manual_mining_interval: float = 0.15
 
 @export_group("Progression")
 @export_range(1, 10000, 1) var starting_level: int = 1
@@ -28,6 +51,9 @@ var _money_pulse_tween: Tween
 @export_range(0, 100000, 1) var dirt_money_reward: int = 1
 @export_range(0, 100000, 1) var fossil_money_reward: int = 50
 @export_range(0.0, 10.0, 0.05) var level_transition_delay: float = 0.4
+
+@export_group("Economy")
+@export_range(1.0, 3.0, 0.05) var upgrade_cost_growth_multiplier: float = 1.5
 
 @export_group("Terrain")
 @export_range(0, 31, 1) var terrain_set_id: int = 0
@@ -53,7 +79,7 @@ var _money_pulse_tween: Tween
 @onready var damage_label: Label = %damage
 @onready var size_label: Label = %size
 @onready var multiplier_label: Label = %multiplier
-@onready var auto_mining_label: Label = %auto_mining
+@onready var manual_mining_label: Label = %manual_mining
 @onready var upgrade_1: Button = %upgrade_1
 @onready var upgrade_2: Button = %upgrade_2
 @onready var upgrade_3: Button = %upgrade_3
@@ -78,12 +104,11 @@ var _remaining_fossils: int = 0
 var _level_transition_pending: bool = false
 var _manual_mining: bool = false
 var _manual_mining_cooldown: float = 0.0
-var _auto_mining_cooldown: float = 0.0
+var _game_finished: bool = false
+var manual_speed_upgrade_cost: int = 10
 var damage_upgrade_cost: int = 10
 var size_upgrade_cost: int = 25
 var multiplier_upgrade_cost: int = 50
-var auto_mining_upgrade_cost: int = 100
-var auto_mining_level: int = 0
 
 
 func _ready() -> void:
@@ -92,7 +117,16 @@ func _ready() -> void:
 	pickaxe.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	pickaxe.z_index = 100
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	_pickaxe_sound_volume_db = pickaxe_sound.volume_db
 	_update_pickaxe_position()
+	upgrade_menu.hide()
+	_connect_button_click_sounds()
+	upgrade_menu_button.focus_mode = Control.FOCUS_ALL
+	upgrade_menu_button.offset_transform_enabled = true
+	upgrade_panel.offset_transform_enabled = true
+	upgrade_panel.offset_transform_pivot_ratio = Vector2(0.5, 0.5)
+	dinoenemigo_1.died.connect(_on_dino_defeated)
+	_style_upgrade_menu()
 	level = starting_level
 	_capture_initial_terrain()
 	update_score()
@@ -100,6 +134,7 @@ func _ready() -> void:
 	_build_fossils_array()
 	_spawn_fossils()
 	_setup_fossils()
+	upgrade_menu_button.call_deferred("grab_focus")
 
 
 func _setup_fossils() -> void:
@@ -118,6 +153,25 @@ func _setup_fossils() -> void:
 		_remaining_fossils += 1
 
 
+func _connect_button_click_sounds() -> void:
+	var buttons: Array[Button] = [
+		upgrade_menu_button,
+		upgrade_close_button,
+		upgrade_1,
+		upgrade_2,
+		upgrade_3,
+		upgrade_4
+	]
+	for button in buttons:
+		if not button.pressed.is_connected(_play_button_click):
+			button.pressed.connect(_play_button_click)
+
+
+func _play_button_click() -> void:
+	button_click.pitch_scale = randf_range(0.96, 1.04)
+	button_click.play()
+
+
 func _capture_initial_terrain() -> void:
 	_initial_tile_data.clear()
 	for cell in tile_map_layer.get_used_cells():
@@ -130,7 +184,7 @@ func _capture_initial_terrain() -> void:
 
 func _process(_delta: float) -> void:
 	_update_pickaxe_position()
-	if _level_transition_pending:
+	if _level_transition_pending or _game_finished:
 		return
 
 	_manual_mining_cooldown = maxf(_manual_mining_cooldown - _delta, 0.0)
@@ -138,14 +192,12 @@ func _process(_delta: float) -> void:
 		_mine_from_pointer()
 		_manual_mining_cooldown = manual_mining_interval
 
-	if auto_mining_level > 0:
-		_auto_mining_cooldown -= _delta
-		if _auto_mining_cooldown <= 0.0:
-			_mine_from_pointer()
-			_auto_mining_cooldown = 1.0 / float(auto_mining_level)
-
-
 func _input(event: InputEvent) -> void:
+	if upgrade_menu.visible and event.is_action_pressed("ui_cancel"):
+		_close_upgrade_menu()
+		get_viewport().set_input_as_handled()
+		return
+
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and not event.pressed:
@@ -261,7 +313,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and event.pressed:
-		if _level_transition_pending:
+		if _level_transition_pending or _game_finished or upgrade_menu.visible:
 			return
 		_manual_mining = true
 		_manual_mining_cooldown = manual_mining_interval
@@ -269,8 +321,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _mine_from_pointer() -> void:
+	var mining_position := get_global_mouse_position()
 	_swing_pickaxe()
-	mine_at_global_position(get_global_mouse_position())
+	_play_pickaxe_sound(_has_available_tile_at(mining_position))
+	mine_at_global_position(mining_position)
+
+
+func _play_pickaxe_sound(hit_available_tile: bool) -> void:
+	pickaxe_sound.pitch_scale = randf_range(0.84, 1.2)
+	pickaxe_sound.volume_db = _pickaxe_sound_volume_db if hit_available_tile else -80.0
+	pickaxe_sound.play()
 
 
 func _swing_pickaxe() -> void:
@@ -288,28 +348,61 @@ func _swing_pickaxe() -> void:
 
 
 func mine_at_global_position(global_position_new: Vector2) -> bool:
-	var local_position := tile_map_layer.to_local(global_position_new)
-	var cell := tile_map_layer.local_to_map(local_position)
-
+	var start_cell := _get_mining_start_cell(global_position_new)
 	var mined_any := false
-	var damage_numbers_displayed := 0
-	@warning_ignore("integer_division")
-	var start_cell := cell - Vector2i(mining_width / 2, mining_height / 2)
+	var total_damage_dealt := 0
 	for y in range(start_cell.y, start_cell.y + mining_height):
 		for x in range(start_cell.x, start_cell.x + mining_width):
 			var target_cell := Vector2i(x, y)
-			var has_dirt := tile_map_layer.get_cell_source_id(target_cell) >= 0
-			var show_damage_number := damage_numbers_displayed < max_damage_numbers_per_swing
-			if has_dirt and show_damage_number:
-				damage_numbers_displayed += 1
-			if not mine_cell(target_cell, show_damage_number):
+			total_damage_dealt += _get_cell_damage(target_cell)
+			if not mine_cell(target_cell, false):
 				continue
 
 			var cell_position := tile_map_layer.to_global(tile_map_layer.map_to_local(target_cell))
 			_play_cell_destroy_particles(cell_position)
 			mined_any = true
 
+	if total_damage_dealt > 0:
+		dinoenemigo_1.take_damage(total_damage_dealt)
+		DamageNumbers.display_numbers(total_damage_dealt, global_position_new)
+
 	return mined_any
+
+
+func _on_dino_defeated() -> void:
+	if _game_finished:
+		return
+
+	_game_finished = true
+	_manual_mining = false
+	upgrade_menu.hide()
+	await get_tree().create_timer(0.65).timeout
+	TransitionManager.change_scene(DINO_VICTORY_SCENE)
+
+
+func _has_available_tile_at(world_position: Vector2) -> bool:
+	var start_cell := _get_mining_start_cell(world_position)
+	for y in range(start_cell.y, start_cell.y + mining_height):
+		for x in range(start_cell.x, start_cell.x + mining_width):
+			if tile_map_layer.get_cell_source_id(Vector2i(x, y)) >= 0:
+				return true
+	return false
+
+
+func _get_mining_start_cell(world_position: Vector2) -> Vector2i:
+	var local_position := tile_map_layer.to_local(world_position)
+	var cell := tile_map_layer.local_to_map(local_position)
+	@warning_ignore("integer_division")
+	return cell - Vector2i(mining_width / 2, mining_height / 2)
+
+
+func _get_cell_damage(cell: Vector2i) -> int:
+	if tile_map_layer.get_cell_source_id(cell) < 0:
+		return 0
+
+	var level_tile_health := tile_health + (level - 1) * tile_health_increase_per_level
+	var remaining_health: int = _tile_health_by_cell.get(cell, level_tile_health)
+	return mini(mining_power, remaining_health)
 
 
 func mine_cell(cell: Vector2i, show_damage_number: bool = true) -> bool:
@@ -319,7 +412,7 @@ func mine_cell(cell: Vector2i, show_damage_number: bool = true) -> bool:
 
 	var level_tile_health := tile_health + (level - 1) * tile_health_increase_per_level
 	var remaining_health: int = _tile_health_by_cell.get(cell, level_tile_health)
-	var damage_dealt: int = mini(mining_power, remaining_health)
+	var damage_dealt := _get_cell_damage(cell)
 	var cell_global_position := tile_map_layer.to_global(tile_map_layer.map_to_local(cell))
 	if show_damage_number:
 		DamageNumbers.display_numbers(damage_dealt, cell_global_position)
@@ -449,15 +542,31 @@ func apply_mining_upgrade(power_increase: int) -> void:
 
 
 func _on_upgrade_1_pressed() -> void:
+	if manual_mining_interval <= MIN_MANUAL_MINING_INTERVAL:
+		return
+	if not _try_purchase_upgrade(manual_speed_upgrade_cost):
+		return
+
+	manual_mining_interval = maxf(
+		manual_mining_interval * 0.85,
+		MIN_MANUAL_MINING_INTERVAL
+	)
+	manual_speed_upgrade_cost = _get_next_upgrade_cost(manual_speed_upgrade_cost)
+	_update_upgrade_ui()
+	_play_upgrade_purchase_feedback(upgrade_1)
+
+
+func _on_upgrade_2_pressed() -> void:
 	if not _try_purchase_upgrade(damage_upgrade_cost):
 		return
 
 	apply_mining_upgrade(1)
 	damage_upgrade_cost = _get_next_upgrade_cost(damage_upgrade_cost)
 	_update_upgrade_ui()
+	_play_upgrade_purchase_feedback(upgrade_2)
 
 
-func _on_upgrade_2_pressed() -> void:
+func _on_upgrade_3_pressed() -> void:
 	if not _try_purchase_upgrade(size_upgrade_cost):
 		return
 
@@ -467,25 +576,17 @@ func _on_upgrade_2_pressed() -> void:
 		mining_width += 1
 	size_upgrade_cost = _get_next_upgrade_cost(size_upgrade_cost)
 	_update_upgrade_ui()
+	_play_upgrade_purchase_feedback(upgrade_3)
 
 
-func _on_upgrade_3_pressed() -> void:
+func _on_upgrade_4_pressed() -> void:
 	if not _try_purchase_upgrade(multiplier_upgrade_cost):
 		return
 
 	money_multiplier *= 2
 	multiplier_upgrade_cost = _get_next_upgrade_cost(multiplier_upgrade_cost)
 	_update_upgrade_ui()
-
-
-func _on_upgrade_4_pressed() -> void:
-	if not _try_purchase_upgrade(auto_mining_upgrade_cost):
-		return
-
-	auto_mining_level += 1
-	auto_mining_upgrade_cost = ceili(auto_mining_upgrade_cost * 1.6)
-	_auto_mining_cooldown = 1.0 / float(auto_mining_level)
-	_update_upgrade_ui()
+	_play_upgrade_purchase_feedback(upgrade_4)
 
 
 func _try_purchase_upgrade(cost: int) -> bool:
@@ -498,7 +599,7 @@ func _try_purchase_upgrade(cost: int) -> bool:
 
 
 func _get_next_upgrade_cost(current_cost: int) -> int:
-	return ceili(current_cost * 1.5)
+	return ceili(current_cost * upgrade_cost_growth_multiplier)
 
 
 func _start_next_level() -> void:
@@ -542,20 +643,45 @@ func _start_next_level() -> void:
 
 
 func _update_upgrade_ui() -> void:
-	level_label.text = "Level: %d" % level
-	damage_label.text = "Damage: %d" % mining_power
-	size_label.text = "Size: %dx%d" % [mining_width, mining_height]
-	multiplier_label.text = "Multiplier: x%d" % money_multiplier
-	auto_mining_label.text = "Auto dig: %d/s" % auto_mining_level
+	level_label.text = "DIG Site: %d" % level
+	damage_label.text = "POWER: %d" % mining_power
+	size_label.text = "AREA: %dx%d" % [mining_width, mining_height]
+	multiplier_label.text = "INCOME: x%d" % money_multiplier
+	manual_mining_label.text = "MANUAL DIG: %.1f/s" % (1.0 / manual_mining_interval)
 
-	upgrade_1.text = "Damage +1 ($%d)" % damage_upgrade_cost
-	upgrade_2.text = "Size +1 ($%d)" % size_upgrade_cost
-	upgrade_3.text = "Income x2 ($%d)" % multiplier_upgrade_cost
-	upgrade_4.text = "Auto dig +1/s ($%d)" % auto_mining_upgrade_cost
-	upgrade_1.disabled = money < damage_upgrade_cost
-	upgrade_2.disabled = money < size_upgrade_cost
-	upgrade_3.disabled = money < multiplier_upgrade_cost
-	upgrade_4.disabled = money < auto_mining_upgrade_cost
+	if manual_mining_interval <= MIN_MANUAL_MINING_INTERVAL:
+		upgrade_1.text = "QUICKER PICKAXE   |   MAX SPEED REACHED"
+	else:
+		var next_interval := maxf(
+			manual_mining_interval * 0.85,
+			MIN_MANUAL_MINING_INTERVAL
+		)
+		upgrade_1.text = "QUICKER PICKAXE   |   %.1f > %.1f DIGS/SEC   |   $%d" % [
+			1.0 / manual_mining_interval,
+			1.0 / next_interval,
+			manual_speed_upgrade_cost
+		]
+	upgrade_2.text = "PICKAXE POWER   |   +1 DAMAGE   |   $%d" % damage_upgrade_cost
+	upgrade_3.text = "EXCAVATION AREA   |   +1 TILE   |   $%d" % size_upgrade_cost
+	upgrade_4.text = "COIN VALUE   |   INCOME x2   |   $%d" % multiplier_upgrade_cost
+	upgrade_1.disabled = money < manual_speed_upgrade_cost \
+		or manual_mining_interval <= MIN_MANUAL_MINING_INTERVAL
+	upgrade_2.disabled = money < damage_upgrade_cost
+	upgrade_3.disabled = money < size_upgrade_cost
+	upgrade_4.disabled = money < multiplier_upgrade_cost
+
+	upgrade_stats_label.text = (
+		"LEVEL  %d       POWER  %d       AREA  %d x %d\nINCOME  x%d       MANUAL DIG  %.1f / sec"
+		% [
+			level, mining_power, mining_width, mining_height,
+			money_multiplier, 1.0 / manual_mining_interval
+		]
+	)
+	var upgrade_money_text := str(money)
+	if upgrade_money_label.text != upgrade_money_text:
+		upgrade_money_label.text = upgrade_money_text
+		_pulse_upgrade_wallet()
+	upgrade_menu_button.text = "CLOSE UPGRADES" if upgrade_menu.visible else "UPGRADES"
 
 	var money_text := str(money)
 	if money_label.text != money_text:
@@ -573,3 +699,209 @@ func _pulse_money_counter() -> void:
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_money_pulse_tween.tween_property(money_counter, "scale", Vector2.ONE, 0.14) \
 		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+func _on_upgrade_menu_button_pressed() -> void:
+	if upgrade_menu.visible:
+		_close_upgrade_menu()
+		return
+
+	_manual_mining = false
+	upgrade_menu.show()
+	upgrade_menu_button.text = "CLOSE UPGRADES"
+	pickaxe.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	upgrade_menu.modulate.a = 0.0
+	upgrade_panel.offset_transform_scale = Vector2(0.94, 0.94)
+	if _upgrade_menu_tween != null and _upgrade_menu_tween.is_running():
+		_upgrade_menu_tween.kill()
+	_upgrade_menu_tween = create_tween()
+	_upgrade_menu_tween.set_parallel(true)
+	_upgrade_menu_tween.tween_property(upgrade_menu, "modulate:a", 1.0, 0.18) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_upgrade_menu_tween.tween_property(upgrade_panel, "offset_transform_scale", Vector2.ONE, 0.24) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	upgrade_1.call_deferred("grab_focus")
+
+
+func _close_upgrade_menu() -> void:
+	if not upgrade_menu.visible:
+		return
+
+	if _upgrade_menu_tween != null and _upgrade_menu_tween.is_running():
+		_upgrade_menu_tween.kill()
+	upgrade_menu.hide()
+	upgrade_menu.modulate.a = 1.0
+	upgrade_panel.offset_transform_scale = Vector2.ONE
+	upgrade_menu_button.text = "UPGRADES"
+	pickaxe.show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	upgrade_menu_button.grab_focus()
+
+
+func _on_upgrade_close_button_pressed() -> void:
+	_close_upgrade_menu()
+
+
+func _on_upgrade_backdrop_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \
+	and event.button_index == MOUSE_BUTTON_LEFT \
+	and event.pressed:
+		get_viewport().set_input_as_handled()
+		_close_upgrade_menu()
+
+
+func _style_upgrade_menu() -> void:
+	var menu_theme := Theme.new()
+	menu_theme.set_font("font", "Button", RETRO_UI_FONT)
+	menu_theme.set_font("font", "Label", RETRO_UI_FONT)
+	menu_theme.set_font_size("font_size", "Button", 23)
+	menu_theme.set_font_size("font_size", "Label", 21)
+	menu_theme.set_color("font_color", "Button", Color("#f4dcc0"))
+	menu_theme.set_color("font_hover_color", "Button", Color("#fff0cf"))
+	menu_theme.set_color("font_pressed_color", "Button", Color("#fff8e4"))
+	menu_theme.set_color("font_disabled_color", "Button", Color("#95736f"))
+	menu_theme.set_color("font_focus_color", "Button", Color("#fff0cf"))
+	menu_theme.set_color("font_outline_color", "Button", Color("#170e14"))
+	menu_theme.set_color("font_outline_color", "Label", Color("#170e14"))
+	menu_theme.set_constant("outline_size", "Button", 1)
+	menu_theme.set_constant("outline_size", "Label", 1)
+	menu_theme.set_stylebox("normal", "Button", _make_upgrade_button_style(
+		Color("#4d2931"), Color("#9b5146")
+	))
+	menu_theme.set_stylebox("hover", "Button", _make_upgrade_button_style(
+		Color("#783942"), Color("#f5b75b"), 3
+	))
+	menu_theme.set_stylebox("pressed", "Button", _make_upgrade_button_style(
+		Color("#321d25"), Color("#e88b4c"), 3
+	))
+	menu_theme.set_stylebox("disabled", "Button", _make_upgrade_button_style(
+		Color("#302329"), Color("#50333a")
+	))
+	menu_theme.set_stylebox("focus", "Button", _make_upgrade_button_style(
+		Color("#783942"), Color("#ffe28a"), 3
+	))
+	upgrade_menu.theme = menu_theme
+	info_panel.theme = menu_theme
+	money_counter.theme = menu_theme
+	upgrade_menu.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	info_panel.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	money_counter.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+
+	var panel_style := StyleBoxFlat.new()
+	panel_style.bg_color = Color("#28171e")
+	panel_style.border_color = Color("#c76048")
+	panel_style.set_border_width_all(3)
+	panel_style.set_corner_radius_all(0)
+	panel_style.set_content_margin_all(22.0)
+	panel_style.shadow_color = Color("#110b10")
+	panel_style.shadow_size = 2
+	panel_style.shadow_offset = Vector2(5.0, 5.0)
+	upgrade_panel.add_theme_stylebox_override("panel", panel_style)
+
+	var info_style := StyleBoxFlat.new()
+	info_style.bg_color = Color("#28171e")
+	info_style.border_color = Color("#c76048")
+	info_style.set_border_width_all(3)
+	info_style.set_corner_radius_all(0)
+	info_style.set_content_margin_all(15.0)
+	info_style.shadow_color = Color("#110b10")
+	info_style.shadow_size = 2
+	info_style.shadow_offset = Vector2(4.0, 4.0)
+	info_panel.add_theme_stylebox_override("panel", info_style)
+
+	$info_text/StatsContent/Heading \
+		.add_theme_color_override("font_color", Color("#f5b75b"))
+	level_label.add_theme_color_override("font_color", Color("#f5b75b"))
+	damage_label.add_theme_color_override("font_color", Color("#f4dcc0"))
+	size_label.add_theme_color_override("font_color", Color("#f4dcc0"))
+	multiplier_label.add_theme_color_override("font_color", Color("#f4dcc0"))
+	manual_mining_label.add_theme_color_override("font_color", Color("#f4dcc0"))
+	var stat_labels: Array[Label] = [
+		level_label, damage_label, size_label, multiplier_label, manual_mining_label
+	]
+	for stat_label in stat_labels:
+		stat_label.add_theme_font_size_override("font_size", 22)
+
+	var wallet_style := StyleBoxFlat.new()
+	wallet_style.bg_color = Color("#442630")
+	wallet_style.border_color = Color("#895044")
+	wallet_style.set_border_width_all(2)
+	wallet_style.set_corner_radius_all(0)
+	wallet_style.set_content_margin_all(10.0)
+	$Upgrade_menu/CenterContainer/PanelContainer/MenuContent/WalletStrip \
+		.add_theme_stylebox_override("panel", wallet_style)
+
+	$Upgrade_menu/CenterContainer/PanelContainer/MenuContent/Header/Heading \
+		.add_theme_color_override("font_color", Color("#f5b75b"))
+	$Upgrade_menu/CenterContainer/PanelContainer/MenuContent/Subtitle \
+		.add_theme_color_override("font_color", Color("#c47d68"))
+	$Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_stats_label \
+		.add_theme_color_override("font_color", Color("#f4dcc0"))
+	$Upgrade_menu/CenterContainer/PanelContainer/MenuContent/WalletStrip/WalletRow/WalletTitle \
+		.add_theme_color_override("font_color", Color("#c47d68"))
+	upgrade_money_label.add_theme_color_override("font_color", Color("#f5b75b"))
+
+	var launcher_style := _make_upgrade_button_style(Color("#c7603f"), Color("#f5b75b"), 3)
+	launcher_style.set_content_margin_all(14.0)
+	upgrade_menu_button.add_theme_stylebox_override("normal", launcher_style)
+	upgrade_menu_button.add_theme_stylebox_override(
+		"hover", _make_upgrade_button_style(Color("#df7950"), Color("#ffe28a"), 3)
+	)
+	upgrade_menu_button.add_theme_stylebox_override(
+		"pressed", _make_upgrade_button_style(Color("#8e3f38"), Color("#f5b75b"), 3)
+	)
+	upgrade_menu_button.add_theme_color_override("font_color", Color("#211319"))
+	upgrade_menu_button.add_theme_color_override("font_hover_color", Color("#211319"))
+	upgrade_menu_button.add_theme_color_override("font_pressed_color", Color("#fff0cf"))
+	upgrade_menu_button.add_theme_font_size_override("font_size", 25)
+	upgrade_menu_button.add_theme_stylebox_override(
+		"focus", _make_upgrade_button_style(Color("#df7950"), Color("#ffe28a"), 3)
+	)
+
+
+func _make_upgrade_button_style(
+	background_color: Color,
+	border_color: Color,
+	border_width: int = 1
+) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = background_color
+	style.border_color = border_color
+	style.set_border_width_all(border_width)
+	style.set_corner_radius_all(0)
+	style.set_content_margin_all(12.0)
+	style.shadow_color = Color("#110b10")
+	style.shadow_size = 2
+	style.shadow_offset = Vector2(3.0, 3.0)
+	return style
+
+
+func _pulse_upgrade_wallet() -> void:
+	if _upgrade_wallet_tween != null and _upgrade_wallet_tween.is_running():
+		_upgrade_wallet_tween.kill()
+
+	upgrade_money_label.offset_transform_enabled = true
+	upgrade_money_label.offset_transform_scale = Vector2.ONE
+	_upgrade_wallet_tween = create_tween()
+	_upgrade_wallet_tween.tween_property(
+		upgrade_money_label, "offset_transform_scale", Vector2(1.16, 1.16), 0.08
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_upgrade_wallet_tween.tween_property(
+		upgrade_money_label, "offset_transform_scale", Vector2.ONE, 0.14
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+func _play_upgrade_purchase_feedback(button: Button) -> void:
+	button.offset_transform_enabled = true
+	var purchase_tween := create_tween()
+	purchase_tween.tween_property(
+		button, "offset_transform_scale", Vector2(1.035, 1.035), 0.07
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	purchase_tween.tween_property(
+		button, "offset_transform_scale", Vector2.ONE, 0.12
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+func _on_musica_finished() -> void:
+	musica.play()
