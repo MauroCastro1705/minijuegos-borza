@@ -77,6 +77,9 @@ metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 _data = [Vector2(0.002252251, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
+size = Vector2(160, 168)
+
 [node name="Dinoenemigo1" type="Node2D" unique_id=1589991327]
 script = ExtResource("1_76vom")
 
@@ -114,7 +117,7 @@ horizontal_alignment = 1
 position = Vector2(-8, -75)
 emitting = false
 amount = 15
-lifetime = 0.5
+lifetime = 0.3
 one_shot = true
 explosiveness = 0.77
 emission_shape = 1
@@ -126,3 +129,10 @@ initial_velocity_max = 250.0
 scale_amount_min = 4.0
 scale_amount_max = 5.0
 scale_amount_curve = SubResource("Curve_5rcss")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1465762809]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=203690270]
+position = Vector2(-1, -74)
+shape = SubResource("RectangleShape2D_yowuo")
+debug_color = Color(0.90527946, 0.2987521, 0.16318876, 0.41960785)

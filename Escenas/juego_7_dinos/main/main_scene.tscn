@@ -21,6 +21,11 @@
 [ext_resource type="AudioStream" uid="uid://cgrttdu68toao" path="res://assets/musica/fossil_music.wav" id="18_t38o5"]
 [ext_resource type="AudioStream" uid="uid://bp5hq1hog6ytk" path="res://assets/juegos7/button_click.mp3" id="20_1285c"]
 [ext_resource type="PackedScene" uid="uid://bg15ysvwirn51" path="res://Escenas/juego_7_dinos/dinoenemigos/dinoenemigo1.tscn" id="21_0yt8m"]
+[ext_resource type="Texture2D" uid="uid://cqhxgqyxwkfd3" path="res://assets/juegos7/city_buildings_all.png" id="22_d1a1j"]
+[ext_resource type="Texture2D" uid="uid://bu712if175vd7" path="res://assets/juegos7/cannon_2d.png" id="22_qef0w"]
+[ext_resource type="LabelSettings" uid="uid://cd0oo28yvvyom" path="res://themas/texto_pixelart_muchoborde.tres" id="23_hlqx6"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="24_qef0w"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="25_u7lv5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1sqd0"]
 texture = ExtResource("1_htr03")
@@ -256,9 +261,76 @@ shader_parameter/wiggle_speed = 10.0
 shader_parameter/smear = 0.2000000095
 shader_parameter/blur_samples = 15
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7c4s7"]
+size = Vector2(101, 150)
+
+[sub_resource type="Resource" id="Resource_8jsbk"]
+script = ExtResource("24_qef0w")
+color = Color(0.4347438, 1.4439226e-07, 0.22585589, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+inset_left = -2
+inset_top = -2
+inset_right = -2
+inset_bottom = -2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_vl073"]
+offsets = PackedFloat32Array(0.11640212, 0.93650794)
+colors = PackedColorArray(0.24705882, 0.007843138, 0.1254902, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_736rf"]
+gradient = SubResource("Gradient_vl073")
+fill_from = Vector2(0.48290598, 0.82905984)
+fill_to = Vector2(0.4957265, 0)
+
+[sub_resource type="StyleBox" id="StyleBox_lq0di"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("25_u7lv5")
+color = Color(0.26162738, 1.2032688e-08, 0.12759003, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("24_qef0w")]([SubResource("Resource_8jsbk"), null])
+texture = SubResource("GradientTexture2D_736rf")
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Gradient" id="Gradient_dwdik"]
+offsets = PackedFloat32Array(0.11640212, 0.93650794)
+colors = PackedColorArray(0.24705882, 0.007843138, 0.1254902, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_us70q"]
+gradient = SubResource("Gradient_dwdik")
+fill_from = Vector2(0.48290598, 0.82905984)
+fill_to = Vector2(0.4957265, 0)
+
+[sub_resource type="StyleBox" id="StyleBox_rgk2o"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("25_u7lv5")
+color = Color(0.9999996, 0.30287123, 0.60685384, 1)
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("24_qef0w")]([null])
+texture = SubResource("GradientTexture2D_us70q")
+corner_curvature_top_left = 7.0
+corner_curvature_top_right = 0.7249999999999996
+corner_curvature_bottom_right = 0.0
+corner_curvature_bottom_left = 7.0
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
 [node name="MainScene" type="Node2D" unique_id=1791501728]
 script = ExtResource("1_1sqd0")
 manual_mining_interval = 0.45
+upgrade_cost_growth_multiplier = 1.7
 fossil_1 = ExtResource("3_vx8jk")
 fossil_2 = ExtResource("3_1lnc5")
 fossil_3 = ExtResource("4_cnexa")
@@ -440,10 +512,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 40.0
-offset_top = 23.0
-offset_right = 125.0
-offset_bottom = 53.0
+offset_left = 495.0
+offset_top = 20.0
+offset_right = 580.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -479,6 +551,21 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "UPGRADES"
 
+[node name="attack_button" type="Button" parent="." unique_id=870145930]
+custom_minimum_size = Vector2(188, 54)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 203.5
+offset_top = 710.0
+offset_right = 391.5
+offset_bottom = 764.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "ATTACK 10  |  $10"
+
 [node name="Upgrade_menu" type="Control" parent="." unique_id=1783340197]
 visible = false
 z_index = 6
@@ -509,9 +596,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -318.0
-offset_top = -304.0
+offset_top = -374.0
 offset_right = 302.0
-offset_bottom = 266.0
+offset_bottom = 356.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -577,10 +664,11 @@ vertical_alignment = 1
 
 [node name="upgrade_stats_label" type="Label" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent" unique_id=370409202]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
 text = "LEVEL 1       POWER 1       AREA 1 x 1
-INCOME x1       MANUAL DIG 6.7 / sec"
+INCOME x1       MANUAL DIG 6.7 / sec
+ATTACK 10 DAMAGE  |  COST $10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -593,27 +681,33 @@ theme_override_constants/separation = 9
 
 [node name="upgrade_1" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=2012428452]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 text = "QUICKER PICKAXE   |   6.7 > 7.8 DIGS/SEC   |   $10"
 
 [node name="upgrade_2" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=2081387871]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 text = "PICKAXE POWER   |   +1 DAMAGE   |   $10"
 
 [node name="upgrade_3" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=705919686]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 text = "EXCAVATION AREA   |   +1 TILE   |   $25"
 
 [node name="upgrade_4" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=699339783]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 60)
+custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
 text = "COIN VALUE   |   INCOME x2   |   $50"
+
+[node name="upgrade_5" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=870145931]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 54)
+layout_mode = 2
+text = "ATTACK POWER   |   +5 DAMAGE   |   $50"
 
 [node name="Hint" type="Label" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent" unique_id=1407304155]
 layout_mode = 2
@@ -633,12 +727,66 @@ stream = ExtResource("20_1285c")
 
 [node name="Dinoenemigo1" parent="enemys" unique_id=1589991327 instance=ExtResource("21_0yt8m")]
 position = Vector2(855, 226)
+movement_speed = 9.0
+
+[node name="damageArea" type="Area2D" parent="." unique_id=243141430]
+position = Vector2(177, 88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="damageArea" unique_id=568752444]
+position = Vector2(112.5, 66)
+shape = SubResource("RectangleShape2D_7c4s7")
+debug_color = Color(0.95254666, 0.22053897, 3.85046e-07, 0.41960785)
+
+[node name="cannon_asset" type="TextureRect" parent="." unique_id=901425375]
+texture_filter = 1
+offset_left = 275.0
+offset_top = 118.999985
+offset_right = 420.0
+offset_bottom = 183.75726
+rotation = -0.2530748
+pivot_offset = Vector2(20.237854, 29.126434)
+texture = ExtResource("22_qef0w")
+expand_mode = 5
+stretch_mode = 5
+flip_h = true
+
+[node name="city_texture" type="TextureRect" parent="." unique_id=207564301]
+texture_filter = 1
+offset_left = 11.0
+offset_top = 81.0
+offset_right = 389.53436
+offset_bottom = 242.0
+texture = ExtResource("22_d1a1j")
+
+[node name="life_value" type="Label" parent="city_texture" unique_id=960601331]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 95.0
+offset_top = -44.0
+offset_right = 257.0
+offset_bottom = -27.0
+text = "156432/1564"
+label_settings = ExtResource("23_hlqx6")
+horizontal_alignment = 1
+
+[node name="life_bar" type="ProgressBar" parent="city_texture" unique_id=1848931430]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 104.0
+offset_top = -24.0
+offset_right = 264.0
+offset_bottom = -10.0
+theme_override_styles/background = SubResource("StyleBox_lq0di")
+theme_override_styles/fill = SubResource("StyleBox_rgk2o")
+value = 75.0
+show_percentage = false
 
 [connection signal="pressed" from="upgrade_menu_button" to="." method="_on_upgrade_menu_button_pressed"]
+[connection signal="pressed" from="attack_button" to="." method="_on_attack_pressed"]
 [connection signal="gui_input" from="Upgrade_menu/Backdrop" to="." method="_on_upgrade_backdrop_gui_input"]
-[connection signal="pressed" from="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/Header/CloseButton" to="." method="_on_upgrade_close_button_pressed"]
 [connection signal="pressed" from="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons/upgrade_1" to="." method="_on_upgrade_1_pressed"]
 [connection signal="pressed" from="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons/upgrade_2" to="." method="_on_upgrade_2_pressed"]
 [connection signal="pressed" from="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons/upgrade_3" to="." method="_on_upgrade_3_pressed"]
 [connection signal="pressed" from="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons/upgrade_4" to="." method="_on_upgrade_4_pressed"]
+[connection signal="pressed" from="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons/upgrade_5" to="." method="_on_upgrade_5_pressed"]
 [connection signal="finished" from="musica" to="." method="_on_musica_finished"]

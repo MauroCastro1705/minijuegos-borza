@@ -3,6 +3,7 @@ extends Node2D
 const RETRO_UI_FONT: FontFile = preload("res://assets/fonts/VT323-Regular.ttf")
 const MIN_MANUAL_MINING_INTERVAL: float = 0.05
 const DINO_VICTORY_SCENE: String = "res://Escenas/juego_7_dinos/main/game_over_dino.tscn"
+const PLAYER_MAX_HEALTH: int = 200
 
 signal tile_damaged(cell: Vector2i, remaining_health: int)
 signal tile_mined(cell: Vector2i)
@@ -12,15 +13,25 @@ signal fossil_excavated(fossil_texture: Texture2D, score_awarded: int, total_sco
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var pickaxe: TextureRect = $pickaxe
 @onready var money_counter: Control = $money
+@onready var damage_area: Area2D = $damageArea
+@onready var cannon_asset: TextureRect = $cannon_asset
 
 @onready var fossils_area: Area2D = $Fossils_area
 @onready var musica: AudioStreamPlayer2D = $musica
 @onready var button_click: AudioStreamPlayer2D = $button_click
 
+@onready var player_texture: TextureRect = $city_texture
+@onready var player_life_value: Label = %life_value
+@onready var player_life_bar: ProgressBar = %life_bar
+
+
 var picar_piedra: PackedScene = preload("res://particulas/picar_piedra.tscn")
 var _pickaxe_swing_tween: Tween
 var _money_pulse_tween: Tween
+var _cannon_recoil_tween: Tween
+var _cannon_base_position: Vector2
 @onready var upgrade_menu_button: Button = $upgrade_menu_button
+@onready var attack_button: Button = $attack_button
 @onready var upgrade_menu: Control = $Upgrade_menu
 @onready var upgrade_panel: PanelContainer = $Upgrade_menu/CenterContainer/PanelContainer
 @onready var upgrade_close_button: Button = \
@@ -55,6 +66,10 @@ var _pickaxe_sound_volume_db: float
 @export_group("Economy")
 @export_range(1.0, 3.0, 0.05) var upgrade_cost_growth_multiplier: float = 1.5
 
+@export_group("Combat")
+@export_range(1, 100, 1) var player_damage_per_hit: int = 25
+@export_range(0.1, 10.0, 0.1) var player_damage_interval: float = 1.5
+
 @export_group("Terrain")
 @export_range(0, 31, 1) var terrain_set_id: int = 0
 @export_range(0, 255, 1) var terrain_id: int = 0
@@ -84,6 +99,7 @@ var _pickaxe_sound_volume_db: float
 @onready var upgrade_2: Button = %upgrade_2
 @onready var upgrade_3: Button = %upgrade_3
 @onready var upgrade_4: Button = %upgrade_4
+@onready var upgrade_5: Button = %upgrade_5
 @onready var money_label: Label = %money_label
 @onready var money_texture: TextureRect = $money/money_texture
 
@@ -109,6 +125,12 @@ var manual_speed_upgrade_cost: int = 10
 var damage_upgrade_cost: int = 10
 var size_upgrade_cost: int = 25
 var multiplier_upgrade_cost: int = 50
+var attack_damage: int = 10
+var attack_cost: int = 10
+var attack_damage_upgrade_cost: int = 50
+var player_health: int = PLAYER_MAX_HEALTH
+var _player_damage_cooldown: float = 0.0
+var _dino_in_damage_area: bool = false
 
 
 func _ready() -> void:
@@ -118,14 +140,24 @@ func _ready() -> void:
 	pickaxe.z_index = 100
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	_pickaxe_sound_volume_db = pickaxe_sound.volume_db
+	_cannon_base_position = cannon_asset.position
 	_update_pickaxe_position()
 	upgrade_menu.hide()
 	_connect_button_click_sounds()
 	upgrade_menu_button.focus_mode = Control.FOCUS_ALL
 	upgrade_menu_button.offset_transform_enabled = true
+	upgrade_close_button.focus_mode = Control.FOCUS_ALL
+	upgrade_close_button.mouse_filter = Control.MOUSE_FILTER_STOP
+	if not upgrade_close_button.pressed.is_connected(_on_upgrade_close_button_pressed):
+		upgrade_close_button.pressed.connect(_on_upgrade_close_button_pressed)
 	upgrade_panel.offset_transform_enabled = true
 	upgrade_panel.offset_transform_pivot_ratio = Vector2(0.5, 0.5)
 	dinoenemigo_1.died.connect(_on_dino_defeated)
+	damage_area.area_entered.connect(_on_damage_area_area_entered)
+	damage_area.area_exited.connect(_on_damage_area_area_exited)
+	player_life_bar.max_value = PLAYER_MAX_HEALTH
+	player_health = PLAYER_MAX_HEALTH
+	_update_player_health_ui()
 	_style_upgrade_menu()
 	level = starting_level
 	_capture_initial_terrain()
@@ -160,7 +192,9 @@ func _connect_button_click_sounds() -> void:
 		upgrade_1,
 		upgrade_2,
 		upgrade_3,
-		upgrade_4
+		upgrade_4,
+		upgrade_5,
+		attack_button
 	]
 	for button in buttons:
 		if not button.pressed.is_connected(_play_button_click):
@@ -191,6 +225,17 @@ func _process(_delta: float) -> void:
 	if _manual_mining and _manual_mining_cooldown == 0.0:
 		_mine_from_pointer()
 		_manual_mining_cooldown = manual_mining_interval
+
+
+func _physics_process(delta: float) -> void:
+	if _game_finished or not _dino_in_damage_area:
+		return
+
+	_player_damage_cooldown = maxf(_player_damage_cooldown - delta, 0.0)
+	if _player_damage_cooldown == 0.0:
+		_damage_player(player_damage_per_hit)
+		_player_damage_cooldown = player_damage_interval
+
 
 func _input(event: InputEvent) -> void:
 	if upgrade_menu.visible and event.is_action_pressed("ui_cancel"):
@@ -350,21 +395,15 @@ func _swing_pickaxe() -> void:
 func mine_at_global_position(global_position_new: Vector2) -> bool:
 	var start_cell := _get_mining_start_cell(global_position_new)
 	var mined_any := false
-	var total_damage_dealt := 0
 	for y in range(start_cell.y, start_cell.y + mining_height):
 		for x in range(start_cell.x, start_cell.x + mining_width):
 			var target_cell := Vector2i(x, y)
-			total_damage_dealt += _get_cell_damage(target_cell)
 			if not mine_cell(target_cell, false):
 				continue
 
 			var cell_position := tile_map_layer.to_global(tile_map_layer.map_to_local(target_cell))
 			_play_cell_destroy_particles(cell_position)
 			mined_any = true
-
-	if total_damage_dealt > 0:
-		dinoenemigo_1.take_damage(total_damage_dealt)
-		DamageNumbers.display_numbers(total_damage_dealt, global_position_new)
 
 	return mined_any
 
@@ -376,8 +415,55 @@ func _on_dino_defeated() -> void:
 	_game_finished = true
 	_manual_mining = false
 	upgrade_menu.hide()
+	_update_upgrade_ui()
 	await get_tree().create_timer(0.65).timeout
 	TransitionManager.change_scene(DINO_VICTORY_SCENE)
+
+
+func _on_damage_area_area_entered(area: Area2D) -> void:
+	if area != dinoenemigo_1.attack_area or _game_finished:
+		return
+
+	_dino_in_damage_area = true
+	_player_damage_cooldown = 0.0
+	dinoenemigo_1.set_attacking_player(true)
+
+
+func _on_damage_area_area_exited(area: Area2D) -> void:
+	if area != dinoenemigo_1.attack_area:
+		return
+
+	_dino_in_damage_area = false
+	dinoenemigo_1.set_attacking_player(false)
+
+
+func _damage_player(damage: int) -> void:
+	if damage <= 0 or player_health <= 0 or _game_finished:
+		return
+
+	player_health = maxi(player_health - damage, 0)
+	_update_player_health_ui()
+	DamageNumbers.display_numbers(
+		damage,
+		player_texture.global_position + Vector2(player_texture.size.x / 2.0, 35.0)
+	)
+	if player_health == 0:
+		_game_finished = true
+		_manual_mining = false
+		upgrade_menu.hide()
+		dinoenemigo_1.stop_moving()
+		_update_upgrade_ui()
+		DamageNumbers.display_text(
+			"CITY DESTROYED",
+			player_texture.global_position + Vector2(player_texture.size.x / 2.0, 10.0),
+			Color("#ff554f"),
+			32
+		)
+
+
+func _update_player_health_ui() -> void:
+	player_life_bar.value = player_health
+	player_life_value.text = "%d/%d" % [player_health, PLAYER_MAX_HEALTH]
 
 
 func _has_available_tile_at(world_position: Vector2) -> bool:
@@ -589,6 +675,16 @@ func _on_upgrade_4_pressed() -> void:
 	_play_upgrade_purchase_feedback(upgrade_4)
 
 
+func _on_upgrade_5_pressed() -> void:
+	if not _try_purchase_upgrade(attack_damage_upgrade_cost):
+		return
+
+	attack_damage += 5
+	attack_damage_upgrade_cost = _get_next_upgrade_cost(attack_damage_upgrade_cost)
+	_update_upgrade_ui()
+	_play_upgrade_purchase_feedback(upgrade_5)
+
+
 func _try_purchase_upgrade(cost: int) -> bool:
 	if money < cost:
 		return false
@@ -664,17 +760,21 @@ func _update_upgrade_ui() -> void:
 	upgrade_2.text = "PICKAXE POWER   |   +1 DAMAGE   |   $%d" % damage_upgrade_cost
 	upgrade_3.text = "EXCAVATION AREA   |   +1 TILE   |   $%d" % size_upgrade_cost
 	upgrade_4.text = "COIN VALUE   |   INCOME x2   |   $%d" % multiplier_upgrade_cost
+	upgrade_5.text = "ATTACK POWER   |   +5 DAMAGE   |   $%d" % attack_damage_upgrade_cost
 	upgrade_1.disabled = money < manual_speed_upgrade_cost \
 		or manual_mining_interval <= MIN_MANUAL_MINING_INTERVAL
 	upgrade_2.disabled = money < damage_upgrade_cost
 	upgrade_3.disabled = money < size_upgrade_cost
 	upgrade_4.disabled = money < multiplier_upgrade_cost
+	upgrade_5.disabled = money < attack_damage_upgrade_cost
+	attack_button.text = "ATTACK %d  |  $%d" % [attack_damage, attack_cost]
+	attack_button.disabled = money < attack_cost or _level_transition_pending or _game_finished
 
 	upgrade_stats_label.text = (
-		"LEVEL  %d       POWER  %d       AREA  %d x %d\nINCOME  x%d       MANUAL DIG  %.1f / sec"
+		"LEVEL  %d       POWER  %d       AREA  %d x %d\nINCOME  x%d       MANUAL DIG  %.1f / sec\nATTACK  %d DAMAGE  |  COST  $%d"
 		% [
 			level, mining_power, mining_width, mining_height,
-			money_multiplier, 1.0 / manual_mining_interval
+			money_multiplier, 1.0 / manual_mining_interval, attack_damage, attack_cost
 		]
 	)
 	var upgrade_money_text := str(money)
@@ -858,6 +958,25 @@ func _style_upgrade_menu() -> void:
 	upgrade_menu_button.add_theme_stylebox_override(
 		"focus", _make_upgrade_button_style(Color("#df7950"), Color("#ffe28a"), 3)
 	)
+	attack_button.add_theme_stylebox_override("normal", launcher_style)
+	attack_button.add_theme_stylebox_override(
+		"hover", _make_upgrade_button_style(Color("#df7950"), Color("#ffe28a"), 3)
+	)
+	attack_button.add_theme_stylebox_override(
+		"pressed", _make_upgrade_button_style(Color("#8e3f38"), Color("#f5b75b"), 3)
+	)
+	attack_button.add_theme_stylebox_override(
+		"focus", _make_upgrade_button_style(Color("#df7950"), Color("#ffe28a"), 3)
+	)
+	attack_button.add_theme_stylebox_override(
+		"disabled", _make_upgrade_button_style(Color("#302329"), Color("#50333a"))
+	)
+	attack_button.add_theme_color_override("font_color", Color("#211319"))
+	attack_button.add_theme_color_override("font_hover_color", Color("#211319"))
+	attack_button.add_theme_color_override("font_pressed_color", Color("#fff0cf"))
+	attack_button.add_theme_color_override("font_disabled_color", Color("#95736f"))
+	attack_button.add_theme_font_override("font", RETRO_UI_FONT)
+	attack_button.add_theme_font_size_override("font_size", 22)
 
 
 func _make_upgrade_button_style(
@@ -905,3 +1024,108 @@ func _play_upgrade_purchase_feedback(button: Button) -> void:
 
 func _on_musica_finished() -> void:
 	musica.play()
+
+
+func _on_attack_pressed() -> void:
+	if _level_transition_pending or _game_finished or money < attack_cost:
+		return
+
+	money -= attack_cost
+	_update_upgrade_ui()
+	_play_upgrade_purchase_feedback(attack_button)
+	_fire_cannon_projectile()
+	if _dino_in_damage_area:
+		_player_damage_cooldown = player_damage_interval
+	dinoenemigo_1.take_damage(attack_damage)
+	DamageNumbers.display_numbers(
+		attack_damage,
+		dinoenemigo_1.global_position + Vector2(0, -75)
+	)
+
+
+func _fire_cannon_projectile() -> void:
+	var projectile := _create_cannon_projectile()
+	var start_position := cannon_asset.get_global_transform() * Vector2(
+		cannon_asset.size.x * 0.9,
+		cannon_asset.size.y * 0.5
+	)
+	var target_position := dinoenemigo_1.global_position + Vector2(-48.0, -80.0)
+	var control_position := (start_position + target_position) / 2.0 + Vector2(0.0, -55.0)
+	projectile.global_position = start_position
+
+	if _cannon_recoil_tween != null and _cannon_recoil_tween.is_running():
+		_cannon_recoil_tween.kill()
+	cannon_asset.position = _cannon_base_position
+	_cannon_recoil_tween = create_tween()
+	_cannon_recoil_tween.tween_property(
+		cannon_asset, "position", _cannon_base_position + Vector2(-7.0, 1.0), 0.05
+	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_cannon_recoil_tween.tween_property(
+		cannon_asset, "position", _cannon_base_position, 0.12
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	var shot_tween := create_tween()
+	shot_tween.tween_method(
+		_update_cannon_projectile.bind(
+			projectile, start_position, control_position, target_position
+		),
+		0.0,
+		1.0,
+		0.32
+	).set_trans(Tween.TRANS_LINEAR)
+	shot_tween.tween_property(projectile, "scale", Vector2(1.25, 1.25), 0.06)
+	shot_tween.tween_property(projectile, "modulate:a", 0.0, 0.08)
+	shot_tween.tween_callback(projectile.queue_free)
+
+
+func _create_cannon_projectile() -> Node2D:
+	var projectile := Node2D.new()
+	projectile.name = "CannonProjectile"
+	projectile.z_index = 20
+	add_child(projectile)
+
+	var trail := Line2D.new()
+	trail.width = 5.0
+	trail.default_color = Color("#f5b75b")
+	trail.points = PackedVector2Array([Vector2(-30.0, 0.0), Vector2(-5.0, 0.0)])
+	projectile.add_child(trail)
+
+	var glow := Polygon2D.new()
+	glow.polygon = _make_circle_polygon(9.0)
+	glow.color = Color("#f0783c")
+	projectile.add_child(glow)
+
+	var core := Polygon2D.new()
+	core.polygon = _make_circle_polygon(5.0)
+	core.color = Color("#fff0cf")
+	projectile.add_child(core)
+	return projectile
+
+
+func _make_circle_polygon(radius: float) -> PackedVector2Array:
+	var points := PackedVector2Array()
+	for index in range(12):
+		var angle := TAU * float(index) / 12.0
+		points.append(Vector2(cos(angle), sin(angle)) * radius)
+	return points
+
+
+func _update_cannon_projectile(
+	progress: float,
+	projectile: Node2D,
+	start: Vector2,
+	control: Vector2,
+	target: Vector2
+) -> void:
+	if not is_instance_valid(projectile):
+		return
+
+	var one_minus_progress := 1.0 - progress
+	projectile.global_position = (
+		one_minus_progress * one_minus_progress * start
+		+ 2.0 * one_minus_progress * progress * control
+		+ progress * progress * target
+	)
+	var tangent := 2.0 * one_minus_progress * (control - start) \
+		+ 2.0 * progress * (target - control)
+	projectile.rotation = tangent.angle()
