@@ -454,7 +454,7 @@ func _damage_player(damage: int) -> void:
 		dinoenemigo_1.stop_moving()
 		_update_upgrade_ui()
 		DamageNumbers.display_text(
-			"CITY DESTROYED",
+			"CIUDAD DESTRUIDA",
 			player_texture.global_position + Vector2(player_texture.size.x / 2.0, 10.0),
 			Color("#ff554f"),
 			32
@@ -589,7 +589,7 @@ func _on_fossil_excavated(
 	fossil_excavated.emit(fossil_texture, score_awarded, score)
 	_play_fossil_excavated_particles(fossil_global_position, fossil_texture)
 	DamageNumbers.display_text(
-		"Fossil! +%d points  +$%d" % [score_awarded, fossil_money_reward * money_multiplier],
+		"¡Fósil! +%d puntos  +$%d" % [score_awarded, fossil_money_reward * money_multiplier],
 		fossil_global_position,
 		Color("#ffe45e"),
 		24
@@ -739,39 +739,39 @@ func _start_next_level() -> void:
 
 
 func _update_upgrade_ui() -> void:
-	level_label.text = "DIG Site: %d" % level
-	damage_label.text = "POWER: %d" % mining_power
-	size_label.text = "AREA: %dx%d" % [mining_width, mining_height]
-	multiplier_label.text = "INCOME: x%d" % money_multiplier
-	manual_mining_label.text = "MANUAL DIG: %.1f/s" % (1.0 / manual_mining_interval)
+	level_label.text = "YACIMIENTO: %d" % level
+	damage_label.text = "PODER: %d" % mining_power
+	size_label.text = "ÁREA: %dx%d" % [mining_width, mining_height]
+	multiplier_label.text = "INGRESOS: x%d" % money_multiplier
+	manual_mining_label.text = "EXCAV. MANUAL: %.1f/s" % (1.0 / manual_mining_interval)
 
 	if manual_mining_interval <= MIN_MANUAL_MINING_INTERVAL:
-		upgrade_1.text = "QUICKER PICKAXE   |   MAX SPEED REACHED"
+		upgrade_1.text = "PICO MÁS RÁPIDO   |   VELOCIDAD MÁXIMA"
 	else:
 		var next_interval := maxf(
 			manual_mining_interval * 0.85,
 			MIN_MANUAL_MINING_INTERVAL
 		)
-		upgrade_1.text = "QUICKER PICKAXE   |   %.1f > %.1f DIGS/SEC   |   $%d" % [
+		upgrade_1.text = "PICO MÁS RÁPIDO   |   %.1f > %.1f EXCAV./S   |   $%d" % [
 			1.0 / manual_mining_interval,
 			1.0 / next_interval,
 			manual_speed_upgrade_cost
 		]
-	upgrade_2.text = "PICKAXE POWER   |   +1 DAMAGE   |   $%d" % damage_upgrade_cost
-	upgrade_3.text = "EXCAVATION AREA   |   +1 TILE   |   $%d" % size_upgrade_cost
-	upgrade_4.text = "COIN VALUE   |   INCOME x2   |   $%d" % multiplier_upgrade_cost
-	upgrade_5.text = "ATTACK POWER   |   +5 DAMAGE   |   $%d" % attack_damage_upgrade_cost
+	upgrade_2.text = "PODER DEL PICO   |   +1 DAÑO   |   $%d" % damage_upgrade_cost
+	upgrade_3.text = "ÁREA DE EXCAVACIÓN   |   +1 BLOQUE   |   $%d" % size_upgrade_cost
+	upgrade_4.text = "VALOR DE MONEDAS   |   INGRESOS x2   |   $%d" % multiplier_upgrade_cost
+	upgrade_5.text = "POTENCIA DEL CAÑÓN   |   +5 DAÑO   |   $%d" % attack_damage_upgrade_cost
 	upgrade_1.disabled = money < manual_speed_upgrade_cost \
 		or manual_mining_interval <= MIN_MANUAL_MINING_INTERVAL
 	upgrade_2.disabled = money < damage_upgrade_cost
 	upgrade_3.disabled = money < size_upgrade_cost
 	upgrade_4.disabled = money < multiplier_upgrade_cost
 	upgrade_5.disabled = money < attack_damage_upgrade_cost
-	attack_button.text = "ATTACK %d  |  $%d" % [attack_damage, attack_cost]
+	attack_button.text = "ATACAR %d  |  $%d" % [attack_damage, attack_cost]
 	attack_button.disabled = money < attack_cost or _level_transition_pending or _game_finished
 
 	upgrade_stats_label.text = (
-		"LEVEL  %d       POWER  %d       AREA  %d x %d\nINCOME  x%d       MANUAL DIG  %.1f / sec\nATTACK  %d DAMAGE  |  COST  $%d"
+		"NIVEL  %d       PODER  %d       ÁREA  %d x %d\nINGRESOS  x%d       EXCAV.  %.1f / s\nATAQUE  %d DAÑO  |  COSTO  $%d"
 		% [
 			level, mining_power, mining_width, mining_height,
 			money_multiplier, 1.0 / manual_mining_interval, attack_damage, attack_cost
@@ -781,7 +781,7 @@ func _update_upgrade_ui() -> void:
 	if upgrade_money_label.text != upgrade_money_text:
 		upgrade_money_label.text = upgrade_money_text
 		_pulse_upgrade_wallet()
-	upgrade_menu_button.text = "CLOSE UPGRADES" if upgrade_menu.visible else "UPGRADES"
+	upgrade_menu_button.text = "CERRAR MEJORAS" if upgrade_menu.visible else "MEJORAS"
 
 	var money_text := str(money)
 	if money_label.text != money_text:
@@ -808,7 +808,7 @@ func _on_upgrade_menu_button_pressed() -> void:
 
 	_manual_mining = false
 	upgrade_menu.show()
-	upgrade_menu_button.text = "CLOSE UPGRADES"
+	upgrade_menu_button.text = "CERRAR MEJORAS"
 	pickaxe.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	upgrade_menu.modulate.a = 0.0
@@ -833,7 +833,7 @@ func _close_upgrade_menu() -> void:
 	upgrade_menu.hide()
 	upgrade_menu.modulate.a = 1.0
 	upgrade_panel.offset_transform_scale = Vector2.ONE
-	upgrade_menu_button.text = "UPGRADES"
+	upgrade_menu_button.text = "MEJORAS"
 	pickaxe.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	upgrade_menu_button.grab_focus()

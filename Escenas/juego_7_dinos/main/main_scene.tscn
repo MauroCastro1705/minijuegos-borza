@@ -430,7 +430,7 @@ offset_left = 431.0
 offset_top = 159.0
 offset_right = 568.0
 offset_bottom = 232.0
-text = "Score
+text = "Puntaje
 "
 label_settings = ExtResource("10_cnexa")
 
@@ -476,7 +476,7 @@ theme_override_constants/separation = 8
 [node name="Heading" type="Label" parent="info_text/StatsContent" unique_id=188745982]
 layout_mode = 2
 theme_override_font_sizes/font_size = 17
-text = "FIELD STATUS"
+text = "ESTADO DEL YACIMIENTO"
 
 [node name="Separator" type="HSeparator" parent="info_text/StatsContent" unique_id=923163690]
 layout_mode = 2
@@ -484,27 +484,27 @@ layout_mode = 2
 [node name="level_label" type="Label" parent="info_text/StatsContent" unique_id=1567882731]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Level: 1"
+text = "YACIMIENTO: 1"
 
 [node name="damage" type="Label" parent="info_text/StatsContent" unique_id=951127948]
 unique_name_in_owner = true
 layout_mode = 2
-text = "damage"
+text = "PODER: 1"
 
 [node name="size" type="Label" parent="info_text/StatsContent" unique_id=460436981]
 unique_name_in_owner = true
 layout_mode = 2
-text = "size"
+text = "ÁREA: 1x1"
 
 [node name="multiplier" type="Label" parent="info_text/StatsContent" unique_id=921344333]
 unique_name_in_owner = true
 layout_mode = 2
-text = "multi"
+text = "INGRESOS: x1"
 
 [node name="manual_mining" type="Label" parent="info_text/StatsContent" unique_id=1470635889]
 unique_name_in_owner = true
 layout_mode = 2
-text = "MANUAL DIG: 6.7/s"
+text = "EXCAV. MANUAL: 6.7/s"
 
 [node name="money" type="HBoxContainer" parent="." unique_id=71477612]
 anchors_preset = 8
@@ -533,7 +533,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 custom_maximum_size = Vector2(-1, 30)
 layout_mode = 2
-text = "dinero"
+text = "Monedas"
 vertical_alignment = 1
 
 [node name="upgrade_menu_button" type="Button" parent="." unique_id=1523402909]
@@ -549,7 +549,7 @@ offset_right = 595.5
 offset_bottom = 764.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "UPGRADES"
+text = "MEJORAS"
 
 [node name="attack_button" type="Button" parent="." unique_id=870145930]
 custom_minimum_size = Vector2(188, 54)
@@ -564,7 +564,7 @@ offset_right = 391.5
 offset_bottom = 764.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "ATTACK 10  |  $10"
+text = "ATACAR 10  |  $10"
 
 [node name="Upgrade_menu" type="Control" parent="." unique_id=1783340197]
 visible = false
@@ -619,7 +619,7 @@ theme_override_constants/separation = 12
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 27
-text = "EXCAVATION UPGRADES"
+text = "MEJORAS DE EXCAVACIÓN"
 vertical_alignment = 1
 
 [node name="CloseButton" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/Header" unique_id=535469449]
@@ -630,7 +630,7 @@ text = "X"
 [node name="Subtitle" type="Label" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent" unique_id=1944764297]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-text = "UPGRADE YOUR DIG SITE. SPEND COINS WISELY."
+text = "MEJORA TU YACIMIENTO. ¡INVIERTE TUS MONEDAS!"
 
 [node name="WalletStrip" type="PanelContainer" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent" unique_id=1438314272]
 custom_minimum_size = Vector2(0, 52)
@@ -643,7 +643,7 @@ theme_override_constants/separation = 10
 [node name="WalletTitle" type="Label" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/WalletStrip/WalletRow" unique_id=1502273006]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "COINS IN BAG"
+text = "MONEDAS"
 vertical_alignment = 1
 
 [node name="WalletIcon" type="TextureRect" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/WalletStrip/WalletRow" unique_id=524080261]
@@ -666,9 +666,9 @@ vertical_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 68)
 layout_mode = 2
-text = "LEVEL 1       POWER 1       AREA 1 x 1
-INCOME x1       MANUAL DIG 6.7 / sec
-ATTACK 10 DAMAGE  |  COST $10"
+text = "NIVEL 1       PODER 1       ÁREA 1 x 1
+INGRESOS x1       EXCAV. 6.7 / s
+ATAQUE 10 DAÑO  |  COSTO $10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -683,36 +683,36 @@ theme_override_constants/separation = 9
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
-text = "QUICKER PICKAXE   |   6.7 > 7.8 DIGS/SEC   |   $10"
+text = "PICO MÁS RÁPIDO   |   6.7 > 7.8 EXCAV./S   |   $10"
 
 [node name="upgrade_2" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=2081387871]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
-text = "PICKAXE POWER   |   +1 DAMAGE   |   $10"
+text = "PODER DEL PICO   |   +1 DAÑO   |   $10"
 
 [node name="upgrade_3" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=705919686]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
-text = "EXCAVATION AREA   |   +1 TILE   |   $25"
+text = "ÁREA DE EXCAVACIÓN   |   +1 BLOQUE   |   $25"
 
 [node name="upgrade_4" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=699339783]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
-text = "COIN VALUE   |   INCOME x2   |   $50"
+text = "VALOR DE MONEDAS   |   INGRESOS x2   |   $50"
 
 [node name="upgrade_5" type="Button" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent/upgrade_buttons" unique_id=870145931]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 54)
 layout_mode = 2
-text = "ATTACK POWER   |   +5 DAMAGE   |   $50"
+text = "POTENCIA DEL CAÑÓN   |   +5 DAÑO   |   $50"
 
 [node name="Hint" type="Label" parent="Upgrade_menu/CenterContainer/PanelContainer/MenuContent" unique_id=1407304155]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "FIND FOSSILS. EARN COINS. GET STRONGER."
+text = "¡ENCUENTRA FÓSILES, GANA MONEDAS Y HAZTE MÁS FUERTE!"
 horizontal_alignment = 1
 
 [node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=308989090]
