@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://xv42cxo23s4e" path="res://assets/musica/menu.wav" id="12_nrt5e"]
 [ext_resource type="Texture2D" uid="uid://641ubhngi22x" path="res://assets/portadas/emociones_game.png" id="13_mhndg"]
 [ext_resource type="PackedScene" uid="uid://cc80d7jrn58h4" path="res://Componentes/boton_generico_lindo/button_nice.tscn" id="14_chgxx"]
+[ext_resource type="Texture2D" uid="uid://bk4jvf6t2s7nf" path="res://assets/portadas/dinos.jpg" id="14_cpe8a"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="14_x1cxr"]
 [ext_resource type="FontFile" uid="uid://ohilp3fj4bjr" path="res://assets/fonts/Korean Looks.ttf" id="16_d8bvs"]
 [ext_resource type="FontFile" uid="uid://dg6jcs60v7j6q" path="res://assets/fonts/Milany-Regular.otf" id="17_mhndg"]
@@ -332,8 +333,10 @@ alignment = 1
 [node name="BotonMainMenu" parent="juegos/HBoxContainer3" unique_id=1116043422 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-game_name = "Tema sorpresa"
-game_img = ExtResource("5_8cngx")
+scene_path = "res://Escenas/juego_7_dinos/menu/menu_dino.tscn"
+game_name = "Tema 7 : Dinosaurios"
+game_img = ExtResource("14_cpe8a")
+disable_buton = false
 
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer3" unique_id=130147954 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
