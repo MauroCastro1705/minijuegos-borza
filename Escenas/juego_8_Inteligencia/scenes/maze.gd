@@ -1,4 +1,4 @@
-extends Node2D
+extends PanelContainer
 
 signal level_exit_reached
 
@@ -34,7 +34,8 @@ const FLOOR_COLOR := Color("#222b43")
 const WALL_COLOR := Color("#8194bc")
 const EXIT_COLOR := Color("#70d6a5")
 
-@onready var player_start: Marker2D = $PlayerStart
+@onready var player_start: Marker2D = $MazeContent/PlayerStart
+@onready var maze_content: Control = $MazeContent
 
 var _level_nodes: Node2D
 
@@ -57,7 +58,7 @@ func load_level(level_index: int) -> void:
 
 	_level_nodes = Node2D.new()
 	_level_nodes.name = "LevelGeometry"
-	add_child(_level_nodes)
+	maze_content.add_child(_level_nodes)
 
 	var layout: Array = MAZE_LEVELS[level_index]
 	for row in range(layout.size()):

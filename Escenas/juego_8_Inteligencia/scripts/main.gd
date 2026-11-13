@@ -30,10 +30,11 @@ extends Node2D
 @onready var container: Node2D = $board_container/MarginContainer/BoardArea/BoardTiles
 @onready var player: CharacterBody2D = $Personaje8
 @onready var maze = $Maze
-@onready var player_start: Marker2D = $Maze/PlayerStart
+@onready var player_start: Marker2D = $Maze/MazeContent/PlayerStart
 
 const TILE_TYPES := ["LEFT", "RIGHT", "UP", "DOWN", "SPECIAL"]
 const MOVEMENT_TILE_TYPES := ["LEFT", "RIGHT", "UP", "DOWN"]
+const FOUR_TILE_MATCH_SCORE_MULTIPLIER := 2
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var vhs_efecto: ColorRect = $CanvasLayer/vhs_efecto
 
@@ -270,8 +271,12 @@ func _update_level_label() -> void:
 	level_label.text = "Nivel %d" % _current_level
 
 func _add_match_score(matches: Array) -> void:
+	var match_score := 0
 	for piece in matches:
-		score += special_tile_score if piece.type == "SPECIAL" else 1
+		match_score += special_tile_score if piece.type == "SPECIAL" else 1
+	if matches.size() == 4:
+		match_score *= FOUR_TILE_MATCH_SCORE_MULTIPLIER
+	score += match_score
 	_update_score_label()
 
 func _update_score_label() -> void:
@@ -333,22 +338,24 @@ func _move_player_for_matches(matches: Array) -> void:
 	if _level_transitioning:
 		return
 
+	var movement_count := 2 if matches.size() == 4 else 1
 	var matched_types := {}
 	for piece in matches:
 		matched_types[piece.type] = true
 
-	for tile_type in MOVEMENT_TILE_TYPES:
-		if not matched_types.has(tile_type):
-			continue
-		match tile_type:
-			"LEFT":
-				player.move_left()
-			"RIGHT":
-				player.move_right()
-			"UP":
-				player.move_up()
-			"DOWN":
-				player.move_down()
+	for _movement in range(movement_count):
+		for tile_type in MOVEMENT_TILE_TYPES:
+			if not matched_types.has(tile_type):
+				continue
+			match tile_type:
+				"LEFT":
+					player.move_left()
+				"RIGHT":
+					player.move_right()
+				"UP":
+					player.move_up()
+				"DOWN":
+					player.move_down()
 
 func _show_match_hint() -> void:
 	var possible_matches := _find_possible_matches()

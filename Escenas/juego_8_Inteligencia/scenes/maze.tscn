@@ -1,9 +1,70 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bs3p4yapd33nk"]
 
-[ext_resource type="Script" path="res://Escenas/juego_8_Inteligencia/scenes/maze.gd" id="1_maze"]
+[ext_resource type="Script" uid="uid://bj6tc0tv2maam" path="res://Escenas/juego_8_Inteligencia/scenes/maze.gd" id="1_maze"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="1_tuhh7"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="2_b4ls1"]
 
-[node name="Maze" type="Node2D"]
+[sub_resource type="Resource" id="Resource_0cj1c"]
+script = ExtResource("1_tuhh7")
+color = Color(1, 1, 1, 0.50980395)
+width_left = 10
+width_top = 10
+width_right = 10
+width_bottom = 10
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_0ct5t"]
+script = ExtResource("1_tuhh7")
+color = Color(1.041, 0.589, 0, 1)
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_lhg7v"]
+offsets = PackedFloat32Array(0, 0.62721896, 1)
+colors = PackedColorArray(0.31940156, 0.53926957, 0.6029368, 1, 0.75686276, 0.654902, 1, 1, 1, 0.40392157, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xxx5h"]
+gradient = SubResource("Gradient_lhg7v")
+fill_from = Vector2(0.48497853, 1)
+fill_to = Vector2(0.4635193, 0.042918455)
+
+[sub_resource type="StyleBox" id="StyleBox_21byg"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("2_b4ls1")
+borders = Array[ExtResource("1_tuhh7")]([SubResource("Resource_0cj1c"), SubResource("Resource_0ct5t")])
+texture = SubResource("GradientTexture2D_xxx5h")
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[node name="Maze" type="PanelContainer" unique_id=2105631584]
+anchors_preset = -1
+anchor_left = 0.194
+anchor_top = 0.34800002
+anchor_right = 0.81200004
+anchor_bottom = 0.64100003
+offset_left = -192.0
+offset_top = -275.40002
+offset_right = -160.00006
+offset_bottom = -223.80005
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_21byg")
 script = ExtResource("1_maze")
 
-[node name="PlayerStart" type="Marker2D" parent="."]
+[node name="MazeContent" type="Control" parent="." unique_id=1590271161]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PlayerStart" type="Marker2D" parent="MazeContent" unique_id=1395650349]
 position = Vector2(72, 72)

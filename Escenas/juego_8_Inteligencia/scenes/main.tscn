@@ -12,7 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://c26xoi1o70ttr" path="res://Escenas/juego_8_Inteligencia/sprites/cursors/cursor-hand-open.png" id="9_4c57u"]
 [ext_resource type="Texture2D" uid="uid://eailhed83ju8" path="res://Escenas/juego_8_Inteligencia/sprites/cursors/cursor-hand-closed.png" id="10_efxa6"]
 [ext_resource type="PackedScene" uid="uid://b8ge6mj6gyt6o" path="res://Escenas/juego_8_Inteligencia/personaje/personaje-8.tscn" id="11_player"]
-[ext_resource type="PackedScene" path="res://Escenas/juego_8_Inteligencia/scenes/maze.tscn" id="12_maze"]
+[ext_resource type="PackedScene" uid="uid://bs3p4yapd33nk" path="res://Escenas/juego_8_Inteligencia/scenes/maze.tscn" id="12_maze"]
+[ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="14_45mhr"]
+[ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="15_bbbfa"]
+[ext_resource type="FontFile" uid="uid://pc2vl0wcr3u4" path="res://assets/fonts/HyperbonnardRegular.otf" id="16_bbbfa"]
 
 [sub_resource type="Shader" id="Shader_dh5qa"]
 code = "shader_type canvas_item;
@@ -122,6 +125,105 @@ shader_parameter/wiggle_speed = 10.0
 shader_parameter/smear = 0.2000000095
 shader_parameter/blur_samples = 15
 
+[sub_resource type="Resource" id="Resource_rjqt8"]
+script = ExtResource("14_45mhr")
+color = Color(1, 1, 1, 0.50980395)
+width_left = 10
+width_top = 10
+width_right = 10
+width_bottom = 10
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_bowcj"]
+script = ExtResource("14_45mhr")
+color = Color(1.041, 0.589, 0, 1)
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_8kb36"]
+offsets = PackedFloat32Array(0, 0.62721896, 1)
+colors = PackedColorArray(0.31940156, 0.53926957, 0.6029368, 1, 0.75686276, 0.654902, 1, 1, 1, 0.40392157, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_33ihp"]
+gradient = SubResource("Gradient_8kb36")
+fill_from = Vector2(0.48497853, 1)
+fill_to = Vector2(0.4635193, 0.042918455)
+
+[sub_resource type="StyleBox" id="StyleBox_eafrw"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("15_bbbfa")
+borders = Array[ExtResource("14_45mhr")]([SubResource("Resource_rjqt8"), SubResource("Resource_bowcj")])
+texture = SubResource("GradientTexture2D_33ihp")
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="LabelSettings" id="LabelSettings_45mhr"]
+font = ExtResource("16_bbbfa")
+font_size = 26
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bbbfa"]
+font = ExtResource("16_bbbfa")
+font_size = 23
+outline_size = 5
+outline_color = Color(1, 0, 1, 1)
+
+[sub_resource type="Resource" id="Resource_45mhr"]
+script = ExtResource("14_45mhr")
+color = Color(1, 1, 1, 0.50980395)
+width_left = 10
+width_top = 10
+width_right = 10
+width_bottom = 10
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Resource" id="Resource_bbbfa"]
+script = ExtResource("14_45mhr")
+color = Color(1.041, 0.589, 0, 1)
+width_left = 1
+width_top = 1
+width_right = 1
+width_bottom = 1
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_rjqt8"]
+offsets = PackedFloat32Array(0, 0.62721896, 1)
+colors = PackedColorArray(0.31940156, 0.53926957, 0.6029368, 1, 0.75686276, 0.654902, 1, 1, 1, 0.40392157, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bowcj"]
+gradient = SubResource("Gradient_rjqt8")
+fill_from = Vector2(0.48497853, 1)
+fill_to = Vector2(0.4635193, 0.042918455)
+
+[sub_resource type="StyleBox" id="StyleBox_lkraf"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = -1.0
+content_margin_top = -1.0
+content_margin_right = -1.0
+content_margin_bottom = -1.0
+script = ExtResource("15_bbbfa")
+borders = Array[ExtResource("14_45mhr")]([SubResource("Resource_45mhr"), SubResource("Resource_bbbfa")])
+texture = SubResource("GradientTexture2D_bowcj")
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
 [node name="Main" type="Node2D" unique_id=1469547217]
 script = ExtResource("1_ig7tw")
 width = 7
@@ -146,7 +248,10 @@ size_flags_vertical = 3
 texture = ExtResource("8_5vw27")
 
 [node name="Maze" parent="." unique_id=996567461 instance=ExtResource("12_maze")]
-position = Vector2(188, 24)
+offset_left = 188.0
+offset_top = 24.0
+offset_right = 816.0
+offset_bottom = 316.0
 
 [node name="Personaje8" parent="." unique_id=7371244 instance=ExtResource("11_player")]
 position = Vector2(500, 180)
@@ -164,32 +269,36 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1568584849]
-offset_left = 37.0
-offset_top = 170.0
-offset_right = 157.0
-offset_bottom = 388.0
+offset_left = 16.0
+offset_top = 299.0
+offset_right = 185.0
+offset_bottom = 427.0
+theme_override_styles/panel = SubResource("StyleBox_eafrw")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1226334804]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=32581493]
 layout_mode = 2
+theme_override_constants/separation = 16
 alignment = 1
 
 [node name="nivel_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2063481242]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Nivel 1"
+label_settings = SubResource("LabelSettings_45mhr")
 horizontal_alignment = 1
 
 [node name="score_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1067551080]
 unique_name_in_owner = true
 layout_mode = 2
 text = "15612"
+label_settings = SubResource("LabelSettings_bbbfa")
 
 [node name="board_container" type="PanelContainer" parent="." unique_id=104527485]
 unique_name_in_owner = true
@@ -198,6 +307,7 @@ offset_top = 373.0
 offset_right = 776.0
 offset_bottom = 640.0
 mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBox_lkraf")
 
 [node name="MarginContainer" type="MarginContainer" parent="board_container" unique_id=1714878718]
 layout_mode = 2
