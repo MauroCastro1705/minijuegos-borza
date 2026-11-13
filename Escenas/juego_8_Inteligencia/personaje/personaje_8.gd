@@ -27,6 +27,10 @@ func move_right() -> void:
 	_pending_moves.append(Vector2.RIGHT)
 
 
+func clear_pending_moves() -> void:
+	_pending_moves.clear()
+
+
 func _physics_process(_delta: float) -> void:
 	if not _pending_moves.is_empty():
 		var direction: Vector2 = _pending_moves.pop_front()

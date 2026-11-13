@@ -4,6 +4,11 @@ signal tile_pressed(pos)
 
 var type: String
 var grid_position:Vector2i
+var _base_scale: Vector2
+var _hint_tween: Tween
+
+func _ready() -> void:
+	_base_scale = scale
 
 # Highlight tile when hovering mouse
 
@@ -27,6 +32,17 @@ func set_tile_type(id: String, texture: Texture2D) -> void:
 	
 	type = id
 	$Sprite2D.texture = texture
+
+func play_match_hint() -> void:
+	stop_match_hint()
+	_hint_tween = create_tween().set_loops()
+	_hint_tween.tween_property(self, "scale", _base_scale * 1.15, 0.35).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_hint_tween.tween_property(self, "scale", _base_scale, 0.35).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+func stop_match_hint() -> void:
+	if _hint_tween and _hint_tween.is_valid():
+		_hint_tween.kill()
+	scale = _base_scale
 
 # Letting the main code know when a tile has been pressed
 

@@ -145,8 +145,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("8_5vw27")
 
-[node name="Board" type="Node2D" parent="." unique_id=879210771]
-
 [node name="Maze" parent="." unique_id=996567461 instance=ExtResource("12_maze")]
 position = Vector2(188, 24)
 
@@ -164,3 +162,55 @@ anchor_bottom = 1.024
 offset_bottom = -0.2000122
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1568584849]
+offset_left = 37.0
+offset_top = 170.0
+offset_right = 157.0
+offset_bottom = 388.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1226334804]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=32581493]
+layout_mode = 2
+alignment = 1
+
+[node name="nivel_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2063481242]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Nivel 1"
+horizontal_alignment = 1
+
+[node name="score_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1067551080]
+unique_name_in_owner = true
+layout_mode = 2
+text = "15612"
+
+[node name="board_container" type="PanelContainer" parent="." unique_id=104527485]
+unique_name_in_owner = true
+offset_left = 224.0
+offset_top = 373.0
+offset_right = 776.0
+offset_bottom = 640.0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="board_container" unique_id=1714878718]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="BoardArea" type="Control" parent="board_container/MarginContainer" unique_id=794682883]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="BoardTiles" type="Node2D" parent="board_container/MarginContainer/BoardArea" unique_id=264105777]
