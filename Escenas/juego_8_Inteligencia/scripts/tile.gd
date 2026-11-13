@@ -2,7 +2,7 @@ extends Area2D
 
 signal tile_pressed(pos)
 
-var type:String
+var type: String
 var grid_position:Vector2i
 
 # Highlight tile when hovering mouse
@@ -23,7 +23,7 @@ func _on_mouse_exited():
 
 # Set piece them when initializing
 
-func set_tile_type(id: String, texture: Texture2D):
+func set_tile_type(id: String, texture: Texture2D) -> void:
 	
 	type = id
 	$Sprite2D.texture = texture

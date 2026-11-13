@@ -9,14 +9,22 @@ extends Node2D
 @export var tile_scene: PackedScene 
 @export var sparkles_scene: PackedScene
 
-@export_subgroup("Tiles")
-@export var textures: Array[Texture2D] 
+@export_group("Tile sprites")
+@export var left_tile_sprite: Texture2D
+@export var right_tile_sprite: Texture2D
+@export var up_tile_sprite: Texture2D
+@export var down_tile_sprite: Texture2D
+@export var special_tile_sprite: Texture2D
 
 @export_subgroup("Cursors")
 @export var open_hand_cursor: Texture2D
 @export var closed_hand_cursor: Texture2D
 
 @onready var container = $Board
+@onready var player: CharacterBody2D = $Personaje8
+
+const TILE_TYPES := ["LEFT", "RIGHT", "UP", "DOWN", "SPECIAL"]
+const MOVEMENT_TILE_TYPES := ["LEFT", "RIGHT", "UP", "DOWN"]
 
 # State
 
@@ -29,12 +37,16 @@ var combo_count: int = 0
 
 func _ready():
 	
+	if left_tile_sprite == null or right_tile_sprite == null or up_tile_sprite == null or down_tile_sprite == null or special_tile_sprite == null:
+		push_error("Assign a sprite for each tile type in the Main inspector.")
+		return
+
 	set_cursor(open_hand_cursor)
 	
 	randomize()
 	
 	setup_grid_array() 
-	process_board_state()
+	process_board_state(false)
 	
 	center_grid_on_screen() 
 	
@@ -67,11 +79,12 @@ func setup_grid_array():
 func spawn_at(x, y):
 	
 	var created_piece = tile_scene.instantiate() 
-	var random_index = randi_range(0, textures.size() - 1)
+	var random_index = randi_range(0, TILE_TYPES.size() - 1)
+	var tile_type = TILE_TYPES[random_index]
 	
 	container.add_child(created_piece) 
 	
-	created_piece.set_tile_type(str(random_index), textures[random_index]) 
+	created_piece.set_tile_type(tile_type, _get_tile_sprite(tile_type))
 	created_piece.tile_pressed.connect(_on_tile_pressed) 
 	created_piece.grid_position = Vector2i(x, y) 
 	created_piece.position = grid_to_pixel(x, y) 
@@ -161,13 +174,15 @@ func find_matches() -> Array:
 
 	return matched_dict.keys()
 
-func process_board_state():
+func process_board_state(move_player: bool = true):
 	
 	combo_count = 0 
 	var matches = find_matches()
 	
 	while matches.size() > 0:
 		combo_count += 1
+		if move_player:
+			_move_player_for_matches(matches)
 		
 		for piece in matches:
 			var effect = sparkles_scene.instantiate()
@@ -226,3 +241,35 @@ func is_within_grid(pos: Vector2i) -> bool:
 
 func set_cursor(cursor_texture: Texture2D):
 	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
+
+func _get_tile_sprite(tile_type: String) -> Texture2D:
+	match tile_type:
+		"LEFT":
+			return left_tile_sprite
+		"RIGHT":
+			return right_tile_sprite
+		"UP":
+			return up_tile_sprite
+		"DOWN":
+			return down_tile_sprite
+		"SPECIAL":
+			return special_tile_sprite
+	return null
+
+func _move_player_for_matches(matches: Array) -> void:
+	var matched_types := {}
+	for piece in matches:
+		matched_types[piece.type] = true
+
+	for tile_type in MOVEMENT_TILE_TYPES:
+		if not matched_types.has(tile_type):
+			continue
+		match tile_type:
+			"LEFT":
+				player.move_left()
+			"RIGHT":
+				player.move_right()
+			"UP":
+				player.move_up()
+			"DOWN":
+				player.move_down()
