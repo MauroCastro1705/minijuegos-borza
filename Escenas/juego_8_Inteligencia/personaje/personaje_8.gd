@@ -1,8 +1,14 @@
 extends CharacterBody2D
 
-@export var move_distance: float = 10.0
+@export var move_distance: float = 48.0
 
 var _pending_moves: Array[Vector2] = []
+
+
+func _ready() -> void:
+	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+	collision_layer = 1
+	collision_mask = 2
 
 
 func move_up() -> void:

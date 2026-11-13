@@ -1,19 +1,25 @@
 [gd_scene format=3 uid="uid://b8ge6mj6gyt6o"]
 
 [ext_resource type="Script" uid="uid://dklbq6gp6xu4r" path="res://Escenas/juego_8_Inteligencia/personaje/personaje_8.gd" id="1_0uonk"]
+[ext_resource type="Texture2D" uid="uid://2d4u3m6gcbdy" path="res://Escenas/juego_8_Inteligencia/sprites/tiles/tile-godot.png" id="2_stf3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yowuo"]
-size = Vector2(28, 27)
+size = Vector2(44, 44)
 
 [node name="Personaje8" type="CharacterBody2D" unique_id=7371244]
 script = ExtResource("1_0uonk")
 
+[node name="TileGodot" type="Sprite2D" parent="." unique_id=513318170]
+position = Vector2(0, -1.0728836e-06)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("2_stf3l")
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1800197312]
-offset_left = -13.0
-offset_top = -13.0
-offset_right = 15.0
-offset_bottom = 14.0
+visible = false
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2048494127]
-position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_yowuo")

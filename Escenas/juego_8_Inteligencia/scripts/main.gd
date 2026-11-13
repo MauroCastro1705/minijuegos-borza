@@ -22,9 +22,12 @@ extends Node2D
 
 @onready var container = $Board
 @onready var player: CharacterBody2D = $Personaje8
+@onready var player_start: Marker2D = $Maze/PlayerStart
 
 const TILE_TYPES := ["LEFT", "RIGHT", "UP", "DOWN", "SPECIAL"]
 const MOVEMENT_TILE_TYPES := ["LEFT", "RIGHT", "UP", "DOWN"]
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var vhs_efecto: ColorRect = $CanvasLayer/vhs_efecto
 
 # State
 
@@ -36,11 +39,12 @@ var combo_count: int = 0
 # Functions
 
 func _ready():
-	
+	canvas_layer.show()
 	if left_tile_sprite == null or right_tile_sprite == null or up_tile_sprite == null or down_tile_sprite == null or special_tile_sprite == null:
 		push_error("Assign a sprite for each tile type in the Main inspector.")
 		return
 
+	player.global_position = player_start.global_position
 	set_cursor(open_hand_cursor)
 	
 	randomize()
