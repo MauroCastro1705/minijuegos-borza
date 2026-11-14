@@ -4,6 +4,21 @@
 [ext_resource type="Script" uid="uid://cjmmhbp1b5312" path="res://addons/StyleboxFancy/StyleBorder.gd" id="2_5tjk6"]
 [ext_resource type="Script" uid="uid://bkl6g25jwb47h" path="res://addons/StyleboxFancy/StyleBoxFancy.gd" id="3_cwdvt"]
 [ext_resource type="Script" uid="uid://c7tomhfdfk65k" path="res://Escenas/juego_7_dinos/main/game_over_dino.gd" id="4_dino"]
+[ext_resource type="Script" uid="uid://dgnfej0vnae1p" path="res://addons/interaction_feedback/interaction_feedback.gd" id="5_knc2b"]
+[ext_resource type="Script" uid="uid://bpainjbj3pqmt" path="res://addons/interaction_feedback/effects/feedback_sticky_effect.gd" id="6_edvwn"]
+[ext_resource type="Script" uid="uid://bg75wl2v4x2yr" path="res://addons/interaction_feedback/effects/feedback_scale_effect.gd" id="7_u4bsi"]
+[ext_resource type="Script" uid="uid://ksdfn1ifejq6" path="res://addons/interaction_feedback/effects/feedback_rotation_once_effect.gd" id="8_3evcd"]
+[ext_resource type="Script" uid="uid://cjxao02a5vj2h" path="res://addons/interaction_feedback/effects/feedback_rotation_oscillated_effect.gd" id="9_mfr1m"]
+[ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="10_g7bcl"]
+
+[sub_resource type="Gradient" id="Gradient_6v6d6"]
+colors = PackedColorArray(0.8742246, 0.61666954, 7.70092e-07, 1, 0.19450262, 0.11383835, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5tjk6"]
+gradient = SubResource("Gradient_6v6d6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.47863248, 0.047008548)
 
 [sub_resource type="Shader" id="Shader_h3e0d"]
 code = "shader_type canvas_item;
@@ -87,7 +102,7 @@ void fragment()
 	COLOR = colormap(shade, uv);
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1flkd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cwdvt"]
 shader = SubResource("Shader_h3e0d")
 shader_parameter/progress = 0.5
 shader_parameter/speed = 0.5
@@ -95,7 +110,7 @@ shader_parameter/pixelation = Vector2(2, 2)
 shader_parameter/zoom = 5.0
 shader_parameter/background_threshold = 0.5430001207925002
 shader_parameter/color_threshold = 0.0
-shader_parameter/color = Color(0.7867219, 0.32069483, 0.428191, 0.6784314)
+shader_parameter/color = Color(0.44104266, 0.3856619, 0.111679204, 1)
 shader_parameter/seed = 0.5
 
 [sub_resource type="LabelSettings" id="LabelSettings_1285c"]
@@ -104,7 +119,7 @@ font_size = 40
 outline_size = 10
 outline_color = Color(0.20954207, 2.9792935e-05, 0.20954037, 1)
 
-[sub_resource type="Resource" id="Resource_mxlkd"]
+[sub_resource type="Resource" id="Resource_wf8mm"]
 script = ExtResource("2_5tjk6")
 color = Color(0, 0.8392157, 1, 1)
 width_left = 2
@@ -113,16 +128,16 @@ width_right = 2
 width_bottom = 2
 metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 
-[sub_resource type="Gradient" id="Gradient_0yt8m"]
-offsets = PackedFloat32Array(0.13227513, 0.537037, 1)
-colors = PackedColorArray(0.8752258, 0.5802287, 0.6263345, 1, 0.8251283, 0.35928845, 0.5183849, 1, 0.65730345, 0.13332494, 0.26920366, 1)
+[sub_resource type="Gradient" id="Gradient_5dgmu"]
+offsets = PackedFloat32Array(0.09917355, 0.5873016, 1)
+colors = PackedColorArray(0.48245692, 0.32381696, 9.62615e-08, 1, 0.60635257, 0.4246466, 0.20217744, 1, 0.3639146, 0.1869281, 0.0075576347, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xp5dg"]
-gradient = SubResource("Gradient_0yt8m")
-fill_from = Vector2(0.102564104, 0.991453)
-fill_to = Vector2(0.74786323, 0.0982906)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xhu6q"]
+gradient = SubResource("Gradient_5dgmu")
+fill_from = Vector2(0.14957266, 0.98717946)
+fill_to = Vector2(0.8247863, 0.034188036)
 
-[sub_resource type="StyleBox" id="StyleBox_d1a1j"]
+[sub_resource type="StyleBox" id="StyleBox_5aslv"]
 resource_local_to_scene = false
 resource_name = ""
 content_margin_left = 2.0
@@ -131,8 +146,51 @@ content_margin_right = 2.0
 content_margin_bottom = 2.0
 script = ExtResource("3_cwdvt")
 skew = Vector2(0.1, 0)
-borders = Array[ExtResource("2_5tjk6")]([SubResource("Resource_mxlkd")])
-texture = SubResource("GradientTexture2D_xp5dg")
+borders = Array[ExtResource("2_5tjk6")]([SubResource("Resource_wf8mm")])
+texture = SubResource("GradientTexture2D_xhu6q")
+corner_detail = 9
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.84705883)
+shadow_offset = Vector2(2, 2)
+metadata/_custom_type_script = "uid://bkl6g25jwb47h"
+
+[sub_resource type="Resource" id="Resource_4aixg"]
+script = ExtResource("2_5tjk6")
+color = Color(0, 0.8392157, 1, 1)
+width_left = 2
+width_top = 2
+width_right = 2
+width_bottom = 2
+metadata/_custom_type_script = "uid://cjmmhbp1b5312"
+
+[sub_resource type="Gradient" id="Gradient_tixj2"]
+offsets = PackedFloat32Array(0.09917355, 0.44973546, 0.9656085)
+colors = PackedColorArray(0.6230535, 0.19065514, 0.32109395, 1, 0.44662225, 0.071317755, 0.08802711, 1, 0.7385808, 0.27779135, 0.45615065, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7rc5g"]
+gradient = SubResource("Gradient_tixj2")
+fill_from = Vector2(0.9102564, 0.025641026)
+fill_to = Vector2(0.21367522, 0.8418803)
+
+[sub_resource type="StyleBox" id="StyleBox_7lrhl"]
+resource_local_to_scene = false
+resource_name = ""
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+script = ExtResource("3_cwdvt")
+skew = Vector2(0.1, 0)
+borders = Array[ExtResource("2_5tjk6")]([SubResource("Resource_4aixg")])
+texture = SubResource("GradientTexture2D_7rc5g")
 corner_detail = 9
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -150,20 +208,23 @@ metadata/_custom_type_script = "uid://bkl6g25jwb47h"
 [node name="game_over" type="Node2D" unique_id=244699212]
 script = ExtResource("4_dino")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=365573452]
-offset_right = 1049.0
-offset_bottom = 837.0
+[node name="TextureRect" type="TextureRect" parent="." unique_id=268146721]
+offset_left = -32.0
+offset_top = -35.0
+offset_right = 1024.0
+offset_bottom = 835.0
 mouse_filter = 2
-color = Color(0.23392546, 0.23392546, 0.23392543, 1)
-metadata/_edit_use_anchors_ = true
+texture = SubResource("GradientTexture2D_5tjk6")
+metadata/_edit_lock_ = true
 
-[node name="efecto ondas" type="ColorRect" parent="." unique_id=1229060678]
-material = SubResource("ShaderMaterial_1flkd")
-offset_left = 4.0
-offset_top = -5.0
-offset_right = 1004.0
-offset_bottom = 823.0
+[node name="efecto ondas2" type="ColorRect" parent="." unique_id=1263578315]
+material = SubResource("ShaderMaterial_cwdvt")
+offset_left = -11.0
+offset_top = -6.0
+offset_right = 1009.0
+offset_bottom = 810.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="." unique_id=2126368863]
 offset_left = 2.0
@@ -175,12 +236,42 @@ Dominaste el sitio de excavación"
 label_settings = SubResource("LabelSettings_1285c")
 horizontal_alignment = 1
 
-[node name="restart" type="Button" parent="." unique_id=914760714]
-offset_left = 422.0
-offset_top = 532.0
-offset_right = 580.0
-offset_bottom = 587.0
-theme_override_styles/normal = SubResource("StyleBox_d1a1j")
-text = "Volver al menú"
+[node name="restart" type="Button" parent="." unique_id=980649309]
+offset_left = 337.0
+offset_top = 546.0
+offset_right = 646.0
+offset_bottom = 628.0
+theme_override_fonts/font = ExtResource("1_347tt")
+theme_override_font_sizes/font_size = 46
+theme_override_styles/normal = SubResource("StyleBox_5aslv")
+theme_override_styles/hover = SubResource("StyleBox_7lrhl")
+text = "Volver al menu"
+
+[node name="InteractionFeedback" type="Node" parent="restart" unique_id=2023179020]
+script = ExtResource("5_knc2b")
+
+[node name="FeedbackStickyEffect" type="Node" parent="restart/InteractionFeedback" unique_id=200357886]
+script = ExtResource("6_edvwn")
+
+[node name="FeedbackScaleEffect" type="Node" parent="restart/InteractionFeedback" unique_id=1598621330]
+script = ExtResource("7_u4bsi")
+transition = 10
+
+[node name="FeedbackRotationOnceEffect" type="Node" parent="restart/InteractionFeedback" unique_id=1602894937]
+script = ExtResource("8_3evcd")
+degrees = 5.0
+on_press = true
+transition = 1
+
+[node name="FeedbackRotationOscillatedEffect" type="Node" parent="restart/InteractionFeedback" unique_id=753673784]
+script = ExtResource("9_mfr1m")
+mode = 1
+trigger = 1
+
+[node name="FeedbackModulateOnceEffect" type="Node" parent="restart/InteractionFeedback" unique_id=32877544]
+script = ExtResource("10_g7bcl")
+color = Color(0.5764706, 0.37254903, 0, 1)
+transition = 1
+metadata/_custom_type_script = "uid://cw31nl0ldqdv0"
 
 [connection signal="pressed" from="restart" to="." method="_on_restart_pressed"]

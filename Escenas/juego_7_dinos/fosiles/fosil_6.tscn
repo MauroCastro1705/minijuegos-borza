@@ -11,7 +11,7 @@ region = Rect2(44, 446, 162, 103)
 
 [node name="Fosil6" unique_id=1653278641 instance=ExtResource("1_fdj2e")]
 
-[node name="TextureRect" parent="." index="0" unique_id=1155139521]
+[node name="TextureRect" parent="." index="1" unique_id=1155139521]
 offset_left = -27.0
 offset_top = -40.611046
 offset_right = 29.0
@@ -19,4 +19,4 @@ offset_bottom = 43.31488
 texture = SubResource("AtlasTexture_ba3pe")
 
 [node name="CollisionPolygon2D" parent="Area2D" parent_id_path=PackedInt32Array(1017856180) index="0" unique_id=1007265819]
-polygon = PackedVector2Array(20, -8, 26, 8, 11, 14, -11, 14, -21, 6, -20, -7, -2, -13)
+polygon = PackedVector2Array(20, -8, 26, 8, 11, 14, -11, 14, -21, 6, -20, -7, -11, -10, -2, -13)

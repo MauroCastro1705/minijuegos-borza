@@ -718,6 +718,7 @@ horizontal_alignment = 1
 [node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=308989090]
 position = Vector2(501, 443)
 stream = ExtResource("18_t38o5")
+volume_db = -13.72
 autoplay = true
 
 [node name="button_click" type="AudioStreamPlayer2D" parent="." unique_id=1118731323]

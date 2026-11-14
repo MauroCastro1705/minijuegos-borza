@@ -15,16 +15,16 @@
 [ext_resource type="Script" uid="uid://cw31nl0ldqdv0" path="res://addons/interaction_feedback/effects/feedback_modulate_once_effect.gd" id="12_dcwws"]
 [ext_resource type="AudioStream" uid="uid://cgrttdu68toao" path="res://assets/musica/fossil_music.wav" id="13_8gfec"]
 
-[sub_resource type="Gradient" id="Gradient_6v6d6"]
+[sub_resource type="Gradient" id="Gradient_7upwi"]
 colors = PackedColorArray(0.8742246, 0.61666954, 7.70092e-07, 1, 0.19450262, 0.11383835, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4aixg"]
-gradient = SubResource("Gradient_6v6d6")
+gradient = SubResource("Gradient_7upwi")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.47863248, 0.047008548)
 
-[sub_resource type="Shader" id="Shader_h3e0d"]
+[sub_resource type="Shader" id="Shader_snqfh"]
 code = "shader_type canvas_item;
 
 uniform float progress = 0.0;
@@ -107,7 +107,7 @@ void fragment()
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3it33"]
-shader = SubResource("Shader_h3e0d")
+shader = SubResource("Shader_snqfh")
 shader_parameter/progress = 0.5
 shader_parameter/speed = 0.5
 shader_parameter/pixelation = Vector2(2, 2)
@@ -150,7 +150,7 @@ metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 offsets = PackedFloat32Array(0.09917355, 0.5873016, 1)
 colors = PackedColorArray(0.48245692, 0.32381696, 9.62615e-08, 1, 0.60635257, 0.4246466, 0.20217744, 1, 0.3639146, 0.1869281, 0.0075576347, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xhu6q"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_snqfh"]
 gradient = SubResource("Gradient_4jai8")
 fill_from = Vector2(0.14957266, 0.98717946)
 fill_to = Vector2(0.8247863, 0.034188036)
@@ -165,7 +165,7 @@ content_margin_bottom = 2.0
 script = ExtResource("6_gdpov")
 skew = Vector2(0.1, 0)
 borders = Array[ExtResource("5_cnxxb")]([SubResource("Resource_wf8mm")])
-texture = SubResource("GradientTexture2D_xhu6q")
+texture = SubResource("GradientTexture2D_snqfh")
 corner_detail = 9
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -193,7 +193,7 @@ metadata/_custom_type_script = "uid://cjmmhbp1b5312"
 offsets = PackedFloat32Array(0.09917355, 0.44973546, 0.9656085)
 colors = PackedColorArray(0.6230535, 0.19065514, 0.32109395, 1, 0.44662225, 0.071317755, 0.08802711, 1, 0.7385808, 0.27779135, 0.45615065, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_7rc5g"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wdcpc"]
 gradient = SubResource("Gradient_3it33")
 fill_from = Vector2(0.9102564, 0.025641026)
 fill_to = Vector2(0.21367522, 0.8418803)
@@ -208,7 +208,7 @@ content_margin_bottom = 2.0
 script = ExtResource("6_gdpov")
 skew = Vector2(0.1, 0)
 borders = Array[ExtResource("5_cnxxb")]([SubResource("Resource_4aixg")])
-texture = SubResource("GradientTexture2D_7rc5g")
+texture = SubResource("GradientTexture2D_wdcpc")
 corner_detail = 9
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -375,10 +375,10 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="play" type="Button" parent="." unique_id=1336704372]
-offset_left = 409.0
-offset_top = 638.0
-offset_right = 586.0
-offset_bottom = 720.0
+offset_left = 389.0
+offset_top = 642.0
+offset_right = 606.0
+offset_bottom = 716.0
 theme_override_fonts/font = ExtResource("4_487xl")
 theme_override_font_sizes/font_size = 46
 theme_override_styles/normal = SubResource("StyleBox_gvrgc")
@@ -438,6 +438,7 @@ autowrap_mode = 3
 [node name="musica" type="AudioStreamPlayer2D" parent="." unique_id=753803944]
 position = Vector2(501, 443)
 stream = ExtResource("13_8gfec")
+volume_db = -5.311
 autoplay = true
 
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
