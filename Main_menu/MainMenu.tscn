@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cc80d7jrn58h4" path="res://Componentes/boton_generico_lindo/button_nice.tscn" id="14_chgxx"]
 [ext_resource type="Texture2D" uid="uid://bk4jvf6t2s7nf" path="res://assets/portadas/dinos.jpg" id="14_cpe8a"]
 [ext_resource type="Material" uid="uid://baffnde62a5js" path="res://shaders/vhs_wiggle.tres" id="14_x1cxr"]
+[ext_resource type="Texture2D" uid="uid://bbur8itk1k72m" path="res://assets/portadas/matchmaze.png" id="15_rt2ic"]
 [ext_resource type="FontFile" uid="uid://ohilp3fj4bjr" path="res://assets/fonts/Korean Looks.ttf" id="16_d8bvs"]
 [ext_resource type="FontFile" uid="uid://dg6jcs60v7j6q" path="res://assets/fonts/Milany-Regular.otf" id="17_mhndg"]
 [ext_resource type="FontFile" uid="uid://deq7kinrh10v1" path="res://assets/fonts/FFF_Bold_TRIAL.ttf" id="19_cpe8a"]
@@ -219,10 +220,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 7.0
-offset_top = 772.0
-offset_right = -848.0
-offset_bottom = -3.0
+offset_left = 9.0
+offset_top = 756.0
+offset_right = -846.0
+offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "V 0.1.05"
@@ -233,10 +234,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 745.0
-offset_top = 771.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_left = 739.0
+offset_top = 755.0
+offset_right = -10.0
+offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Mauro Castro - seminario 2 - 2026"
@@ -341,8 +342,10 @@ disable_buton = false
 [node name="BotonMainMenu2" parent="juegos/HBoxContainer3" unique_id=130147954 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-game_name = "Tema sorpresa"
-game_img = ExtResource("5_8cngx")
+scene_path = "res://Escenas/juego_8_Inteligencia/menu/menu_8.tscn"
+game_name = "Tema 8qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq: Inteligencia"
+game_img = ExtResource("15_rt2ic")
+disable_buton = false
 
 [node name="BotonMainMenu3" parent="juegos/HBoxContainer3" unique_id=1696385270 instance=ExtResource("4_lq512")]
 custom_minimum_size = Vector2(200, 200)
